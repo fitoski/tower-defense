@@ -15,7 +15,10 @@ public class GameManager : MonoBehaviour
 
     private Vector3 selectedNodePosition;
 
+    private Rigidbody2D rb;
 
+    public GameObject traderPrefab;
+    public TraderUIManager traderUIManager;
 
     private void Awake()
     {
@@ -24,9 +27,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         currency = 0;
         level = 1;
         experiencePoints = 0;
+        InvokeRepeating("SpawnTrader", 5f, Random.Range(20f, 40f));
+        traderUIManager.Awake();
+        traderUIManager = TraderUIManager.instance;
+        Debug.Log(traderUIManager == null ? "TraderUIManager is null" : "TraderUIManager found");
     }
 
     public void IncreaseCurrency(int amount)
@@ -129,5 +137,17 @@ public class GameManager : MonoBehaviour
             playerScript.DecreaseAttackCooldownPerLevel(0.1f);
             playerScript.IncreaseMaxHealthPerLevel(20);
         }
+    }
+
+    public void SpawnTrader()
+    {
+        GameObject trader = Instantiate(traderPrefab, new Vector2(Random.Range(-10, 10), Random.Range(-10, 10)), Quaternion.identity);
+        Trader traderScript = trader.GetComponent<Trader>();
+        if (traderScript != null)
+        {
+            traderScript.traderUIManager = TraderUIManager.instance;
+        }
+        Debug.Log("A Trader has spawned!");
+        Debug.Log("Trader spawned at: " + trader.transform.position);
     }
 }

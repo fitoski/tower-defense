@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - BuildingZone
   - Node
+  - Boundary
+  - WanderingTrader
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - Enemy
   - Bullet
   - NodeLayer
-  - 
-  - 
-  - 
+  - Boundary
+  - Player
+  - WanderingTrader
   - 
   - 
   - 

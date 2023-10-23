@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     private GameManager gameManager;
 
-
     void Start()
     {
         gameManager = GameManager.main;
@@ -54,6 +53,12 @@ public class PlayerMovement : MonoBehaviour
             float moveInputY = Input.GetAxisRaw("Vertical");
             Vector2 movement = new Vector2(moveInputX, moveInputY).normalized * moveSpeed * Time.deltaTime;
             transform.Translate(movement, Space.World);
+
+            Vector3 playerPosition = transform.position;
+
+         //playerPosition.x = Mathf.Clamp(playerPosition.x, minX, maxX);
+         //playerPosition.y = Mathf.Clamp(playerPosition.y, minY, maxY);
+         //transform.position = playerPosition;
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
@@ -82,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
                 if (enemy.CompareTag("Enemy"))
                 {
                     TakeDamage();
-                    break;  
+                    break;
                 }
             }
         }
@@ -91,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
             waveDisplayText.text = "Wave: " + enemySpawner.GetCurrentWaveNumber().ToString();
         }
     }
+
 
     void Attack()
     {
