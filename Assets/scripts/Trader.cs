@@ -11,6 +11,47 @@ public class Trader : MonoBehaviour
 
     public TraderUIManager traderUIManager;
 
+    public List<TraderUIElement> shopUIElements = new List<TraderUIElement>();
+
+    [System.Serializable]
+    public class ShopItem
+    {
+        public string itemName;
+        public int price;
+        public Sprite itemIcon;
+    }
+
+    public List<ShopItem> allItems = new List<ShopItem>();
+
+    public List<ShopItem> GetRandomItems(int numberOfItems)
+    {
+        List<ShopItem> randomItems = new List<ShopItem>();
+        List<ShopItem> availableItems = new List<ShopItem>(allItems); 
+
+        for (int i = 0; i < numberOfItems && availableItems.Count > 0; i++)
+        {
+            int randomIndex = Random.Range(0, availableItems.Count);
+            randomItems.Add(availableItems[randomIndex]);
+            availableItems.RemoveAt(randomIndex); 
+        }
+
+        return randomItems;
+    }
+
+    public void UpdateShopUI(List<ShopItem> itemsToShow)
+    {
+        foreach (var uiElement in shopUIElements)
+        {
+            uiElement.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < itemsToShow.Count; i++)
+        {
+            shopUIElements[i].gameObject.SetActive(true);
+            shopUIElements[i].UpdateUI(itemsToShow[i]);
+        }
+    }
+
     void Awake()
     {
         traderUIManager = TraderUIManager.instance;

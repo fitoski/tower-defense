@@ -18,11 +18,13 @@ public class TraderUIManager : MonoBehaviour
 
     public void OpenShopUI()
     {
+        Time.timeScale = 0;
         shopPanel.SetActive(true);
     }
 
     public void CloseShopUI()
     {
+        Time.timeScale = 1;
         shopPanel.SetActive(false);
     }
 
@@ -37,4 +39,16 @@ public class TraderUIManager : MonoBehaviour
             Debug.Log("Not enough money to buy Item1");
         }
     }
+
+    public void UpdateUI(GameObject uiElement, Trader.ShopItem item)
+    {
+        Image itemIcon = uiElement.transform.Find("ItemIcon").GetComponent<Image>();
+        Text itemName = uiElement.transform.Find("ItemName").GetComponent<Text>();
+        Text itemPrice = uiElement.transform.Find("ItemPrice").GetComponent<Text>();
+
+        itemIcon.sprite = item.itemIcon;
+        itemName.text = item.itemName;
+        itemPrice.text = item.price.ToString();
+    }
+
 }

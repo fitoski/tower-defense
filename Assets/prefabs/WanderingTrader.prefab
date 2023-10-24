@@ -203,3 +203,9 @@ MonoBehaviour:
   timeToStay: 10
   inventory: []
   traderUIManager: {fileID: 0}
+  shopUIElements:
+  - {fileID: 8830386465397809650, guid: a6c83391cdd50db45bcea3983e0fe2f8, type: 3}
+  allItems:
+  - itemName: Item1
+    price: 10
+    itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
