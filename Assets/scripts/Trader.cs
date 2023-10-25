@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Enums;
 
 public class Trader : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class Trader : MonoBehaviour
         public string itemName;
         public int price;
         public Sprite itemIcon;
+        public ItemType itemType;  
+        public float itemDamageBonus;
+        public float itemRangeBonus;
+        public float armorBonus;
     }
 
     public List<ShopItem> allItems = new List<ShopItem>();
@@ -80,6 +85,8 @@ public class Trader : MonoBehaviour
 
     public void OpenShop()
     {
+        List<ShopItem> randomShopItems = GetRandomItems(4);
+        UpdateShopUI(randomShopItems);
         traderUIManager.OpenShopUI();
         Debug.Log("Shop opened");
     }

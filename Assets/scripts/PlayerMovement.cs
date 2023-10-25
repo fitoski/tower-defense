@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Enums;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,12 +16,14 @@ public class PlayerMovement : MonoBehaviour
     private float attackCooldownTimer = 0f;  
     public int playerDamage = 5;
     private bool isInvulnerable = false; 
-    public float invulnerabilityDuration = 1.5f; 
-
+    public float invulnerabilityDuration = 1.5f;
+    public float armorValue;
     public float flashDuration = 0.2f;
     public Color flashColor = Color.red;
     private Color originalColor;
     private SpriteRenderer playerSpriteRenderer;
+    public SpriteRenderer swordSpriteRenderer;
+    public List<Sprite> weaponSprites;
 
     private bool isMoving = true;
 
@@ -43,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
         UpdateHealthBars();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameManager = FindObjectOfType<GameManager>();
+        swordSpriteRenderer = sword.GetComponent<SpriteRenderer>();
+
     }
 
     void Update()
@@ -189,4 +194,17 @@ public class PlayerMovement : MonoBehaviour
         playerHealth = maxPlayerHealth;
         UpdateHealthBars();
     }
+
+    public void ChangeArmor(float newArmorValue)
+    {
+        armorValue = newArmorValue;
+    }
+
+    public void ChangeWeapon(int newDamage, float newRange, int weaponIndex)
+    {
+        playerDamage = newDamage;
+        orbitRadius = newRange;
+        swordSpriteRenderer.sprite = weaponSprites[weaponIndex];
+    }
+
 }

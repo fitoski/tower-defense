@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static Enums;
 
 public class TraderUIManager : MonoBehaviour
 {
@@ -30,9 +31,11 @@ public class TraderUIManager : MonoBehaviour
 
     public void BuyItem1()
     {
-        if (GameManager.main.currency >= 10)  
+        if (GameManager.main.currency >= 10)
         {
             GameManager.main.currency -= 10;
+            PlayerMovement player = FindObjectOfType<PlayerMovement>();
+            player.ChangeWeapon(15, 5f, 1);
         }
         else
         {

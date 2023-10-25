@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static Enums;
 
 public class TraderUIElement : MonoBehaviour
 {

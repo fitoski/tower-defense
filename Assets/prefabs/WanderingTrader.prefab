@@ -201,11 +201,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToStay: 10
-  inventory: []
+  inventory:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
   traderUIManager: {fileID: 0}
   shopUIElements:
   - {fileID: 8830386465397809650, guid: a6c83391cdd50db45bcea3983e0fe2f8, type: 3}
+  - {fileID: 8830386465397809650, guid: 6d01c6ebcfbe09b4e94244fd1ccee0c9, type: 3}
+  - {fileID: 8830386465397809650, guid: b488353c2d332554d9cc77c543d7464f, type: 3}
+  - {fileID: 8830386465397809650, guid: acaa980d68c1db44d8436308770618e4, type: 3}
+  - {fileID: 8830386465397809650, guid: 8ececb4e30957a44996d84df5e83f47f, type: 3}
   allItems:
   - itemName: Item1
+    price: 10
+    itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+  - itemName: Item2
+    price: 10
+    itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+  - itemName: Item3
+    price: 10
+    itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+  - itemName: Item4
+    price: 10
+    itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+  - itemName: Item5
     price: 10
     itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
