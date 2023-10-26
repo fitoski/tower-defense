@@ -151,4 +151,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("A Trader has spawned!");
         Debug.Log("Trader spawned at: " + trader.transform.position);
     }
+
+    public void GoToMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
 }

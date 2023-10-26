@@ -49,7 +49,11 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //GameManager.main.IncreaseCurrency(currencyWorth);
+            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+            if (player != null)
+            {
+                player.TakeDamage(baseDamage);
+            }
             Destroy(gameObject);
         }
     }
@@ -63,6 +67,4 @@ public class EnemyMovement : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-
 }

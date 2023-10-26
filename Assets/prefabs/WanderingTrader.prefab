@@ -218,15 +218,35 @@ MonoBehaviour:
   - itemName: Item1
     price: 10
     itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+    itemType: 1
+    itemDamageBonus: 0
+    itemRangeBonus: 0
+    armorBonus: 1
   - itemName: Item2
     price: 10
     itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+    itemType: 0
+    itemDamageBonus: 0
+    itemRangeBonus: 0
+    armorBonus: 0
   - itemName: Item3
     price: 10
     itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+    itemType: 0
+    itemDamageBonus: 0
+    itemRangeBonus: 0
+    armorBonus: 0
   - itemName: Item4
     price: 10
     itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+    itemType: 0
+    itemDamageBonus: 0
+    itemRangeBonus: 0
+    armorBonus: 0
   - itemName: Item5
     price: 10
     itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+    itemType: 0
+    itemDamageBonus: 0
+    itemRangeBonus: 0
+    armorBonus: 0

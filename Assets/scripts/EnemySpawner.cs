@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesToSpawn;
 
     private int currentWaveNumber = 1;
-    private bool allowSpawn = true;
+    public bool allowSpawn = true;
 
     public GameObject EnemyFastPrefab;
     public GameObject EnemyTankPrefab;
@@ -57,21 +57,16 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Vector2 spawnPosition = (Vector2)transform.position + Random.insideUnitCircle * 15f;
-        GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        if (!allowSpawn) return;
 
+        Vector2 spawnPosition = GetRandomSpawnPosition();
+
+        GameObject chosenEnemyPrefab = waveEnemyTypes[currentWaveNumber][Random.Range(0, waveEnemyTypes[currentWaveNumber].Count)];
+
+        GameObject enemy = Instantiate(chosenEnemyPrefab, spawnPosition, Quaternion.identity);
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
         if (enemyMovement != null)
             enemyMovement.SetTarget(protectionObject);
-    }
-
-    void StartNextWave()
-    {
-        currentWaveNumber++;
-
-        enemiesPerWave += enemiesIncreasePerWave;
-        enemiesToSpawn = enemiesPerWave;
-        spawnInterval *= 0.9f; 
     }
 
     public void StartWave(int waveNumber)
@@ -79,10 +74,11 @@ public class EnemySpawner : MonoBehaviour
         if (waveEnemyTypes.ContainsKey(waveNumber))
         {
             List<GameObject> enemiesInThisWave = waveEnemyTypes[waveNumber];
-            foreach (var enemy in enemiesInThisWave)
+            for (int i = 0; i < enemiesPerWave; i++)
             {
                 Vector2 spawnPosition = GetRandomSpawnPosition();
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
+                GameObject chosenEnemyPrefab = enemiesInThisWave[Random.Range(0, enemiesInThisWave.Count)];
+                GameObject spawnedEnemy = Instantiate(chosenEnemyPrefab, spawnPosition, Quaternion.identity);
             }
         }
         else
@@ -91,18 +87,24 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    void StartNextWave()
+    {
+        currentWaveNumber++;
+
+        enemiesPerWave += enemiesIncreasePerWave;
+        enemiesToSpawn = enemiesPerWave;
+        spawnInterval *= 0.9f;
+    }
 
     public int GetCurrentWaveNumber()
     {
         return currentWaveNumber;
     }
 
-
     public void SetSpawnPermission(bool permission)
     {
         allowSpawn = permission;
     }
-
 
     public void IntroduceNewEnemy(int maxHealth, float speed, int baseDamage, int scoreValue, int experiencePointsValue, float damageMultiplier)
     {

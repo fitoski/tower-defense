@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (enemy.CompareTag("Enemy"))
                 {
-                    TakeDamage();
+                    TakeDamage(10);
                     break;
                 }
             }
@@ -120,17 +120,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void TakeDamage()
+    public void TakeDamage(int damage)
     {
         if (!isInvulnerable)
         {
-            playerHealth -= 10;
+            int actualDamage = (int)(10 * (1 - armorValue / 100));
+            playerHealth -= actualDamage;
             UpdateHealthBars();
             StartCoroutine(FlashPlayer());
             StartCoroutine(PausePlayer());
             if (playerHealth <= 0)
             {
-                
+                Die();
             }
             else
             {
@@ -205,6 +206,12 @@ public class PlayerMovement : MonoBehaviour
         playerDamage = newDamage;
         orbitRadius = newRange;
         swordSpriteRenderer.sprite = weaponSprites[weaponIndex];
+    }
+
+    public void Die()
+    {
+        isMoving = false; 
+        gameManager.GoToMainMenu(); 
     }
 
 }
