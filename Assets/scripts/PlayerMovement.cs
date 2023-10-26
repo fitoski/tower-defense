@@ -54,10 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isMoving)
         {
-            float moveInputX = Input.GetAxisRaw("Horizontal");
-            float moveInputY = Input.GetAxisRaw("Vertical");
-            Vector2 movement = new Vector2(moveInputX, moveInputY).normalized * moveSpeed * Time.deltaTime;
-            transform.Translate(movement, Space.World);
+            //transform.Translate(movement, Space.World);
 
             Vector3 playerPosition = transform.position;
 
@@ -100,6 +97,14 @@ public class PlayerMovement : MonoBehaviour
         {
             waveDisplayText.text = "Wave: " + enemySpawner.GetCurrentWaveNumber().ToString();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        float moveInputX = Input.GetAxisRaw("Horizontal");
+        float moveInputY = Input.GetAxisRaw("Vertical");
+        Vector2 movement = new Vector2(moveInputX, moveInputY).normalized * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(movement + rb.position);
     }
 
 

@@ -214,6 +214,9 @@ MonoBehaviour:
   - {fileID: 8830386465397809650, guid: b488353c2d332554d9cc77c543d7464f, type: 3}
   - {fileID: 8830386465397809650, guid: acaa980d68c1db44d8436308770618e4, type: 3}
   - {fileID: 8830386465397809650, guid: 8ececb4e30957a44996d84df5e83f47f, type: 3}
+  AllAbilitiess:
+  - rid: 5413542861143277592
+  - rid: 5413542861143277593
   allItems:
   - itemName: Item1
     price: 10
@@ -250,3 +253,31 @@ MonoBehaviour:
     itemDamageBonus: 0
     itemRangeBonus: 0
     armorBonus: 0
+  - itemName: Item5
+    price: 10
+    itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+    itemType: 0
+    itemDamageBonus: 0
+    itemRangeBonus: 0
+    armorBonus: 0
+  - itemName: Fireball
+    price: 10
+    itemIcon: {fileID: 21300000, guid: 8818efdc78e333544b80c2b23351c936, type: 3}
+    itemType: 2
+    itemDamageBonus: 0
+    itemRangeBonus: 0
+    armorBonus: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 5413542861143277592
+      type: {class: Trader/FireballAbility, ns: , asm: Assembly-CSharp}
+      data:
+        name: Fireball
+        damage: 0
+    - rid: 5413542861143277593
+      type: {class: Trader/KeyifAbility, ns: , asm: Assembly-CSharp}
+      data:
+        name: Keyif
+        damage: 0
+        uykuSaati: 15

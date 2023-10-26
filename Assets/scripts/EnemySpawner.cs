@@ -16,6 +16,8 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTimer;
     private int enemiesToSpawn;
 
+    private int currentEnemyCountPerSpawn = 1;
+
     private int currentWaveNumber = 1;
     public bool allowSpawn = true;
 
@@ -41,7 +43,10 @@ public class EnemySpawner : MonoBehaviour
         {
             if (spawnTimer <= 0f && enemiesToSpawn > 0)
             {
-                SpawnEnemy();
+                for (int i = 0; i < currentEnemyCountPerSpawn; i++)
+                {
+                    SpawnEnemy();
+                }
                 spawnTimer = spawnInterval;
                 enemiesToSpawn--;
             }
@@ -74,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
         if (waveEnemyTypes.ContainsKey(waveNumber))
         {
             List<GameObject> enemiesInThisWave = waveEnemyTypes[waveNumber];
-            for (int i = 0; i < enemiesPerWave; i++)
+            for (int i = 0; i < enemiesPerWave + 2; i++)
             {
                 Vector2 spawnPosition = GetRandomSpawnPosition();
                 GameObject chosenEnemyPrefab = enemiesInThisWave[Random.Range(0, enemiesInThisWave.Count)];
@@ -90,10 +95,10 @@ public class EnemySpawner : MonoBehaviour
     void StartNextWave()
     {
         currentWaveNumber++;
-
         enemiesPerWave += enemiesIncreasePerWave;
         enemiesToSpawn = enemiesPerWave;
         spawnInterval *= 0.9f;
+        if (currentEnemyCountPerSpawn < 20) currentEnemyCountPerSpawn++;
     }
 
     public int GetCurrentWaveNumber()
@@ -140,6 +145,14 @@ public class EnemySpawner : MonoBehaviour
     }
     private Vector2 GetRandomSpawnPosition()
     {
-        return (Vector2)transform.position + Random.insideUnitCircle * 15f;
+        Vector2 spawnPosition = (Vector2)transform.position + Random.insideUnitCircle * 30;
+
+        if (Vector2.Distance(transform.position, spawnPosition) < 10f)
+        {
+            Debug.Log("dasdasdsa");
+            return GetRandomSpawnPosition();
+        }
+
+        return spawnPosition;
     }
 }
