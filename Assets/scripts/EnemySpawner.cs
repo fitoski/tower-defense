@@ -23,6 +23,9 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject EnemyFastPrefab;
     public GameObject EnemyTankPrefab;
+    public GameObject Boss1Prefab;
+    public GameObject Boss2Prefab;
+    private bool bossSpawnedThisWave = false;
 
     private Dictionary<int, List<GameObject>> waveEnemyTypes = new Dictionary<int, List<GameObject>>();
 
@@ -35,6 +38,9 @@ public class EnemySpawner : MonoBehaviour
         waveEnemyTypes.Add(1, new List<GameObject> { enemyPrefab });
         waveEnemyTypes.Add(2, new List<GameObject> { enemyPrefab, EnemyFastPrefab });
         waveEnemyTypes.Add(3, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab });
+        waveEnemyTypes.Add(5, new List<GameObject> { Boss1Prefab, enemyPrefab, EnemyFastPrefab, EnemyTankPrefab });
+        waveEnemyTypes.Add(10, new List<GameObject> { Boss2Prefab, enemyPrefab, EnemyFastPrefab, EnemyTankPrefab });
+        // 15 - 20 - 25 so on
     }
 
     void Update()
@@ -52,8 +58,10 @@ public class EnemySpawner : MonoBehaviour
             }
             else if (spawnTimer <= 0f && enemiesToSpawn == 0)
             {
-                Invoke("StartNextWave", waveDelay);
-                spawnTimer = spawnInterval;
+                if (!IsInvoking("StartNextWave"))
+                {
+                    Invoke("StartNextWave", waveDelay);
+                }
             }
         }
 
@@ -66,7 +74,30 @@ public class EnemySpawner : MonoBehaviour
 
         Vector2 spawnPosition = GetRandomSpawnPosition();
 
-        GameObject chosenEnemyPrefab = waveEnemyTypes[currentWaveNumber][Random.Range(0, waveEnemyTypes[currentWaveNumber].Count)];
+        List<GameObject> enemiesForThisWave;
+        if (waveEnemyTypes.ContainsKey(currentWaveNumber))
+        {
+            enemiesForThisWave = waveEnemyTypes[currentWaveNumber];
+        }
+        else
+        {
+            enemiesForThisWave = GetWaveEnemies(currentWaveNumber);
+        }
+
+        GameObject chosenEnemyPrefab;
+        if (currentWaveNumber % 5 == 0 && !bossSpawnedThisWave)
+        {
+            if (currentWaveNumber == 5)
+                chosenEnemyPrefab = Boss1Prefab;
+            else
+                chosenEnemyPrefab = Boss2Prefab;
+            bossSpawnedThisWave = true;
+        }
+        else
+        {
+            enemiesForThisWave.RemoveAll(e => e == Boss1Prefab || e == Boss2Prefab);
+            chosenEnemyPrefab = enemiesForThisWave[Random.Range(0, enemiesForThisWave.Count)];
+        }
 
         GameObject enemy = Instantiate(chosenEnemyPrefab, spawnPosition, Quaternion.identity);
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
@@ -74,31 +105,51 @@ public class EnemySpawner : MonoBehaviour
             enemyMovement.SetTarget(protectionObject);
     }
 
-    public void StartWave(int waveNumber)
-    {
-        if (waveEnemyTypes.ContainsKey(waveNumber))
-        {
-            List<GameObject> enemiesInThisWave = waveEnemyTypes[waveNumber];
-            for (int i = 0; i < enemiesPerWave + 2; i++)
-            {
-                Vector2 spawnPosition = GetRandomSpawnPosition();
-                GameObject chosenEnemyPrefab = enemiesInThisWave[Random.Range(0, enemiesInThisWave.Count)];
-                GameObject spawnedEnemy = Instantiate(chosenEnemyPrefab, spawnPosition, Quaternion.identity);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Wave " + waveNumber + " için belirlenmiş düşman türü yok.");
-        }
-    }
+
+
+    //public void StartWave(int waveNumber)
+    //{
+    //    if (waveEnemyTypes.ContainsKey(waveNumber))
+    //    {
+    //        List<GameObject> enemiesInThisWave = waveEnemyTypes[waveNumber];
+    //        for (int i = 0; i < enemiesPerWave + 2; i++)
+    //        {
+    //            Vector2 spawnPosition = GetRandomSpawnPosition();
+    //            GameObject chosenEnemyPrefab = enemiesInThisWave[Random.Range(0, enemiesInThisWave.Count)];
+    //            GameObject spawnedEnemy = Instantiate(chosenEnemyPrefab, spawnPosition, Quaternion.identity);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("Wave " + waveNumber + " için belirlenmiş düşman türü yok.");
+    //    }
+    //}
 
     void StartNextWave()
     {
-        currentWaveNumber++;
-        enemiesPerWave += enemiesIncreasePerWave;
+        bossSpawnedThisWave = false;
+
+        int nextWave = currentWaveNumber + 1;
+        if (GetWaveEnemies(nextWave).Count == 0) 
+        {
+            return;
+        }
+
+        currentWaveNumber = nextWave;
+
+        if (currentWaveNumber % 5 == 0)
+        {
+            enemiesToSpawn = enemiesPerWave + 1; 
+        }
+
+        else
+        {
+            enemiesPerWave += enemiesIncreasePerWave;
+            spawnInterval *= 0.9f;
+            if (currentEnemyCountPerSpawn < 20) currentEnemyCountPerSpawn++;
+        }
+
         enemiesToSpawn = enemiesPerWave;
-        spawnInterval *= 0.9f;
-        if (currentEnemyCountPerSpawn < 20) currentEnemyCountPerSpawn++;
     }
 
     public int GetCurrentWaveNumber()
@@ -154,5 +205,30 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return spawnPosition;
+    }
+
+    private List<GameObject> GetWaveEnemies(int waveNumber)
+    {
+        List<GameObject> waveEnemies = new List<GameObject>();
+
+        waveEnemies.Add(enemyPrefab);
+
+        if (waveNumber >= 4)
+        {
+            waveEnemies.Add(EnemyFastPrefab);
+        }
+
+        if (waveNumber >= 6)
+        {
+            waveEnemies.Add(EnemyTankPrefab);
+        }
+
+        if (waveNumber % 5 == 0)
+        {
+            if (waveNumber == 5) waveEnemies.Add(Boss1Prefab);
+            else if (waveNumber == 10) waveEnemies.Add(Boss2Prefab);
+        }
+
+        return waveEnemies;
     }
 }

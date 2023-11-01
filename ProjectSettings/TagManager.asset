@@ -9,6 +9,7 @@ TagManager:
   - Node
   - Boundary
   - WanderingTrader
+  - Boss
   layers:
   - Default
   - TransparentFX

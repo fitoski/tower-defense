@@ -9,7 +9,7 @@ public class Enums : MonoBehaviour
         Weapon,
         Armor,
         Ability
-        // farklı eşyalar and so on
+        // farklı eşyalar
     }
 
 }

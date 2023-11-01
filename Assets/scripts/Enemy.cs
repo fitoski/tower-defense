@@ -11,12 +11,12 @@ public class Enemy : MonoBehaviour
 
     private int currentHealth;
 
-    private EnemyMovement enemyMovement;
+    protected EnemyMovement enemyMovement;
 
     public int scoreValue = 10;
     public int experiencePointsValue = 5;
 
-    void Start()
+    protected void Start()
     {
         currentHealth = maxHealth;
         enemyMovement = GetComponent<EnemyMovement>();
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
         return scoreValue;
     }
 
-    void Die()
+    protected virtual void Die()
     {
         if (enemyMovement != null)
         {

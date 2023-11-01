@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -114,16 +114,23 @@ public class PlayerMovement : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy.CompareTag("Enemy"))
+            if (enemy.CompareTag("Enemy") || enemy.CompareTag("Boss"))
             {
                 Enemy enemyComponent = enemy.GetComponent<Enemy>();
                 if (enemyComponent != null)
                 {
                     enemyComponent.TakeDamage(playerDamage);
+
+                    if (enemy.CompareTag("Boss"))
+                    {
+                        //Debug.Log("Boss'a hasar verildi!");
+                    }
                 }
             }
         }
     }
+
+
 
     public void TakeDamage(int damage)
     {

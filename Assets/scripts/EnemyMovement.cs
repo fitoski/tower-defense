@@ -15,7 +15,7 @@ public class EnemyMovement : MonoBehaviour
 
     //[SerializeField] private int currencyWorth = 50;
 
-    void Update()
+    public void Update()
     {
         if (target != null)
         {
@@ -34,7 +34,7 @@ public class EnemyMovement : MonoBehaviour
         target = newTarget;
     }
 
-    void AttackTarget()
+    public void AttackTarget()
     {
         Core core = target.GetComponent<Core>();
         if (core != null)
