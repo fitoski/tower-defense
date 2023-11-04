@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     private GameManager gameManager;
 
+    private Animator swordAnimator;
+
     void Start()
     {
         gameManager = GameManager.main;
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameManager = FindObjectOfType<GameManager>();
         swordSpriteRenderer = sword.GetComponent<SpriteRenderer>();
-
+        swordAnimator = sword.GetComponent<Animator>();
     }
 
     void Update()
@@ -69,7 +71,17 @@ public class PlayerMovement : MonoBehaviour
             sword.up = direction;
             sword.RotateAround(transform.position, Vector3.forward, orbitSpeed * Time.deltaTime);
 
-            if (Input.GetButton("Fire1") && attackCooldownTimer <= 0f)
+            //if (Input.GetButton("Fire1") && attackCooldownTimer <= 0f)
+            //{
+            //    sword.Rotate(Vector3.forward, attackRotationAmount);
+            //    attackCooldownTimer = attackCooldown;
+            //    Attack();
+            //}
+
+            bool isAttacking = Input.GetMouseButton(0);
+            swordAnimator.SetBool("isAttacking", isAttacking);
+
+            if (isAttacking && attackCooldownTimer <= 0f)
             {
                 sword.Rotate(Vector3.forward, attackRotationAmount);
                 attackCooldownTimer = attackCooldown;
@@ -81,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
                 attackCooldownTimer -= Time.deltaTime;
             }
         }
+
         if (!isInvulnerable)
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 0.5f);
@@ -107,10 +120,35 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(movement + rb.position);
     }
 
+    //void Attack()
+    //{
+    //    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 2f);
+
+    //    foreach (Collider2D enemy in hitEnemies)
+    //    {
+    //        if (enemy.CompareTag("Enemy") || enemy.CompareTag("Boss"))
+    //        {
+    //            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+    //            if (enemyComponent != null)
+    //            {
+    //                enemyComponent.TakeDamage(playerDamage);
+
+    //                if (enemy.CompareTag("Boss"))
+    //                {
+    //                    //Debug.Log("Boss'a hasar verildi!");
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     void Attack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 2f);
+        sword.Rotate(Vector3.forward, attackRotationAmount); 
+        attackCooldownTimer = attackCooldown;
+        swordAnimator.SetBool("isAttacking", true);
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(sword.position, 2f);
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -120,16 +158,10 @@ public class PlayerMovement : MonoBehaviour
                 if (enemyComponent != null)
                 {
                     enemyComponent.TakeDamage(playerDamage);
-
-                    if (enemy.CompareTag("Boss"))
-                    {
-                        //Debug.Log("Boss'a hasar verildi!");
-                    }
                 }
             }
         }
     }
-
 
 
     public void TakeDamage(int damage)
@@ -213,11 +245,12 @@ public class PlayerMovement : MonoBehaviour
         armorValue = newArmorValue;
     }
 
-    public void ChangeWeapon(int newDamage, float newRange, int weaponIndex)
+    public void ChangeWeapon(int newDamage, float newRange, int weaponIndex, RuntimeAnimatorController weaponAnimator)
     {
         playerDamage = newDamage;
         orbitRadius = newRange;
         swordSpriteRenderer.sprite = weaponSprites[weaponIndex];
+        sword.GetComponent<Animator>().runtimeAnimatorController = weaponAnimator;
     }
 
     public void Die()
@@ -225,5 +258,4 @@ public class PlayerMovement : MonoBehaviour
         isMoving = false; 
         gameManager.GoToMainMenu(); 
     }
-
 }

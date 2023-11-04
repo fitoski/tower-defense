@@ -21471,7 +21471,7 @@ Transform:
   m_GameObject: {fileID: 345292729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.32, y: 0.18, z: 0}
+  m_LocalPosition: {x: -7.29, y: 0.39, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33018,7 +33018,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.32, y: 0.18, z: -10}
+  m_LocalPosition: {x: -7.29, y: 0.39, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49280,7 +49280,7 @@ GameObject:
   - component: {fileID: 770974168}
   - component: {fileID: 770974169}
   m_Layer: 10
-  m_Name: Capsule
+  m_Name: Sword
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49295,8 +49295,8 @@ Transform:
   m_GameObject: {fileID: 770974167}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.108, y: 0.099, z: 0}
-  m_LocalScale: {x: 0.04, y: 0.14, z: 1}
+  m_LocalPosition: {x: 0.157, y: 0.062, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 345292733}
@@ -49342,12 +49342,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -1402622769, guid: ea8ce99ee619be54ab751415e0571018, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.48, y: 0.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -80052,7 +80052,7 @@ Transform:
   m_GameObject: {fileID: 1201168037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.32, y: 0.18, z: -10}
+  m_LocalPosition: {x: -7.29, y: 0.39, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -136191,6 +136191,8 @@ MonoBehaviour:
   allowSpawn: 1
   EnemyFastPrefab: {fileID: 3838339183629443256, guid: a2921c9b2fbbc024da1e794b7ca1c37a, type: 3}
   EnemyTankPrefab: {fileID: 3838339183629443256, guid: 4362231ec233af04abcf9cfb7b39a643, type: 3}
+  Boss1Prefab: {fileID: 0}
+  Boss2Prefab: {fileID: 0}
 --- !u!4 &2138262649
 Transform:
   m_ObjectHideFlags: 0

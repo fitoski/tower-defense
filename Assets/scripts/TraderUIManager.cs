@@ -12,6 +12,8 @@ public class TraderUIManager : MonoBehaviour
     public static TraderUIManager instance;
     public Button closeShopButton;
 
+    public RuntimeAnimatorController item1Animator; 
+
     public void Awake()
     {
         instance = this;
@@ -35,7 +37,7 @@ public class TraderUIManager : MonoBehaviour
         {
             GameManager.main.currency -= 10;
             PlayerMovement player = FindObjectOfType<PlayerMovement>();
-            player.ChangeWeapon(15, 5f, 1);
+            player.ChangeWeapon(15, 5f, 1, item1Animator);
         }
         else
         {
@@ -53,5 +55,4 @@ public class TraderUIManager : MonoBehaviour
         itemName.text = item.itemName;
         itemPrice.text = item.price.ToString();
     }
-
 }
