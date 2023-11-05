@@ -10,6 +10,11 @@ public class Node : MonoBehaviour
 
     private Color startColor;
 
+    private bool hasBuilding = false;
+    public bool HasBuilding => hasBuilding;
+    private GameObject turret = null;
+    public GameObject Turret => turret;
+
     private void Start()
     {
         startColor = sr.color;
@@ -27,7 +32,24 @@ public class Node : MonoBehaviour
 
     private void OnMouseDown()
     {
-        BroadcastMessage("OpenBuyMenu", transform.position, SendMessageOptions.RequireReceiver);
+        BroadcastMessage("OpenBuyMenu", this, SendMessageOptions.RequireReceiver);
+    }
+
+    public void BuyTurretToThisNode(GameObject turret)
+    {
+        hasBuilding = true;
+        this.turret = turret;
+    }
+
+    public void BuyWallToThisNode()
+    {
+        hasBuilding = true;
+    }
+
+    public void SellTurretFromThisNode()
+    {
+        hasBuilding = false;
+        this.turret = null;
     }
 
     void Update()
@@ -37,10 +59,17 @@ public class Node : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.CompareTag("Node"))
+            if (hit.collider != null && hit.collider.transform.CompareTag("Node"))
             {
-                Vector3 targetNodePosition = hit.collider.transform.position;
-                GameManager.main.SetSelectedNodePosition(targetNodePosition);
+                if (hit.collider.transform == transform)
+                {
+                    GameManager.main.SetSelectedNode(this);
+                }
+            }
+
+            else
+            {
+                GetComponent<BuyMenu>().CloseBuyMenu();
             }
         }
     }

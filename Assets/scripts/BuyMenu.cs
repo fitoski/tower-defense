@@ -1,56 +1,94 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class BuyMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject buyMenuUI;
+    private GameObject buyMenuUI;
+    private GameObject upgradeMenuUI;
     [SerializeField] private GameObject turretPrefab;
     [SerializeField] private GameObject wallPrefab;
-
     private Vector3 selectedNodePosition;
 
     private bool isBuyMenuOpen = false;
 
-    public void OpenBuyMenu(Vector3 nodePosition)
+    private void Awake()
+    {
+        buyMenuUI = GameObject.FindGameObjectWithTag("BuildingPanel");
+        upgradeMenuUI = GameObject.FindGameObjectWithTag("UpgradePanel");
+        Debug.Log(buyMenuUI.transform.name);
+        Debug.Log(upgradeMenuUI.transform.name);
+    }
+
+    public void OpenBuyMenu(Node targetNode)
     {
         if (isBuyMenuOpen) return;
 
-        float yOffset = 1f;
-        selectedNodePosition = new Vector3(nodePosition.x, nodePosition.y + yOffset, nodePosition.z);
+        if (targetNode.HasBuilding && targetNode.Turret != null)
+        {
+            float yOffset = 1f;
+            selectedNodePosition = new Vector3(targetNode.transform.position.x, targetNode.transform.position.y + yOffset, targetNode.transform.position.z);
 
-        buyMenuUI.transform.position = selectedNodePosition;
-        buyMenuUI.SetActive(!buyMenuUI.activeSelf);
+            upgradeMenuUI.transform.position = selectedNodePosition;
+            buyMenuUI.SetActive(false);
+            upgradeMenuUI.SetActive(true);
+
+        }
+
+        else if (!targetNode.HasBuilding)
+        {
+            float yOffset = 1f;
+            selectedNodePosition = new Vector3(targetNode.transform.position.x, targetNode.transform.position.y + yOffset, targetNode.transform.position.z);
+
+            buyMenuUI.transform.position = selectedNodePosition;
+            buyMenuUI.SetActive(true);
+            upgradeMenuUI.SetActive(false);
+        }
     }
 
     public void CloseBuyMenu()
     {
         buyMenuUI.SetActive(false);
+        upgradeMenuUI.SetActive(false);
     }
 
     public void BuyTurret()
     {
-        Vector3 targetNodePosition = GameManager.main.GetSelectedNodePosition();
+        Node targetNode = GameManager.main.GetSelectedNode();
 
-        if (GameManager.main.HasEnoughCurrency(GameManager.main.GetTurretCost()) && targetNodePosition != null)
+        if (GameManager.main.HasEnoughCurrency(GameManager.main.GetTurretCost()) && targetNode != null)
         {
-            PlacePrefab(turretPrefab, targetNodePosition, GameManager.main.GetTurretCost());
+            GameObject turret = PlacePrefab(turretPrefab, targetNode.transform.position, GameManager.main.GetTurretCost());
+            if (turret != null)
+            {
+                targetNode.BuyTurretToThisNode(turret);
+            }
+            
             GameManager.main.ClearSelectedNodePosition();
         }
         else
         {
             Debug.Log("Not enough currency or no node position available.");
         }
+    }
+
+    public void SellTurret()
+    {
+        Node targetNode = GameManager.main.GetSelectedNode();
+        Destroy(targetNode.Turret);
+        targetNode.SellTurretFromThisNode();
     }
 
     public void BuyWall()
     {
-        Vector3 targetNodePosition = GameManager.main.GetSelectedNodePosition();
+        Node targetNode = GameManager.main.GetSelectedNode();
 
-        if (GameManager.main.HasEnoughCurrency(GameManager.main.GetWallCost()) && targetNodePosition != null)
+        if (GameManager.main.HasEnoughCurrency(GameManager.main.GetWallCost()) && targetNode != null)
         {
-            PlacePrefab(wallPrefab, targetNodePosition, GameManager.main.GetWallCost());
+            targetNode.BuyWallToThisNode();
+            PlacePrefab(wallPrefab, targetNode.transform.position, GameManager.main.GetWallCost());
             GameManager.main.ClearSelectedNodePosition();
         }
         else
@@ -59,17 +97,20 @@ public class BuyMenu : MonoBehaviour
         }
     }
 
-    private void PlacePrefab(GameObject prefab, Vector3 position, int cost)
+    private GameObject PlacePrefab(GameObject prefab, Vector3 position, int cost)
     {
-        if (GameManager.main.GetSelectedNodePosition() == null)
+        if (GameManager.main.GetSelectedNode() == null)
         {
             Debug.Log("No selected node position available.");
-            return;
+            return null;
         }
 
         if (GameManager.main.SpendCurrency(GameManager.main.GetTurretCost()))
         {
             GameObject placedPrefab = Instantiate(prefab, position, Quaternion.identity);
+            return placedPrefab;
         }
+
+        return null;
     }
 }

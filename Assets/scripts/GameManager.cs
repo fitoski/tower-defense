@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using static Enums;
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int turretCost = 50;  
     public int wallCost = 30;
 
-    private Vector3 selectedNodePosition;
+    private Node selectedNode;
 
     private Rigidbody2D rb;
 
@@ -62,19 +63,19 @@ public class GameManager : MonoBehaviour
         return currency >= amount;
     }
 
-    public void SetSelectedNodePosition(Vector3 position)
+    public void SetSelectedNode(Node node)
     {
-        selectedNodePosition = position;
+        selectedNode = node;
     }
 
-    public Vector3 GetSelectedNodePosition()
+    public Node GetSelectedNode()
     {
-        return selectedNodePosition;
+        return selectedNode;
     }
 
     public void ClearSelectedNodePosition()
     {
-        selectedNodePosition = Vector3.zero;
+        selectedNode = null;
     }
 
     public int GetTurretCost()
@@ -113,6 +114,7 @@ public class GameManager : MonoBehaviour
         if (experiencePoints >= requiredExperience)
         {
             level++;
+            NodesManager.Instance.SpawnObjectsInNextLayer();
             experiencePoints = 0;
             IncreasePlayerStatsOnLevelUp();
         }
