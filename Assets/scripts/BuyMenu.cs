@@ -6,8 +6,10 @@ using UnityEngine.EventSystems;
 
 public class BuyMenu : MonoBehaviour
 {
-    private GameObject buyMenuUI;
-    private GameObject upgradeMenuUI;
+    private static BuyMenu instance;
+    public static BuyMenu Instance => instance;
+    [SerializeField] private GameObject buyMenuUI;
+    [SerializeField] private GameObject upgradeMenuUI;
     [SerializeField] private GameObject turretPrefab;
     [SerializeField] private GameObject wallPrefab;
     private Vector3 selectedNodePosition;
@@ -16,10 +18,7 @@ public class BuyMenu : MonoBehaviour
 
     private void Awake()
     {
-        buyMenuUI = GameObject.FindGameObjectWithTag("BuildingPanel");
-        upgradeMenuUI = GameObject.FindGameObjectWithTag("UpgradePanel");
-        Debug.Log(buyMenuUI.transform.name);
-        Debug.Log(upgradeMenuUI.transform.name);
+        instance = this;
     }
 
     public void OpenBuyMenu(Node targetNode)

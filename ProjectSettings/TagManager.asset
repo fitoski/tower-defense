@@ -10,6 +10,9 @@ TagManager:
   - Boundary
   - WanderingTrader
   - Boss
+  - BuildingPanel
+  - UpgradePanel
+  - BuyMenuCanvas
   layers:
   - Default
   - TransparentFX

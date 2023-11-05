@@ -32,7 +32,7 @@ public class Node : MonoBehaviour
 
     private void OnMouseDown()
     {
-        BroadcastMessage("OpenBuyMenu", this, SendMessageOptions.RequireReceiver);
+        BuyMenu.Instance.OpenBuyMenu(this);
     }
 
     public void BuyTurretToThisNode(GameObject turret)
@@ -69,7 +69,7 @@ public class Node : MonoBehaviour
 
             else
             {
-                GetComponent<BuyMenu>().CloseBuyMenu();
+                BuyMenu.Instance.CloseBuyMenu();
             }
         }
     }

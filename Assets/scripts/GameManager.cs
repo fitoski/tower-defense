@@ -114,7 +114,10 @@ public class GameManager : MonoBehaviour
         if (experiencePoints >= requiredExperience)
         {
             level++;
-            NodesManager.Instance.SpawnObjectsInNextLayer();
+            if (level % 25 == 0)
+            {
+                NodesManager.Instance.SpawnObjectsInNextLayer();
+            }
             experiencePoints = 0;
             IncreasePlayerStatsOnLevelUp();
         }

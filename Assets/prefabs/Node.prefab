@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5464005068076800870}
   - component: {fileID: 5295674036171856134}
   - component: {fileID: 516390499440660484}
-  - component: {fileID: 7336554267462748393}
   m_Layer: 8
   m_Name: Node
   m_TagString: Node
@@ -146,19 +145,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7336554267462748393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4345274086490490297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ad05a8bd30218548a1c7b6d22193257, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buyMenuUI: {fileID: 0}
-  upgradeMenuUI: {fileID: 0}
-  turretPrefab: {fileID: 1542800076757277249, guid: 22c1e6b79773ecf41957730200dbc6b4, type: 3}
-  wallPrefab: {fileID: 4576678974656573235, guid: b80f59df894ff6d438d2be0a115d981e, type: 3}
