@@ -10,12 +10,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public Transform sword;
     public float orbitRadius = 2f;
-    public float orbitSpeed = 90f;
-    public float attackRotationAmount = 15f;
-    public float attackCooldown = 0.5f;
-    private float attackCooldownTimer = 0f;
+    public float orbitSpeed = 90f;  
+    public float attackRotationAmount = 15f;  
+    public float attackCooldown = 0.5f; 
+    private float attackCooldownTimer = 0f;  
     public int playerDamage = 5;
-    private bool isInvulnerable = false;
+    private bool isInvulnerable = false; 
     public float invulnerabilityDuration = 1.5f;
     public float armorValue;
     public float flashDuration = 0.2f;
@@ -60,9 +60,9 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 playerPosition = transform.position;
 
-            //playerPosition.x = Mathf.Clamp(playerPosition.x, minX, maxX);
-            //playerPosition.y = Mathf.Clamp(playerPosition.y, minY, maxY);
-            //transform.position = playerPosition;
+         //playerPosition.x = Mathf.Clamp(playerPosition.x, minX, maxX);
+         //playerPosition.y = Mathf.Clamp(playerPosition.y, minY, maxY);
+         //transform.position = playerPosition;
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Attack()
     {
-        sword.Rotate(Vector3.forward, attackRotationAmount);
+        sword.Rotate(Vector3.forward, attackRotationAmount); 
         attackCooldownTimer = attackCooldown;
         swordAnimator.SetBool("isAttacking", true);
 
@@ -202,9 +202,9 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator PausePlayer()
     {
-        isMoving = false;
-        yield return new WaitForSeconds(0.2f);
-        isMoving = true;
+        isMoving = false;  
+        yield return new WaitForSeconds(0.2f); 
+        isMoving = true;  
     }
 
     void ResetInvulnerability()
@@ -255,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        isMoving = false;
-        gameManager.GoToMainMenu();
+        isMoving = false; 
+        gameManager.GoToMainMenu(); 
     }
 }

@@ -67,6 +67,7 @@ public class Trader : MonoBehaviour
         timer = timeToStay;
     }
 
+    // Update is called once per frame
     void Update()
     {
         timer -= Time.deltaTime;

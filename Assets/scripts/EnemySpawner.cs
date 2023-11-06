@@ -121,6 +121,7 @@ public class EnemySpawner : MonoBehaviour
     //    }
     //    else
     //    {
+    //        Debug.LogWarning("Wave " + waveNumber + " için belirlenmiş düşman türü yok.");
     //    }
     //}
 
@@ -199,6 +200,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (Vector2.Distance(transform.position, spawnPosition) < 10f)
         {
+            Debug.Log("dasdasdsa");
             return GetRandomSpawnPosition();
         }
 

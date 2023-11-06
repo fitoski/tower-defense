@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public int level;
     public int experiencePoints;
 
-    public int turretCost = 50;
+    public int turretCost = 50;  
     public int wallCost = 30;
 
     private Node selectedNode;
