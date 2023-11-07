@@ -21189,6 +21189,7 @@ GameObject:
   - component: {fileID: 345292731}
   - component: {fileID: 345292734}
   - component: {fileID: 345292735}
+  - component: {fileID: 345292736}
   - component: {fileID: 345292730}
   m_Layer: 10
   m_Name: Player
@@ -21391,6 +21392,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15075628, y: 0.23714226}
   m_EdgeRadius: 0
+--- !u!114 &345292736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345292729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5087181609b3cc54fb6a731fc482c2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &347433265
 GameObject:
   m_ObjectHideFlags: 0
@@ -52972,15 +52985,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8289006278629130943, guid: 6d01c6ebcfbe09b4e94244fd1ccee0c9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8289006278629130943, guid: 6d01c6ebcfbe09b4e94244fd1ccee0c9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8289006278629130943, guid: 6d01c6ebcfbe09b4e94244fd1ccee0c9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8289006278629130943, guid: 6d01c6ebcfbe09b4e94244fd1ccee0c9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -52988,7 +53001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8289006278629130943, guid: 6d01c6ebcfbe09b4e94244fd1ccee0c9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -432
       objectReference: {fileID: 0}
     - target: {fileID: 8289006278629130943, guid: 6d01c6ebcfbe09b4e94244fd1ccee0c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -112871,6 +112884,7 @@ GameObject:
   - component: {fileID: 1732176448}
   - component: {fileID: 1732176447}
   - component: {fileID: 1732176449}
+  - component: {fileID: 1732176450}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -112926,6 +112940,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldAmount: 10
   currencyText: {fileID: 712892702}
+--- !u!114 &1732176450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732176446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba43f0799c5649842b005df8915677a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - {fileID: 11400000, guid: dfafbe1c32a3d4647b113ce640dcd12c, type: 2}
+  - {fileID: 11400000, guid: 7b22c455829fdb64e80a750256373351, type: 2}
+  - {fileID: 11400000, guid: 4b51a6357425caa4f8a7a1738418cf72, type: 2}
 --- !u!1 &1734234564
 GameObject:
   m_ObjectHideFlags: 0

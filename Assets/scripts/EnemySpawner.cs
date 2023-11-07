@@ -200,7 +200,6 @@ public class EnemySpawner : MonoBehaviour
 
         if (Vector2.Distance(transform.position, spawnPosition) < 10f)
         {
-            Debug.Log("dasdasdsa");
             return GetRandomSpawnPosition();
         }
 
