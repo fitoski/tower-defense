@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -108,7 +108,175 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: tekerleklirobotattack_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 12
+        width: 29
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8de55ad8e16aca4c85fe7ce2759a31e
+      internalID: 1338075957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tekerleklirobotattack_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 12
+        width: 22
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a9bdbeb20ff6d94f92bc9432b976b26
+      internalID: 2014168446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tekerleklirobotattack_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 12
+        width: 29
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f73e0311c8546a741a90f3a4350a457f
+      internalID: -1009846663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tekerleklirobotattack_3
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 12
+        width: 57
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a72d193c81c6e7479a97dd96e0ef682
+      internalID: -1182752800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tekerleklirobotattack_4
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 12
+        width: 39
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a21f1632559ff64f888ebafe76ffd76
+      internalID: -2045331718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tekerleklirobotattack_5
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 12
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 488499b4e4e9a8348b49ae4e8a9229a8
+      internalID: 234153258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tekerleklirobotattack_6
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 12
+        width: 29
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbcc084ca815b0b41ad558a3a21a65cf
+      internalID: 1280454025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tekerleklirobotattack_7
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 12
+        width: 29
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47d06663f91723b469f84ac2b3e84c58
+      internalID: 492612014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +287,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tekerleklirobotattack_0: 1338075957
+      tekerleklirobotattack_1: 2014168446
+      tekerleklirobotattack_2: -1009846663
+      tekerleklirobotattack_3: -1182752800
+      tekerleklirobotattack_4: -2045331718
+      tekerleklirobotattack_5: 234153258
+      tekerleklirobotattack_6: 1280454025
+      tekerleklirobotattack_7: 492612014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
