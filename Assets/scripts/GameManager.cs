@@ -94,32 +94,55 @@ public class GameManager : MonoBehaviour
         CheckLevelUp();
     }
 
+    //void LevelUp()
+    //{
+    //    PlayerMovement playerScript = FindObjectOfType<PlayerMovement>();
+
+    //    if (playerScript != null)
+    //    {
+    //        playerScript.IncreaseDamagePerLevel(2);
+    //        playerScript.IncreaseMoveSpeedPerLevel(1f);
+    //        playerScript.DecreaseAttackCooldownPerLevel(0.1f);
+    //        playerScript.IncreaseMaxHealthPerLevel(20);
+    //    }
+    //}
     void LevelUp()
     {
-        PlayerMovement playerScript = FindObjectOfType<PlayerMovement>();
-
-        if (playerScript != null)
+        level++;
+        StatSelectionPanel statSelectionPanel = FindObjectOfType<StatSelectionPanel>();
+        if (statSelectionPanel != null)
         {
-            playerScript.IncreaseDamagePerLevel(2);
-            playerScript.IncreaseMoveSpeedPerLevel(1f);
-            playerScript.DecreaseAttackCooldownPerLevel(0.1f);
-            playerScript.IncreaseMaxHealthPerLevel(20);
+            statSelectionPanel.OpenStatSelection(); 
+        }
+        else
+        {
+            Debug.LogError("StatSelectionPanel not found in the scene!");
         }
     }
 
+    //public void CheckLevelUp()
+    //{
+    //    int requiredExperience = Mathf.FloorToInt(10 * Mathf.Pow(1.7f, level - 1));
+
+    //    if (experiencePoints >= requiredExperience)
+    //    {
+    //        level++;
+    //        if (level % 25 == 0)
+    //        {
+    //            NodesManager.Instance.SpawnObjectsInNextLayer();
+    //        }
+    //        experiencePoints = 0;
+    //        //IncreasePlayerStatsOnLevelUp();
+    //    }
+    //}
     public void CheckLevelUp()
     {
         int requiredExperience = Mathf.FloorToInt(10 * Mathf.Pow(1.7f, level - 1));
 
         if (experiencePoints >= requiredExperience)
         {
-            level++;
-            if (level % 25 == 0)
-            {
-                NodesManager.Instance.SpawnObjectsInNextLayer();
-            }
-            experiencePoints = 0;
-            IncreasePlayerStatsOnLevelUp();
+            experiencePoints -= requiredExperience; 
+            LevelUp();
         }
     }
 
@@ -133,17 +156,17 @@ public class GameManager : MonoBehaviour
         return experiencePoints;
     }
 
-    public void IncreasePlayerStatsOnLevelUp()
-    {
-        PlayerMovement playerScript = FindObjectOfType<PlayerMovement>();
-        if (playerScript != null)
-        {
-            playerScript.IncreaseDamagePerLevel(2);
-            playerScript.IncreaseMoveSpeedPerLevel(1f);
-            playerScript.DecreaseAttackCooldownPerLevel(0.1f);
-            playerScript.IncreaseMaxHealthPerLevel(20);
-        }
-    }
+    //public void IncreasePlayerStatsOnLevelUp()
+    //{
+    //    PlayerMovement playerScript = FindObjectOfType<PlayerMovement>();
+    //    if (playerScript != null)
+    //    {
+    //        playerScript.IncreaseDamagePerLevel(2);
+    //        playerScript.IncreaseMoveSpeedPerLevel(1f);
+    //        playerScript.DecreaseAttackCooldownPerLevel(0.1f);
+    //        playerScript.IncreaseMaxHealthPerLevel(20);
+    //    }
+    //}
 
     public void SpawnTrader()
     {
