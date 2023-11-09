@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b05d974eca1bcbe4395221a459e18f0c
+guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,274 +110,316 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: butonlar_0
+      name: demonknightdeath_0
       rect:
         serializedVersion: 2
-        x: 118
-        y: 47
-        width: 11
-        height: 7
+        x: 0
+        y: 1119.0667
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85ef2726b813aa444a344724a8b34134
-      internalID: -1516396067
+      spriteID: 2e3acb5dcb180e1439134d001d3cedce
+      internalID: -1575816536
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_1
+      name: demonknightdeath_1
       rect:
         serializedVersion: 2
-        x: 131
-        y: 47
-        width: 11
-        height: 7
+        x: 0
+        y: 1039.0667
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91d6dd9bc8146ef4f85722c277625428
-      internalID: -1462776827
+      spriteID: 74b344245b9cb5d428b3e5b20c7cd2bc
+      internalID: 81875844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_2
+      name: demonknightdeath_2
       rect:
         serializedVersion: 2
-        x: 147
-        y: 46
-        width: 11
-        height: 12
+        x: 0
+        y: 959.06665
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a34b12140751f14f8eec9d1a84741cb
-      internalID: 621493909
+      spriteID: 556dc3f839a81664ab0d71773b6cb2ad
+      internalID: 1614600915
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_3
+      name: demonknightdeath_3
       rect:
         serializedVersion: 2
-        x: 160
-        y: 46
-        width: 11
-        height: 12
+        x: 0
+        y: 879.06665
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f541286f642731148a0b44af45fe9c24
-      internalID: -309659087
+      spriteID: 5153558fcf9aa04469ec85e24b23ea92
+      internalID: -1921348825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_4
+      name: demonknightdeath_4
       rect:
         serializedVersion: 2
-        x: 118
-        y: 33
-        width: 11
-        height: 11
+        x: 0
+        y: 799.06665
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70fc261380dfb974a88dfa4862faefd7
-      internalID: -1191434433
+      spriteID: 3cf9715a816d7fa479294a06f780321c
+      internalID: 1812397163
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_5
+      name: demonknightdeath_5
       rect:
         serializedVersion: 2
-        x: 131
-        y: 33
-        width: 11
-        height: 11
+        x: 0
+        y: 719.06665
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab038a97db8fa26498db632d59833398
-      internalID: 138232471
+      spriteID: 1624ab16fcb7a1c44878069c043aa6b4
+      internalID: -1747587866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_6
+      name: demonknightdeath_6
       rect:
         serializedVersion: 2
-        x: 147
-        y: 33
-        width: 11
-        height: 12
+        x: 0
+        y: 639.06665
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d034a1e1cd8dc142af9bdd00441b2ee
-      internalID: -1525228480
+      spriteID: a8a723d89f9820b4980319a028cee582
+      internalID: 839956668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_7
+      name: demonknightdeath_7
       rect:
         serializedVersion: 2
-        x: 160
-        y: 33
-        width: 11
-        height: 12
+        x: 0
+        y: 559.06665
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac590037cfb1c9f46b095c16661f9463
-      internalID: -1707983178
+      spriteID: ed27949a82cba864d9018f9fae2aec8b
+      internalID: -494365723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_8
+      name: demonknightdeath_8
       rect:
         serializedVersion: 2
-        x: 180
-        y: 33
-        width: 11
-        height: 12
+        x: 0
+        y: 479.06665
+        width: 80
+        height: 80.933334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f57de82d60a9574cbbd7c320948c080
-      internalID: 1746658911
+      spriteID: 8d39fb3d6cfee334a86fb567444cd92c
+      internalID: -1285969160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: butonlar_9
+      name: demonknightdeath_9
       rect:
         serializedVersion: 2
-        x: 9
+        x: 0
+        y: 399.06665
+        width: 80
+        height: 80.933334
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca2029fffbef8b04dbef5877c8ffe999
+      internalID: -1232728098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demonknightdeath_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 319.06665
+        width: 80
+        height: 80.933334
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4023c2317efed5c45b18486e447fae8b
+      internalID: -1741537314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demonknightdeath_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 239.06667
+        width: 80
+        height: 80.933334
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86952f3bce100bc4182b0ff008b62d8a
+      internalID: 593687249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demonknightdeath_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 159.06667
+        width: 80
+        height: 80.933334
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a79c9e31f8212664daa191ab8ccf2f34
+      internalID: -1239165204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demonknightdeath_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 79.066666
+        width: 80
+        height: 80.933334
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f4b5822158564b4591bff80115bb4d6
+      internalID: -1207300471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demonknightdeath_15
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
-        width: 43
-        height: 12
+        width: 80
+        height: 79
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bef7a605e82e0845bdd00392e1077d6
-      internalID: 1420988255
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: butonlar_10
-      rect:
-        serializedVersion: 2
-        x: 54
-        y: 0
-        width: 43
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b29079630cc814a4c850e7e1106c78b0
-      internalID: 302326626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: butonlar_11
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 0
-        width: 43
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 61321d9b6d3afe04597605e6b0765280
-      internalID: 468344594
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: butonlar_12
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 0
-        width: 43
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cbeec0a0c382a0640b2ebd9a918c4e68
-      internalID: 528936537
+      spriteID: 83f1d7140b42a3e4db1def8b1c4594e2
+      internalID: -1428468176
       vertices: []
       indices: 
       edges: []
@@ -393,19 +435,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      butonlar_0: -1516396067
-      butonlar_1: -1462776827
-      butonlar_10: 302326626
-      butonlar_11: 468344594
-      butonlar_12: 528936537
-      butonlar_2: 621493909
-      butonlar_3: -309659087
-      butonlar_4: -1191434433
-      butonlar_5: 138232471
-      butonlar_6: -1525228480
-      butonlar_7: -1707983178
-      butonlar_8: 1746658911
-      butonlar_9: 1420988255
+      demonknightdeath_0: -1575816536
+      demonknightdeath_1: 81875844
+      demonknightdeath_10: -1741537314
+      demonknightdeath_11: 593687249
+      demonknightdeath_12: -1239165204
+      demonknightdeath_13: -1207300471
+      demonknightdeath_14: 172484258
+      demonknightdeath_15: 392289612
+      demonknightdeath_2: 1614600915
+      demonknightdeath_3: -1921348825
+      demonknightdeath_4: 1812397163
+      demonknightdeath_5: -1747587866
+      demonknightdeath_6: 839956668
+      demonknightdeath_7: -494365723
+      demonknightdeath_8: -1285969160
+      demonknightdeath_9: -1232728098
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
