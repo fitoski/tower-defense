@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnTrader", 5f, Random.Range(20f, 40f));
         traderUIManager.Awake();
         traderUIManager = TraderUIManager.instance;
-        Debug.Log(traderUIManager == null ? "TraderUIManager is null" : "TraderUIManager found");
     }
 
     public void IncreaseCurrency(int amount)
@@ -176,8 +175,6 @@ public class GameManager : MonoBehaviour
         {
             traderScript.traderUIManager = TraderUIManager.instance;
         }
-        Debug.Log("A Trader has spawned!");
-        Debug.Log("Trader spawned at: " + trader.transform.position);
     }
 
     public void GoToMainMenu()
