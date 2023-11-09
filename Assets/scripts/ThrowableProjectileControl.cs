@@ -72,7 +72,6 @@ public class ThrowableProjectileControl : MonoBehaviour
     {
         if (collision != null && collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Hit");
             Destroy(gameObject);
         }
     }

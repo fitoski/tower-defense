@@ -10,14 +10,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public Transform sword;
     public float orbitRadius = 2f;
-    public float orbitSpeed = 90f;  
-    public float attackRotationAmount = 15f;  
-    public float attackCooldown = 0.5f; 
-    private float attackCooldownTimer = 0f;  
+    public float orbitSpeed = 90f;
+    public float attackRotationAmount = 15f;
+    public float attackCooldown = 0.5f;
+    private float attackCooldownTimer = 0f;
     public int playerDamage = 5;
-    public float criticalHitChance = 0.0f; 
+    public float criticalHitChance = 0.0f;
     public float healthRegenerationRate = 0.0f;
-    private bool isInvulnerable = false; 
+    private bool isInvulnerable = false;
     public float invulnerabilityDuration = 1.5f;
     public float armorValue;
     public float flashDuration = 0.2f;
@@ -32,6 +32,14 @@ public class PlayerMovement : MonoBehaviour
 
     public int maxPlayerHealth = 100;
     public int playerHealth = 100;
+
+    public bool hasIncreasedHealthRegen = false;
+    public bool hasIncreasedCritChance = false;
+    public bool hasIncreasedDamage = false;
+    public bool hasIncreasedHealth = false;
+    public bool hasIncreasedSpeed = false;
+    public bool hasIncreasedArmor = false;
+    public bool hasIncreasedOrbitRadius = false;
 
     public Image playerHealthBar;
     private EnemySpawner enemySpawner;
@@ -124,11 +132,11 @@ public class PlayerMovement : MonoBehaviour
             Vector2 playerPosition = transform.position;
             if (mousePosition.x < playerPosition.x)
             {
-                playerSpriteRenderer.flipX = true; 
+                playerSpriteRenderer.flipX = true;
             }
             else if (mousePosition.x > playerPosition.x)
             {
-                playerSpriteRenderer.flipX = false; 
+                playerSpriteRenderer.flipX = false;
             }
             Vector2 direction = (mousePosition - playerPosition).normalized;
             sword.position = playerPosition + direction * orbitRadius;
@@ -183,13 +191,15 @@ public class PlayerMovement : MonoBehaviour
         //{
         //    playerSpriteRenderer.flipX = true; 
         //}
+        bool isWalking = moveInputX != 0 || moveInputY != 0;
+        playerAnimator.SetBool("dkWalk", isWalking);
         Vector2 movement = new Vector2(moveInputX, moveInputY).normalized * moveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(movement + rb.position);
     }
 
     void Attack()
     {
-        sword.Rotate(Vector3.forward, attackRotationAmount); 
+        sword.Rotate(Vector3.forward, attackRotationAmount);
         attackCooldownTimer = attackCooldown;
         swordAnimator.SetBool("isAttacking", true);
 
@@ -207,7 +217,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
 
     public void TakeDamage(int damage)
     {
@@ -247,9 +256,9 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator PausePlayer()
     {
-        isMoving = false;  
-        yield return new WaitForSeconds(0.2f); 
-        isMoving = true;  
+        isMoving = false;
+        yield return new WaitForSeconds(0.2f);
+        isMoving = true;
     }
 
     void ResetInvulnerability()
@@ -266,11 +275,13 @@ public class PlayerMovement : MonoBehaviour
     public void IncreaseDamagePerLevel(int increaseAmount)
     {
         playerDamage += increaseAmount;
+        hasIncreasedDamage = true;
     }
 
     public void IncreaseMoveSpeedPerLevel(float speedIncrase)
     {
         moveSpeed += speedIncrase;
+        hasIncreasedSpeed = true;
     }
 
     public void DecreaseAttackCooldownPerLevel(float cooldownDecrease)
@@ -282,25 +293,34 @@ public class PlayerMovement : MonoBehaviour
     {
         maxPlayerHealth += healthIncrease;
         playerHealth = maxPlayerHealth;
+        hasIncreasedHealth = true;
         UpdateHealthBars();
     }
 
     public void IncreaseCriticalHitChance(float chanceIncrease)
     {
         criticalHitChance += chanceIncrease;
+        hasIncreasedCritChance = true;
     }
 
     public void IncreaseHealthRegeneration(float healthRegenIncrease)
     {
         healthRegenerationRate += healthRegenIncrease;
+        hasIncreasedHealthRegen = true;
+    }
+
+    public void IncreaseOrbitRadius(float increaseAmount)
+    {
+        orbitRadius += increaseAmount;
+        hasIncreasedOrbitRadius = true;
     }
 
     void RegenerateHealth()
     {
         if (healthRegenerationRate > 0f)
         {
-            playerHealth += (int)(healthRegenerationRate * Time.deltaTime); 
-            playerHealth = Mathf.Min(playerHealth, maxPlayerHealth); 
+            playerHealth += (int)(healthRegenerationRate * Time.deltaTime);
+            playerHealth = Mathf.Min(playerHealth, maxPlayerHealth);
             UpdateHealthBars();
         }
     }
@@ -308,6 +328,7 @@ public class PlayerMovement : MonoBehaviour
     public void ChangeArmor(float newArmorValue)
     {
         armorValue = newArmorValue;
+        hasIncreasedArmor = true;
     }
 
     public void ChangeWeapon(int newDamage, float newRange, int weaponIndex, RuntimeAnimatorController weaponAnimator)
@@ -320,7 +341,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        isMoving = false; 
-        gameManager.GoToMainMenu(); 
+        isMoving = false;
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetTrigger("dkDeath");
+        }
+        gameManager.GoToMainMenu();
     }
 }
+

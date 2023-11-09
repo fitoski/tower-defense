@@ -50,7 +50,8 @@ public class StatSelectionPanel : MonoBehaviour
         IncreaseSpeed,
         IncreaseArmor,
         IncreaseCriticalHitChance,
-        IncreaseHealthRegeneration
+        IncreaseHealthRegeneration,
+        IncreaseOrbitRadius
         };
 
         List<System.Action> selectedActions = new List<System.Action>();
@@ -118,6 +119,12 @@ public class StatSelectionPanel : MonoBehaviour
     public void IncreaseHealthRegeneration()
     {
         player.IncreaseHealthRegeneration(0.1f); 
+        ClosePanel();
+    }
+
+    public void IncreaseOrbitRadius()
+    {
+        player.IncreaseOrbitRadius(0.5f); 
         ClosePanel();
     }
 
