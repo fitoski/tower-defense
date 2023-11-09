@@ -48,30 +48,26 @@ public class StatSelectionPanel : MonoBehaviour
         IncreaseDamage,
         IncreaseHealth,
         IncreaseSpeed,
-        IncreaseArmor
-        // Burada daha fazla eylem ekleyebilirsiniz.
-    };
+        IncreaseArmor,
+        IncreaseCriticalHitChance,
+        IncreaseHealthRegeneration
+        };
 
-        // Rastgele seçilen eylemleri saklayacak yeni bir liste oluşturun.
         List<System.Action> selectedActions = new List<System.Action>();
 
-        // Toplamda görünmesini istediğiniz buton sayısı için bir döngü oluşturun, örneğin 4.
         for (int i = 0; i < 4; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, availableActions.Count);
             System.Action selectedAction = availableActions[randomIndex];
             selectedActions.Add(selectedAction);
-            // Aynı eylemi tekrar seçmemek için listeden kaldırın.
             availableActions.RemoveAt(randomIndex);
         }
 
-        // Paneldeki her butonu saklıyoruz ve hepsini gizliyoruz.
         foreach (var button in statButtons)
         {
             button.gameObject.SetActive(false);
         }
 
-        // Seçilen eylemleri butonlara atayın ve sadece bu butonları etkinleştirin.
         for (int i = 0; i < selectedActions.Count; i++)
         {
             System.Action actionToAssign = selectedActions[i];
@@ -82,14 +78,12 @@ public class StatSelectionPanel : MonoBehaviour
                 Debug.LogError("TextMeshProUGUI component on stat button is not found.");
                 continue;
             }
-            buttonText.text = actionToAssign.Method.Name.Replace("Increase", " + ");
+            buttonText.text = actionToAssign.Method.Name.Replace("Increase", "") + " +";
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => actionToAssign());
-            // Butonu etkinleştirin.
             button.gameObject.SetActive(true);
         }
     }
-
 
     public void IncreaseDamage()
     {
@@ -112,6 +106,18 @@ public class StatSelectionPanel : MonoBehaviour
     public void IncreaseArmor()
     {
         player.ChangeArmor(player.armorValue + 5);
+        ClosePanel();
+    }
+
+    public void IncreaseCriticalHitChance()
+    {
+        player.IncreaseCriticalHitChance(0.01f); 
+        ClosePanel();
+    }
+
+    public void IncreaseHealthRegeneration()
+    {
+        player.IncreaseHealthRegeneration(0.1f); 
         ClosePanel();
     }
 

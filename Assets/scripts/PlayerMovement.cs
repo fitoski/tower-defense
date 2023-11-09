@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public float attackCooldown = 0.5f; 
     private float attackCooldownTimer = 0f;  
     public int playerDamage = 5;
+    public float criticalHitChance = 0.0f; 
+    public float healthRegenerationRate = 0.0f;
     private bool isInvulnerable = false; 
     public float invulnerabilityDuration = 1.5f;
     public float armorValue;
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer playerSpriteRenderer;
     public SpriteRenderer swordSpriteRenderer;
     public List<Sprite> weaponSprites;
+    private Animator playerAnimator;
 
     private bool isMoving = true;
 
@@ -50,37 +53,93 @@ public class PlayerMovement : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         swordSpriteRenderer = sword.GetComponent<SpriteRenderer>();
         swordAnimator = sword.GetComponent<Animator>();
+        playerAnimator = GetComponent<Animator>();
+        if (playerAnimator == null)
+        {
+            Debug.LogError("Animator component not found on the player!");
+        }
     }
+
+    //void Update()
+    //{
+    //    if (isMoving)
+    //    {
+    //        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //        Vector2 playerPosition = transform.position;
+    //        if (mousePosition.x < playerPosition.x)
+    //        {
+    //            playerSpriteRenderer.flipX = true;
+    //        }
+    //        else if (mousePosition.x > playerPosition.x)
+    //        {
+    //            playerSpriteRenderer.flipX = false;
+    //        }
+    //        Vector3 playerPosition = transform.position;
+    //        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //        Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
+    //        sword.position = (Vector2)transform.position + direction * orbitRadius;
+    //        sword.up = direction;
+    //        sword.RotateAround(transform.position, Vector3.forward, orbitSpeed * Time.deltaTime);
+    //        bool isAttacking = Input.GetMouseButton(0);
+    //        swordAnimator.SetBool("isAttacking", isAttacking);
+    //        if (playerAnimator != null)
+    //        {
+    //            playerAnimator.SetBool("dkAttack", isAttacking);
+    //        }
+    //        if (isAttacking && attackCooldownTimer <= 0f)
+    //        {
+    //            sword.Rotate(Vector3.forward, attackRotationAmount);
+    //            attackCooldownTimer = attackCooldown;
+    //            Attack();
+    //        }
+    //        if (attackCooldownTimer > 0f)
+    //        {
+    //            attackCooldownTimer -= Time.deltaTime;
+    //        }
+    //        RegenerateHealth();
+    //    }
+    //    if (!isInvulnerable)
+    //    {
+    //        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+    //        foreach (Collider2D enemy in hitEnemies)
+    //        {
+    //            if (enemy.CompareTag("Enemy"))
+    //            {
+    //                TakeDamage(10);
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    if (waveDisplayText != null && enemySpawner != null)
+    //    {
+    //        waveDisplayText.text = "Wave: " + enemySpawner.GetCurrentWaveNumber().ToString();
+    //    }
+    //}
 
     void Update()
     {
         if (isMoving)
         {
-            //transform.Translate(movement, Space.World);
-
-            Vector3 playerPosition = transform.position;
-
-         //playerPosition.x = Mathf.Clamp(playerPosition.x, minX, maxX);
-         //playerPosition.y = Mathf.Clamp(playerPosition.y, minY, maxY);
-         //transform.position = playerPosition;
-
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
-
-            sword.position = (Vector2)transform.position + direction * orbitRadius;
+            Vector2 playerPosition = transform.position;
+            if (mousePosition.x < playerPosition.x)
+            {
+                playerSpriteRenderer.flipX = true; 
+            }
+            else if (mousePosition.x > playerPosition.x)
+            {
+                playerSpriteRenderer.flipX = false; 
+            }
+            Vector2 direction = (mousePosition - playerPosition).normalized;
+            sword.position = playerPosition + direction * orbitRadius;
             sword.up = direction;
-            sword.RotateAround(transform.position, Vector3.forward, orbitSpeed * Time.deltaTime);
-
-            //if (Input.GetButton("Fire1") && attackCooldownTimer <= 0f)
-            //{
-            //    sword.Rotate(Vector3.forward, attackRotationAmount);
-            //    attackCooldownTimer = attackCooldown;
-            //    Attack();
-            //}
-
+            sword.RotateAround(playerPosition, Vector3.forward, orbitSpeed * Time.deltaTime);
             bool isAttacking = Input.GetMouseButton(0);
             swordAnimator.SetBool("isAttacking", isAttacking);
-
+            if (playerAnimator != null)
+            {
+                playerAnimator.SetBool("dkAttack", isAttacking);
+            }
             if (isAttacking && attackCooldownTimer <= 0f)
             {
                 sword.Rotate(Vector3.forward, attackRotationAmount);
@@ -92,8 +151,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 attackCooldownTimer -= Time.deltaTime;
             }
+            RegenerateHealth();
         }
-
         if (!isInvulnerable)
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 0.5f);
@@ -116,31 +175,17 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveInputX = Input.GetAxisRaw("Horizontal");
         float moveInputY = Input.GetAxisRaw("Vertical");
+        //if (moveInputX > 0)
+        //{
+        //    playerSpriteRenderer.flipX = false; 
+        //}
+        //else if (moveInputX < 0)
+        //{
+        //    playerSpriteRenderer.flipX = true; 
+        //}
         Vector2 movement = new Vector2(moveInputX, moveInputY).normalized * moveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(movement + rb.position);
     }
-
-    //void Attack()
-    //{
-    //    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, 2f);
-
-    //    foreach (Collider2D enemy in hitEnemies)
-    //    {
-    //        if (enemy.CompareTag("Enemy") || enemy.CompareTag("Boss"))
-    //        {
-    //            Enemy enemyComponent = enemy.GetComponent<Enemy>();
-    //            if (enemyComponent != null)
-    //            {
-    //                enemyComponent.TakeDamage(playerDamage);
-
-    //                if (enemy.CompareTag("Boss"))
-    //                {
-    //                    //Debug.Log("Boss'a hasar verildi!");
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 
     void Attack()
     {
@@ -238,6 +283,26 @@ public class PlayerMovement : MonoBehaviour
         maxPlayerHealth += healthIncrease;
         playerHealth = maxPlayerHealth;
         UpdateHealthBars();
+    }
+
+    public void IncreaseCriticalHitChance(float chanceIncrease)
+    {
+        criticalHitChance += chanceIncrease;
+    }
+
+    public void IncreaseHealthRegeneration(float healthRegenIncrease)
+    {
+        healthRegenerationRate += healthRegenIncrease;
+    }
+
+    void RegenerateHealth()
+    {
+        if (healthRegenerationRate > 0f)
+        {
+            playerHealth += (int)(healthRegenerationRate * Time.deltaTime); 
+            playerHealth = Mathf.Min(playerHealth, maxPlayerHealth); 
+            UpdateHealthBars();
+        }
     }
 
     public void ChangeArmor(float newArmorValue)
