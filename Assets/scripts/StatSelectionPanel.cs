@@ -44,19 +44,28 @@ public class StatSelectionPanel : MonoBehaviour
 
     private void RandomizeStats()
     {
-        List<System.Action> availableActions = new List<System.Action> {
-        IncreaseDamage,
-        IncreaseHealth,
-        IncreaseSpeed,
-        IncreaseArmor,
-        IncreaseCriticalHitChance,
-        IncreaseHealthRegeneration,
-        IncreaseOrbitRadius
-        };
+        List<System.Action> availableActions = new List<System.Action>();
+
+        if (player.moveSpeed < player.maxMoveSpeed)
+        {
+            availableActions.Add(IncreaseSpeed);
+        }
+        if (player.orbitRadius < player.maxOrbitRadius)
+        {
+            availableActions.Add(IncreaseOrbitRadiusPerLevel);
+        }
+        if (player.healthRegenerationRate < player.maxHealthRegenRate)
+        {
+            availableActions.Add(IncreaseHealthRegeneration);
+        }
+
+        availableActions.Add(IncreaseDamage);
+        availableActions.Add(IncreaseHealth);
+        availableActions.Add(IncreaseArmor);
+        availableActions.Add(IncreaseCriticalHitChance);
 
         List<System.Action> selectedActions = new List<System.Action>();
-
-        for (int i = 0; i < 4; i++)
+        while (selectedActions.Count < Mathf.Min(4, availableActions.Count))
         {
             int randomIndex = UnityEngine.Random.Range(0, availableActions.Count);
             System.Action selectedAction = availableActions[randomIndex];
@@ -122,9 +131,9 @@ public class StatSelectionPanel : MonoBehaviour
         ClosePanel();
     }
 
-    public void IncreaseOrbitRadius()
+    public void IncreaseOrbitRadiusPerLevel()
     {
-        player.IncreaseOrbitRadius(0.5f); 
+        player.IncreaseOrbitRadiusPerLevel(0.5f); 
         ClosePanel();
     }
 

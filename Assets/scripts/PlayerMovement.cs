@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
     public int maxPlayerHealth = 100;
     public int playerHealth = 100;
 
+    public float maxMoveSpeed = 10f;
+    public float maxOrbitRadius = 5f;
+    public float maxHealthRegenRate;
     public bool hasIncreasedHealthRegen = false;
     public bool hasIncreasedCritChance = false;
     public bool hasIncreasedDamage = false;
@@ -62,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         swordSpriteRenderer = sword.GetComponent<SpriteRenderer>();
         swordAnimator = sword.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
+        maxHealthRegenRate = maxPlayerHealth * 0.5f;
         if (playerAnimator == null)
         {
             Debug.LogError("Animator component not found on the player!");
@@ -278,10 +282,12 @@ public class PlayerMovement : MonoBehaviour
         hasIncreasedDamage = true;
     }
 
-    public void IncreaseMoveSpeedPerLevel(float speedIncrase)
+    public void IncreaseMoveSpeedPerLevel(float speedIncrease)
     {
-        moveSpeed += speedIncrase;
-        hasIncreasedSpeed = true;
+        if (moveSpeed < maxMoveSpeed)
+        {
+            moveSpeed = Mathf.Min(moveSpeed + speedIncrease, maxMoveSpeed);
+        }
     }
 
     public void DecreaseAttackCooldownPerLevel(float cooldownDecrease)
@@ -305,14 +311,19 @@ public class PlayerMovement : MonoBehaviour
 
     public void IncreaseHealthRegeneration(float healthRegenIncrease)
     {
-        healthRegenerationRate += healthRegenIncrease;
-        hasIncreasedHealthRegen = true;
+        if (healthRegenerationRate < maxHealthRegenRate)
+        {
+            healthRegenerationRate = Mathf.Min(healthRegenerationRate + healthRegenIncrease, maxHealthRegenRate);
+        }
     }
 
-    public void IncreaseOrbitRadius(float increaseAmount)
+    public void IncreaseOrbitRadiusPerLevel(float increaseAmount)
     {
-        orbitRadius += increaseAmount;
-        hasIncreasedOrbitRadius = true;
+        if (orbitRadius < maxOrbitRadius)
+        {
+            orbitRadius = Mathf.Min(orbitRadius + increaseAmount, maxOrbitRadius);
+            hasIncreasedOrbitRadius = true;
+        }
     }
 
     void RegenerateHealth()
