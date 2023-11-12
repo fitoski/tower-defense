@@ -107,15 +107,12 @@ public class PlayerMovement : MonoBehaviour
 
             if (isAttacking && attackCooldownTimer <= 0f)
             {
-                sword.Rotate(Vector3.forward, attackRotationAmount);
-                attackCooldownTimer = attackCooldown;
+                Debug.Log("Vurduk");
                 Attack();
             }
 
-            if (attackCooldownTimer > 0f)
-            {
-                attackCooldownTimer -= Time.deltaTime;
-            }
+            attackCooldownTimer -= Time.deltaTime;
+
             RegenerateHealth();
         }
         
@@ -137,11 +134,9 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator.SetBool("dkWalkBackwards", isMovingBackwards);
     }
 
-    void Attack()
+    public void Attack()
     {
-        sword.Rotate(Vector3.forward, attackRotationAmount);
-        attackCooldownTimer = attackCooldown;
-        swordAnimator.SetBool("isAttacking", true);
+        //sword.Rotate(Vector3.forward, attackRotationAmount);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(sword.position, 2f);
 
         foreach (Collider2D enemy in hitEnemies)
@@ -155,6 +150,12 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    void StartAttackAnimation()
+    {
+        attackCooldownTimer = attackCooldown;
+        swordAnimator.SetBool("isAttacking", true);
     }
 
     public void TakeDamage(int damage)
