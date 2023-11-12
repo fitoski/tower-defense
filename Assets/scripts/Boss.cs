@@ -36,7 +36,7 @@ public class Boss : Enemy
         }
     }
 
-    protected override void Die()
+    public override void Die()
     {
         base.Die();
         DropItemOnDeath();

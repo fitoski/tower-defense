@@ -8,16 +8,21 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 2f;
     public int baseDamage = 1;
     public float damageMultiplierPerWave = 1.5f;
-
+    private bool isMoving = true;
     public int currentWave = 1;
-
+    private Animator animator;
     public GameObject goldPrefab;
 
     //[SerializeField] private int currencyWorth = 50;
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void Update()
     {
-        if (target != null)
+        if (isMoving && target != null)
         {
             Vector2 direction = (target.position - transform.position).normalized;
             transform.Translate(direction * speed * Time.deltaTime);
@@ -41,7 +46,9 @@ public class EnemyMovement : MonoBehaviour
         {
             int damage = Mathf.CeilToInt(baseDamage * Mathf.Pow(damageMultiplierPerWave, currentWave - 1));
             core.TakeDamage(damage);
-            Destroy(gameObject);
+
+            StopMovement();
+            animator.SetTrigger("SpecialAnimation"); 
         }
     }
 
@@ -54,8 +61,12 @@ public class EnemyMovement : MonoBehaviour
             {
                 player.TakeDamage(baseDamage);
             }
-            Destroy(gameObject);
         }
+    }
+
+    public void StopMovement()
+    {
+        isMoving = false;
     }
 
     public void Die()
@@ -64,7 +75,11 @@ public class EnemyMovement : MonoBehaviour
         {
             Instantiate(goldPrefab, transform.position, Quaternion.identity);
         }
+        GetComponent<Enemy>().Die();
+    }
 
+    public void DestroyEnemy()
+    {
         Destroy(gameObject);
     }
 }

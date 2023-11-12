@@ -44,51 +44,58 @@ public class StatSelectionPanel : MonoBehaviour
 
     private void RandomizeStats()
     {
-        List<System.Action> availableActions = new List<System.Action>();
-
-        if (player.moveSpeed < player.maxMoveSpeed)
+        List<System.Action> availableActions = new List<System.Action>
+    {
+        IncreaseDamage,
+        IncreaseHealth,
+        IncreaseSpeed,
+        IncreaseOrbitRadiusPerLevel,
+        IncreaseHealthRegeneration,
+        DecreaseAttackCooldown
+    };
+        if (player.moveSpeed >= player.maxMoveSpeed)
         {
-            availableActions.Add(IncreaseSpeed);
+            availableActions.Remove(IncreaseSpeed);
         }
-        if (player.orbitRadius < player.maxOrbitRadius)
+        if (player.orbitRadius >= player.maxOrbitRadius)
         {
-            availableActions.Add(IncreaseOrbitRadiusPerLevel);
+            availableActions.Remove(IncreaseOrbitRadiusPerLevel);
         }
-        if (player.healthRegenerationRate < player.maxHealthRegenRate)
+        if (player.healthRegenerationRate >= player.maxHealthRegenRate)
         {
-            availableActions.Add(IncreaseHealthRegeneration);
+            availableActions.Remove(IncreaseHealthRegeneration);
         }
-
-        availableActions.Add(IncreaseDamage);
-        availableActions.Add(IncreaseHealth);
-        availableActions.Add(IncreaseArmor);
-        availableActions.Add(IncreaseCriticalHitChance);
-
+        if (player.attackCooldown <= player.minimumAttackCooldown)
+        {
+            availableActions.Remove(DecreaseAttackCooldown);
+        }
+        if (player.criticalHitChance < 1f)
+        {
+            availableActions.Add(IncreaseCriticalHitChance);
+        }
+        foreach (var button in statButtons)
+        {
+            button.gameObject.SetActive(false);
+        }
         List<System.Action> selectedActions = new List<System.Action>();
-        while (selectedActions.Count < Mathf.Min(4, availableActions.Count))
+        while (selectedActions.Count < 4 && availableActions.Count > 0)
         {
             int randomIndex = UnityEngine.Random.Range(0, availableActions.Count);
             System.Action selectedAction = availableActions[randomIndex];
             selectedActions.Add(selectedAction);
             availableActions.RemoveAt(randomIndex);
         }
-
-        foreach (var button in statButtons)
+        for (int i = 0; i < Mathf.Min(selectedActions.Count, statButtons.Length); i++)
         {
-            button.gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < selectedActions.Count; i++)
-        {
-            System.Action actionToAssign = selectedActions[i];
             Button button = statButtons[i];
+            System.Action actionToAssign = selectedActions[i];
             TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
             if (buttonText == null)
             {
                 Debug.LogError("TextMeshProUGUI component on stat button is not found.");
                 continue;
             }
-            buttonText.text = actionToAssign.Method.Name.Replace("Increase", "") + " +";
+            buttonText.text = actionToAssign.Method.Name.Replace("Increase", "").Replace("Decrease", "") + " +";
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => actionToAssign());
             button.gameObject.SetActive(true);
@@ -97,43 +104,43 @@ public class StatSelectionPanel : MonoBehaviour
 
     public void IncreaseDamage()
     {
-        player.IncreaseDamagePerLevel(1);
+        player.IncreaseDamagePerLevel();
         ClosePanel();
     }
 
     public void IncreaseHealth()
     {
-        player.IncreaseMaxHealthPerLevel(10);
+        player.IncreaseMaxHealthPerLevel();
         ClosePanel();
     }
 
     public void IncreaseSpeed()
     {
-        player.IncreaseMoveSpeedPerLevel(0.5f);
-        ClosePanel();
-    }
-
-    public void IncreaseArmor()
-    {
-        player.ChangeArmor(player.armorValue + 5);
+        player.IncreaseMoveSpeedPerLevel();
         ClosePanel();
     }
 
     public void IncreaseCriticalHitChance()
     {
-        player.IncreaseCriticalHitChance(0.01f); 
+        player.IncreaseCriticalHitChance(); 
         ClosePanel();
     }
 
     public void IncreaseHealthRegeneration()
     {
-        player.IncreaseHealthRegeneration(0.1f); 
+        player.IncreaseHealthRegeneration(); 
         ClosePanel();
     }
 
     public void IncreaseOrbitRadiusPerLevel()
     {
-        player.IncreaseOrbitRadiusPerLevel(0.5f); 
+        player.IncreaseOrbitRadiusPerLevel(); 
+        ClosePanel();
+    }
+
+    public void DecreaseAttackCooldown()
+    {
+        player.DecreaseAttackCooldownPerLevel(); 
         ClosePanel();
     }
 

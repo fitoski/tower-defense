@@ -45,13 +45,37 @@ public class Trader : MonoBehaviour
 
     public void UpdateShopUI(List<ShopItem> itemsToShow)
     {
+        if (shopUIElements == null)
+        {
+            Debug.LogError("shopUIElements is null");
+            return;
+        }
+
+        if (itemsToShow == null)
+        {
+            Debug.LogError("itemsToShow is null");
+            return;
+        }
+
         foreach (var uiElement in shopUIElements)
         {
+            if (uiElement == null)
+            {
+                Debug.LogWarning("A uiElement in shopUIElements is null");
+                continue;
+            }
             uiElement.gameObject.SetActive(false);
         }
 
-        for (int i = 0; i < itemsToShow.Count; i++)
+        int maxItemsToShow = Mathf.Min(4, itemsToShow.Count);
+        for (int i = 0; i < maxItemsToShow; i++)
         {
+            if (shopUIElements[i] == null)
+            {
+                Debug.LogError($"shopUIElements[{i}] is null");
+                continue;
+            }
+
             shopUIElements[i].gameObject.SetActive(true);
             shopUIElements[i].UpdateUI(itemsToShow[i]);
         }

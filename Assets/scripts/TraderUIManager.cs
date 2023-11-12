@@ -8,14 +8,30 @@ using static Enums;
 public class TraderUIManager : MonoBehaviour
 {
     public Button buyItem1Button;
+    public Button buyItem2Button;
+    public Button buyItem3Button;
+    public Button buyItem4Button;
+    public Button buyItem5Button;
+
+
     public GameObject shopPanel;
     public static TraderUIManager instance;
     public Button closeShopButton;
 
-    public RuntimeAnimatorController item1Animator; 
+    public RuntimeAnimatorController item1Animator;
+    public RuntimeAnimatorController item2Animator;
+    public RuntimeAnimatorController item3Animator;
+    public RuntimeAnimatorController item4Animator;
+    public RuntimeAnimatorController item5Animator;
+
 
     public void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         instance = this;
     }
 
@@ -38,6 +54,62 @@ public class TraderUIManager : MonoBehaviour
             GameManager.main.currency -= 10;
             PlayerMovement player = FindObjectOfType<PlayerMovement>();
             player.ChangeWeapon(15, 5f, 1, item1Animator);
+        }
+        else
+        {
+            Debug.Log("Not enough money to buy Item1");
+        }
+    }
+
+    public void BuyItem2()
+    {
+        if (GameManager.main.currency >= 10)
+        {
+            GameManager.main.currency -= 10;
+            PlayerMovement player = FindObjectOfType<PlayerMovement>();
+            player.ChangeWeapon(15, 5f, 1, item2Animator);
+        }
+        else
+        {
+            Debug.Log("Not enough money to buy Item1");
+        }
+    }
+
+    public void BuyItem3()
+    {
+        if (GameManager.main.currency >= 10)
+        {
+            GameManager.main.currency -= 10;
+            PlayerMovement player = FindObjectOfType<PlayerMovement>();
+            player.ChangeWeapon(15, 5f, 1, item3Animator);
+        }
+        else
+        {
+            Debug.Log("Not enough money to buy Item1");
+        }
+    }
+
+    public void BuyItem4()
+    {
+        if (GameManager.main.currency >= 10)
+        {
+            GameManager.main.currency -= 10;
+            PlayerMovement player = FindObjectOfType<PlayerMovement>();
+            player.ChangeWeapon(15, 5f, 1, item4Animator);
+        }
+        else
+        {
+            Debug.Log("Not enough money to buy Item1");
+        }
+    }
+
+    public void BuyItem5()
+    {
+        if (GameManager.main.currency >= 10)
+        {
+            GameManager.main.currency -= 10;
+            PlayerMovement player = FindObjectOfType<PlayerMovement>();
+            player.ChangeWeapon(15, 5f, 1, item5Animator);
         }
         else
         {

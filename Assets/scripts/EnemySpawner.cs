@@ -105,26 +105,6 @@ public class EnemySpawner : MonoBehaviour
             enemyMovement.SetTarget(protectionObject);
     }
 
-
-
-    //public void StartWave(int waveNumber)
-    //{
-    //    if (waveEnemyTypes.ContainsKey(waveNumber))
-    //    {
-    //        List<GameObject> enemiesInThisWave = waveEnemyTypes[waveNumber];
-    //        for (int i = 0; i < enemiesPerWave + 2; i++)
-    //        {
-    //            Vector2 spawnPosition = GetRandomSpawnPosition();
-    //            GameObject chosenEnemyPrefab = enemiesInThisWave[Random.Range(0, enemiesInThisWave.Count)];
-    //            GameObject spawnedEnemy = Instantiate(chosenEnemyPrefab, spawnPosition, Quaternion.identity);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Wave " + waveNumber + " için belirlenmiş düşman türü yok.");
-    //    }
-    //}
-
     void StartNextWave()
     {
         bossSpawnedThisWave = false;

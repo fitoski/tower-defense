@@ -12,7 +12,7 @@ public class TraderUIElement : MonoBehaviour
     public void UpdateUI(Trader.ShopItem shopItem)
     {
         itemIcon.sprite = shopItem.itemIcon;
-        itemNameText.text = shopItem.itemName;
+        //itemNameText.text = shopItem.itemName;
         itemPriceText.text = shopItem.price.ToString() + " Coins";
     }
 }

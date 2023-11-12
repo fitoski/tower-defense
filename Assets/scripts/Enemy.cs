@@ -8,18 +8,31 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 10;
     public int baseDamage = 1;
     public float damageMultiplierPerWave = 1.5f;
-
-    private int currentHealth;
-
+    protected int currentHealth;
     protected EnemyMovement enemyMovement;
-
+    public float speed;
     public int scoreValue = 10;
     public int experiencePointsValue = 5;
 
+    private Animator animator;
+
     protected void Start()
     {
+        animator = GetComponent<Animator>();
         currentHealth = maxHealth;
         enemyMovement = GetComponent<EnemyMovement>();
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            PlayerMovement player = collider.GetComponent<PlayerMovement>();
+            if (player != null)
+            {
+                player.TakeDamage(baseDamage);
+            }
+        }
     }
 
     public void TakeDamage(int damage)
@@ -38,12 +51,18 @@ public class Enemy : MonoBehaviour
         return scoreValue;
     }
 
-    protected virtual void Die()
+    public virtual void Die()
     {
+        animator.SetBool("isDead", true);
         if (enemyMovement != null)
         {
-            enemyMovement.Die();
+            enemyMovement.StopMovement();
         }
         GameManager.main.IncreaseExperiencePoints(experiencePointsValue);
+    }
+
+    public void OnDeathAnimationComplete()
+    {
+        Destroy(gameObject);
     }
 }

@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTank : MonoBehaviour
+public class EnemyTank : Enemy
 {
-    [Header("Attributes of Enemy Tank")]
-    [SerializeField] public int maxHealth = 50;
-    [SerializeField] public float speed = 1f;
-    [SerializeField] public int baseDamage = 3;
-    [SerializeField] public int scoreValue = 30;
-    [SerializeField] public int experiencePointsValue = 20;
-    [SerializeField] public float damageMultiplierPerWave = 1.5f;
-
-    private int currentHealth;
-
-    void Start()
+    new void Start()
     {
-        currentHealth = maxHealth;
+        base.Start(); 
+        maxHealth = 10;
+        speed = 5f;
+        baseDamage = 1;
+        scoreValue = 15;
+        experiencePointsValue = 10;
+        damageMultiplierPerWave = 1.5f;
+        currentHealth = maxHealth; 
     }
-
 }

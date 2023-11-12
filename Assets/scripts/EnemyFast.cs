@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFast : MonoBehaviour
+public class EnemyFast : Enemy
 {
-    [Header("Attributes of Enemy Fast")]
-    [SerializeField] public int maxHealth = 10;
-    [SerializeField] public float speed = 5f;
-    [SerializeField] public int baseDamage = 1;
-    [SerializeField] public int scoreValue = 15;
-    [SerializeField] public int experiencePointsValue = 10;
-    [SerializeField] public float damageMultiplierPerWave = 1.5f;
-
-    private int currentHealth;
-
-    void Start()
+    new void Start()
     {
+        base.Start();
+        maxHealth = 10;
+        speed = 5f;
+        baseDamage = 1;
+        scoreValue = 15;
+        experiencePointsValue = 10;
+        damageMultiplierPerWave = 1.5f;
         currentHealth = maxHealth;
     }
-
-}
+} 

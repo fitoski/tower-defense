@@ -32,7 +32,6 @@ public class PauseMenu : MonoBehaviour
         if (player != null)
         {
             string upgradesDisplayText = "";
-
             if (player.hasIncreasedDamage)
             {
                 upgradesDisplayText += "Damage: " + player.playerDamage.ToString() + "\n";
@@ -61,6 +60,10 @@ public class PauseMenu : MonoBehaviour
             {
                 upgradesDisplayText += "Orbit Radius: " + player.orbitRadius.ToString("F1") + "\n";
             }
+            if (player.hasDecreasedAttackCooldown)
+            {
+                upgradesDisplayText += "Attack Speed: " + (1f / player.attackCooldown).ToString("F1") + " attacks/sec\n";
+            }
             upgradesText.text = upgradesDisplayText;
         }
         else
@@ -68,6 +71,7 @@ public class PauseMenu : MonoBehaviour
             upgradesText.text = "Player not found!";
         }
     }
+
 
     public void ResumeGame()
     {
