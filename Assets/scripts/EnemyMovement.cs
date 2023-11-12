@@ -89,6 +89,7 @@ public class EnemyMovement : MonoBehaviour
             Core core = collision.gameObject.GetComponent<Core>();
             if (core != null)
             {
+                Debug.Log("COREA VURDU");
                 core.TakeDamage(baseDamage);
                 StopMovement();
                 DropGold();
@@ -105,9 +106,7 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log("Attacking Core");
             int damage = Mathf.CeilToInt(baseDamage * Mathf.Pow(damageMultiplierPerWave, currentWave - 1));
             core.TakeDamage(damage);
-
             StopMovement();
-            DropGold();
             SetAppropriateTrigger("SpecialAnimation", "Die");
         }
     }

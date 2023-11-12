@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator swordAnimator;
     private Vector2 directionToMouse;
     private Vector2 movementDirection;
+    private float attackAnimationLength = 0;
 
     void Start()
     {
@@ -75,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("Animator component not found on the player!");
         }
+
+        AdjustAttackSpeedAndAnimation(attackCooldown);
     }
 
     void Update()
@@ -96,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
             sword.up = direction;
             sword.RotateAround(playerPosition, Vector3.forward, orbitSpeed * Time.deltaTime);
             bool isAttacking = Input.GetMouseButton(0);
-            swordAnimator.SetBool("isAttacking", isAttacking);
             directionToMouse = (mousePosition - playerPosition).normalized;
             movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
@@ -107,8 +110,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (isAttacking && attackCooldownTimer <= 0f)
             {
-                Debug.Log("Vurduk");
-                Attack();
+                StartAttackAnimation();
             }
 
             attackCooldownTimer -= Time.deltaTime;
@@ -155,7 +157,10 @@ public class PlayerMovement : MonoBehaviour
     void StartAttackAnimation()
     {
         attackCooldownTimer = attackCooldown;
-        swordAnimator.SetBool("isAttacking", true);
+        swordAnimator.SetTrigger("Attack");
+
+
+
     }
 
     public void TakeDamage(int damage)
@@ -283,10 +288,31 @@ public class PlayerMovement : MonoBehaviour
 
         public void AdjustAttackSpeedAndAnimation(float newAttackCooldown)
         {
+            AnimationClip[] clips = swordAnimator.runtimeAnimatorController.animationClips;
+            bool isFound = false;
+            foreach (AnimationClip clip in clips)
+            {
+                switch (clip.name)
+                {
+                    case "sword3Attack":
+                        attackAnimationLength = clip.length;
+                        isFound = true;
+                        break;
+                    case "sword2Attack":
+                        attackAnimationLength = clip.length;
+                        isFound = true;
+                        break;
+                }
+
+                if (isFound) {
+                    break;
+                }
+            }
+
             attackCooldown = newAttackCooldown;
             if (swordAnimator != null)
             {
-                swordAnimator.speed = 1.0f / attackCooldown;
+                swordAnimator.speed = attackAnimationLength / attackCooldown;
             }
         }
 
@@ -312,6 +338,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("swordAnimator component not found on the sword object!");
         }
+
         AdjustAttackSpeedAndAnimation(attackCooldown);
     }
 

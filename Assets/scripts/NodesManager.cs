@@ -16,6 +16,7 @@ public class NodesManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("dfsad");
         SpawnObjectsInNextLayer();
     }
 
