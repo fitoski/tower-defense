@@ -106,45 +106,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -154,8 +115,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 29
-        height: 63
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae754dac577b99a40a5f065757fb4446
-      internalID: -1472918534
+      spriteID: 7b07b178947d8c24ab77028ea7f5bfc6
+      internalID: 1182061786
       vertices: []
       indices: 
       edges: []
@@ -173,10 +134,10 @@ TextureImporter:
       name: tekerleklirobotdeath_1
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 0
-        width: 29
-        height: 63
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccf45708529b4f044a820b64e1ccd9a5
-      internalID: 1575019155
+      spriteID: 8dd15abfed4954343a65ee851f625feb
+      internalID: -1602038632
       vertices: []
       indices: 
       edges: []
@@ -194,10 +155,10 @@ TextureImporter:
       name: tekerleklirobotdeath_2
       rect:
         serializedVersion: 2
-        x: 135
+        x: 128
         y: 0
-        width: 29
-        height: 61
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cde20612d2fba4e4d822fae8676dadc3
-      internalID: 815836534
+      spriteID: 00a70f2577f9b544f9d487684aa1a128
+      internalID: -57220704
       vertices: []
       indices: 
       edges: []
@@ -215,10 +176,10 @@ TextureImporter:
       name: tekerleklirobotdeath_3
       rect:
         serializedVersion: 2
-        x: 216
-        y: 6
-        width: 29
-        height: 44
+        x: 192
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0e4b14d9b18506459866378e952bfd7
-      internalID: 1065245215
+      spriteID: eab2ca5239a7bbf4c8b0699b80a4bb78
+      internalID: 538308257
       vertices: []
       indices: 
       edges: []
@@ -236,10 +197,10 @@ TextureImporter:
       name: tekerleklirobotdeath_4
       rect:
         serializedVersion: 2
-        x: 284
-        y: 33
-        width: 10
-        height: 11
+        x: 256
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f29aa5ac71540c42bbdd0e5e18b7399
-      internalID: 989409985
+      spriteID: 05343af6a0b4f954aa5edbbcd1260991
+      internalID: -1814908027
       vertices: []
       indices: 
       edges: []
@@ -257,10 +218,10 @@ TextureImporter:
       name: tekerleklirobotdeath_5
       rect:
         serializedVersion: 2
-        x: 291
+        x: 320
         y: 0
-        width: 22
-        height: 35
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f30333749f0df6459e2b0650c82be7a
-      internalID: -728197880
+      spriteID: f4040add530e01341bccb97b8906b1b4
+      internalID: 567729499
       vertices: []
       indices: 
       edges: []
@@ -278,10 +239,10 @@ TextureImporter:
       name: tekerleklirobotdeath_6
       rect:
         serializedVersion: 2
-        x: 355
+        x: 384
         y: 0
-        width: 22
-        height: 35
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,134 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 411b8a3b4029dbd4792da9cfde567f40
-      internalID: -169174074
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tekerleklirobotdeath_7
-      rect:
-        serializedVersion: 2
-        x: 202
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90000c5b7afea8b4f8e1e70beff6201c
-      internalID: 1093621023
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tekerleklirobotdeath_8
-      rect:
-        serializedVersion: 2
-        x: 266
-        y: 0
-        width: 22
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be332752b29f69740aa70c2e7f702257
-      internalID: -1526648269
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tekerleklirobotdeath_9
-      rect:
-        serializedVersion: 2
-        x: 330
-        y: 0
-        width: 22
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 43c751e0e02a8e44da72dd64bf01bcf6
-      internalID: 1873119672
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tekerleklirobotdeath_10
-      rect:
-        serializedVersion: 2
-        x: 344
-        y: 13
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d6500bd8970a5c48809ca023bb4365a
-      internalID: -1132901463
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tekerleklirobotdeath_11
-      rect:
-        serializedVersion: 2
-        x: 394
-        y: 0
-        width: 27
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d541f0566f592c34ca9a3aefde9b459f
-      internalID: -2064026738
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tekerleklirobotdeath_12
-      rect:
-        serializedVersion: 2
-        x: 418
-        y: 0
-        width: 23
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3bc6e0a4ef31c67418e5caa7ccd66160
-      internalID: -433712760
+      spriteID: 0353d5e7df5a0114ebbd7a3bf2194781
+      internalID: 1827468164
       vertices: []
       indices: 
       edges: []
@@ -432,19 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tekerleklirobotdeath_0: -1472918534
-      tekerleklirobotdeath_1: 1575019155
-      tekerleklirobotdeath_10: -1132901463
-      tekerleklirobotdeath_11: -2064026738
-      tekerleklirobotdeath_12: -433712760
-      tekerleklirobotdeath_2: 815836534
-      tekerleklirobotdeath_3: 1065245215
-      tekerleklirobotdeath_4: 989409985
-      tekerleklirobotdeath_5: -728197880
-      tekerleklirobotdeath_6: -169174074
-      tekerleklirobotdeath_7: 1093621023
-      tekerleklirobotdeath_8: -1526648269
-      tekerleklirobotdeath_9: 1873119672
+      tekerleklirobotdeath_0: 1182061786
+      tekerleklirobotdeath_1: -1602038632
+      tekerleklirobotdeath_2: -57220704
+      tekerleklirobotdeath_3: 538308257
+      tekerleklirobotdeath_4: -1814908027
+      tekerleklirobotdeath_5: 567729499
+      tekerleklirobotdeath_6: 1827468164
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
