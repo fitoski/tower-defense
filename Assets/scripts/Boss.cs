@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
+    public float attackRange = 5f;
+    public int attackDamage = 10;
+    public float attackCooldown = 5f;
+    private float attackTimer;
+
+    private Transform playerTransform;
+    private Animator bossAnimator;
     private BossAbilities bossAbilities;
 
     public List<DropItem> droppableItems;
@@ -11,6 +18,17 @@ public class Boss : Enemy
     private new void Start()
     {
         base.Start();
+        maxHealth = 10;
+        speed = 5f;
+        baseDamage = 1;
+        scoreValue = 15;
+        experiencePointsValue = 10;
+        damageMultiplierPerWave = 1.5f;
+        currentHealth = maxHealth;
+        base.Start();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        bossAnimator = GetComponent<Animator>();
+        attackTimer = attackCooldown;
         bossAbilities = GetComponent<BossAbilities>();
 
         if (bossAbilities != null)
@@ -20,21 +38,60 @@ public class Boss : Enemy
         }
     }
 
-    void UseSpecialAttack()
+    private new void Update()
     {
-        if (bossAbilities != null)
+        if (playerTransform != null)
         {
-            bossAbilities.SpecialAttack();
+            FollowPlayer();
+        }
+
+        if (attackTimer > 0)
+        {
+            base.Start();
+            maxHealth = 10;
+            speed = 5f;
+            baseDamage = 1;
+            scoreValue = 15;
+            experiencePointsValue = 10;
+            damageMultiplierPerWave = 1.5f;
+            currentHealth = maxHealth;
+            attackTimer -= Time.deltaTime;
+        }
+        else
+        {
+            if (Vector2.Distance(transform.position, playerTransform.position) <= attackRange)
+            {
+                AttackPlayer();
+            }
         }
     }
 
-    void UseAnotherAbility()
+    void FollowPlayer()
     {
-        if (bossAbilities != null)
-        {
-            bossAbilities.AnotherAbility();
-        }
+        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
     }
+
+    void AttackPlayer()
+    {
+        bossAnimator.SetTrigger("Attack");
+        attackTimer = attackCooldown;
+    }
+
+    //void UseSpecialAttack()
+    //{
+    //    if (bossAbilities != null)
+    //    {
+    //        bossAbilities.SpecialAttack();
+    //    }
+    //}
+
+    //void UseAnotherAbility()
+    //{
+    //    if (bossAbilities != null)
+    //    {
+    //        bossAbilities.AnotherAbility();
+    //    }
+    //}
 
     public override void Die()
     {

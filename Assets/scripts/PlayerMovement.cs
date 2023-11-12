@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     public Text waveDisplayText;
     private GameManager gameManager;
     private Animator swordAnimator;
+    private Vector2 directionToMouse;
+    private Vector2 movementDirection;
 
     void Start()
     {
@@ -95,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
             sword.RotateAround(playerPosition, Vector3.forward, orbitSpeed * Time.deltaTime);
             bool isAttacking = Input.GetMouseButton(0);
             swordAnimator.SetBool("isAttacking", isAttacking);
+            directionToMouse = (mousePosition - playerPosition).normalized;
+            movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
             if (playerAnimator != null)
             {
@@ -129,6 +133,8 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator.SetBool("dkWalk", isWalking);
         Vector2 movement = new Vector2(moveInputX, moveInputY).normalized * moveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(movement + rb.position);
+        bool isMovingBackwards = Vector2.Dot(directionToMouse, movementDirection) < 0;
+        playerAnimator.SetBool("dkWalkBackwards", isMovingBackwards);
     }
 
     void Attack()
@@ -307,8 +313,6 @@ public class PlayerMovement : MonoBehaviour
         }
         AdjustAttackSpeedAndAnimation(attackCooldown);
     }
-
-
 
     public void Die()
         {

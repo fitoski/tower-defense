@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
     public float speed;
     public int scoreValue = 10;
     public int experiencePointsValue = 5;
-
+    private Vector2 previousPosition;
+    private float movementThreshold = 0.01f;
     private Animator animator;
 
     protected void Start()
@@ -21,6 +22,16 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
         enemyMovement = GetComponent<EnemyMovement>();
+        previousPosition = transform.position;
+
+    }
+
+    protected virtual void Update()
+    {
+        Vector2 currentPosition = transform.position;
+        bool isEnemyMoving = Vector2.Distance(previousPosition, currentPosition) > movementThreshold;
+        animator.SetBool("isMoving", isEnemyMoving);
+        previousPosition = currentPosition;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -53,7 +64,9 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        animator.SetTrigger("Die");
         animator.SetBool("isDead", true);
+
         if (enemyMovement != null)
         {
             enemyMovement.StopMovement();

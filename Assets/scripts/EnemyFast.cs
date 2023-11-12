@@ -15,4 +15,15 @@ public class EnemyFast : Enemy
         damageMultiplierPerWave = 1.5f;
         currentHealth = maxHealth;
     }
-} 
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
+    public override void Die()
+    {
+        base.Die();
+    }
+
+}

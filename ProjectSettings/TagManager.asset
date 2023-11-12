@@ -13,6 +13,7 @@ TagManager:
   - BuildingPanel
   - UpgradePanel
   - BuyMenuCanvas
+  - Core
   layers:
   - Default
   - TransparentFX

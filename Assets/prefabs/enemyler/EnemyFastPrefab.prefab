@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.142, y: 0.063, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.6415094, g: 0, b: 0.20529506, a: 1}
+  m_Sprite: {fileID: 2060907221, guid: 97c06fffbc2c7a54f8dd5a0d4b5ed265, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -127,7 +127,7 @@ Animator:
   m_GameObject: {fileID: 3838339183629443256}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7b4cb3c0288c64543ab32045c34c66c4, type: 2}
+  m_Controller: {fileID: 9100000, guid: af78a11df9950b643b8a4301182a7613, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -167,21 +167,21 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.009924762, y: -0.10419577}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.29, y: 0.61}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.2713771, y: 0.40364254}
   m_EdgeRadius: 0
 --- !u!114 &8316285283714994773
 MonoBehaviour:
@@ -215,6 +215,7 @@ MonoBehaviour:
   maxHealth: 10
   baseDamage: 1
   damageMultiplierPerWave: 1.5
+  speed: 0
   scoreValue: 10
   experiencePointsValue: 5
 --- !u!114 &-1520317674268574116
@@ -230,8 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  speed: 5
   baseDamage: 1
+  damageMultiplierPerWave: 1.5
+  speed: 5
   scoreValue: 15
   experiencePointsValue: 10
-  damageMultiplierPerWave: 1.5
