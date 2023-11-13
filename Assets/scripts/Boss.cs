@@ -77,22 +77,6 @@ public class Boss : Enemy
         attackTimer = attackCooldown;
     }
 
-    //void UseSpecialAttack()
-    //{
-    //    if (bossAbilities != null)
-    //    {
-    //        bossAbilities.SpecialAttack();
-    //    }
-    //}
-
-    //void UseAnotherAbility()
-    //{
-    //    if (bossAbilities != null)
-    //    {
-    //        bossAbilities.AnotherAbility();
-    //    }
-    //}
-
     public override void Die()
     {
         base.Die();
@@ -116,31 +100,3 @@ public class Boss : Enemy
         }
     }
 }
-
-//void DropItemOnDeath()
-//{
-//    List<DropItem> filteredItems = new List<DropItem>();
-
-//    foreach (DropItem item in droppableItems)
-//    {
-//        float randomValue = Random.Range(0f, 100f);
-//        if (randomValue <= item.dropChance)
-//        {
-//            filteredItems.Add(item);
-//        }
-//    }
-
-//    if (filteredItems.Count > 0)
-//    {
-//        int randomIndex = Random.Range(0, filteredItems.Count);
-//        DropItem selectedItem = filteredItems[randomIndex];
-
-//        GameObject droppedItem = Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
-//        SpriteRenderer sr = droppedItem.GetComponent<SpriteRenderer>();
-//        if (sr)
-//        {
-//            sr.sprite = selectedItem.itemIcon;
-//        }
-//        Debug.Log("eşya: " + selectedItem.itemName);
-//    }
-//}
