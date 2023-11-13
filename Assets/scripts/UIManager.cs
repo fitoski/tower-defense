@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     {
         if (gameManager != null)
         {
-            levelText.text = "Level: " + gameManager.GetCurrentLevel().ToString();
+            levelText.text = "Lv: " + gameManager.GetCurrentLevel().ToString();
 
             float experienceRatio = (float)gameManager.GetCurrentExperiencePoints() /
                                    (10 * Mathf.Pow(1.7f, gameManager.GetCurrentLevel() - 1));

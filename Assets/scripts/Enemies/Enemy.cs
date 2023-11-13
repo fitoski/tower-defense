@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour
             enemyMovement.StopMovement();
         }
         GameManager.main.IncreaseExperiencePoints(experiencePointsValue);
+        EnemySpawner.Instance.ActiveEnemies--;
     }
 
     public void OnDeathAnimationComplete()
