@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a59ab08721730574eafe272e9d9a9673
+guid: 7c133b5c36bfa0249ae7a5610749de3a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grirobotwalk_0
+      name: Grirobotwalk 1_0
       rect:
         serializedVersion: 2
         x: 11
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb8afd11d4364b940bb5d3b650682fbf
-      internalID: 112293468
+      spriteID: b7d86c22a7a96804e9f3224346e18d34
+      internalID: -191430793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_1
+      name: Grirobotwalk 1_1
       rect:
         serializedVersion: 2
         x: 61
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 106334bcd5f7546489965c71db1dea7d
-      internalID: -1880479019
+      spriteID: 5d3c248ec76f57b4ea260e7d27dece09
+      internalID: -1090956087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_2
+      name: Grirobotwalk 1_2
       rect:
         serializedVersion: 2
         x: 111
@@ -166,17 +166,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d65f2b065ba312846a368cf82fbe56eb
-      internalID: -363328816
+      spriteID: c8f9474d9b823db4284005be1fea321f
+      internalID: 57707126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_3
+      name: Grirobotwalk 1_3
       rect:
         serializedVersion: 2
-        x: 160
+        x: 159
         y: 15
         width: 23
         height: 24
@@ -187,17 +187,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3617be48ae197940b2e911e64e78f6f
-      internalID: -851702737
+      spriteID: d82a908bb6404224da3b982bf8140bba
+      internalID: -1221428732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_4
+      name: Grirobotwalk 1_4
       rect:
         serializedVersion: 2
-        x: 210
+        x: 209
         y: 15
         width: 23
         height: 25
@@ -208,17 +208,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efc82264738029e4b901455cd9f90593
-      internalID: 795334483
+      spriteID: 9600f54aa41fa4849a1507e8efbd051c
+      internalID: 1209400844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_5
+      name: Grirobotwalk 1_5
       rect:
         serializedVersion: 2
-        x: 260
+        x: 259
         y: 15
         width: 23
         height: 25
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8e463c5f2702e5449a6b3c0a25950c1
-      internalID: 584388280
+      spriteID: 333e0f2db3e8ae64e9f18b4d20607dfa
+      internalID: -1404353480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_6
+      name: Grirobotwalk 1_6
       rect:
         serializedVersion: 2
         x: 309
@@ -250,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5022fea3c05d40043aee7f9ea4003fbb
-      internalID: -119745144
+      spriteID: 3be0f115e7d9ae445a946b7d9a52c987
+      internalID: 157323161
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_7
+      name: Grirobotwalk 1_7
       rect:
         serializedVersion: 2
         x: 359
         y: 15
         width: 23
-        height: 23
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d982ca26929ff2d4184724f7db5f05fc
-      internalID: -332550304
+      spriteID: 49e1d3342ec9cdb46864949af994708a
+      internalID: -2051871209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_8
+      name: Grirobotwalk 1_8
       rect:
         serializedVersion: 2
         x: 409
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2c8477e90d13304db22b3d867f4fad8
-      internalID: -1249878176
+      spriteID: cdcc93df3018e4441b47068db28224af
+      internalID: 443085569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_9
+      name: Grirobotwalk 1_9
       rect:
         serializedVersion: 2
         x: 459
@@ -313,122 +313,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a07fef668725e9844905e1749570b888
-      internalID: 1193279159
+      spriteID: bad1e93dbe3149b4aade7ba7ae54ef5c
+      internalID: 1263319852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_10
+      name: Grirobotwalk 1_10
       rect:
         serializedVersion: 2
-        x: 509
-        y: 15
-        width: 23
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c43ca1114faf034c80421f6c8bf1242
-      internalID: -915260721
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grirobotwalk_11
-      rect:
-        serializedVersion: 2
-        x: 559
-        y: 15
-        width: 23
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5912228f1c4435040aa96cc02afcfe39
-      internalID: 1974058450
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grirobotwalk_12
-      rect:
-        serializedVersion: 2
-        x: 609
-        y: 15
-        width: 23
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ade82d61618f1f4f9142c6aa9433036
-      internalID: 1569838729
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grirobotwalk_13
-      rect:
-        serializedVersion: 2
-        x: 659
-        y: 15
-        width: 23
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ccf781af4b4e034c9d65eb55166dc39
-      internalID: 1135784771
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grirobotwalk_14
-      rect:
-        serializedVersion: 2
-        x: 709
-        y: 15
-        width: 23
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bdacbbce82727774ebe287f4906c0de5
-      internalID: -1783102856
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grirobotwalk_15
-      rect:
-        serializedVersion: 2
-        x: 758
+        x: 507
         y: 15
         width: 23
         height: 23
@@ -439,17 +334,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60ef629a6d8608543acd9c93b9b2dc29
-      internalID: 54513732
+      spriteID: 02424239769b98c4bbf0b4e0d2f72b6d
+      internalID: 371542925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grirobotwalk_16
+      name: Grirobotwalk 1_11
       rect:
         serializedVersion: 2
-        x: 807
+        x: 557
         y: 15
         width: 23
         height: 24
@@ -460,8 +355,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c04d33d7df39624aa3d300528310d79
-      internalID: 54637722
+      spriteID: 7e6f03bb131b7784fb120d0721fdaa1d
+      internalID: 1623815307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grirobotwalk 1_12
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 15
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f0b76db1cbb43f468499899e484d412
+      internalID: 1024630006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grirobotwalk 1_13
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 15
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2924a60087831af46bedf1d1dc301389
+      internalID: 1062168673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grirobotwalk 1_14
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 15
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b574f5ab71d71b4f94602e813de135a
+      internalID: 2064337078
       vertices: []
       indices: 
       edges: []
@@ -477,23 +435,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Grirobotwalk_0: 112293468
-      Grirobotwalk_1: -1880479019
-      Grirobotwalk_10: -915260721
-      Grirobotwalk_11: 1974058450
-      Grirobotwalk_12: 1569838729
-      Grirobotwalk_13: 1135784771
-      Grirobotwalk_14: -1783102856
-      Grirobotwalk_15: 54513732
-      Grirobotwalk_16: 54637722
-      Grirobotwalk_2: -363328816
-      Grirobotwalk_3: -851702737
-      Grirobotwalk_4: 795334483
-      Grirobotwalk_5: 584388280
-      Grirobotwalk_6: -119745144
-      Grirobotwalk_7: -332550304
-      Grirobotwalk_8: -1249878176
-      Grirobotwalk_9: 1193279159
+      Grirobotwalk 1_0: -191430793
+      Grirobotwalk 1_1: -1090956087
+      Grirobotwalk 1_10: 371542925
+      Grirobotwalk 1_11: 1623815307
+      Grirobotwalk 1_12: 1024630006
+      Grirobotwalk 1_13: 1062168673
+      Grirobotwalk 1_14: 2064337078
+      Grirobotwalk 1_2: 57707126
+      Grirobotwalk 1_3: -1221428732
+      Grirobotwalk 1_4: 1209400844
+      Grirobotwalk 1_5: -1404353480
+      Grirobotwalk 1_6: 157323161
+      Grirobotwalk 1_7: -2051871209
+      Grirobotwalk 1_8: 443085569
+      Grirobotwalk 1_9: 1263319852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
