@@ -6,7 +6,7 @@ public class ThrowableProjectileControl : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Vector2 firstPos = Vector2.zero;
-
+    private int damage;
     private float speed;
     public float distance;
     private void Awake()
@@ -14,10 +14,11 @@ public class ThrowableProjectileControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void InitObject(float distance, float speed)
+    public void InitObject(float distance, float speed, int damage)
     {
         this.distance = distance;
         this.speed = speed;
+        this.damage = damage;
     }
     void Start()
     {
@@ -73,6 +74,7 @@ public class ThrowableProjectileControl : MonoBehaviour
         if (collision != null && collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
+            collision.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
 }

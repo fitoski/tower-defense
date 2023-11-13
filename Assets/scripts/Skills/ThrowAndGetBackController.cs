@@ -7,17 +7,18 @@ public class ThrowAndGetBackController : MonoBehaviour
 {
     private float speed;
     private float distance;
-
+    private int damage;
     private Transform player;
     private Vector2 firstPos;
     private Vector2 dir;
 
 
     private bool isGoingBack = false;
-    public void InitObject(float distance, float speed)
+    public void InitObject(float distance, float speed, int damage)
     {
         this.speed = speed;
         this.distance = distance;
+        this.damage = damage;
     }
     void Start()
     {
@@ -83,5 +84,13 @@ public class ThrowAndGetBackController : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().TakeDamage(damage);
+        }
     }
 }

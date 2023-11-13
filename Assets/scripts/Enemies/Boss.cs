@@ -86,17 +86,6 @@ public class Boss : Enemy
     void DropItemOnDeath()
     {
         Debug.Log("item düştü");
-        foreach (DropItem item in droppableItems)
-        {
-            int randomChance = UnityEngine.Random.Range(0, 100);
-            Debug.Log("random chance: " + randomChance + "item drop chance: " + item.dropChance);
-
-            if (randomChance < item.dropChance)
-            {
-                Debug.Log("dropped item: " + item.itemName);
-                Instantiate(item.itemPrefab, transform.position, Quaternion.identity);
-                break;
-            }
-        }
+        SkillsManager.Instance.PrepareSkillRewardPanel();
     }
 }

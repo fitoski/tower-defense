@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66ef9bf11b2898042b1d820caae78c6b, type: 3}
-  m_Name: ThrowAndGetBackSkill
+  m_Name: Test3
   m_EditorClassIdentifier: 
-  skillName: Throw and get Back
-  description: "F\u0131rlat ve geri getir"
-  icon: {fileID: 21300000, guid: 59452e6abedfc4c4f8f65ef7d644e446, type: 3}
+  skillName: TestBXVCB
+  description: bu bir test objesidir.
+  icon: {fileID: -1153131523, guid: 6604061df54a19743bc411e0aaf64b2c, type: 3}
   maxLevel: 0
-  cooldown: 4
-  baseDamage: 10
-  damagePerLevel: 10
-  prefab: {fileID: 3875032648117720701, guid: 572612fa6c5809e42acbfdb0d17ae404, type: 3}
-  speed: 10
-  distance: 50
+  cooldown: 5
+  baseDamage: 0
+  damagePerLevel: 0
+  prefab: {fileID: 0}
+  speed: 0
+  distance: 0

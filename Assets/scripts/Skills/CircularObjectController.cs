@@ -7,6 +7,7 @@ public class CircularObjectController : MonoBehaviour
     private float orbitDistance;
     private float orbitDegreesPerSec;
     private float maxAngle;
+    private int damage;
 
     private Transform player;
     private float currentAngle = 0;
@@ -17,11 +18,12 @@ public class CircularObjectController : MonoBehaviour
         transform.position = player.transform.position + new Vector3(orbitDistance, 0, 0);
     }
 
-    public void InitObject(float orbitDistance, float orbitDegreesPerSec, float maxAngle)
+    public void InitObject(float orbitDistance, float orbitDegreesPerSec, float maxAngle, int damage)
     {
         this.orbitDistance = orbitDistance;
         this.orbitDegreesPerSec = orbitDegreesPerSec;
         this.maxAngle = maxAngle;
+        this.damage = damage;
     }
 
     void Update()
@@ -42,6 +44,14 @@ public class CircularObjectController : MonoBehaviour
         if (currentAngle > maxAngle)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
 }
