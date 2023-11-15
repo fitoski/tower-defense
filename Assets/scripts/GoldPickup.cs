@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GoldPickup : MonoBehaviour
 {
     public int goldAmount = 10;
-    public Text currencyText;
+    public TextMeshProUGUI currencyText;
 
     private void Update()
     {
@@ -17,7 +18,7 @@ public class GoldPickup : MonoBehaviour
     {
         if (currencyText != null)
         {
-            currencyText.text = "Currency: " + GameManager.main.currency.ToString();
+            currencyText.text = GameManager.main.currency.ToString();
         }
     }
 

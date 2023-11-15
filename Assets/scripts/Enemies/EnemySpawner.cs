@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class EnemySpawner : MonoBehaviour
     public int initialEnemiesPerWave = 5;
     public float waveDelay = 10f;
     public int enemiesIncreasePerWave = 1;
+    private int totalEnemiesKilled = 0;
+    public TextMeshProUGUI enemyCountText;
 
     private float spawnInterval;
     private int enemiesPerWave;
@@ -136,6 +139,22 @@ public class EnemySpawner : MonoBehaviour
             enemyMovement.SetTarget(protectionObject);
 
         activeEnemies++;
+        UpdateEnemyCountUI();
+
+    }
+
+    public void EnemyKilled()
+    {
+        totalEnemiesKilled++;
+        UpdateEnemyCountUI();
+    }
+
+    private void UpdateEnemyCountUI()
+    {
+        if (enemyCountText != null)
+        {
+            enemyCountText.text = "" + totalEnemiesKilled;
+        }
     }
 
     void StartNextWave()
