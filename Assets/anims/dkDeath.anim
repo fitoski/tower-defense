@@ -23,32 +23,30 @@ AnimationClip:
     - time: 0
       value: {fileID: -1575816536, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
     - time: 0.1
-      value: {fileID: -1232728098, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 0.2
       value: {fileID: 1614600915, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 0.3
+    - time: 0.2
       value: {fileID: -1921348825, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 0.4
+    - time: 0.3
       value: {fileID: 1812397163, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 0.5
+    - time: 0.4
       value: {fileID: -1747587866, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 0.6
+    - time: 0.5
       value: {fileID: 839956668, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 0.7
+    - time: 0.6
       value: {fileID: -494365723, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 0.8
+    - time: 0.7
       value: {fileID: -1285969160, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 0.9
+    - time: 0.8
       value: {fileID: -1232728098, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 1
+    - time: 0.9
       value: {fileID: -1741537314, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 1.1
+    - time: 1
       value: {fileID: 593687249, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 1.2
+    - time: 1.1
       value: {fileID: -1239165204, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 1.3
+    - time: 1.2
       value: {fileID: -1207300471, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - time: 1.4
+    - time: 1.3
       value: {fileID: -1428468176, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
     attribute: m_Sprite
     path: 
@@ -73,7 +71,6 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: -1575816536, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
-    - {fileID: -1232728098, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
     - {fileID: 1614600915, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
     - {fileID: -1921348825, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
     - {fileID: 1812397163, guid: 79ef0592f6ee4e84d9a5b84eabe9f2ac, type: 3}
@@ -92,7 +89,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.5
+    m_StopTime: 1.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -111,4 +108,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1.4
+    functionName: TriggerDeathScreen
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

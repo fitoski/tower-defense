@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject traderPrefab;
     public TraderUIManager traderUIManager;
+    public GameObject deathScreenPanel;
+    public TextMeshProUGUI minutesSurvivedText;
+    public TextMeshProUGUI totalGoldText;
 
     private void Awake()
     {
@@ -159,6 +162,34 @@ public class GameManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ReplayGame()
+    {
+        Time.timeScale = 1;
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ShowDeathScreen()
+    {
+        Time.timeScale = 0;
+
+        deathScreenPanel.GetComponent<CanvasGroup>().alpha = 1;
+        deathScreenPanel.GetComponent<CanvasGroup>().interactable = true;
+        deathScreenPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        int minutes = (int)(playTime / 60);
+        int seconds = (int)(playTime % 60);
+        minutesSurvivedText.text = "Minutes Survived: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+        totalGoldText.text = "Total Gold: " + currency;
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1;
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 

@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 directionToMouse;
     private Vector2 movementDirection;
     private float attackAnimationLength = 0;
+    public float deathAnimationLength = 2f; 
 
     void Start()
     {
@@ -346,6 +347,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerAnimator.SetTrigger("dkDeath");
             }
-            gameManager.GoToMainMenu();
-        }
+        StartCoroutine(WaitForDeathAnimation());
     }
+
+    public void TriggerDeathScreen()
+    {
+        GameManager.main.ShowDeathScreen();
+    }
+
+    private IEnumerator WaitForDeathAnimation()
+    {
+        yield return new WaitForSeconds(deathAnimationLength);
+        GameManager.main.ShowDeathScreen(); 
+    }
+}
