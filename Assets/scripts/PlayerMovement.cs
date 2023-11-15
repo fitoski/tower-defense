@@ -158,9 +158,6 @@ public class PlayerMovement : MonoBehaviour
     {
         attackCooldownTimer = attackCooldown;
         swordAnimator.SetTrigger("Attack");
-
-
-
     }
 
     public void TakeDamage(int damage)

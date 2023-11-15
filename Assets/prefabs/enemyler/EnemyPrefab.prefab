@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2539599766684847071}
   - component: {fileID: 6119647460750049429}
   - component: {fileID: 8316285283714994773}
-  - component: {fileID: -5684185764130608339}
   - component: {fileID: 2882033880101117232}
+  - component: {fileID: 1417263819240883765}
   m_Layer: 6
   m_Name: EnemyPrefab
   m_TagString: Enemy
@@ -154,24 +154,6 @@ MonoBehaviour:
   damageMultiplierPerWave: 1.5
   currentWave: 1
   goldPrefab: {fileID: 6444085966677475160, guid: aae43f6c7b02c364b98752104b7743a2, type: 3}
---- !u!114 &-5684185764130608339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3838339183629443256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00168cb0cf1c7f149adc425158635f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  baseDamage: 1
-  damageMultiplierPerWave: 1.5
-  speed: 0
-  scoreValue: 10
-  experiencePointsValue: 5
 --- !u!70 &2882033880101117232
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -207,3 +189,23 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0016530305, y: 0.0062924474}
   m_Size: {x: 0.18330607, y: 0.2671713}
   m_Direction: 0
+--- !u!114 &1417263819240883765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3838339183629443256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00168cb0cf1c7f149adc425158635f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  baseDamage: 1
+  damageMultiplierPerWave: 1.5
+  speed: 0
+  scoreValue: 10
+  experiencePointsValue: 5
+  floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
+  canvasTransform: {fileID: 0}

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4076628180002203910}
   - component: {fileID: 1528906267942121428}
-  - component: {fileID: -3616749556187024895}
   - component: {fileID: 5141248966787767232}
   - component: {fileID: 6531017074477062789}
-  - component: {fileID: 5980781206054759278}
   - component: {fileID: 4373678261000053710}
+  - component: {fileID: -3616749556187024895}
+  - component: {fileID: 5980781206054759278}
   m_Layer: 0
   m_Name: Boss1Prefab
   m_TagString: Boss
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1615763870, guid: 2513d025e08e3ef40be5f022602af040, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -89,36 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-3616749556187024895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7047081285439649330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be2b42970a0341e46b1ca2a392264f86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  baseDamage: 10
-  damageMultiplierPerWave: 1.5
-  speed: 0
-  scoreValue: 10
-  experiencePointsValue: 20
-  attackRange: 5
-  attackDamage: 10
-  attackCooldown: 5
-  droppableItems:
-  - itemName: 31
-    itemType: 0
-    itemPrefab: {fileID: 5630773696877715100, guid: 98fd6f040b642694995f62ca0a77f5c0, type: 3}
-    dropChance: 49
-  - itemName: 13
-    itemType: 1
-    itemPrefab: {fileID: 240424366028138487, guid: 94a955ca44d854441aa87505887fb763, type: 3}
-    dropChance: 51
 --- !u!50 &5141248966787767232
 Rigidbody2D:
   serializedVersion: 4
@@ -181,23 +151,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0037225145, y: -0.008050442}
   m_Size: {x: 0.2149882, y: 0.27145407}
   m_Direction: 0
---- !u!114 &5980781206054759278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7047081285439649330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d67a34c9434a22445958416d434ca60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  baseDamage: 1
-  damageMultiplierPerWave: 1.5
-  currentWave: 1
-  goldPrefab: {fileID: 6444085966677475160, guid: aae43f6c7b02c364b98752104b7743a2, type: 3}
 --- !u!95 &4373678261000053710
 Animator:
   serializedVersion: 5
@@ -219,3 +172,52 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3616749556187024895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047081285439649330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2b42970a0341e46b1ca2a392264f86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  baseDamage: 10
+  damageMultiplierPerWave: 1.5
+  speed: 0
+  scoreValue: 10
+  experiencePointsValue: 20
+  floatingTextPrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
+  attackRange: 5
+  attackDamage: 10
+  attackCooldown: 5
+  droppableItems:
+  - itemName: 31
+    itemType: 0
+    itemPrefab: {fileID: 5630773696877715100, guid: 98fd6f040b642694995f62ca0a77f5c0, type: 3}
+    dropChance: 49
+  - itemName: 13
+    itemType: 1
+    itemPrefab: {fileID: 240424366028138487, guid: 94a955ca44d854441aa87505887fb763, type: 3}
+    dropChance: 51
+--- !u!114 &5980781206054759278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047081285439649330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a34c9434a22445958416d434ca60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  baseDamage: 1
+  damageMultiplierPerWave: 1.5
+  currentWave: 1
+  goldPrefab: {fileID: 6444085966677475160, guid: aae43f6c7b02c364b98752104b7743a2, type: 3}

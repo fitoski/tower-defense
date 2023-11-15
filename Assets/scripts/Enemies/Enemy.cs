@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     private Vector2 previousPosition;
     private float movementThreshold = 0.01f;
     private Animator animator;
+    public GameObject floatingTextPrefab;
+    public Transform canvasTransform;
 
     protected void Start()
     {
@@ -23,7 +26,19 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         enemyMovement = GetComponent<EnemyMovement>();
         previousPosition = transform.position;
-
+        GameObject canvasObject = GameObject.FindWithTag("FloatingTextCanvas");
+        if (canvasObject != null)
+        {
+            canvasTransform = canvasObject.transform;
+        }
+        else
+        {
+            Debug.LogError("Canvas for floating text not found.");
+        }
+        if (floatingTextPrefab == null)
+        {
+            Debug.LogError("FloatingTextPrefab is not assigned.");
+        }
     }
 
     protected virtual void Update()
@@ -50,9 +65,20 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
 
+        if (floatingTextPrefab != null && canvasTransform != null)
+        {
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 offset = new Vector3(0, 50, 0); 
+            GameObject floatingText = Instantiate(floatingTextPrefab, screenPosition + offset, Quaternion.identity, canvasTransform);
+            floatingText.GetComponent<FloatingText>().SetText(damage.ToString());
+        }
+        else
+        {
+            Debug.LogError("FloatingTextPrefab or CanvasTransform is null.");
+        }
+
         if (currentHealth <= 0)
         {
-            currentHealth = 0;
             Die();
         }
     }

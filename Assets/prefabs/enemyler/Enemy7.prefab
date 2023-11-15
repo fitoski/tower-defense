@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1708369290, guid: 9cbd97a216121894992bc6a5a54dfcbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -173,6 +173,8 @@ MonoBehaviour:
   speed: 0
   scoreValue: 10
   experiencePointsValue: 5
+  floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
+  canvasTransform: {fileID: 0}
 --- !u!114 &3457070980512580872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +193,8 @@ MonoBehaviour:
   speed: 0
   scoreValue: 10
   experiencePointsValue: 5
+  floatingTextPrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!70 &8621574823394529386
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

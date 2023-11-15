@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using static Enums;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class GameManager : MonoBehaviour
     public int currency;
     public int level;
     public int experiencePoints;
-
+    private float playTime = 0f;
+    public TextMeshProUGUI playTimeText;
     public int turretCost = 50;  
     public int wallCost = 30;
 
@@ -36,6 +38,13 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnTrader", 5f, Random.Range(20f, 40f));
         traderUIManager.Awake();
         traderUIManager = TraderUIManager.instance;
+        playTime = 0f; 
+    }
+
+    private void Update()
+    {
+        playTime += Time.deltaTime;
+        UpdatePlayTimeUI();
     }
 
     public void IncreaseCurrency(int amount)
@@ -54,6 +63,16 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Not enough currency.");
             return false;
+        }
+    }
+
+    private void UpdatePlayTimeUI()
+    {
+        if (playTimeText != null)
+        {
+            int minutes = (int)(playTime / 60);
+            int seconds = (int)(playTime % 60);
+            playTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
     }
 
@@ -93,18 +112,6 @@ public class GameManager : MonoBehaviour
         CheckLevelUp();
     }
 
-    //void LevelUp()
-    //{
-    //    PlayerMovement playerScript = FindObjectOfType<PlayerMovement>();
-
-    //    if (playerScript != null)
-    //    {
-    //        playerScript.IncreaseDamagePerLevel(2);
-    //        playerScript.IncreaseMoveSpeedPerLevel(1f);
-    //        playerScript.DecreaseAttackCooldownPerLevel(0.1f);
-    //        playerScript.IncreaseMaxHealthPerLevel(20);
-    //    }
-    //}
     void LevelUp()
     {
         level++;
@@ -119,21 +126,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //public void CheckLevelUp()
-    //{
-    //    int requiredExperience = Mathf.FloorToInt(10 * Mathf.Pow(1.7f, level - 1));
-
-    //    if (experiencePoints >= requiredExperience)
-    //    {
-    //        level++;
-    //        if (level % 25 == 0)
-    //        {
-    //            NodesManager.Instance.SpawnObjectsInNextLayer();
-    //        }
-    //        experiencePoints = 0;
-    //        //IncreasePlayerStatsOnLevelUp();
-    //    }
-    //}
     public void CheckLevelUp()
     {
         int requiredExperience = Mathf.FloorToInt(10 * Mathf.Pow(1.7f, level - 1));
@@ -154,18 +146,6 @@ public class GameManager : MonoBehaviour
     {
         return experiencePoints;
     }
-
-    //public void IncreasePlayerStatsOnLevelUp()
-    //{
-    //    PlayerMovement playerScript = FindObjectOfType<PlayerMovement>();
-    //    if (playerScript != null)
-    //    {
-    //        playerScript.IncreaseDamagePerLevel(2);
-    //        playerScript.IncreaseMoveSpeedPerLevel(1f);
-    //        playerScript.DecreaseAttackCooldownPerLevel(0.1f);
-    //        playerScript.IncreaseMaxHealthPerLevel(20);
-    //    }
-    //}
 
     public void SpawnTrader()
     {
