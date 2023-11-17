@@ -194,7 +194,7 @@ MonoBehaviour:
   speed: 5
   scoreValue: 15
   experiencePointsValue: 10
-  floatingTextPrefab: {fileID: 0}
+  floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
   canvasTransform: {fileID: 0}
 --- !u!58 &1450671378217607747
 CircleCollider2D:

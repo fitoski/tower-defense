@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public TMP_Text upgradesText;
+    public GameObject optionsMenuUI;
 
     void Update()
     {
@@ -19,11 +20,13 @@ public class PauseMenu : MonoBehaviour
     public void TogglePauseMenu()
     {
         pauseMenuUI.SetActive(!pauseMenuUI.activeSelf);
+        Time.timeScale = pauseMenuUI.activeSelf ? 0f : 1f;
+
         if (pauseMenuUI.activeSelf)
         {
             UpdateUpgradesDisplay();
+            optionsMenuUI.SetActive(false);
         }
-        Time.timeScale = pauseMenuUI.activeSelf ? 0f : 1f;
     }
 
     private void UpdateUpgradesDisplay()
@@ -72,7 +75,6 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-
     public void ResumeGame()
     {
         TogglePauseMenu();
@@ -80,7 +82,8 @@ public class PauseMenu : MonoBehaviour
 
     public void OpenOptions()
     {
-        SceneManager.LoadScene("OptionsScene");
+        optionsMenuUI.SetActive(!optionsMenuUI.activeSelf);
+        pauseMenuUI.SetActive(!optionsMenuUI.activeSelf);
     }
 
     public void QuitToMainMenu()

@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float attackCooldown = 1f;
     private float attackCooldownTimer = 0f;
     public int playerDamage = 5;
-    public float criticalHitChance = 0.0f;
+    public float criticalHitChance = 1.017f;
     public float healthRegenerationRate = 0.0f;
     private bool isInvulnerable = false;
     public float invulnerabilityDuration = 1.5f;
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxOrbitRadius = 5f;
     public float maxHealthRegenRate;
     public float cooldownDecreasePercentage = 0.05f;
-    public float criticalHitChanceIncreasePercentage = 0.02f;
+    public float criticalHitChanceIncreasePercentage = 0.1f;
     public float healthRegenIncreasePercentage = 0.03f;
     public float healthIncreasePercentage = 0.05f;
     public float damageIncreasePercentage = 0.10f;
@@ -58,7 +58,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 directionToMouse;
     private Vector2 movementDirection;
     private float attackAnimationLength = 0;
-    public float deathAnimationLength = 2f; 
+    public float deathAnimationLength = 2f;
+    private float healthRegenTimer = 0f;
+    private const float healthRegenInterval = 5f;
+    private float criticalHitChanceFirstTimeIncrease = 0.05f;
+    private float criticalHitChanceMultiplier = 1.017f;
+    private float healthRegenFirstTimeValue = 1f;
+    private float healthRegenBaseMultiplier = 0.1f; 
 
     void Start()
     {
@@ -73,17 +79,18 @@ public class PlayerMovement : MonoBehaviour
         swordSpriteRenderer = sword.GetComponent<SpriteRenderer>();
         swordAnimator = sword.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
-        maxHealthRegenRate = maxPlayerHealth * 0.5f;
-        if (playerAnimator == null)
-        {
-            Debug.LogError("Animator component not found on the player!");
-        }
-
+        maxHealthRegenRate = maxPlayerHealth * 0.1f;
         AdjustAttackSpeedAndAnimation(attackCooldown);
     }
 
     void Update()
     {
+        healthRegenTimer += Time.deltaTime;
+        if (healthRegenTimer >= healthRegenInterval)
+        {
+            RegenerateHealth();
+            healthRegenTimer = 0f;
+        }
         if (isMoving)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -103,22 +110,16 @@ public class PlayerMovement : MonoBehaviour
             bool isAttacking = Input.GetMouseButton(0);
             directionToMouse = (mousePosition - playerPosition).normalized;
             movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-
             if (playerAnimator != null)
             {
                 playerAnimator.SetBool("dkAttack", isAttacking);
             }
-
             if (isAttacking && attackCooldownTimer <= 0f)
             {
                 StartAttackAnimation();
             }
-
             attackCooldownTimer -= Time.deltaTime;
-
-            RegenerateHealth();
         }
-        
         if (waveDisplayText != null && enemySpawner != null)
         {
             waveDisplayText.text = "Wave: " + enemySpawner.GetCurrentWaveNumber().ToString();
@@ -139,7 +140,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack()
     {
-        //sword.Rotate(Vector3.forward, attackRotationAmount);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(sword.position, 2f);
 
         foreach (Collider2D enemy in hitEnemies)
@@ -217,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
 
         public void IncreaseDamagePerLevel()
         {
-            int damageIncreaseAmount = Mathf.FloorToInt(playerDamage * damageIncreasePercentage);
+            int damageIncreaseAmount = Mathf.FloorToInt(playerDamage * damageIncreasePercentage); 
             playerDamage += damageIncreaseAmount;
             hasIncreasedDamage = true;
         }
@@ -243,40 +243,53 @@ public class PlayerMovement : MonoBehaviour
 
         public void IncreaseCriticalHitChance()
         {
-            criticalHitChance += criticalHitChanceIncreasePercentage;
-            criticalHitChance = Mathf.Min(criticalHitChance, 1f);
+            if (criticalHitChance == 0)
+            {
+                criticalHitChance = criticalHitChanceFirstTimeIncrease;
+            }
+            else
+            {
+                criticalHitChance *= criticalHitChanceMultiplier;
+                criticalHitChance = Mathf.Min(criticalHitChance, 1f); 
+            }
+
             hasIncreasedCritChance = true;
         }
 
+
+        void RegenerateHealth()
+                {
+                    if (healthRegenerationRate > 0f)
+                    {
+                        playerHealth = Mathf.Min(playerHealth + (int)healthRegenerationRate, maxPlayerHealth);
+                        UpdateHealthBars();
+                    }
+                }
+
         public void IncreaseHealthRegeneration()
         {
-            if (healthRegenerationRate < maxHealthRegenRate)
+            if (healthRegenerationRate <= 0f)
             {
-                float healthRegenIncreaseAmount = (healthRegenerationRate > 0 ? healthRegenerationRate : maxPlayerHealth * 0.05f) * (healthRegenIncreasePercentage + 0.05f);
-                healthRegenerationRate = Mathf.Min(healthRegenerationRate + healthRegenIncreaseAmount, maxHealthRegenRate);
-                hasIncreasedHealthRegen = true;
+                healthRegenerationRate = Mathf.Max(healthRegenFirstTimeValue, maxHealthRegenRate * healthRegenBaseMultiplier);
             }
+            else if (healthRegenerationRate < maxHealthRegenRate)
+            {
+                float healthRegenIncreaseAmount = healthRegenerationRate * healthRegenIncreasePercentage;
+                healthRegenerationRate = Mathf.Min(healthRegenerationRate + healthRegenIncreaseAmount, maxHealthRegenRate);
+            }
+
+            hasIncreasedHealthRegen = true;
         }
 
         public void IncreaseOrbitRadiusPerLevel()
-        {
-            if (orbitRadius < maxOrbitRadius)
             {
-                float orbitRadiusIncreaseAmount = orbitRadius * orbitRadiusIncreasePercentage;
-                orbitRadius = Mathf.Min(orbitRadius + orbitRadiusIncreaseAmount, maxOrbitRadius);
-                hasIncreasedOrbitRadius = true;
+                if (orbitRadius < maxOrbitRadius)
+                {
+                    float orbitRadiusIncreaseAmount = orbitRadius * orbitRadiusIncreasePercentage;
+                    orbitRadius = Mathf.Min(orbitRadius + orbitRadiusIncreaseAmount, maxOrbitRadius);
+                    hasIncreasedOrbitRadius = true;
+                }
             }
-        }
-
-        void RegenerateHealth()
-        {
-            if (healthRegenerationRate > 0f)
-            {
-                playerHealth += (int)(healthRegenerationRate * Time.deltaTime);
-                playerHealth = Mathf.Min(playerHealth, maxPlayerHealth);
-                UpdateHealthBars();
-            }
-        }
 
         public void ChangeArmor(float newArmorValue)
         {
@@ -322,42 +335,42 @@ public class PlayerMovement : MonoBehaviour
             hasDecreasedAttackCooldown = true;
         }
 
-    public void ChangeWeapon(int newDamage, float newRange, int weaponIndex, RuntimeAnimatorController weaponAnimator)
-    {
-        playerDamage = newDamage;
-        orbitRadius = newRange;
-        swordSpriteRenderer.sprite = weaponSprites[weaponIndex];
-
-        if (swordAnimator != null)
+        public void ChangeWeapon(int newDamage, float newRange, int weaponIndex, RuntimeAnimatorController weaponAnimator)
         {
-            swordAnimator.runtimeAnimatorController = weaponAnimator;
-        }
-        else
-        {
-            Debug.LogError("swordAnimator component not found on the sword object!");
-        }
+            playerDamage = newDamage;
+            orbitRadius = newRange;
+            swordSpriteRenderer.sprite = weaponSprites[weaponIndex];
 
-        AdjustAttackSpeedAndAnimation(attackCooldown);
-    }
-
-    public void Die()
-        {
-            isMoving = false;
-            if (playerAnimator != null)
+            if (swordAnimator != null)
             {
-                playerAnimator.SetTrigger("dkDeath");
+                swordAnimator.runtimeAnimatorController = weaponAnimator;
             }
-        StartCoroutine(WaitForDeathAnimation());
-    }
+            else
+            {
+                Debug.LogError("swordAnimator component not found on the sword object!");
+            }
 
-    public void TriggerDeathScreen()
-    {
-        GameManager.main.ShowDeathScreen();
-    }
+            AdjustAttackSpeedAndAnimation(attackCooldown);
+        }
 
-    private IEnumerator WaitForDeathAnimation()
-    {
-        yield return new WaitForSeconds(deathAnimationLength);
-        GameManager.main.ShowDeathScreen(); 
-    }
+        public void Die()
+            {
+                isMoving = false;
+                if (playerAnimator != null)
+                {
+                    playerAnimator.SetTrigger("dkDeath");
+                }
+            StartCoroutine(WaitForDeathAnimation());
+        }
+
+        public void TriggerDeathScreen()
+        {
+            GameManager.main.ShowDeathScreen();
+        }
+
+        private IEnumerator WaitForDeathAnimation()
+        {
+            yield return new WaitForSeconds(deathAnimationLength);
+            GameManager.main.ShowDeathScreen(); 
+        }
 }
