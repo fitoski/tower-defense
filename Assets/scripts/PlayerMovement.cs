@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float orbitRadius = 2f;
     public float orbitSpeed = 90f;
     public float attackRotationAmount = 15f;
-    public float attackCooldown = 0.5f;
+    public float attackCooldown = 1f;
     private float attackCooldownTimer = 0f;
     public int playerDamage = 5;
     public float criticalHitChance = 1.017f;
@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving = true;
     public int maxPlayerHealth = 100;
     public int playerHealth = 100;
-    public float minimumAttackCooldown = 0.1f;
+    public float minimumAttackCooldown = 0.5f;
     public float maxMoveSpeed = 10f;
     public float maxOrbitRadius = 5f;
     public float maxHealthRegenRate;
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator swordAnimator;
     private Vector2 directionToMouse;
     private Vector2 movementDirection;
-    //private float attackAnimationLength = 0;
+    private float attackAnimationLength = 0;
     public float deathAnimationLength = 2f;
     private float healthRegenTimer = 0f;
     private const float healthRegenInterval = 5f;
@@ -93,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (isMoving)
         {
-            playerAnimator.speed = 1f;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 playerPosition = transform.position;
             if (mousePosition.x < playerPosition.x)
@@ -159,12 +158,7 @@ public class PlayerMovement : MonoBehaviour
     void StartAttackAnimation()
     {
         attackCooldownTimer = attackCooldown;
-
-        AdjustAnimatorSpeed(playerAnimator, "dkAttack");
-        AdjustAnimatorSpeed(swordAnimator, "swordAttackAnimationName"); 
-
         swordAnimator.SetTrigger("Attack");
-        playerAnimator.SetTrigger("Attack");
     }
 
     public void TakeDamage(int damage)
@@ -303,72 +297,43 @@ public class PlayerMovement : MonoBehaviour
         hasIncreasedArmor = true;
     }
 
-    //public void AdjustAttackSpeedAndAnimation(float newAttackCooldown)
-    //{
-    //    AnimationClip[] clips = swordAnimator.runtimeAnimatorController.animationClips;
-    //    bool isFound = false;
-    //    foreach (AnimationClip clip in clips)
-    //    {
-    //        switch (clip.name)
-    //        {
-    //            case "sword3Attack":
-    //                attackAnimationLength = clip.length;
-    //                isFound = true;
-    //                break;
-    //            case "sword2Attack":
-    //                attackAnimationLength = clip.length;
-    //                isFound = true;
-    //                break;
-    //        }
-
-    //        if (isFound)
-    //        {
-    //            break;
-    //        }
-    //    }
-
-    //    attackCooldown = newAttackCooldown;
-    //    if (swordAnimator != null)
-    //    {
-    //        swordAnimator.speed = attackAnimationLength / attackCooldown;
-    //    }
-    //}
-
     public void AdjustAttackSpeedAndAnimation(float newAttackCooldown)
     {
-        attackCooldown = newAttackCooldown;
+        AnimationClip[] clips = swordAnimator.runtimeAnimatorController.animationClips;
 
-        AdjustAnimatorSpeed(swordAnimator, "sword3Attack");
-        AdjustAnimatorSpeed(playerAnimator, "dkAttack");
-    }
-
-    private void AdjustAnimatorSpeed(Animator animator, string animationName)
-    {
-        float animationLength = FindAnimationClipLength(animator, animationName);
-        if (animator != null && animationLength > 0)
-        {
-            animator.speed = animationLength / attackCooldown;
-        }
-    }
-
-    private float FindAnimationClipLength(Animator animator, string animationName)
-    {
-        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+        bool isFound = false;
         foreach (AnimationClip clip in clips)
         {
-            if (clip.name == animationName)
+            switch (clip.name)
             {
-                return clip.length;
+                case "sword3Attack":
+                    attackAnimationLength = clip.length;
+                    isFound = true;
+                    break;
+                case "sword2Attack":
+                    attackAnimationLength = clip.length;
+                    isFound = true;
+                    break;
+            }
+
+            if (isFound)
+            {
+                break;
             }
         }
-        return 0f;
+
+        attackCooldown = newAttackCooldown;
+        if (swordAnimator != null)
+        {
+            swordAnimator.speed = attackAnimationLength / attackCooldown;
+        }
     }
 
     public void DecreaseAttackCooldownPerLevel()
     {
         float decreaseAmount = attackCooldown * cooldownDecreasePercentage;
         float newCooldown = Mathf.Max(attackCooldown - decreaseAmount, minimumAttackCooldown);
-        AdjustAttackSpeedAndAnimation(newCooldown); 
+        AdjustAttackSpeedAndAnimation(newCooldown);
         hasDecreasedAttackCooldown = true;
     }
 
@@ -411,3 +376,4 @@ public class PlayerMovement : MonoBehaviour
         GameManager.main.ShowDeathScreen();
     }
 }
+

@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     private PlayerMovement player;
+
     void Start()
     {
         player = GetComponentInParent<PlayerMovement>();

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Enums;
+using TMPro;
 
 public class Trader : MonoBehaviour
 {
@@ -11,8 +12,12 @@ public class Trader : MonoBehaviour
     private float timer;
 
     public TraderUIManager traderUIManager;
+    private Animator animator;
+    public TextMeshProUGUI notificationText; 
+    private float notificationDuration = 3f; 
 
     public List<TraderUIElement> shopUIElements = new List<TraderUIElement>();
+    public List<Transform> spawnPoints;
 
     [System.Serializable]
     public class ShopItem
@@ -84,11 +89,48 @@ public class Trader : MonoBehaviour
     void Awake()
     {
         traderUIManager = TraderUIManager.instance;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
     {
         timer = timeToStay;
+        animator.SetBool("IsIdle", true);
+
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+        transform.position = spawnPoint.position;
+
+        if (traderUIManager != null)
+        {
+            traderUIManager.ShowNotification("Trader has arrived!", notificationDuration);
+        }
+    }
+
+    IEnumerator EnableTraderAfterIntro(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        animator.SetBool("IsIdle", true);
+    }
+
+    void NotifyPlayer(string message)
+    {
+        if (notificationText != null)
+        {
+            notificationText.text = message;
+            notificationText.gameObject.SetActive(true);
+            StartCoroutine(DisableNotificationAfterTime(notificationDuration));
+        }
+        else
+        {
+            Debug.LogError("Notification TextMeshProUGUI is not set in the Inspector.");
+        }
+    }
+
+    IEnumerator DisableNotificationAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        notificationText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -96,7 +138,8 @@ public class Trader : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            Destroy(gameObject);
+            animator.SetTrigger("Disappear");  
+            Destroy(gameObject, 1f);  
         }
     }
 
