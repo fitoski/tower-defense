@@ -5,6 +5,8 @@ using TMPro;
 
 public class Enemy : MonoBehaviour
 {
+    private bool isDead = false;
+
     [Header("Attributes")]
     public int maxHealth = 10;
     public int baseDamage = 1;
@@ -51,7 +53,7 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Player"))
+        if (collider.gameObject.CompareTag("Player") && !isDead) 
         {
             PlayerMovement player = collider.GetComponent<PlayerMovement>();
             if (player != null)
@@ -77,6 +79,11 @@ public class Enemy : MonoBehaviour
             Debug.LogError("FloatingTextPrefab or CanvasTransform is null.");
         }
 
+        if (isDead)
+        {
+            return;
+        }
+
         if (currentHealth <= 0)
         {
             Die();
@@ -90,6 +97,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        isDead = true;
         animator.SetTrigger("Die");
         animator.SetBool("isDead", true);
 

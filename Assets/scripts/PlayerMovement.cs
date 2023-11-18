@@ -93,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (isMoving)
         {
+            playerAnimator.speed = 1f;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 playerPosition = transform.position;
             if (mousePosition.x < playerPosition.x)
@@ -337,7 +338,6 @@ public class PlayerMovement : MonoBehaviour
     {
         attackCooldown = newAttackCooldown;
 
-        // Hem silah hem de oyuncu animatörü için hızı ayarla
         AdjustAnimatorSpeed(swordAnimator, "sword3Attack");
         AdjustAnimatorSpeed(playerAnimator, "dkAttack");
     }
