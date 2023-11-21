@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09952aaddd451e44c96205347710d85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretRotationPoint: {fileID: 0}
+  turretRotationPoint: {fileID: 5017357129158700684}
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
   bulletPrefab: {fileID: 5864646473436446315, guid: 36af3bb638d8d354bb46c483717bccc1, type: 3}
-  firingPoint: {fileID: 0}
+  firingPoint: {fileID: 369535741886250300}
   targetingRange: 6
   rotationSpeed: 200
   bps: 1

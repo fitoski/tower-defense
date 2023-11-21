@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Enums;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -52,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public bool hasDecreasedAttackCooldown = false;
     public Image playerHealthBar;
     private EnemySpawner enemySpawner;
-    public Text waveDisplayText;
+    public TextMeshProUGUI waveDisplayText;
     private GameManager gameManager;
     private Animator swordAnimator;
     private Vector2 directionToMouse;
