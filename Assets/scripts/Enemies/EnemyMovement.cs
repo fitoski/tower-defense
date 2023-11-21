@@ -78,7 +78,8 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
-            if (player != null)
+            Enemy enemy = GetComponent<Enemy>();
+            if (player != null && enemy != null && !enemy.IsDead) 
             {
                 player.TakeDamage(baseDamage);
             }
@@ -152,14 +153,14 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void Die()
-    {
-        if (goldPrefab != null)
-        {
-            Instantiate(goldPrefab, transform.position, Quaternion.identity);
-        }
-        GetComponent<Enemy>().Die();
-    }
+    //public void Die()
+    //{
+    //    if (goldPrefab != null)
+    //    {
+    //        Instantiate(goldPrefab, transform.position, Quaternion.identity);
+    //    }
+    //    GetComponent<Enemy>().Die();
+    //}
 
     public void DestroyEnemy()
     {

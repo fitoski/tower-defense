@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     public GameObject floatingTextPrefab;
     public Transform canvasTransform;
+    public GameObject goldPrefab;
 
     protected void Start()
     {
@@ -65,7 +66,15 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead)
+        {
+            Debug.Log(gameObject.name + " zaten ölü.");
+
+            return;
+        }
+
         currentHealth -= damage;
+        Debug.Log(gameObject.name + " hasar aldı, yeni canı: " + currentHealth);
 
         if (floatingTextPrefab != null && canvasTransform != null)
         {
@@ -74,20 +83,26 @@ public class Enemy : MonoBehaviour
             GameObject floatingText = Instantiate(floatingTextPrefab, screenPosition + offset, Quaternion.identity, canvasTransform);
             floatingText.GetComponent<FloatingText>().SetText(damage.ToString());
         }
+
         else
         {
             Debug.LogError("FloatingTextPrefab or CanvasTransform is null.");
-        }
-
-        if (isDead)
-        {
-            return;
         }
 
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
+
+    public int CurrentHealth
+    {
+        get { return currentHealth; }
     }
 
     public int GetScoreValue()
@@ -97,6 +112,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        if (isDead) return;
+
         isDead = true;
         animator.SetTrigger("Die");
         animator.SetBool("isDead", true);
@@ -105,9 +122,20 @@ public class Enemy : MonoBehaviour
         {
             enemyMovement.StopMovement();
         }
+
+        DropGold(); 
+
         GameManager.main.IncreaseExperiencePoints(experiencePointsValue);
         EnemySpawner.Instance.ActiveEnemies--;
         EnemySpawner.Instance.EnemyKilled();
+    }
+
+    private void DropGold()
+    {
+        if (goldPrefab != null)
+        {
+            Instantiate(goldPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     public void OnDeathAnimationComplete()
