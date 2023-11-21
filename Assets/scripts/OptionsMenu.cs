@@ -43,9 +43,16 @@ public class OptionsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void SetVolume (float volume)
+    public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", volume);
+        if (volume > 0)
+        {
+            audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        }
+        else
+        {
+            audioMixer.SetFloat("volume", -80);
+        }
     }
 
     public void SetQuality (int qualityIndex)

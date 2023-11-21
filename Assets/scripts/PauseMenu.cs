@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public TMP_Text upgradesText;
     public GameObject optionsMenuUI;
+    public AudioSource backgroundMusic;
 
     void Update()
     {
@@ -24,8 +25,13 @@ public class PauseMenu : MonoBehaviour
 
         if (pauseMenuUI.activeSelf)
         {
+            backgroundMusic.Pause();
             UpdateUpgradesDisplay();
             optionsMenuUI.SetActive(false);
+        }
+        else
+        {
+            backgroundMusic.UnPause();
         }
     }
 
