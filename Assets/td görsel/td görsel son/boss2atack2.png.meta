@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -115,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 257ae4f08a45f184fa6fac58f7019219
-      internalID: 1448916814
+      spriteID: d393aaafd9bfe0c4d84c612c729b0316
+      internalID: 2127940034
       vertices: []
       indices: 
       edges: []
@@ -134,9 +134,9 @@ TextureImporter:
       name: boss2atack2_1
       rect:
         serializedVersion: 2
-        x: 230
+        x: 254
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3557cd3abf146745814107861db97c7
-      internalID: -472750682
+      spriteID: d786681d82e388b4eb2852a003280d7b
+      internalID: 2028330135
       vertices: []
       indices: 
       edges: []
@@ -155,9 +155,9 @@ TextureImporter:
       name: boss2atack2_2
       rect:
         serializedVersion: 2
-        x: 460
+        x: 508
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e4642ad95445414aaaa7767997e2865
-      internalID: 1927860752
+      spriteID: ff1b5f07f1442924390e566681645934
+      internalID: 1545322427
       vertices: []
       indices: 
       edges: []
@@ -176,9 +176,9 @@ TextureImporter:
       name: boss2atack2_3
       rect:
         serializedVersion: 2
-        x: 690
+        x: 762
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bb1f5ec5becb3649ba0863f1f5ee530
-      internalID: 1267966552
+      spriteID: 89a9f611a1e87874586817104bad2d55
+      internalID: -479955321
       vertices: []
       indices: 
       edges: []
@@ -197,9 +197,9 @@ TextureImporter:
       name: boss2atack2_4
       rect:
         serializedVersion: 2
-        x: 920
+        x: 1016
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c344a1ccb705dfc4cbbec0b88479ffbf
-      internalID: -366593021
+      spriteID: 43a452939adf9f74aaf054d1008221aa
+      internalID: 1268124455
       vertices: []
       indices: 
       edges: []
@@ -218,9 +218,9 @@ TextureImporter:
       name: boss2atack2_5
       rect:
         serializedVersion: 2
-        x: 1150
+        x: 1270
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af84a2991476451418397defc5f8e99c
-      internalID: 1093185282
+      spriteID: 019869b795d6c024a94a08f7d873fea5
+      internalID: -1227492050
       vertices: []
       indices: 
       edges: []
@@ -239,9 +239,9 @@ TextureImporter:
       name: boss2atack2_6
       rect:
         serializedVersion: 2
-        x: 1380
+        x: 1524
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c79e9f6f763ef243a894a626ac4320d
-      internalID: -1374020106
+      spriteID: bdc63c8dd6d105c4c97b56569589e52d
+      internalID: -402493049
       vertices: []
       indices: 
       edges: []
@@ -260,9 +260,9 @@ TextureImporter:
       name: boss2atack2_7
       rect:
         serializedVersion: 2
-        x: 1610
+        x: 1778
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a4109dd567b4e846a3f99059134121a
-      internalID: 1766959151
+      spriteID: 4eb9df63c8e8f9b4c959981b6a2b8572
+      internalID: 1956415218
       vertices: []
       indices: 
       edges: []
@@ -281,9 +281,9 @@ TextureImporter:
       name: boss2atack2_8
       rect:
         serializedVersion: 2
-        x: 1840
+        x: 2032
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -292,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f901db7ccc215ef45b3abf118bdc2e9a
-      internalID: -769915626
+      spriteID: aa3fa3930f4480549a9b73e9694601e6
+      internalID: 153483185
       vertices: []
       indices: 
       edges: []
@@ -302,9 +302,9 @@ TextureImporter:
       name: boss2atack2_9
       rect:
         serializedVersion: 2
-        x: 2070
+        x: 2286
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -313,8 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21edb475f5922d34d9c328d0dcc0ae6a
-      internalID: -18604815
+      spriteID: e46564a49b420b44b919f2dc8acb5e9b
+      internalID: 50678416
       vertices: []
       indices: 
       edges: []
@@ -323,9 +323,9 @@ TextureImporter:
       name: boss2atack2_10
       rect:
         serializedVersion: 2
-        x: 2300
+        x: 2540
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -334,8 +334,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8616c92b145aeff4c8f3c7361dd4190b
-      internalID: 1469722484
+      spriteID: 25b9ec63c37d1e441a31bbbc2338d1b6
+      internalID: 1185734401
       vertices: []
       indices: 
       edges: []
@@ -344,9 +344,9 @@ TextureImporter:
       name: boss2atack2_11
       rect:
         serializedVersion: 2
-        x: 2530
+        x: 2794
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -355,8 +355,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 704f4deae7ab9c741bec530f61db7fee
-      internalID: -1955194874
+      spriteID: 30f2e8c355e062f40be596e7fc8db817
+      internalID: -67553923
       vertices: []
       indices: 
       edges: []
@@ -365,9 +365,9 @@ TextureImporter:
       name: boss2atack2_12
       rect:
         serializedVersion: 2
-        x: 2760
+        x: 3048
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -376,8 +376,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0706100aa8708d4e93c86d9de23d978
-      internalID: -2033830489
+      spriteID: 7434b1d2ba5d70049838564b3f17538f
+      internalID: -483572906
       vertices: []
       indices: 
       edges: []
@@ -386,9 +386,9 @@ TextureImporter:
       name: boss2atack2_13
       rect:
         serializedVersion: 2
-        x: 2990
+        x: 3302
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -397,8 +397,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57575a3f253aed54d89fc74273dfd57e
-      internalID: -1165127051
+      spriteID: f138091300d9e6349983348e77a9857b
+      internalID: 447657569
       vertices: []
       indices: 
       edges: []
@@ -407,9 +407,9 @@ TextureImporter:
       name: boss2atack2_14
       rect:
         serializedVersion: 2
-        x: 3220
+        x: 3556
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -418,8 +418,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c17cf53257e3c94b9afb1403bce77c0
-      internalID: 1943871379
+      spriteID: 3dfe3b83d63332642ae865672a711ba8
+      internalID: -766228526
       vertices: []
       indices: 
       edges: []
@@ -428,9 +428,9 @@ TextureImporter:
       name: boss2atack2_15
       rect:
         serializedVersion: 2
-        x: 3450
+        x: 3810
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -439,8 +439,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17723ac57d8d1c646a601ffcf67bc0f9
-      internalID: -1066351589
+      spriteID: 6fb747c0f48aa864db08e79115c5a07f
+      internalID: -1452164591
       vertices: []
       indices: 
       edges: []
@@ -456,22 +456,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boss2atack2_0: 1448916814
-      boss2atack2_1: -472750682
-      boss2atack2_10: 1469722484
-      boss2atack2_11: -1955194874
-      boss2atack2_12: -2033830489
-      boss2atack2_13: -1165127051
-      boss2atack2_14: 1943871379
-      boss2atack2_15: -1066351589
-      boss2atack2_2: 1927860752
-      boss2atack2_3: 1267966552
-      boss2atack2_4: -366593021
-      boss2atack2_5: 1093185282
-      boss2atack2_6: -1374020106
-      boss2atack2_7: 1766959151
-      boss2atack2_8: -769915626
-      boss2atack2_9: -18604815
+      boss2atack2_0: 2127940034
+      boss2atack2_1: 2028330135
+      boss2atack2_10: 1185734401
+      boss2atack2_11: -67553923
+      boss2atack2_12: -483572906
+      boss2atack2_13: 447657569
+      boss2atack2_14: -766228526
+      boss2atack2_15: -1452164591
+      boss2atack2_2: 1545322427
+      boss2atack2_3: -479955321
+      boss2atack2_4: 1268124455
+      boss2atack2_5: -1227492050
+      boss2atack2_6: -402493049
+      boss2atack2_7: 1956415218
+      boss2atack2_8: 153483185
+      boss2atack2_9: 50678416
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

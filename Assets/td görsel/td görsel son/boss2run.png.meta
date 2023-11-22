@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -115,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d0ea4083b556784cb53d655e496e7f7
-      internalID: -1606832576
+      spriteID: 0d1ed666c16ecbe4bb32c320b5c26a3d
+      internalID: 1322936224
       vertices: []
       indices: 
       edges: []
@@ -134,9 +134,9 @@ TextureImporter:
       name: boss2run_1
       rect:
         serializedVersion: 2
-        x: 230
+        x: 254
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5b030d683aa50d47ab6b386fb44bab4
-      internalID: 490526999
+      spriteID: 978f950880650fe46b4b49f703adcedb
+      internalID: -1010046397
       vertices: []
       indices: 
       edges: []
@@ -155,9 +155,9 @@ TextureImporter:
       name: boss2run_2
       rect:
         serializedVersion: 2
-        x: 460
+        x: 508
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ce4b66e537204546b63fec559a4cb1c
-      internalID: -1271493767
+      spriteID: 44cb8978507e70c448b3beb4555cebed
+      internalID: 1048419760
       vertices: []
       indices: 
       edges: []
@@ -176,9 +176,9 @@ TextureImporter:
       name: boss2run_3
       rect:
         serializedVersion: 2
-        x: 690
+        x: 762
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbd6398b2232cf64caf5717b5b314e37
-      internalID: 2006333220
+      spriteID: 04e88e86056a81d44b46477291b53808
+      internalID: -1915247347
       vertices: []
       indices: 
       edges: []
@@ -197,9 +197,9 @@ TextureImporter:
       name: boss2run_4
       rect:
         serializedVersion: 2
-        x: 920
+        x: 1016
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e08a40f02d478b04198fb9940a9d8cea
-      internalID: 505409505
+      spriteID: 61fab42902cc6934fa390d274363a02a
+      internalID: 590681153
       vertices: []
       indices: 
       edges: []
@@ -218,9 +218,9 @@ TextureImporter:
       name: boss2run_5
       rect:
         serializedVersion: 2
-        x: 1150
+        x: 1270
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0faff89bf96397643aa13cea32d6c73b
-      internalID: 1090504675
+      spriteID: 5b426e98c12353c468ff9679be86631e
+      internalID: 402973416
       vertices: []
       indices: 
       edges: []
@@ -239,9 +239,9 @@ TextureImporter:
       name: boss2run_6
       rect:
         serializedVersion: 2
-        x: 1380
+        x: 1524
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec50bb4b642def043a7fb36b773386b7
-      internalID: -906633920
+      spriteID: ccfcdb1ab7b9be74cb3b0a46ad79f75d
+      internalID: -481104831
       vertices: []
       indices: 
       edges: []
@@ -260,9 +260,9 @@ TextureImporter:
       name: boss2run_7
       rect:
         serializedVersion: 2
-        x: 1610
+        x: 1778
         y: 0
-        width: 230
+        width: 254
         height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c9b40c76eb30db4f90cf4c2ae346c76
-      internalID: 1626906071
+      spriteID: d01cff763e76c0a409e277a8e3804177
+      internalID: 1706709652
       vertices: []
       indices: 
       edges: []
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boss2run_0: -1606832576
-      boss2run_1: 490526999
-      boss2run_2: -1271493767
-      boss2run_3: 2006333220
-      boss2run_4: 505409505
-      boss2run_5: 1090504675
-      boss2run_6: -906633920
-      boss2run_7: 1626906071
+      boss2run_0: 1322936224
+      boss2run_1: -1010046397
+      boss2run_2: 1048419760
+      boss2run_3: -1915247347
+      boss2run_4: 590681153
+      boss2run_5: 402973416
+      boss2run_6: -481104831
+      boss2run_7: 1706709652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
