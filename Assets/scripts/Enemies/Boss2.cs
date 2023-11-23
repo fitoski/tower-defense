@@ -8,11 +8,13 @@ public class Boss2 : Enemy
     public int attackDamage = 10;
     public float attackCooldown = 5f;
     private float attackTimer;
+    private float attack1Timer = 4f;
 
     private Transform playerTransform;
     private Animator bossAnimator;
-    //private BossAbilities bossAbilities;
     private bool isAttacking = false;
+
+    private float attackForwardDistance = 5f;
 
     public List<DropItem> droppableItems;
 
@@ -26,7 +28,6 @@ public class Boss2 : Enemy
         experiencePointsValue = 10;
         damageMultiplierPerWave = 1.5f;
         currentHealth = maxHealth;
-        base.Start();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         bossAnimator = GetComponent<Animator>();
         attackTimer = attackCooldown;
@@ -42,9 +43,14 @@ public class Boss2 : Enemy
 
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
-        if (!isAttacking && distanceToPlayer <= attackRange && attackTimer <= 0)
+        if (!isAttacking && distanceToPlayer <= attackRange)
         {
-            AttackPlayer();
+            attack1Timer -= Time.deltaTime;
+            if (attack1Timer <= 0)
+            {
+                AttackType1();
+                attack1Timer = 10f;
+            }
         }
         else if (!isAttacking)
         {
@@ -72,28 +78,31 @@ public class Boss2 : Enemy
         isAttacking = true;
         attackTimer = attackCooldown;
 
-        int attackType = UnityEngine.Random.Range(0, 2); 
+        int attackType = UnityEngine.Random.Range(0, 2);
         if (attackType == 0)
         {
             AttackType1();
         }
         else
         {
-            AttackType2();
+            //AttackType2();
+            return;
         }
     }
 
     void AttackType1()
     {
-        Debug.Log("Boss is performing attack type 1");
+        Debug.Log("attack type 1");
         bossAnimator.SetTrigger("Attack1");
+        isAttacking = true;
+        bossAnimator.SetBool("isAttacking", true);
     }
 
-    void AttackType2()
-    {
-        Debug.Log("Boss is performing attack type 2");
-        bossAnimator.SetTrigger("Attack2");
-    }
+    //void AttackType2()
+    //{
+    //    Debug.Log("attack type 2");
+    //    bossAnimator.SetTrigger("Attack2");
+    //}
 
     void UpdateOrientationTowardsPlayer()
     {
@@ -104,8 +113,24 @@ public class Boss2 : Enemy
     public void OnAttackEnd()
     {
         Debug.Log("Attack ended");
-        bossAnimator.SetBool("isAttacking", false);
         isAttacking = false;
+        bossAnimator.SetBool("isAttacking", false);
+        AdjustBossPosition();
+    }
+
+    private void OnAnimatorMove()
+    {
+        if (isAttacking)
+        {
+            transform.position += bossAnimator.deltaPosition;
+        }
+    }
+
+    public void AdjustBossPosition()
+    {
+        Vector2 desiredPosition = new Vector2(transform.position.x + attackForwardDistance, transform.position.y);
+
+        transform.position = desiredPosition;
     }
 
     public override void Die()

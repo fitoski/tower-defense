@@ -1850,7 +1850,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0046927705, y: -0.020482838}
+  m_Offset: {x: -0.0029800422, y: 0.0006405413}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1861,7 +1861,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15075628, y: 0.23714226}
+  m_Size: {x: 0.17245057, y: 0.27938902}
   m_EdgeRadius: 0
 --- !u!114 &345292736
 MonoBehaviour:
@@ -6166,6 +6166,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984226255}
   m_CullTransparentMesh: 1
+--- !u!1 &986241601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 986241603}
+  - component: {fileID: 986241602}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &986241602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986241601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503fc801a36dd6047bb0122fac5dc8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coreTransform: {fileID: 1691617061}
+  indicatorPrefab: {fileID: 3594558278672592307, guid: a133d8beee0fcc24da4711646923226a, type: 3}
+  mainCamera: {fileID: 519420031}
+  borderOffset: 75
+--- !u!4 &986241603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986241601}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 651.728, y: 336.1343, z: 7.7256722}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1010696868
 GameObject:
   m_ObjectHideFlags: 0
@@ -14433,3 +14481,4 @@ SceneRoots:
   - {fileID: 1368707320}
   - {fileID: 1339307894}
   - {fileID: 645032187}
+  - {fileID: 986241603}
