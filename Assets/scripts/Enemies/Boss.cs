@@ -14,8 +14,6 @@ public class Boss : Enemy
     //private BossAbilities bossAbilities;
     private bool isAttacking = false;
 
-    public List<DropItem> droppableItems;
-
     private new void Start()
     {
         base.Start();

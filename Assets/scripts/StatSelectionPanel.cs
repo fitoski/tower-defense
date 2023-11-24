@@ -2,12 +2,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using UnityEngine.Events;
+using System.Linq;
 
 public class StatSelectionPanel : MonoBehaviour
 {
     public GameObject panel;
     public Button[] statButtons;
     private PlayerMovement player;
+    public List<StatProperty> stats = new List<StatProperty>();
 
     private void Start()
     {
@@ -44,60 +48,56 @@ public class StatSelectionPanel : MonoBehaviour
 
     private void RandomizeStats()
     {
-        List<System.Action> availableActions = new List<System.Action>
-    {
-        IncreaseDamage,
-        IncreaseHealth,
-        IncreaseSpeed,
-        IncreaseOrbitRadiusPerLevel,
-        IncreaseHealthRegeneration,
-        DecreaseAttackCooldown
-    };
+        Dictionary<string, StatProperty> statsDict = stats.ToDictionary(sp => sp.name);
+
         if (player.moveSpeed >= player.maxMoveSpeed)
         {
-            availableActions.Remove(IncreaseSpeed);
+            statsDict.Remove("Increase Speed");
         }
         if (player.orbitRadius >= player.maxOrbitRadius)
         {
-            availableActions.Remove(IncreaseOrbitRadiusPerLevel);
+            
         }
         if (player.healthRegenerationRate >= player.maxHealthRegenRate)
         {
-            availableActions.Remove(IncreaseHealthRegeneration);
+            
         }
         if (player.attackCooldown <= player.minimumAttackCooldown)
         {
-            availableActions.Remove(DecreaseAttackCooldown);
+            
         }
         if (player.criticalHitChance < 1f)
         {
-            availableActions.Add(IncreaseCriticalHitChance);
+            
         }
+
         foreach (var button in statButtons)
         {
             button.gameObject.SetActive(false);
         }
-        List<System.Action> selectedActions = new List<System.Action>();
-        while (selectedActions.Count < 4 && availableActions.Count > 0)
+        List<StatProperty> selectedStats = new List<StatProperty> ();
+        while (selectedStats.Count < 4 && statsDict.Count > 0)
         {
-            int randomIndex = UnityEngine.Random.Range(0, availableActions.Count);
-            System.Action selectedAction = availableActions[randomIndex];
-            selectedActions.Add(selectedAction);
-            availableActions.RemoveAt(randomIndex);
+            int randomIndex = UnityEngine.Random.Range(0, statsDict.Count);
+            StatProperty selectedStat = statsDict.ElementAt(randomIndex).Value;
+            selectedStats.Add(selectedStat);
+            statsDict.Remove(selectedStat.name);
         }
-        for (int i = 0; i < Mathf.Min(selectedActions.Count, statButtons.Length); i++)
+        for (int i = 0; i < Mathf.Min(selectedStats.Count, statButtons.Length); i++)
         {
             Button button = statButtons[i];
-            System.Action actionToAssign = selectedActions[i];
+            UnityEvent actionToAssign = selectedStats[i].action;
             TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            Image image = button.GetComponentsInChildren<Image>()[1];
+            image.sprite = selectedStats[i].icon;
             if (buttonText == null)
             {
                 Debug.LogError("TextMeshProUGUI component on stat button is not found.");
                 continue;
             }
-            buttonText.text = actionToAssign.Method.Name.Replace("Increase", "").Replace("Decrease", "") + " +";
+            buttonText.text = selectedStats[i].name;
             button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => actionToAssign());
+            button.onClick.AddListener(() => actionToAssign.Invoke());
             button.gameObject.SetActive(true);
         }
     }
@@ -149,4 +149,13 @@ public class StatSelectionPanel : MonoBehaviour
         panel.SetActive(false);
         Time.timeScale = 1; 
     }
+}
+
+[Serializable]
+public class StatProperty
+{
+    public Sprite icon;
+    public string name;
+    public string description;
+    public UnityEvent action;
 }

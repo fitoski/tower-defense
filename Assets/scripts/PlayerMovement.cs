@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float orbitRadius = 2f;
     public float orbitSpeed = 90f;
     public float attackRotationAmount = 15f;
-    public float attackCooldown = 1f;
+    public float attackCooldown = 5f;
     private float attackCooldownTimer = 0f;
     public int playerDamage = 5;
     public float criticalHitChance = 1.017f;
@@ -81,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
         swordAnimator = sword.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
         maxHealthRegenRate = maxPlayerHealth * 0.1f;
-        AdjustAttackSpeedAndAnimation(attackCooldown);
     }
 
     void Update()
@@ -111,14 +110,12 @@ public class PlayerMovement : MonoBehaviour
             bool isAttacking = Input.GetMouseButton(0);
             directionToMouse = (mousePosition - playerPosition).normalized;
             movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-            if (playerAnimator != null)
-            {
-                playerAnimator.SetBool("dkAttack", isAttacking);
-            }
+
             if (isAttacking && attackCooldownTimer <= 0f)
             {
                 StartAttackAnimation();
             }
+
             attackCooldownTimer -= Time.deltaTime;
         }
         if (waveDisplayText != null && enemySpawner != null)
@@ -159,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
     void StartAttackAnimation()
     {
         attackCooldownTimer = attackCooldown;
+        playerAnimator.SetTrigger("dkAttack");
         swordAnimator.SetTrigger("Attack");
     }
 
@@ -334,7 +332,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float decreaseAmount = attackCooldown * cooldownDecreasePercentage;
         float newCooldown = Mathf.Max(attackCooldown - decreaseAmount, minimumAttackCooldown);
-        AdjustAttackSpeedAndAnimation(newCooldown);
         hasDecreasedAttackCooldown = true;
     }
 
@@ -352,8 +349,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("swordAnimator component not found on the sword object!");
         }
-
-        AdjustAttackSpeedAndAnimation(attackCooldown);
     }
 
     public void Die()
