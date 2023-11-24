@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public Text levelText;
+    public TextMeshProUGUI levelText;
     public Image experienceBar;
 
     private GameManager gameManager;
@@ -25,4 +26,3 @@ public class UIManager : MonoBehaviour
         }
     }
 }
- 

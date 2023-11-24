@@ -11,7 +11,8 @@ public class Boss : Enemy
 
     private Transform playerTransform;
     private Animator bossAnimator;
-    private BossAbilities bossAbilities;
+    //private BossAbilities bossAbilities;
+    private bool isAttacking = false;
 
     public List<DropItem> droppableItems;
 
@@ -19,7 +20,7 @@ public class Boss : Enemy
     {
         base.Start();
         maxHealth = 10;
-        speed = 5f;
+        speed = 2f;
         baseDamage = 1;
         scoreValue = 15;
         experiencePointsValue = 10;
@@ -29,52 +30,62 @@ public class Boss : Enemy
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         bossAnimator = GetComponent<Animator>();
         attackTimer = attackCooldown;
-        bossAbilities = GetComponent<BossAbilities>();
-
-        if (bossAbilities != null)
-        {
-            InvokeRepeating("UseSpecialAttack", 0f, bossAbilities.specialAttackCooldown);
-            InvokeRepeating("UseAnotherAbility", 0f, bossAbilities.anotherAbilityCooldown);
-        }
     }
-
+       
     private new void Update()
     {
-        if (playerTransform != null)
+        if (currentHealth <= 0)
+        {
+            bossAnimator.SetTrigger("Die");
+            return; 
+        }
+
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+
+        if (!isAttacking && distanceToPlayer <= attackRange && attackTimer <= 0)
+        {
+            AttackPlayer();
+        }
+        else if (!isAttacking)
         {
             FollowPlayer();
         }
 
         if (attackTimer > 0)
         {
-            base.Start();
-            maxHealth = 10;
-            speed = 5f;
-            baseDamage = 1;
-            scoreValue = 15;
-            experiencePointsValue = 10;
-            damageMultiplierPerWave = 1.5f;
-            currentHealth = maxHealth;
             attackTimer -= Time.deltaTime;
-        }
-        else
-        {
-            if (Vector2.Distance(transform.position, playerTransform.position) <= attackRange)
-            {
-                AttackPlayer();
-            }
         }
     }
 
     void FollowPlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+        if (!isAttacking)
+        {
+            UpdateOrientationTowardsPlayer();
+            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+        }
     }
 
     void AttackPlayer()
     {
-        bossAnimator.SetTrigger("Attack");
+        UpdateOrientationTowardsPlayer();
+        Debug.Log("Boss is attacking");
+        bossAnimator.SetBool("isAttacking", true);
+        isAttacking = true;
         attackTimer = attackCooldown;
+    }
+
+    void UpdateOrientationTowardsPlayer()
+    {
+        bool shouldFaceRight = playerTransform.position.x > transform.position.x;
+        GetComponent<SpriteRenderer>().flipX = shouldFaceRight;
+    }
+
+    public void OnAttackEnd()
+    {
+        Debug.Log("Attack ended");
+        bossAnimator.SetBool("isAttacking", false);
+        isAttacking = false;
     }
 
     public override void Die()

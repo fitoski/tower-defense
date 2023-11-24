@@ -14,6 +14,7 @@ TagManager:
   - UpgradePanel
   - BuyMenuCanvas
   - Core
+  - FloatingTextCanvas
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Player
   - WanderingTrader
   - Core
-  - 
+  - Turrets
   - 
   - 
   - 

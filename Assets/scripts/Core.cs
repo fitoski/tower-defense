@@ -17,7 +17,6 @@ public class Core : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("HASAR YEDÝM");
         currentHealth -= damage;
 
         if (currentHealth <= 0)

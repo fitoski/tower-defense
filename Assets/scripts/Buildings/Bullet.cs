@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     public void SetTarget(Transform _target)
@@ -26,25 +26,27 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!target) return;
+        if (!target)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         Vector2 direction = (target.position - transform.position);
 
-        rb.velocity = direction * bulletSpeed;
+        rb.velocity = direction.normalized * bulletSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject != null)
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
+            if (!enemy.IsDead)
             {
                 enemy.TakeDamage(bulletDamage);
             }
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
     }
-
 }

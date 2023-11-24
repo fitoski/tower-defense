@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using static Enums;
 using UnityEditor.Experimental.GraphView;
+using TMPro;
 
 public class TraderUIManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class TraderUIManager : MonoBehaviour
     public RuntimeAnimatorController item4Animator;
     public RuntimeAnimatorController item5Animator;
 
+    public TextMeshProUGUI notificationText;
 
     public void Awake()
     {
@@ -128,4 +130,28 @@ public class TraderUIManager : MonoBehaviour
         itemName.text = item.itemName;
         itemPrice.text = item.price.ToString();
     }
+
+    public void ShowNotification(string message, float duration)
+    {
+        if (notificationText != null)
+        {
+            notificationText.text = message;
+            notificationText.gameObject.SetActive(true);
+            StartCoroutine(HideNotificationAfterDuration(duration));
+        }
+        else
+        {
+            Debug.LogError("NotificationText is not assigned in the TraderUIManager.");
+        }
+    }
+
+    private IEnumerator HideNotificationAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        if (notificationText != null)
+        {
+            notificationText.gameObject.SetActive(false);
+        }
+    }
+
 }

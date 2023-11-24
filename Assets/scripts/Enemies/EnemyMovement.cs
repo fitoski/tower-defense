@@ -78,18 +78,17 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
-            if (player != null)
+            Enemy enemy = GetComponent<Enemy>();
+            if (player != null && enemy != null && !enemy.IsDead) 
             {
                 player.TakeDamage(baseDamage);
             }
         }
         else if (collision.gameObject.CompareTag("Core"))
         {
-            Debug.Log("Enemy collided with Core");
             Core core = collision.gameObject.GetComponent<Core>();
             if (core != null)
             {
-                Debug.Log("COREA VURDU");
                 core.TakeDamage(baseDamage);
                 StopMovement();
                 DropGold();
@@ -103,7 +102,6 @@ public class EnemyMovement : MonoBehaviour
         Core core = target.GetComponent<Core>();
         if (core != null)
         {
-            Debug.Log("Attacking Core");
             int damage = Mathf.CeilToInt(baseDamage * Mathf.Pow(damageMultiplierPerWave, currentWave - 1));
             core.TakeDamage(damage);
             StopMovement();
@@ -155,14 +153,14 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void Die()
-    {
-        if (goldPrefab != null)
-        {
-            Instantiate(goldPrefab, transform.position, Quaternion.identity);
-        }
-        GetComponent<Enemy>().Die();
-    }
+    //public void Die()
+    //{
+    //    if (goldPrefab != null)
+    //    {
+    //        Instantiate(goldPrefab, transform.position, Quaternion.identity);
+    //    }
+    //    GetComponent<Enemy>().Die();
+    //}
 
     public void DestroyEnemy()
     {

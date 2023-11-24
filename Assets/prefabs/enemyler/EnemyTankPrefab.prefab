@@ -218,6 +218,8 @@ MonoBehaviour:
   speed: 0
   scoreValue: 10
   experiencePointsValue: 5
+  floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
+  canvasTransform: {fileID: 0}
 --- !u!114 &7952434997576242771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,3 +238,5 @@ MonoBehaviour:
   speed: 1
   scoreValue: 30
   experiencePointsValue: 20
+  floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
+  canvasTransform: {fileID: 0}
