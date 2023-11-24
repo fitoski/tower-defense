@@ -1590,7 +1590,7 @@ GameObject:
   - component: {fileID: 295739247}
   - component: {fileID: 295739246}
   m_Layer: 0
-  m_Name: PauseMenuUI
+  m_Name: PauseMenuUIParentCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3988,7 +3988,7 @@ GameObject:
   - component: {fileID: 643369049}
   - component: {fileID: 643369048}
   m_Layer: 0
-  m_Name: Nodes
+  m_Name: NodesManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6709,7 +6709,7 @@ GameObject:
   - component: {fileID: 986241603}
   - component: {fileID: 986241602}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: OffScreenIndicatorManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9867,7 +9867,7 @@ GameObject:
   - component: {fileID: 1368707318}
   - component: {fileID: 1368707317}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: DeathScreenCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14908,21 +14908,21 @@ SceneRoots:
   - {fileID: 1315920664}
   - {fileID: 108313696}
   - {fileID: 1354407708}
+  - {fileID: 986241603}
+  - {fileID: 643369049}
   - {fileID: 358219929}
-  - {fileID: 519420032}
-  - {fileID: 1201168039}
+  - {fileID: 1368707320}
+  - {fileID: 1882040960}
+  - {fileID: 471057479}
+  - {fileID: 180840983}
+  - {fileID: 494918447}
+  - {fileID: 295739247}
   - {fileID: 345292733}
   - {fileID: 6662655853511359344}
-  - {fileID: 471057479}
-  - {fileID: 1882040960}
-  - {fileID: 295739247}
-  - {fileID: 180840983}
-  - {fileID: 643369049}
-  - {fileID: 494918447}
-  - {fileID: 2019331458}
   - {fileID: 1686376877}
   - {fileID: 1701019181}
-  - {fileID: 1368707320}
-  - {fileID: 1339307894}
   - {fileID: 645032187}
-  - {fileID: 986241603}
+  - {fileID: 1339307894}
+  - {fileID: 2019331458}
+  - {fileID: 519420032}
+  - {fileID: 1201168039}
