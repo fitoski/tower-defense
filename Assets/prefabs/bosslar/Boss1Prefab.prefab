@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2b42970a0341e46b1ca2a392264f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   baseDamage: 10
   damageMultiplierPerWave: 1.5
   speed: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   experiencePointsValue: 20
   floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
   canvasTransform: {fileID: 0}
-  goldPrefab: {fileID: 0}
+  goldPrefab: {fileID: 6444085966677475160, guid: aae43f6c7b02c364b98752104b7743a2, type: 3}
   attackRange: 5
   attackDamage: 10
   attackCooldown: 5
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  baseDamage: 1
+  baseDamage: 10
   damageMultiplierPerWave: 1.5
   currentWave: 1
   goldPrefab: {fileID: 6444085966677475160, guid: aae43f6c7b02c364b98752104b7743a2, type: 3}
