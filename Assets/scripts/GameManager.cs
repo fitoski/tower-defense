@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playTimeText;
     public int turretCost = 50;  
     public int wallCost = 30;
-
+    public int PlayerGold { get; private set; }
+    public GameObject[] AvailableTurrets;
     private Node selectedNode;
 
     private Rigidbody2D rb;

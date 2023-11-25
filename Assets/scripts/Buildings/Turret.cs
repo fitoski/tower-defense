@@ -14,11 +14,15 @@ public class Turret : MonoBehaviour
     [Header("Attribute")]
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private float bps = 1f; 
+    [SerializeField] private float bps = 1f;
+
+    [Header("Cost")]
+    [SerializeField] private int cost;
 
     private Transform target;
     private float timeUntilFire;
-    
+    public int Cost => cost;
+
     private void Update()
     {
         if (target == null)

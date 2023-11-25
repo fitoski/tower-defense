@@ -7,6 +7,8 @@ public class Node : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
+    [SerializeField] private Sprite notEnoughMoneySprite;  
+    [SerializeField] private Sprite enoughMoneySprite;     
 
     private Color startColor;
 
@@ -18,6 +20,27 @@ public class Node : MonoBehaviour
     private void Start()
     {
         startColor = sr.color;
+    }
+
+    private void UpdateSprite()
+    {
+        if (!hasBuilding)
+        {
+            bool canBuyAnyTurret = CanAffordAnyTurret();
+            sr.sprite = canBuyAnyTurret ? enoughMoneySprite : notEnoughMoneySprite;
+        }
+    }
+
+    private bool CanAffordAnyTurret()
+    {
+        int playerGold = GameManager.main.currency; 
+        foreach (var turretPrefab in GameManager.main.AvailableTurrets)
+        {
+            Turret turret = turretPrefab.GetComponent<Turret>();
+            if (turret != null && playerGold >= turret.Cost)
+                return true;
+        }
+        return false;
     }
 
     private void OnMouseEnter()
@@ -54,6 +77,8 @@ public class Node : MonoBehaviour
 
     void Update()
     {
+        UpdateSprite();
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
