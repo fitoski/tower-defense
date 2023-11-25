@@ -196,15 +196,7 @@ MonoBehaviour:
   attackRange: 5
   attackDamage: 10
   attackCooldown: 5
-  droppableItems:
-  - itemName: 31
-    itemType: 0
-    itemPrefab: {fileID: 5630773696877715100, guid: 98fd6f040b642694995f62ca0a77f5c0, type: 3}
-    dropChance: 49
-  - itemName: 13
-    itemType: 1
-    itemPrefab: {fileID: 240424366028138487, guid: 94a955ca44d854441aa87505887fb763, type: 3}
-    dropChance: 51
+  chestPrefab: {fileID: 6854125686869889687, guid: aa0684ac749450a44b65e156feb2326c, type: 3}
 --- !u!114 &5980781206054759278
 MonoBehaviour:
   m_ObjectHideFlags: 0

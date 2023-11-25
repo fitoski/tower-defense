@@ -11,6 +11,7 @@ public class SkillButton : MonoBehaviour
     [SerializeField] private TMP_Text skillName;
     [SerializeField] private TMP_Text skillDescription;
     [SerializeField] private Image skillIcon;
+    [SerializeField] private Button button; 
 
     public void UpdateUI(PassiveSkill skill)
     {
@@ -22,10 +23,12 @@ public class SkillButton : MonoBehaviour
 
     public void SelectSkill()
     {
+        Debug.Log("SelectSkill called.");
         PlayerSkills playerSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkills>();
         playerSkills.addSkillToPassiveSkills(skill);
 
-        transform.parent.parent.gameObject.SetActive(false);
+        //transform.parent.parent.gameObject.SetActive(false);
+        SkillsManager.Instance.CloseSkillRewardPanel();
         Time.timeScale = 1;
     }
 }

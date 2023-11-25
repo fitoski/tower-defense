@@ -7,6 +7,8 @@ using static Trader;
 public class SkillsManager : MonoBehaviour
 {
     public static SkillsManager Instance { get; private set; }
+    public GameObject skillRewardPanel; 
+
     void Awake()
     {
         if (Instance == null)
@@ -32,6 +34,11 @@ public class SkillsManager : MonoBehaviour
     {
         if (skillRewardButtons.Length == 0) return;
 
+        foreach (var button in skillRewardButtons)
+        {
+            button.GetComponent<Button>().interactable = true;
+        }
+
         Time.timeScale = 0;
 
         skillRewardButtons[0].transform.parent.parent.gameObject.SetActive(true);
@@ -44,5 +51,28 @@ public class SkillsManager : MonoBehaviour
             skillRewardButtons[i].UpdateUI(availableSkills[randomIndex]);
             availableSkills.RemoveAt(randomIndex);
         }
+    }
+
+    public void BossDefeated()
+    {
+        skillRewardPanel.SetActive(true);
+        PrepareSkillRewardPanel();
+    }
+
+    public void CloseSkillRewardPanel()
+    {
+        if (skillRewardPanel != null)
+        {
+            skillRewardPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("skillRewardPanel is not set!");
+        }
+    }
+
+    public void OnBossDeath()
+    {
+        SkillsManager.Instance.BossDefeated();
     }
 }

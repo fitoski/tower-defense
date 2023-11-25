@@ -11,8 +11,8 @@ public class Boss : Enemy
 
     private Transform playerTransform;
     private Animator bossAnimator;
-    //private BossAbilities bossAbilities;
     private bool isAttacking = false;
+    public GameObject chestPrefab; 
 
     private new void Start()
     {
@@ -89,12 +89,17 @@ public class Boss : Enemy
     public override void Die()
     {
         base.Die();
-        DropItemOnDeath();
+        SpawnChest();
     }
 
-    void DropItemOnDeath()
+    void SpawnChest()
     {
-        Debug.Log("item düştü");
+        Instantiate(chestPrefab, transform.position, Quaternion.identity);
+    }
+
+    void DropSkillOnDeath()
+    {
+        Debug.Log("skill item düştü");
         SkillsManager.Instance.PrepareSkillRewardPanel();
     }
 }
