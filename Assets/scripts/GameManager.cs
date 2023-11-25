@@ -5,10 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Enums;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager main;
+    public event Action OnCurrencyChanged;
     public int currency;
     public int level;
     public int experiencePoints;
@@ -31,6 +33,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         main = this;
+        if (OnCurrencyChanged == null)
+        {
+            OnCurrencyChanged = () => { };
+        }
     }
 
     private void Start()
@@ -39,7 +45,7 @@ public class GameManager : MonoBehaviour
         currency = 0;
         level = 1;
         experiencePoints = 0;
-        InvokeRepeating("SpawnTrader", 5f, Random.Range(20f, 40f));
+        InvokeRepeating("SpawnTrader", 5f, UnityEngine.Random.Range(20f, 40f));
         traderUIManager.Awake();
         traderUIManager = TraderUIManager.instance;
         playTime = 0f; 
@@ -54,6 +60,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseCurrency(int amount)
     {
         currency += amount;
+        OnCurrencyChanged?.Invoke();
     }
 
     public bool SpendCurrency(int amount)
@@ -61,6 +68,7 @@ public class GameManager : MonoBehaviour
         if (amount <= currency)
         {
             currency -= amount;
+            OnCurrencyChanged?.Invoke(); 
             return true;
         }
         else
@@ -153,7 +161,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnTrader()
     {
-        GameObject trader = Instantiate(traderPrefab, new Vector2(Random.Range(-10, 10), Random.Range(-10, 10)), Quaternion.identity);
+        GameObject trader = Instantiate(traderPrefab, new Vector2(UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10)), Quaternion.identity);
         Trader traderScript = trader.GetComponent<Trader>();
         if (traderScript != null)
         {

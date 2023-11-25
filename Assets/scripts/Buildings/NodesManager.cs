@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class NodesManager : MonoBehaviour
 {
@@ -9,9 +10,19 @@ public class NodesManager : MonoBehaviour
     [SerializeField] private float distance = 1.5f;
     private int currentLayer = 0;
 
+    private List<Node> allNodes = new List<Node>();
+
     private void Awake()
     {
         instance = this;
+        if (GameManager.main != null)
+        {
+            GameManager.main.OnCurrencyChanged += UpdateAllNodes;
+        }
+        else
+        {
+            Debug.LogError("GameManager.main is null in NodesManager.Awake");
+        }
     }
 
     void Start()
@@ -49,6 +60,24 @@ public class NodesManager : MonoBehaviour
         {
             Vector2 nodePos = initialPosTop + new Vector2(0, i * -distance);
             Instantiate(prefab, nodePos, Quaternion.identity, transform);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.main.OnCurrencyChanged -= UpdateAllNodes;
+    }
+
+    public void RegisterNode(Node node)
+    {
+        allNodes.Add(node);
+    }
+
+    private void UpdateAllNodes()
+    {
+        foreach (var node in allNodes)
+        {
+            node.UpdateSprite();
         }
     }
 }

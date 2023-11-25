@@ -20,9 +20,12 @@ public class Node : MonoBehaviour
     private void Start()
     {
         startColor = sr.color;
+        GameManager.main.OnCurrencyChanged += UpdateSprite;
+        NodesManager.Instance.RegisterNode(this);
+        UpdateSprite();
     }
 
-    private void UpdateSprite()
+    public void UpdateSprite()
     {
         if (!hasBuilding)
         {
@@ -56,6 +59,11 @@ public class Node : MonoBehaviour
     private void OnMouseDown()
     {
         BuyMenu.Instance.OpenBuyMenu(this);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.main.OnCurrencyChanged -= UpdateSprite;
     }
 
     public void BuyTurretToThisNode(GameObject turret)
