@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public int experiencePoints;
     private float playTime = 0f;
     public TextMeshProUGUI playTimeText;
-    public int turretCost = 50;  
     public int wallCost = 30;
     public int PlayerGold { get; private set; }
     public GameObject[] AvailableTurrets;
@@ -106,11 +105,6 @@ public class GameManager : MonoBehaviour
     public void ClearSelectedNodePosition()
     {
         selectedNode = null;
-    }
-
-    public int GetTurretCost()
-    {
-        return turretCost;
     }
 
     public int GetWallCost()

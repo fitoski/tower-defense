@@ -11,7 +11,7 @@ public class Node : MonoBehaviour
     [SerializeField] private Sprite enoughMoneySprite;     
 
     private Color startColor;
-
+    public int turretTier = 0;
     private bool hasBuilding = false;
     public bool HasBuilding => hasBuilding;
     private GameObject turret = null;
@@ -70,6 +70,13 @@ public class Node : MonoBehaviour
     {
         hasBuilding = true;
         this.turret = turret;
+        turretTier = 1;
+    }
+
+    public void UpgradeTurretToElement(GameObject turret)
+    {
+        this.turret = turret;
+        turretTier = 2;
     }
 
     public void BuyWallToThisNode()
@@ -81,6 +88,7 @@ public class Node : MonoBehaviour
     {
         hasBuilding = false;
         this.turret = null;
+        turretTier = 0;
     }
 
     void Update()

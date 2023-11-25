@@ -3,63 +3,85 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 
 public class BuyMenu : MonoBehaviour
 {
     private static BuyMenu instance;
     public static BuyMenu Instance => instance;
     [SerializeField] private GameObject buyMenuUI;
-    [SerializeField] private GameObject upgradeMenuUI;
-    [SerializeField] private GameObject turretPrefab;
-    [SerializeField] private GameObject wallPrefab;
+    [SerializeField] private GameObject buyButton;
     private Vector3 selectedNodePosition;
 
     private bool isBuyMenuOpen = false;
+    [SerializeField] private GameObject normalTurretPrefab;
+    [SerializeField] private List<GameObject> availableUpgradedTurrets = new List<GameObject>();
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        
+        else
+        {
+            Destroy(this);
+        }
     }
 
     public void OpenBuyMenu(Node targetNode)
     {
         if (isBuyMenuOpen) return;
 
-        if (targetNode.HasBuilding && targetNode.Turret != null)
+        float yOffset = 1f;
+        selectedNodePosition = new Vector3(targetNode.transform.position.x, targetNode.transform.position.y + yOffset, targetNode.transform.position.z);
+        buyMenuUI.SetActive(true);
+        buyMenuUI.transform.position = selectedNodePosition;
+
+        foreach (Transform transform in buyMenuUI.transform)
         {
-            float yOffset = 1f;
-            selectedNodePosition = new Vector3(targetNode.transform.position.x, targetNode.transform.position.y + yOffset, targetNode.transform.position.z);
-
-            upgradeMenuUI.transform.position = selectedNodePosition;
-            buyMenuUI.SetActive(false);
-            upgradeMenuUI.SetActive(true);
-
+            Destroy(transform.gameObject);
         }
 
-        else if (!targetNode.HasBuilding)
+        if (targetNode.turretTier == 0)
         {
-            float yOffset = 1f;
-            selectedNodePosition = new Vector3(targetNode.transform.position.x, targetNode.transform.position.y + yOffset, targetNode.transform.position.z);
+            Button turretBuyButton = Instantiate(buyButton, buyMenuUI.transform).GetComponent<Button>();
+            turretBuyButton.onClick.AddListener(() => BuyTurret(normalTurretPrefab));
+            turretBuyButton.GetComponentInChildren<TMP_Text>().text = $"Buy {normalTurretPrefab.GetComponent<Turret>().turretName}";
+        }
 
-            buyMenuUI.transform.position = selectedNodePosition;
-            buyMenuUI.SetActive(true);
-            upgradeMenuUI.SetActive(false);
+        else
+        {
+            if (targetNode.turretTier == 1)
+            {
+                foreach (GameObject prefab in availableUpgradedTurrets)
+                {
+                    Button turretBuyButton = Instantiate(buyButton, buyMenuUI.transform).GetComponent<Button>();
+                    turretBuyButton.onClick.AddListener(() => UpgradeTurretToElement(prefab));
+                    turretBuyButton.GetComponentInChildren<TMP_Text>().text = $"Upgrade to {prefab.GetComponent<Turret>().turretName}";
+                }
+            }
+
+            Button sellButton = Instantiate(buyButton, buyMenuUI.transform).GetComponent<Button>();
+            sellButton.onClick.AddListener(() => SellTurret());
+            sellButton.GetComponentInChildren<TMP_Text>().text = "Sell Turret";
         }
     }
 
     public void CloseBuyMenu()
     {
         buyMenuUI.SetActive(false);
-        upgradeMenuUI.SetActive(false);
     }
 
-    public void BuyTurret()
+    public void BuyTurret(GameObject turretPrefab)
     {
         Node targetNode = GameManager.main.GetSelectedNode();
 
-        if (GameManager.main.HasEnoughCurrency(GameManager.main.GetTurretCost()) && targetNode != null)
+        if (GameManager.main.HasEnoughCurrency(turretPrefab.GetComponent<Turret>().Cost) && targetNode != null)
         {
-            GameObject turret = PlacePrefab(turretPrefab, targetNode.transform.position, GameManager.main.GetTurretCost());
+            GameObject turret = PlacePrefab(turretPrefab, targetNode.transform.position, turretPrefab.GetComponent<Turret>().Cost);
             if (turret != null)
             {
                 targetNode.BuyTurretToThisNode(turret);
@@ -71,29 +93,36 @@ public class BuyMenu : MonoBehaviour
         {
             Debug.Log("Not enough currency or no node position available.");
         }
-    }
 
-    public void SellTurret()
+        CloseBuyMenu();
+    }
+    public void UpgradeTurretToElement(GameObject newTurret)
     {
         Node targetNode = GameManager.main.GetSelectedNode();
-        Destroy(targetNode.Turret);
-        targetNode.SellTurretFromThisNode();
-    }
-
-    public void BuyWall()
-    {
-        Node targetNode = GameManager.main.GetSelectedNode();
-
-        if (GameManager.main.HasEnoughCurrency(GameManager.main.GetWallCost()) && targetNode != null)
+        if (GameManager.main.HasEnoughCurrency(newTurret.GetComponent<Turret>().Cost) && targetNode != null)
         {
-            targetNode.BuyWallToThisNode();
-            PlacePrefab(wallPrefab, targetNode.transform.position, GameManager.main.GetWallCost());
+            Destroy(targetNode.Turret);
+            GameObject turret = PlacePrefab(newTurret, targetNode.transform.position, newTurret.GetComponent<Turret>().Cost);
+            if (turret != null)
+            {
+                targetNode.UpgradeTurretToElement(turret);
+            }
+
             GameManager.main.ClearSelectedNodePosition();
         }
         else
         {
             Debug.Log("Not enough currency or no node position available.");
         }
+
+        CloseBuyMenu();
+    }
+    public void SellTurret()
+    {
+        Node targetNode = GameManager.main.GetSelectedNode();
+        Destroy(targetNode.Turret);
+        targetNode.SellTurretFromThisNode();
+        CloseBuyMenu();
     }
 
     private GameObject PlacePrefab(GameObject prefab, Vector3 position, int cost)
@@ -104,7 +133,7 @@ public class BuyMenu : MonoBehaviour
             return null;
         }
 
-        if (GameManager.main.SpendCurrency(GameManager.main.GetTurretCost()))
+        if (GameManager.main.SpendCurrency(prefab.GetComponent<Turret>().Cost))
         {
             GameObject placedPrefab = Instantiate(prefab, position, Quaternion.identity);
             return placedPrefab;
