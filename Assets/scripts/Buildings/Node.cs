@@ -20,7 +20,6 @@ public class Node : MonoBehaviour
     private void Start()
     {
         startColor = sr.color;
-        GameManager.main.OnCurrencyChanged += UpdateSprite;
         NodesManager.Instance.RegisterNode(this);
         UpdateSprite();
     }
@@ -37,12 +36,14 @@ public class Node : MonoBehaviour
     private bool CanAffordAnyTurret()
     {
         int playerGold = GameManager.main.currency; 
-        foreach (var turretPrefab in GameManager.main.AvailableTurrets)
+        
+
+        if (turretTier == 0)
         {
-            Turret turret = turretPrefab.GetComponent<Turret>();
-            if (turret != null && playerGold >= turret.Cost)
+            if (playerGold >= BuyMenu.Instance.NormalTurretCost)
                 return true;
         }
+
         return false;
     }
 
@@ -59,11 +60,6 @@ public class Node : MonoBehaviour
     private void OnMouseDown()
     {
         BuyMenu.Instance.OpenBuyMenu(this);
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.main.OnCurrencyChanged -= UpdateSprite;
     }
 
     public void BuyTurretToThisNode(GameObject turret)
@@ -93,8 +89,6 @@ public class Node : MonoBehaviour
 
     void Update()
     {
-        UpdateSprite();
-
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -63,11 +63,6 @@ public class NodesManager : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        GameManager.main.OnCurrencyChanged -= UpdateAllNodes;
-    }
-
     public void RegisterNode(Node node)
     {
         allNodes.Add(node);

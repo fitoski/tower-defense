@@ -16,6 +16,7 @@ public class BuyMenu : MonoBehaviour
 
     private bool isBuyMenuOpen = false;
     [SerializeField] private GameObject normalTurretPrefab;
+    public int NormalTurretCost => normalTurretPrefab.GetComponent<Turret>().Cost;
     [SerializeField] private List<GameObject> availableUpgradedTurrets = new List<GameObject>();
 
     private void Awake()
@@ -68,6 +69,17 @@ public class BuyMenu : MonoBehaviour
             sellButton.onClick.AddListener(() => SellTurret());
             sellButton.GetComponentInChildren<TMP_Text>().text = "Sell Turret";
         }
+    }
+
+    public List<int> getAvailableTurretCosts()
+    {
+        List<int> costs = new List<int>();
+        foreach (GameObject turret in availableUpgradedTurrets)
+        {
+            costs.Add(turret.GetComponent<Turret>().Cost);
+        }
+
+        return costs;
     }
 
     public void CloseBuyMenu()
