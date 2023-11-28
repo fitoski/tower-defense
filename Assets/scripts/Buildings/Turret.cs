@@ -12,8 +12,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform firingPoint;
 
     [Header("Attribute")]
-    [SerializeField] private float targetingRange = 5f;
-    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float targetingRange = 6f;
+    [SerializeField] private float rotationSpeed = 200f;
     [SerializeField] private float bps = 1f;
     public string turretName = "Turret";
     public Sprite turretIcon;

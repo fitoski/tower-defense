@@ -50,6 +50,20 @@ public class Enemy : MonoBehaviour
         bool isEnemyMoving = Vector2.Distance(previousPosition, currentPosition) > movementThreshold;
         animator.SetBool("isMoving", isEnemyMoving);
         previousPosition = currentPosition;
+
+        if (Time.time >= nextBurnDamageTime && Time.time <= burnStopTime)
+        {
+            TakeDamage(burnDamageAmount);
+            nextBurnDamageTime = Time.time + burningInterval;
+        }
+
+        else
+        {
+            burnDamageAmount = 0;
+            burningInterval = 999;
+            nextBurnDamageTime = 0;
+            burnStopTime = 0;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -128,6 +142,22 @@ public class Enemy : MonoBehaviour
         GameManager.main.IncreaseExperiencePoints(experiencePointsValue);
         EnemySpawner.Instance.ActiveEnemies--;
         EnemySpawner.Instance.EnemyKilled();
+    }
+
+    public int burnDamageAmount;
+    private float burningInterval;
+    private float nextBurnDamageTime = 0;
+    private float burnStopTime;
+
+    public void StartBurning(int damageAmount,float burningInterval, float burnTime)
+    {
+        if (burnDamageAmount < damageAmount)
+        {
+            burnDamageAmount = damageAmount;
+            this.burningInterval = burningInterval;
+        }
+
+        burnStopTime = Time.time + burningInterval;
     }
 
     private void DropGold()
