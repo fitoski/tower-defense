@@ -8,21 +8,40 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    // Player attributes
+    public float moveSpeed = 5.0f; // Movement Speed
+    public float pickupRange = 3.0f; // Pickup Range
+    public float xpGain = 1.0f; // XP Gain Multiplier
+
+    // Defensive attributes
+    public int maxPlayerHealth = 500; // Max Health
+    public float healthRegenerationRate = 0.2f; // Health Regeneration per second
+    public float armorValue = 10; // Defense
+    public float blockStrength = 10; // Block Strength
+    public float defense = 10f; // Savunma değeri
+    public float defenseBonus = 1f; // Savunma bonusu
+    public bool hasIncreasedDefense = false;
+    public bool hasIncreasedDefenseBonus = false;
+    public bool hasIncreasedBlockStrength = false;
+
+    // Offensive attributes
+    public int playerDamage = 100; // Damage
+    public float attackCooldown = 1.1f; // Attack Speed (attacks per second)
+    public float multistrike = 1.00f; // Multistrike Chance
+    public float criticalHitChance = 20f; // Crit Chance
+    public float criticalHitBonus = 65f; // Crit Bonus
+    public float range = 5.5f; // Attack Range
+    public float area = 2.0f; // Area of Effect
+
+    // Other attributes
     private Rigidbody2D rb;
     public Transform sword;
     public float orbitRadius = 2f;
     public float orbitSpeed = 90f;
     public float attackRotationAmount = 15f;
-    public float attackCooldown = 5f;
     private float attackCooldownTimer = 0f;
-    public int playerDamage = 5;
-    public float criticalHitChance = 1.017f;
-    public float healthRegenerationRate = 0.0f;
     private bool isInvulnerable = false;
     public float invulnerabilityDuration = 1.5f;
-    public float armorValue;
-    public float flashDuration = 0.2f;
     public Color flashColor = Color.red;
     private Color originalColor;
     private SpriteRenderer playerSpriteRenderer;
@@ -30,27 +49,7 @@ public class PlayerMovement : MonoBehaviour
     public List<Sprite> weaponSprites;
     private Animator playerAnimator;
     private bool isMoving = true;
-    public int maxPlayerHealth = 100;
-    public int playerHealth = 100;
-    public float minimumAttackCooldown = 0.5f;
-    public float maxMoveSpeed = 10f;
-    public float maxOrbitRadius = 5f;
-    public float maxHealthRegenRate;
-    public float cooldownDecreasePercentage = 0.05f;
-    public float criticalHitChanceIncreasePercentage = 0.1f;
-    public float healthRegenIncreasePercentage = 0.03f;
-    public float healthIncreasePercentage = 0.05f;
-    public float damageIncreasePercentage = 0.10f;
-    public float speedIncreasePercentage = 0.03f;
-    public float orbitRadiusIncreasePercentage = 0.02f;
-    public bool hasIncreasedHealthRegen = false;
-    public bool hasIncreasedCritChance = false;
-    public bool hasIncreasedDamage = false;
-    public bool hasIncreasedHealth = false;
-    public bool hasIncreasedSpeed = false;
-    public bool hasIncreasedArmor = false;
-    public bool hasIncreasedOrbitRadius = false;
-    public bool hasDecreasedAttackCooldown = false;
+    public int playerHealth;
     public Image playerHealthBar;
     private EnemySpawner enemySpawner;
     public TextMeshProUGUI waveDisplayText;
@@ -61,26 +60,55 @@ public class PlayerMovement : MonoBehaviour
     private float attackAnimationLength = 0;
     public float deathAnimationLength = 2f;
     private float healthRegenTimer = 0f;
-    private const float healthRegenInterval = 5f;
-    private float criticalHitChanceFirstTimeIncrease = 0.05f;
-    private float criticalHitChanceMultiplier = 1.017f;
-    private float healthRegenFirstTimeValue = 1f;
-    private float healthRegenBaseMultiplier = 0.1f;
+    public bool hasIncreasedDamage = false;
+    public bool hasIncreasedHealth = false;
+    public bool hasIncreasedSpeed = false;
+    public bool hasIncreasedArmor = false;
+    public bool hasIncreasedCritChance = false;
+    public bool hasIncreasedHealthRegen = false;
+    public bool hasIncreasedOrbitRadius = false;
+    public bool hasDecreasedAttackCooldown = false;
+    public const float healthRegenInterval = 5f;
+    public const float flashDuration = 0.1f;
+    public const float damageIncreasePercentage = 0.05f;
+    public const float maxMoveSpeed = 10f;
+    public const float speedIncreasePercentage = 0.05f;
+    public const float healthIncreasePercentage = 0.05f;
+    public const float criticalHitChanceFirstTimeIncrease = 0.05f;
+    public const float criticalHitChanceMultiplier = 1.05f;
+    public const float healthRegenFirstTimeValue = 1f;
+    public const float healthRegenBaseMultiplier = 0.1f;
+    public const float orbitRadiusIncreasePercentage = 0.05f;
+    public const float cooldownDecreasePercentage = 0.05f;
+    public const float maxOrbitRadius = 5f;
+    public const float maxHealthRegenRate = 5f;
+    public const float minimumAttackCooldown = 0.5f;
+    public const float healthRegenIncreasePercentage = 0.05f;
+    private bool autoAimEnabled = false;
+    private bool autoAttackEnabled = false;
+    private Transform nearestEnemy;
+
+    // Level up bonuses
+    private const float perLevelDamageIncrease = 0.5f; // Damage increase per level
+    private const float perLevelHealthIncrease = 2.5f; // Health increase per level
+    private const float per10LevelDamageIncrease = 0.05f; // Additional Damage increase every 10 levels
+
+
+
 
     void Start()
     {
-        gameManager = GameManager.main;
-
+        // Initialize values and components
         rb = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = playerSpriteRenderer.color;
+        playerHealth = maxPlayerHealth; // Set initial health
         UpdateHealthBars();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameManager = FindObjectOfType<GameManager>();
         swordSpriteRenderer = sword.GetComponent<SpriteRenderer>();
         swordAnimator = sword.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
-        maxHealthRegenRate = maxPlayerHealth * 0.1f;
     }
 
     void Update()
@@ -103,24 +131,39 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerSpriteRenderer.flipX = false;
             }
-            Vector2 direction = (mousePosition - playerPosition).normalized;
-            sword.position = playerPosition + direction * orbitRadius;
-            sword.up = direction;
-            sword.RotateAround(playerPosition, Vector3.forward, orbitSpeed * Time.deltaTime);
+            if (!autoAimEnabled)
+            {
+                Vector2 direction = (mousePosition - playerPosition).normalized;
+                sword.position = playerPosition + direction * orbitRadius;
+                sword.up = direction;
+                sword.RotateAround(playerPosition, Vector3.forward, orbitSpeed * Time.deltaTime);
+            }
             bool isAttacking = Input.GetMouseButton(0);
             directionToMouse = (mousePosition - playerPosition).normalized;
             movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-
             if (isAttacking && attackCooldownTimer <= 0f)
             {
                 StartAttackAnimation();
             }
-
             attackCooldownTimer -= Time.deltaTime;
         }
         if (waveDisplayText != null && enemySpawner != null)
         {
             waveDisplayText.text = "Wave: " + enemySpawner.GetCurrentWaveNumber().ToString();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            autoAimEnabled = !autoAimEnabled;
+            autoAttackEnabled = autoAimEnabled; 
+        }
+        if (autoAimEnabled && autoAttackEnabled && attackCooldownTimer <= 0f)
+        {
+            AimAtNearestEnemy();
+            AutoAttack();
+        }
+        else
+        {
+            UpdateSwordRotation();
         }
     }
 
@@ -138,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(sword.position, 2f);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(sword.position, area);
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -147,9 +190,84 @@ public class PlayerMovement : MonoBehaviour
                 Enemy enemyComponent = enemy.GetComponent<Enemy>();
                 if (enemyComponent != null)
                 {
-                    enemyComponent.TakeDamage(playerDamage);
+                    bool isDead = enemyComponent.TakeDamage(playerDamage);
+                    if (isDead)
+                    {
+                        GameManager.main.EnemyKilled();
+                    }
                 }
             }
+        }
+    }
+
+    void AimAtNearestEnemy()
+    {
+        Enemy nearestEnemy = FindNearestEnemy();
+        if (nearestEnemy != null)
+        {
+            Vector2 enemyPosition = nearestEnemy.transform.position;
+            Vector2 playerPosition = transform.position;
+
+            Vector2 directionToEnemy = (enemyPosition - playerPosition).normalized;
+
+            playerSpriteRenderer.flipX = enemyPosition.x < playerPosition.x;
+
+            sword.up = directionToEnemy;
+            sword.position = playerPosition + directionToEnemy * orbitRadius;
+
+            StartAttackAnimation();
+        }
+    }
+
+    Enemy FindNearestEnemy()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Enemy nearestEnemy = null;
+        float minDistance = Mathf.Infinity;
+        Vector2 position = transform.position;
+
+        foreach (Enemy enemy in enemies)
+        {
+            float distance = Vector2.Distance(enemy.transform.position, position);
+            if (distance < minDistance)
+            {
+                nearestEnemy = enemy;
+                minDistance = distance;
+            }
+        }
+        return nearestEnemy;
+    }
+
+    void UpdateSwordRotation()
+    {
+        if (!autoAimEnabled)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 playerPosition = transform.position;
+
+            Vector2 direction = (mousePosition - playerPosition).normalized;
+
+            sword.up = direction;
+
+            sword.position = playerPosition + direction * orbitRadius;
+        }
+    }
+
+    void AttackNearestEnemy()
+    {
+        if (nearestEnemy != null)
+        {
+            Attack();
+        }
+    }
+
+    void AutoAttack()
+    {
+        if (attackCooldownTimer <= 0f)
+        {
+            AimAtNearestEnemy();  
+            Attack();
+            attackCooldownTimer = attackCooldown; 
         }
     }
 
@@ -164,11 +282,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isInvulnerable)
         {
-            int actualDamage = (int)(10 * (1 - armorValue / 100));
+            float blockChance = CalculateBlockChance(damage);
+            if (UnityEngine.Random.Range(0f, 100f) <= blockChance)
+            {
+                return;
+            }
+
+            float damageReduction = CalculateDamageReduction(defense);
+            int actualDamage = Mathf.Max(1, damage - Mathf.FloorToInt(damage * damageReduction / 100f));
             playerHealth -= actualDamage;
+
             UpdateHealthBars();
             StartCoroutine(FlashPlayer());
             StartCoroutine(PausePlayer());
+
             if (playerHealth <= 0)
             {
                 Die();
@@ -176,7 +303,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 isInvulnerable = true;
-                Invoke("ResetInvulnerability", invulnerabilityDuration);
+                Invoke("ResetInvulnerability", 0.2f); 
             }
         }
     }
@@ -199,13 +326,25 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator PausePlayer()
     {
         isMoving = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f); 
         isMoving = true;
     }
 
     void ResetInvulnerability()
     {
         isInvulnerable = false;
+    }
+
+    private float CalculateBlockChance(int incomingDamage)
+    {
+        return Mathf.Min(0.5f, blockStrength / (float)incomingDamage) * 100f;
+    }
+
+    private float CalculateDamageReduction(float defense)
+    {
+        float inverseHyperbolicEffect = Mathf.Sign(defense) * (0.6f - 24f / (Mathf.Abs(defense) + 40f));
+        float clippedLinearEffect = Mathf.Min(0.4f, 0.004f * defense);
+        return (inverseHyperbolicEffect + clippedLinearEffect) * 100f;
     }
 
     void UpdateHealthBars()
@@ -274,7 +413,7 @@ public class PlayerMovement : MonoBehaviour
         else if (healthRegenerationRate < maxHealthRegenRate)
         {
             float healthRegenIncreaseAmount = healthRegenerationRate * healthRegenIncreasePercentage;
-            healthRegenerationRate = Mathf.Min(healthRegenerationRate + healthRegenIncreaseAmount, maxHealthRegenRate);
+            healthRegenerationRate = Mathf.Min(healthRegenerationRate + healthRegenIncreaseAmount, PlayerMovement.maxHealthRegenRate);
         }
 
         hasIncreasedHealthRegen = true;
@@ -288,6 +427,27 @@ public class PlayerMovement : MonoBehaviour
             orbitRadius = Mathf.Min(orbitRadius + orbitRadiusIncreaseAmount, maxOrbitRadius);
             hasIncreasedOrbitRadius = true;
         }
+    }
+
+    public void IncreaseBlockStrength()
+    {
+        float blockStrengthIncrease = 0.1f; 
+        blockStrength += blockStrengthIncrease;
+        hasIncreasedBlockStrength = true;
+    }
+
+    public void IncreaseDefense()
+    {
+        float defenseIncrease = 0.2f; 
+        defense += defenseIncrease;
+        hasIncreasedDefense = true;
+    }
+
+    public void IncreaseDefenseBonus()
+    {
+        float defenseBonusIncrease = 0.05f; 
+        defenseBonus += defenseBonusIncrease;
+        hasIncreasedDefenseBonus = true;
     }
 
     public void ChangeArmor(float newArmorValue)
@@ -349,6 +509,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("swordAnimator component not found on the sword object!");
         }
+    }
+
+    public Vector2 MovementDirection
+    {
+        get { return movementDirection; } 
     }
 
     public void Die()

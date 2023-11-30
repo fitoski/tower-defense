@@ -11,7 +11,6 @@ public class Enemy4 : Enemy
         speed = 5f;
         baseDamage = 1;
         scoreValue = 15;
-        experiencePointsValue = 10;
         damageMultiplierPerWave = 1.5f;
         currentHealth = maxHealth;
     }

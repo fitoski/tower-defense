@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2b42970a0341e46b1ca2a392264f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   baseDamage: 10
   damageMultiplierPerWave: 1.5
   speed: 0

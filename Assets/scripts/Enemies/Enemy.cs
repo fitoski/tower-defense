@@ -15,13 +15,13 @@ public class Enemy : MonoBehaviour
     protected EnemyMovement enemyMovement;
     public float speed;
     public int scoreValue = 10;
-    public int experiencePointsValue = 5;
+    public int experiencePointsValue = 1;
     private Vector2 previousPosition;
     private float movementThreshold = 0.01f;
     private Animator animator;
     public GameObject floatingTextPrefab;
     public Transform canvasTransform;
-    public GameObject goldPrefab;
+    public GameObject experiencePointPrefab;
 
     protected void Start()
     {
@@ -64,34 +64,39 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
         if (isDead)
         {
             Debug.Log(gameObject.name + " zaten ölü.");
-
-            return;
+            return false;
         }
 
         currentHealth -= damage;
         Debug.Log(gameObject.name + " hasar aldı, yeni canı: " + currentHealth);
 
-        if (floatingTextPrefab != null && canvasTransform != null)
-        {
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 offset = new Vector3(0, 50, 0); 
-            GameObject floatingText = Instantiate(floatingTextPrefab, screenPosition + offset, Quaternion.identity, canvasTransform);
-            floatingText.GetComponent<FloatingText>().SetText(damage.ToString());
-        }
-
-        else
-        {
-            Debug.LogError("FloatingTextPrefab or CanvasTransform is null.");
-        }
+        ShowFloatingText(damage);
 
         if (currentHealth <= 0)
         {
             Die();
+            return true;
+        }
+        return false;
+    }
+
+    private void ShowFloatingText(int damage)
+    {
+        if (floatingTextPrefab != null && canvasTransform != null)
+        {
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 offset = new Vector3(0, 50, 0);
+            GameObject floatingText = Instantiate(floatingTextPrefab, screenPosition + offset, Quaternion.identity, canvasTransform);
+            floatingText.GetComponent<FloatingText>().SetText(damage.ToString());
+        }
+        else
+        {
+            Debug.LogError("FloatingTextPrefab or CanvasTransform is null.");
         }
     }
 
@@ -123,18 +128,21 @@ public class Enemy : MonoBehaviour
             enemyMovement.StopMovement();
         }
 
-        DropGold(); 
-
-        GameManager.main.IncreaseExperiencePoints(experiencePointsValue);
+        DropExperiencePoints(); 
         EnemySpawner.Instance.ActiveEnemies--;
         EnemySpawner.Instance.EnemyKilled();
     }
 
-    private void DropGold()
+    private void DropExperiencePoints()
     {
-        if (goldPrefab != null)
+        if (experiencePointPrefab != null)
         {
-            Instantiate(goldPrefab, transform.position, Quaternion.identity);
+            GameObject exp = Instantiate(experiencePointPrefab, transform.position, Quaternion.identity);
+            ExperiencePickup expPickup = exp.GetComponent<ExperiencePickup>();
+            if (expPickup != null)
+            {
+                expPickup.experienceAmount = experiencePointsValue;
+            }
         }
     }
 

@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager main;
     public event Action OnCurrencyChanged;
-    public int currency;
     public int level;
     public int experiencePoints;
     private float playTime = 0f;
@@ -20,14 +19,14 @@ public class GameManager : MonoBehaviour
     public int PlayerGold { get; private set; }
     public GameObject[] AvailableTurrets;
     private Node selectedNode;
-
     private Rigidbody2D rb;
-
     public GameObject traderPrefab;
     public TraderUIManager traderUIManager;
     public GameObject deathScreenPanel;
     public TextMeshProUGUI minutesSurvivedText;
     public TextMeshProUGUI totalGoldText;
+    public int currency;
+    public int totalEnemiesKilled;
 
     private void Awake()
     {
@@ -56,10 +55,45 @@ public class GameManager : MonoBehaviour
         UpdatePlayTimeUI();
     }
 
+    public int CalculateXpForNextLevel(int currentLevel, string stage)
+    {
+        int a = 0, b = 0, c = 0;
+        switch (stage)
+        {
+            case "map1":
+                a = -5;
+                b = 4;
+                c = -3;
+                break;
+            case "map2":
+                a = 15;
+                b = 5;
+                c = 0;
+                break;
+            case "map3":
+                a = 35;
+                b = 6;
+                c = 3;
+                break;
+            case "map4":
+                a = 45;
+                b = 7;
+                c = 4;
+                break;
+        }
+        return Mathf.FloorToInt((10 * Mathf.Pow(1.04f, currentLevel) + a * Mathf.Pow(0.95f, currentLevel) + b) * currentLevel + c);
+    }
+
     public void IncreaseCurrency(int amount)
     {
         currency += amount;
         OnCurrencyChanged?.Invoke();
+    }
+
+    public void EnemyKilled()
+    {
+        currency += 1;
+        totalEnemiesKilled++;
     }
 
     public bool SpendCurrency(int amount)
@@ -134,11 +168,11 @@ public class GameManager : MonoBehaviour
 
     public void CheckLevelUp()
     {
-        int requiredExperience = Mathf.FloorToInt(10 * Mathf.Pow(1.7f, level - 1));
+        int requiredExperience = CalculateXpForNextLevel(level, "map1");
 
         if (experiencePoints >= requiredExperience)
         {
-            experiencePoints -= requiredExperience; 
+            experiencePoints -= requiredExperience;
             LevelUp();
         }
     }

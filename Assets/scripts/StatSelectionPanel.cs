@@ -50,19 +50,19 @@ public class StatSelectionPanel : MonoBehaviour
     {
         Dictionary<string, StatProperty> statsDict = stats.ToDictionary(sp => sp.name);
 
-        if (player.moveSpeed >= player.maxMoveSpeed)
+        if (player.moveSpeed >= PlayerMovement.maxMoveSpeed)
         {
             statsDict.Remove("Increase Speed");
         }
-        if (player.orbitRadius >= player.maxOrbitRadius)
+        if (player.orbitRadius >= PlayerMovement.maxOrbitRadius)
         {
             
         }
-        if (player.healthRegenerationRate >= player.maxHealthRegenRate)
+        if (player.healthRegenerationRate >= PlayerMovement.maxHealthRegenRate)
         {
             
         }
-        if (player.attackCooldown <= player.minimumAttackCooldown)
+        if (player.attackCooldown <= PlayerMovement.minimumAttackCooldown)
         {
             
         }
@@ -70,12 +70,23 @@ public class StatSelectionPanel : MonoBehaviour
         {
             
         }
-
+        if (player.defense >= 100) // Burada 'someMaxDefenseValue' maksimum savunma değerinizi temsil eder
+        {
+            statsDict.Remove("Increase Defense");
+        }
+        if (player.defenseBonus >= 100) // 'someMaxDefenseBonusValue' maksimum savunma bonusunuzu temsil eder
+        {
+            statsDict.Remove("Increase Defense Bonus");
+        }
+        if (player.blockStrength >= 100) // 'someMaxBlockStrengthValue' maksimum blok gücünüzü temsil eder
+        {
+            statsDict.Remove("Increase Block Strength");
+        }
         foreach (var button in statButtons)
         {
             button.gameObject.SetActive(false);
         }
-        List<StatProperty> selectedStats = new List<StatProperty> ();
+        List<StatProperty> selectedStats = new List<StatProperty>();
         while (selectedStats.Count < 4 && statsDict.Count > 0)
         {
             int randomIndex = UnityEngine.Random.Range(0, statsDict.Count);
@@ -141,6 +152,24 @@ public class StatSelectionPanel : MonoBehaviour
     public void DecreaseAttackCooldown()
     {
         player.DecreaseAttackCooldownPerLevel(); 
+        ClosePanel();
+    }
+
+    public void IncreaseDefense()
+    {
+        player.IncreaseDefense();
+        ClosePanel();
+    }
+
+    public void IncreaseDefenseBonus()
+    {
+        player.IncreaseDefenseBonus();
+        ClosePanel();
+    }
+
+    public void IncreaseBlockStrength()
+    {
+        player.IncreaseBlockStrength();
         ClosePanel();
     }
 

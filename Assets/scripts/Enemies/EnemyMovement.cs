@@ -91,7 +91,6 @@ public class EnemyMovement : MonoBehaviour
             {
                 core.TakeDamage(baseDamage);
                 StopMovement();
-                DropGold();
                 SetAppropriateTrigger("SpecialAnimation", "Die");
             }
         }
@@ -144,23 +143,6 @@ public class EnemyMovement : MonoBehaviour
     {
         isMoving = false;
     }
-
-    void DropGold()
-    {
-        if (goldPrefab != null)
-        {
-            Instantiate(goldPrefab, transform.position, Quaternion.identity);
-        }
-    }
-
-    //public void Die()
-    //{
-    //    if (goldPrefab != null)
-    //    {
-    //        Instantiate(goldPrefab, transform.position, Quaternion.identity);
-    //    }
-    //    GetComponent<Enemy>().Die();
-    //}
 
     public void DestroyEnemy()
     {

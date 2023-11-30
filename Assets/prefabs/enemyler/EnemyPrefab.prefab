@@ -183,7 +183,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0016530305, y: 0.0062924474}
@@ -209,3 +209,4 @@ MonoBehaviour:
   experiencePointsValue: 5
   floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
   canvasTransform: {fileID: 0}
+  experiencePointPrefab: {fileID: 5343862706134409668, guid: 914004ba27078254686d67c8b4a43f52, type: 3}

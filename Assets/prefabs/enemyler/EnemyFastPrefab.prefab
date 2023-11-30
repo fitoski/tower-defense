@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2539599766684847071}
   - component: {fileID: 6119647460750049429}
   - component: {fileID: 8316285283714994773}
-  - component: {fileID: -587142750035779374}
   - component: {fileID: -1520317674268574116}
   - component: {fileID: 5305528149539678066}
   m_Layer: 6
@@ -155,26 +154,6 @@ MonoBehaviour:
   damageMultiplierPerWave: 1.5
   currentWave: 1
   goldPrefab: {fileID: 6444085966677475160, guid: aae43f6c7b02c364b98752104b7743a2, type: 3}
---- !u!114 &-587142750035779374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3838339183629443256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00168cb0cf1c7f149adc425158635f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  baseDamage: 1
-  damageMultiplierPerWave: 1.5
-  speed: 0
-  scoreValue: 10
-  experiencePointsValue: 5
-  floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
-  canvasTransform: {fileID: 0}
 --- !u!114 &-1520317674268574116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +174,7 @@ MonoBehaviour:
   experiencePointsValue: 10
   floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
   canvasTransform: {fileID: 0}
+  experiencePointPrefab: {fileID: 5343862706134409668, guid: 914004ba27078254686d67c8b4a43f52, type: 3}
 --- !u!70 &5305528149539678066
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

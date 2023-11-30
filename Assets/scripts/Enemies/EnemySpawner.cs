@@ -14,13 +14,13 @@ public class EnemySpawner : MonoBehaviour
     public int enemiesIncreasePerWave = 1;
     private int totalEnemiesKilled = 0;
     public TextMeshProUGUI enemyCountText;
-
+    private const float waveDuration = 60f;
     private float spawnInterval;
     private int enemiesPerWave;
     private float spawnTimer;
     private int enemiesToSpawn;
     private int activeEnemies = 0;
-
+    private float waveStartTime;
     private int currentEnemyCountPerSpawn = 1;
 
     private int currentWaveNumber = 1;
@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
     public int ActiveEnemies
     {
         get { return activeEnemies; }
-        set { activeEnemies = Mathf.Max(0, value); } 
+        set { activeEnemies = Mathf.Max(0, value); }
     }
 
     void Start()
@@ -68,18 +68,19 @@ public class EnemySpawner : MonoBehaviour
         waveEnemyTypes.Add(2, new List<GameObject> { enemyPrefab, EnemyFastPrefab });
         waveEnemyTypes.Add(3, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab });
         waveEnemyTypes.Add(4, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab });
-        waveEnemyTypes.Add(5, new List<GameObject> { Boss1Prefab, enemyPrefab, EnemyFastPrefab, EnemyTankPrefab,enemy4Prefab });
+        waveEnemyTypes.Add(5, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab });
         waveEnemyTypes.Add(6, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab, enemy5Prefab });
         waveEnemyTypes.Add(7, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab });
         waveEnemyTypes.Add(8, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab });
         waveEnemyTypes.Add(9, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab });
-        waveEnemyTypes.Add(10, new List<GameObject> { Boss2Prefab, enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab });
-        // 15 - 20 - 25 so on
+        waveEnemyTypes.Add(10, new List<GameObject> { enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab });
+        waveEnemyTypes.Add(25, new List<GameObject> { Boss1Prefab, enemyPrefab, EnemyFastPrefab, EnemyTankPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab });
+        //
     }
 
     void Update()
     {
-        if (allowSpawn) 
+        if (allowSpawn)
         {
             if (spawnTimer <= 0f && enemiesToSpawn > 0)
             {
@@ -92,13 +93,16 @@ public class EnemySpawner : MonoBehaviour
             }
             else if (spawnTimer <= 0f && enemiesToSpawn == 0)
             {
-                if (!IsInvoking("StartNextWave"))
+                if (activeEnemies == 0 && !IsInvoking("StartNextWave"))
                 {
-                    Invoke("StartNextWave", waveDelay);
+                    StartNextWave();  
+                }
+                else if (!IsInvoking("StartNextWave"))
+                {
+                    Invoke("StartNextWave", waveDelay);  
                 }
             }
         }
-
         spawnTimer -= Time.deltaTime;
     }
 
@@ -149,7 +153,7 @@ public class EnemySpawner : MonoBehaviour
         UpdateEnemyCountUI();
     }
 
-    private void UpdateEnemyCountUI()
+    public void UpdateEnemyCountUI()
     {
         if (enemyCountText != null)
         {
@@ -159,32 +163,21 @@ public class EnemySpawner : MonoBehaviour
 
     void StartNextWave()
     {
-        if (activeEnemies > 0) return;
-
-        bossSpawnedThisWave = false;
-
-        int nextWave = currentWaveNumber + 1;
-
-        if (GetWaveEnemies(nextWave).Count == 0) 
+        if (enemiesToSpawn <= 0 && !IsInvoking("StartNextWave"))
         {
-            return;
-        }
+            bossSpawnedThisWave = false;
 
-        currentWaveNumber = nextWave;
+            currentWaveNumber++;
 
-        if (currentWaveNumber % 5 == 0)
-        {
-            enemiesToSpawn = enemiesPerWave + 1; 
-        }
-
-        else
-        {
             enemiesPerWave += enemiesIncreasePerWave;
             spawnInterval *= 0.9f;
             if (currentEnemyCountPerSpawn < 20) currentEnemyCountPerSpawn++;
-        }
 
-        enemiesToSpawn = enemiesPerWave;
+            enemiesToSpawn = enemiesPerWave;
+            waveStartTime = Time.time; 
+
+            UpdateEnemyCountUI();
+        }
     }
 
     public int GetCurrentWaveNumber()
@@ -317,16 +310,14 @@ public class EnemySpawner : MonoBehaviour
         {
             waveEnemies.Add(EnemyFastPrefab);
         }
-
         if (waveNumber >= 6)
         {
             waveEnemies.Add(EnemyTankPrefab);
         }
 
-        if (waveNumber % 5 == 0)
+        if (waveNumber == 25)
         {
-            if (waveNumber == 5) waveEnemies.Add(Boss1Prefab);
-            else if (waveNumber == 10) waveEnemies.Add(Boss2Prefab);
+            waveEnemies.Add(Boss1Prefab);
         }
 
         return waveEnemies;
