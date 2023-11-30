@@ -15,13 +15,13 @@ public class Enemy : MonoBehaviour
     protected EnemyMovement enemyMovement;
     public float speed;
     public int scoreValue = 10;
-    public int experiencePointsValue = 1;
+    public int experiencePointsValue = 5;
     private Vector2 previousPosition;
     private float movementThreshold = 0.01f;
     private Animator animator;
     public GameObject floatingTextPrefab;
     public Transform canvasTransform;
-    public GameObject experiencePointPrefab;
+    public GameObject goldPrefab;
 
     protected void Start()
     {
@@ -50,6 +50,20 @@ public class Enemy : MonoBehaviour
         bool isEnemyMoving = Vector2.Distance(previousPosition, currentPosition) > movementThreshold;
         animator.SetBool("isMoving", isEnemyMoving);
         previousPosition = currentPosition;
+
+        if (Time.time >= nextBurnDamageTime && Time.time <= burnStopTime)
+        {
+            TakeDamage(burnDamageAmount);
+            nextBurnDamageTime = Time.time + burningInterval;
+        }
+
+        else
+        {
+            burnDamageAmount = 0;
+            burningInterval = 999;
+            nextBurnDamageTime = 0;
+            burnStopTime = 0;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -64,39 +78,34 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public bool TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         if (isDead)
         {
             Debug.Log(gameObject.name + " zaten ölü.");
-            return false;
+
+            return;
         }
 
         currentHealth -= damage;
         Debug.Log(gameObject.name + " hasar aldı, yeni canı: " + currentHealth);
 
-        ShowFloatingText(damage);
+        if (floatingTextPrefab != null && canvasTransform != null)
+        {
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 offset = new Vector3(0, 50, 0); 
+            GameObject floatingText = Instantiate(floatingTextPrefab, screenPosition + offset, Quaternion.identity, canvasTransform);
+            floatingText.GetComponent<FloatingText>().SetText(damage.ToString());
+        }
+
+        else
+        {
+            Debug.LogError("FloatingTextPrefab or CanvasTransform is null.");
+        }
 
         if (currentHealth <= 0)
         {
             Die();
-            return true;
-        }
-        return false;
-    }
-
-    private void ShowFloatingText(int damage)
-    {
-        if (floatingTextPrefab != null && canvasTransform != null)
-        {
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 offset = new Vector3(0, 50, 0);
-            GameObject floatingText = Instantiate(floatingTextPrefab, screenPosition + offset, Quaternion.identity, canvasTransform);
-            floatingText.GetComponent<FloatingText>().SetText(damage.ToString());
-        }
-        else
-        {
-            Debug.LogError("FloatingTextPrefab or CanvasTransform is null.");
         }
     }
 
@@ -128,21 +137,34 @@ public class Enemy : MonoBehaviour
             enemyMovement.StopMovement();
         }
 
-        DropExperiencePoints(); 
+        DropGold(); 
+
+        GameManager.main.IncreaseExperiencePoints(experiencePointsValue);
         EnemySpawner.Instance.ActiveEnemies--;
         EnemySpawner.Instance.EnemyKilled();
     }
 
-    private void DropExperiencePoints()
+    public int burnDamageAmount;
+    private float burningInterval;
+    private float nextBurnDamageTime = 0;
+    private float burnStopTime;
+
+    public void StartBurning(int damageAmount,float burningInterval, float burnTime)
     {
-        if (experiencePointPrefab != null)
+        if (burnDamageAmount < damageAmount)
         {
-            GameObject exp = Instantiate(experiencePointPrefab, transform.position, Quaternion.identity);
-            ExperiencePickup expPickup = exp.GetComponent<ExperiencePickup>();
-            if (expPickup != null)
-            {
-                expPickup.experienceAmount = experiencePointsValue;
-            }
+            burnDamageAmount = damageAmount;
+            this.burningInterval = burningInterval;
+        }
+
+        burnStopTime = Time.time + burningInterval;
+    }
+
+    private void DropGold()
+    {
+        if (goldPrefab != null)
+        {
+            Instantiate(goldPrefab, transform.position, Quaternion.identity);
         }
     }
 
