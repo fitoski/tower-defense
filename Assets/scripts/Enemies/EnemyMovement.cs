@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour
     private bool isMoving = true;
     public int currentWave = 1;
     private Animator animator;
-    public GameObject goldPrefab;
+    //public GameObject goldPrefab;
     private SpriteRenderer spriteRenderer;
 
     //[SerializeField] private int currencyWorth = 50;

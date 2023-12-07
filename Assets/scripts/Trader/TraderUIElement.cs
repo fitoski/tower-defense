@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using static Enums;
@@ -9,10 +9,11 @@ public class TraderUIElement : MonoBehaviour
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemPriceText;
 
-    public void UpdateUI(Trader.ShopItem shopItem)
+    public void UpdateUI(ShopItem shopItem)
     {
         itemIcon.sprite = shopItem.itemIcon;
-        //itemNameText.text = shopItem.itemName;
+        itemNameText.text = shopItem.itemName;
         itemPriceText.text = shopItem.price.ToString() + " Coins";
+        // Diğer UI güncellemeleri 
     }
 }

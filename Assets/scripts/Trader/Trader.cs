@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Enums;
@@ -13,36 +13,24 @@ public class Trader : MonoBehaviour
 
     public TraderUIManager traderUIManager;
     private Animator animator;
-    public TextMeshProUGUI notificationText; 
-    private float notificationDuration = 3f; 
-
+    public TextMeshProUGUI notificationText;
+    private float notificationDuration = 3f;
+    private List<ShopItem> currentShopItems = new List<ShopItem>();
     public List<TraderUIElement> shopUIElements = new List<TraderUIElement>();
     public List<Transform> spawnPoints;
-
-    [System.Serializable]
-    public class ShopItem
-    {
-        public string itemName;
-        public int price;
-        public Sprite itemIcon;
-        public ItemType itemType;  
-        public float itemDamageBonus;
-        public float itemRangeBonus;
-        public float armorBonus;
-    }
 
     public List<ShopItem> allItems = new List<ShopItem>();
 
     public List<ShopItem> GetRandomItems(int numberOfItems)
     {
         List<ShopItem> randomItems = new List<ShopItem>();
-        List<ShopItem> availableItems = new List<ShopItem>(allItems); 
+        List<ShopItem> availableItems = new List<ShopItem>(allItems);
 
         for (int i = 0; i < numberOfItems && availableItems.Count > 0; i++)
         {
             int randomIndex = Random.Range(0, availableItems.Count);
             randomItems.Add(availableItems[randomIndex]);
-            availableItems.RemoveAt(randomIndex); 
+            availableItems.RemoveAt(randomIndex);
         }
 
         return randomItems;
@@ -106,6 +94,19 @@ public class Trader : MonoBehaviour
         }
     }
 
+    public ShopItem GetItem(int index)
+    {
+        if (index >= 0 && index < allItems.Count)
+        {
+            return allItems[index];
+        }
+        else
+        {
+            Debug.LogError("Index out of range for allItems");
+            return null;
+        }
+    }
+
     IEnumerator EnableTraderAfterIntro(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -138,22 +139,32 @@ public class Trader : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            animator.SetTrigger("Disappear");  
-            Destroy(gameObject, 1f);  
+            animator.SetTrigger("Disappear");
+            Destroy(gameObject, 1f);
         }
     }
 
     void OnMouseDown()
     {
-            OpenShop();  
-            timer = 0;  
+        OpenShop();
+        timer = 0;
     }
 
     public void OpenShop()
     {
-        List<ShopItem> randomShopItems = GetRandomItems(4);
-        UpdateShopUI(randomShopItems);
-        traderUIManager.OpenShopUI();
-        Debug.Log("Shop opened");
+        currentShopItems = GetRandomItems(4);
+        UpdateShopUI(currentShopItems);
+
+        // Log each item for debugging purposes
+        for (int i = 0; i < currentShopItems.Count; i++)
+        {
+            Debug.Log($"Item {i}: {currentShopItems[i].itemName} of type {currentShopItems[i].itemType}");
+        }
+
+        if (traderUIManager != null)
+        {
+            traderUIManager.SetCurrentShopItems(currentShopItems);
+            traderUIManager.OpenShopUI();
+        }
     }
 }

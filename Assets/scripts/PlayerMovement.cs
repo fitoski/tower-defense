@@ -190,8 +190,9 @@ public class PlayerMovement : MonoBehaviour
                 Enemy enemyComponent = enemy.GetComponent<Enemy>();
                 if (enemyComponent != null)
                 {
-                    bool isDead = enemyComponent.TakeDamage(playerDamage);
-                    if (isDead)
+                    enemyComponent.TakeDamage(playerDamage);
+
+                    if (enemyComponent.IsDead)
                     {
                         GameManager.main.EnemyKilled();
                     }
@@ -265,17 +266,32 @@ public class PlayerMovement : MonoBehaviour
     {
         if (attackCooldownTimer <= 0f)
         {
-            AimAtNearestEnemy();  
-            Attack();
-            attackCooldownTimer = attackCooldown; 
+            bool attackStarted = StartAttackAnimation();
+            if (attackStarted)
+            {
+                Attack();
+            }
+            attackCooldownTimer = attackCooldown;
         }
     }
 
-    void StartAttackAnimation()
+    //void StartAttackAnimation()
+    //{
+    //    attackCooldownTimer = attackCooldown;
+    //    playerAnimator.SetTrigger("dkAttack");
+    //    swordAnimator.SetTrigger("Attack");
+    //}
+
+    bool StartAttackAnimation()
     {
-        attackCooldownTimer = attackCooldown;
-        playerAnimator.SetTrigger("dkAttack");
-        swordAnimator.SetTrigger("Attack");
+        if (attackCooldownTimer <= 0f) 
+        {
+            attackCooldownTimer = attackCooldown; 
+            playerAnimator.SetTrigger("dkAttack");
+            swordAnimator.SetTrigger("Attack");
+            return true; 
+        }
+        return false;
     }
 
     public void TakeDamage(int damage)
@@ -514,6 +530,29 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 MovementDirection
     {
         get { return movementDirection; } 
+    }
+
+    public void EquipHelmet(HelmetItem helmet)
+    {
+        if (helmet.material == "Cloth")
+        {
+            // Cloth helmet özellikleri
+            moveSpeed *= 1.1f; // Hareket hızını %10 artır
+            attackCooldown *= 0.9f; // Saldırı hızını %10 artır
+        }
+        else if (helmet.material == "Leather")
+        {
+            // Leather helmet özellikleri
+            defense *= 1.2f; // Savunmayı %20 artır
+            playerDamage = (int)(playerDamage * 1.1f);  // Hasarı %10 artır
+        }
+        else if (helmet.material == "Plate")
+        {
+            // Plate helmet özellikleri
+            defense *= 1.5f; // Savunmayı %50 artır
+            blockStrength *= 1.5f; // Blok gücünü %50 artır
+        }
+        // Diğer özellikleri de benzer şekilde ayarlayabilirsiniz.
     }
 
     public void Die()

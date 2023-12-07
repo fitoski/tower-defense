@@ -362,20 +362,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bea1508b2cdca048b3e25ee3de7ab09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToStay: 10
+  timeToStay: 100000
   inventory:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
+  - Cloth Helmet
+  - Leather Helmet
+  - Plate Helmet
+  - Cloth Chestplate
+  - Leather Chestplate
+  - Plate Chestplate
+  - Cloth Boots
+  - Leather Boots
+  - Plate Boots
   traderUIManager: {fileID: 0}
+  notificationText: {fileID: 0}
   shopUIElements:
   - {fileID: 8830386465397809650, guid: a6c83391cdd50db45bcea3983e0fe2f8, type: 3}
-  - {fileID: 8830386465397809650, guid: 6d01c6ebcfbe09b4e94244fd1ccee0c9, type: 3}
-  - {fileID: 8830386465397809650, guid: b488353c2d332554d9cc77c543d7464f, type: 3}
-  - {fileID: 8830386465397809650, guid: acaa980d68c1db44d8436308770618e4, type: 3}
-  - {fileID: 8830386465397809650, guid: 8ececb4e30957a44996d84df5e83f47f, type: 3}
+  - {fileID: 8830386465397809650, guid: 34bc1e595b5643047abadcca8d322f34, type: 3}
+  - {fileID: 8830386465397809650, guid: 0532b581a030ef94b8736ecca10bb5d3, type: 3}
+  - {fileID: 8830386465397809650, guid: 048c2ac0e8876c6469b371ecf2ff89b0, type: 3}
   spawnPoints:
   - {fileID: 1343031816676537764}
   - {fileID: 4982982617513437598}
@@ -384,41 +388,15 @@ MonoBehaviour:
   - {fileID: 1698429922919368726}
   - {fileID: 264206473479805277}
   allItems:
-  - itemName: Item1
-    price: 10
-    itemIcon: {fileID: -2048505297, guid: a2a29930a7f9ee74ca880e5db8b351bc, type: 3}
-    itemType: 0
-    itemDamageBonus: 0
-    itemRangeBonus: 0
-    armorBonus: 0
-  - itemName: Item2
-    price: 10
-    itemIcon: {fileID: 1840985296, guid: 93621c38608f17e42b18573a1a4cac64, type: 3}
-    itemType: 0
-    itemDamageBonus: 0
-    itemRangeBonus: 0
-    armorBonus: 0
-  - itemName: Item3
-    price: 10
-    itemIcon: {fileID: -1250891418, guid: 333c7cc782e07de47813fa758ddfa48d, type: 3}
-    itemType: 0
-    itemDamageBonus: 0
-    itemRangeBonus: 0
-    armorBonus: 0
-  - itemName: Item4
-    price: 10
-    itemIcon: {fileID: -2048505297, guid: a2a29930a7f9ee74ca880e5db8b351bc, type: 3}
-    itemType: 0
-    itemDamageBonus: 0
-    itemRangeBonus: 0
-    armorBonus: 0
-  - itemName: Item4
-    price: 10
-    itemIcon: {fileID: -2048505297, guid: a2a29930a7f9ee74ca880e5db8b351bc, type: 3}
-    itemType: 0
-    itemDamageBonus: 0
-    itemRangeBonus: 0
-    armorBonus: 0
+  - {fileID: 11400000, guid: bd2bb9894593b1149ba653f4b4040a40, type: 2}
+  - {fileID: 11400000, guid: 6ca366f92f9facb4cbf57d22d9f4859a, type: 2}
+  - {fileID: 11400000, guid: 8a0a40460dc7a5b49ac684a4176da0f0, type: 2}
+  - {fileID: 11400000, guid: e879d0161c0ef8849a0c36bedfda7991, type: 2}
+  - {fileID: 11400000, guid: afc544fa22a5d2f43b7aed611d95482d, type: 2}
+  - {fileID: 11400000, guid: e47a87d44be745a4599c6e5b77d2ce7d, type: 2}
+  - {fileID: 11400000, guid: 07475c85ee3357a409a17f04f5f169f1, type: 2}
+  - {fileID: 11400000, guid: e70819862a3d38345915de4d310ae58b, type: 2}
+  - {fileID: 11400000, guid: d53fd6ef01e33e04b8223c4c5b2f5557, type: 2}
 --- !u!95 &7377574819402123526
 Animator:
   serializedVersion: 5

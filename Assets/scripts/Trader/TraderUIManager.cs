@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using static Enums;
-using UnityEditor.Experimental.GraphView;
 using TMPro;
+using System;
 
 public class TraderUIManager : MonoBehaviour
 {
@@ -13,20 +12,15 @@ public class TraderUIManager : MonoBehaviour
     public Button buyItem2Button;
     public Button buyItem3Button;
     public Button buyItem4Button;
-    public Button buyItem5Button;
 
-
+    [SerializeField] private GameObject purchasedItemPanel;
     public GameObject shopPanel;
     public static TraderUIManager instance;
     public Button closeShopButton;
-
-    public RuntimeAnimatorController item1Animator;
-    public RuntimeAnimatorController item2Animator;
-    public RuntimeAnimatorController item3Animator;
-    public RuntimeAnimatorController item4Animator;
-    public RuntimeAnimatorController item5Animator;
-
+    public List<TraderUIElement> shopUIElements = new List<TraderUIElement>();
     public TextMeshProUGUI notificationText;
+    private List<ShopItem> currentShopItems;
+    private Trader trader;
 
     public void Awake()
     {
@@ -36,6 +30,7 @@ public class TraderUIManager : MonoBehaviour
             return;
         }
         instance = this;
+        trader = FindObjectOfType<Trader>();
     }
 
     public void OpenShopUI()
@@ -44,91 +39,128 @@ public class TraderUIManager : MonoBehaviour
         shopPanel.SetActive(true);
     }
 
+    public void SetShopUIElements(List<TraderUIElement> uiElements)
+    {
+        shopUIElements = uiElements;
+    }
+
+    public void UpdateShopButtonsUI(List<ShopItem> items)
+    {
+        for (int i = 0; i < shopUIElements.Count; i++)
+        {
+            if (i < items.Count)
+            {
+                shopUIElements[i].UpdateUI(items[i]);
+            }
+            else
+            {
+                shopUIElements[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
     public void CloseShopUI()
     {
         Time.timeScale = 1;
         shopPanel.SetActive(false);
     }
 
-    public void BuyItem1()
+    public void SetCurrentShopItems(List<ShopItem> items)
     {
-        if (GameManager.main.currency >= 10)
+        currentShopItems = items;
+    }
+
+    public void BuyItem(Button clickedButton)
+    {
+        int itemIndex = clickedButton.transform.GetSiblingIndex();
+        Debug.Log($"Button index clicked: {itemIndex}");
+        if (itemIndex >= 0 && itemIndex < currentShopItems.Count)
         {
-            GameManager.main.currency -= 10;
-            PlayerMovement player = FindObjectOfType<PlayerMovement>();
-            player.ChangeWeapon(15, 5f, 1, item1Animator);
+            ShopItem itemToBuy = currentShopItems[itemIndex];
+            Debug.Log($"Attempting to buy item: {itemToBuy.itemName}");
+
+            if (GameManager.main.SpendCurrency(itemToBuy.price))
+            {
+                ApplyItemEffects(itemToBuy);
+                ShowPurchasedItemIcon(itemToBuy.itemType, itemToBuy.itemIcon);
+            }
+            else
+            {
+                Debug.Log("Not enough currency or item not found.");
+            }
         }
         else
         {
-            Debug.Log("Not enough money to buy Item1");
+            Debug.LogError($"Item index {itemIndex} is out of range for currentShopItems list.");
         }
     }
 
-    public void BuyItem2()
+    private void ApplyItemEffects(ShopItem item)
     {
-        if (GameManager.main.currency >= 10)
+        if (item is HelmetItem helmet)
         {
-            GameManager.main.currency -= 10;
-            PlayerMovement player = FindObjectOfType<PlayerMovement>();
-            player.ChangeWeapon(15, 5f, 1, item2Animator);
-        }
-        else
-        {
-            Debug.Log("Not enough money to buy Item1");
+            FindObjectOfType<PlayerMovement>().EquipHelmet(helmet);
         }
     }
 
-    public void BuyItem3()
+    private string GetIconNameFromItemType(ItemType itemType)
     {
-        if (GameManager.main.currency >= 10)
+        switch (itemType)
         {
-            GameManager.main.currency -= 10;
-            PlayerMovement player = FindObjectOfType<PlayerMovement>();
-            player.ChangeWeapon(15, 5f, 1, item3Animator);
-        }
-        else
-        {
-            Debug.Log("Not enough money to buy Item1");
+            case ItemType.Helmet:
+                Debug.Log("Helmet icon name is requested.");
+                return "Helmet";
+
+            case ItemType.Chestplate:
+                Debug.Log("Chestplate icon name is requested.");
+                return "Chestplate";
+
+            case ItemType.Boots:
+                Debug.Log("Boots icon name is requested.");
+                return "Boots";
+
+            case ItemType.Gloves:
+                Debug.Log("Gloves icon name is requested.");
+                return "Gloves";
+
+            case ItemType.Amulet:
+                Debug.Log("Amulet icon name is requested.");
+                return "Amulet";
+
+            case ItemType.Weapon:
+                Debug.Log("Weapon icon name is requested.");
+                return "Weapon";
+
+            default:
+                return null; 
         }
     }
 
-    public void BuyItem4()
+    private void ShowPurchasedItemIcon(ItemType itemType, Sprite itemIcon)
     {
-        if (GameManager.main.currency >= 10)
-        {
-            GameManager.main.currency -= 10;
-            PlayerMovement player = FindObjectOfType<PlayerMovement>();
-            player.ChangeWeapon(15, 5f, 1, item4Animator);
-        }
-        else
-        {
-            Debug.Log("Not enough money to buy Item1");
-        }
-    }
+        string iconName = GetIconNameFromItemType(itemType);
+        Debug.Log($"Looking for UI element with name: {iconName}");
 
-    public void BuyItem5()
-    {
-        if (GameManager.main.currency >= 10)
+        if (string.IsNullOrEmpty(iconName))
         {
-            GameManager.main.currency -= 10;
-            PlayerMovement player = FindObjectOfType<PlayerMovement>();
-            player.ChangeWeapon(15, 5f, 1, item5Animator);
+            Debug.LogError("Invalid item type for: " + itemType.ToString());
+            return;
         }
-        else
+
+        Image[] allItemIcons = purchasedItemPanel.GetComponentsInChildren<Image>(true);
+        foreach (Image img in allItemIcons)
         {
-            Debug.Log("Not enough money to buy Item1");
+            Debug.Log($"Found UI element with name: {img.gameObject.name}, active: {img.gameObject.activeSelf}");
+            if (img.gameObject.name == iconName)
+            {
+                img.sprite = itemIcon;
+                img.gameObject.SetActive(true);
+            }
+            else
+            {
+                img.gameObject.SetActive(false); 
+            }
         }
-    }
-
-    public void UpdateUI(GameObject uiElement, Trader.ShopItem item)
-    {
-        Image itemIcon = uiElement.transform.Find("ItemIcon").GetComponent<Image>();
-        Text itemName = uiElement.transform.Find("ItemName").GetComponent<Text>();
-        Text itemPrice = uiElement.transform.Find("ItemPrice").GetComponent<Text>();
-
-        itemIcon.sprite = item.itemIcon;
-        itemName.text = item.itemName;
-        itemPrice.text = item.price.ToString();
     }
 
     public void ShowNotification(string message, float duration)
@@ -153,5 +185,4 @@ public class TraderUIManager : MonoBehaviour
             notificationText.gameObject.SetActive(false);
         }
     }
-
 }
