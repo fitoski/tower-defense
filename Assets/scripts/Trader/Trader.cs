@@ -11,7 +11,7 @@ public class Trader : MonoBehaviour
 
     private float timer;
 
-    public TraderUIManager traderUIManager;
+    private TraderUIManager traderUIManager;
     private Animator animator;
     public TextMeshProUGUI notificationText;
     private float notificationDuration = 3f;
@@ -36,52 +36,14 @@ public class Trader : MonoBehaviour
         return randomItems;
     }
 
-    public void UpdateShopUI(List<ShopItem> itemsToShow)
-    {
-        if (shopUIElements == null)
-        {
-            Debug.LogError("shopUIElements is null");
-            return;
-        }
-
-        if (itemsToShow == null)
-        {
-            Debug.LogError("itemsToShow is null");
-            return;
-        }
-
-        foreach (var uiElement in shopUIElements)
-        {
-            if (uiElement == null)
-            {
-                Debug.LogWarning("A uiElement in shopUIElements is null");
-                continue;
-            }
-            uiElement.gameObject.SetActive(false);
-        }
-
-        int maxItemsToShow = Mathf.Min(4, itemsToShow.Count);
-        for (int i = 0; i < maxItemsToShow; i++)
-        {
-            if (shopUIElements[i] == null)
-            {
-                Debug.LogError($"shopUIElements[{i}] is null");
-                continue;
-            }
-
-            shopUIElements[i].gameObject.SetActive(true);
-            shopUIElements[i].UpdateUI(itemsToShow[i]);
-        }
-    }
-
     void Awake()
     {
-        traderUIManager = TraderUIManager.instance;
         animator = GetComponent<Animator>();
     }
 
     void Start()
     {
+        traderUIManager = TraderUIManager.instance;
         timer = timeToStay;
         animator.SetBool("IsIdle", true);
 
@@ -153,7 +115,6 @@ public class Trader : MonoBehaviour
     public void OpenShop()
     {
         currentShopItems = GetRandomItems(4);
-        UpdateShopUI(currentShopItems);
 
         // Log each item for debugging purposes
         for (int i = 0; i < currentShopItems.Count; i++)

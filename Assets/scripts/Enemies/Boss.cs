@@ -24,10 +24,9 @@ public class Boss : Enemy
         experiencePointsValue = 10;
         damageMultiplierPerWave = 1.5f;
         currentHealth = maxHealth;
-        base.Start();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         bossAnimator = GetComponent<Animator>();
-        attackTimer = attackCooldown;
+        attackTimer = 0;
     }
        
     private new void Update()

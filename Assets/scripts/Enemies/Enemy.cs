@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public Transform canvasTransform;
     public GameObject goldPrefab;
 
+
     protected void Start()
     {
         animator = GetComponent<Animator>();

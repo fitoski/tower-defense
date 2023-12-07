@@ -8,8 +8,8 @@ public class Node : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
     [SerializeField] private Sprite notEnoughMoneySprite;  
-    [SerializeField] private Sprite enoughMoneySprite;     
-
+    [SerializeField] private Sprite enoughMoneySprite;
+    [SerializeField] private LayerMask layerMask;
     private Color startColor;
     public int turretTier = 0;
     private bool hasBuilding = false;
@@ -57,11 +57,6 @@ public class Node : MonoBehaviour
         sr.color = startColor;
     }
 
-    private void OnMouseDown()
-    {
-        BuyMenu.Instance.OpenBuyMenu(this);
-    }
-
     public void BuyTurretToThisNode(GameObject turret)
     {
         hasBuilding = true;
@@ -92,13 +87,13 @@ public class Node : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-            if (hit.collider != null && hit.collider.transform.CompareTag("Node"))
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 999, layerMask);
+            if (hit.collider != null)
             {
-                if (hit.collider.transform == transform)
+                if (hit.collider.transform.CompareTag("Node") && hit.collider.transform == transform)
                 {
                     GameManager.main.SetSelectedNode(this);
+                    BuyMenu.Instance.OpenBuyMenu(this);
                 }
             }
 

@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.209608, y: 1.9237256, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1615763870, guid: 2513d025e08e3ef40be5f022602af040, type: 3}
+  m_Sprite: {fileID: 1389754053, guid: 1c46220763c1f51479fdfcb29270ed15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,8 +148,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0037225145, y: -0.008050442}
-  m_Size: {x: 0.2149882, y: 0.27145407}
+  m_Offset: {x: 0.0660821, y: -0.1441599}
+  m_Size: {x: 0.53859234, y: 1.0575879}
   m_Direction: 0
 --- !u!95 &4373678261000053710
 Animator:
@@ -193,9 +193,10 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
   canvasTransform: {fileID: 0}
   goldPrefab: {fileID: 6444085966677475160, guid: aae43f6c7b02c364b98752104b7743a2, type: 3}
+  burnDamageAmount: 0
   attackRange: 5
   attackDamage: 10
-  attackCooldown: 5
+  attackCooldown: 2
   chestPrefab: {fileID: 6854125686869889687, guid: aa0684ac749450a44b65e156feb2326c, type: 3}
 --- !u!114 &5980781206054759278
 MonoBehaviour:
@@ -213,4 +214,4 @@ MonoBehaviour:
   baseDamage: 10
   damageMultiplierPerWave: 1.5
   currentWave: 1
-  goldPrefab: {fileID: 6444085966677475160, guid: aae43f6c7b02c364b98752104b7743a2, type: 3}
+  canInteractWithCore: 0

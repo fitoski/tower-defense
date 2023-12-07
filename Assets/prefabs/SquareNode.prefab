@@ -102,6 +102,10 @@ MonoBehaviour:
   hoverColor: {r: 1, g: 0.85783035, b: 0, a: 1}
   notEnoughMoneySprite: {fileID: 328470003, guid: 06f4abe379cf1104f9417c54a3d74c50, type: 3}
   enoughMoneySprite: {fileID: 595441178, guid: 06f4abe379cf1104f9417c54a3d74c50, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 288
+  turretTier: 0
 --- !u!61 &516390499440660484
 BoxCollider2D:
   m_ObjectHideFlags: 0

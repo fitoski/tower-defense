@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static Enums;
 
 public class TraderUIElement : MonoBehaviour
 {
@@ -14,6 +13,5 @@ public class TraderUIElement : MonoBehaviour
         itemIcon.sprite = shopItem.itemIcon;
         itemNameText.text = shopItem.itemName;
         itemPriceText.text = shopItem.price.ToString() + " Coins";
-        // Diğer UI güncellemeleri 
     }
 }

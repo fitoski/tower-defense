@@ -8,10 +8,8 @@ using System;
 
 public class TraderUIManager : MonoBehaviour
 {
-    public Button buyItem1Button;
-    public Button buyItem2Button;
-    public Button buyItem3Button;
-    public Button buyItem4Button;
+    [SerializeField] private Transform buttonsParent;
+    [SerializeField] private GameObject buttonPrefab;
 
     [SerializeField] private GameObject purchasedItemPanel;
     public GameObject shopPanel;
@@ -68,30 +66,35 @@ public class TraderUIManager : MonoBehaviour
     public void SetCurrentShopItems(List<ShopItem> items)
     {
         currentShopItems = items;
+
+        foreach (Transform button in buttonsParent.transform)
+        {
+            Destroy(button.gameObject);
+        }
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            Debug.Log(i);
+            ShopItem item = currentShopItems[i];
+            TraderUIElement traderButton = Instantiate(buttonPrefab, buttonsParent).GetComponent<TraderUIElement>();
+            traderButton.GetComponent<Button>().onClick.AddListener(() => BuyItem(item));
+            traderButton.UpdateUI(item);
+        }
     }
 
-    public void BuyItem(Button clickedButton)
+    public void BuyItem(ShopItem item)
     {
-        int itemIndex = clickedButton.transform.GetSiblingIndex();
-        Debug.Log($"Button index clicked: {itemIndex}");
-        if (itemIndex >= 0 && itemIndex < currentShopItems.Count)
-        {
-            ShopItem itemToBuy = currentShopItems[itemIndex];
-            Debug.Log($"Attempting to buy item: {itemToBuy.itemName}");
+        ShopItem itemToBuy = item;
+        Debug.Log($"Attempting to buy item: {itemToBuy.itemName}");
 
-            if (GameManager.main.SpendCurrency(itemToBuy.price))
-            {
-                ApplyItemEffects(itemToBuy);
-                ShowPurchasedItemIcon(itemToBuy.itemType, itemToBuy.itemIcon);
-            }
-            else
-            {
-                Debug.Log("Not enough currency or item not found.");
-            }
+        if (GameManager.main.SpendCurrency(itemToBuy.price))
+        {
+            ApplyItemEffects(itemToBuy);
+            ShowPurchasedItemIcon(itemToBuy.itemType, itemToBuy.itemIcon);
         }
         else
         {
-            Debug.LogError($"Item index {itemIndex} is out of range for currentShopItems list.");
+            Debug.Log("Not enough currency or item not found.");
         }
     }
 
@@ -148,18 +151,17 @@ public class TraderUIManager : MonoBehaviour
         }
 
         Image[] allItemIcons = purchasedItemPanel.GetComponentsInChildren<Image>(true);
-        foreach (Image img in allItemIcons)
+        Debug.Log($"uzunluk: {allItemIcons.Length}");
+        for (int i = 1; i < allItemIcons.Length; i++)
         {
-            Debug.Log($"Found UI element with name: {img.gameObject.name}, active: {img.gameObject.activeSelf}");
+            Image img = allItemIcons[i];
             if (img.gameObject.name == iconName)
             {
                 img.sprite = itemIcon;
                 img.gameObject.SetActive(true);
             }
-            else
-            {
-                img.gameObject.SetActive(false); 
-            }
+
+            Debug.Log($"Found UI element with name: {img.gameObject.name}, active: {img.gameObject.activeSelf}");
         }
     }
 

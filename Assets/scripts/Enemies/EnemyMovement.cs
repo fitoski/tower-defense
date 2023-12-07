@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator;
     //public GameObject goldPrefab;
     private SpriteRenderer spriteRenderer;
-
+    public bool canInteractWithCore = true;
     //[SerializeField] private int currencyWorth = 50;
 
     void Start()
@@ -84,7 +84,7 @@ public class EnemyMovement : MonoBehaviour
                 player.TakeDamage(baseDamage);
             }
         }
-        else if (collision.gameObject.CompareTag("Core"))
+        else if (collision.gameObject.CompareTag("Core") && canInteractWithCore)
         {
             Core core = collision.gameObject.GetComponent<Core>();
             if (core != null)
@@ -110,7 +110,7 @@ public class EnemyMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Core"))
+        if (collider.gameObject.CompareTag("Core") && canInteractWithCore)
         {
             StopMovement();
             SetAppropriateTrigger("SpecialAnimation", "Die");

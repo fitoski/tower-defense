@@ -113,6 +113,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 playerPosition = transform.position;
+
         healthRegenTimer += Time.deltaTime;
         if (healthRegenTimer >= healthRegenInterval)
         {
@@ -121,22 +124,21 @@ public class PlayerMovement : MonoBehaviour
         }
         if (isMoving)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 playerPosition = transform.position;
-            if (mousePosition.x < playerPosition.x)
-            {
-                playerSpriteRenderer.flipX = true;
-            }
-            else if (mousePosition.x > playerPosition.x)
-            {
-                playerSpriteRenderer.flipX = false;
-            }
             if (!autoAimEnabled)
             {
                 Vector2 direction = (mousePosition - playerPosition).normalized;
                 sword.position = playerPosition + direction * orbitRadius;
                 sword.up = direction;
                 sword.RotateAround(playerPosition, Vector3.forward, orbitSpeed * Time.deltaTime);
+
+                if (mousePosition.x < playerPosition.x)
+                {
+                    playerSpriteRenderer.flipX = true;
+                }
+                else if (mousePosition.x > playerPosition.x)
+                {
+                    playerSpriteRenderer.flipX = false;
+                }
             }
             bool isAttacking = Input.GetMouseButton(0);
             directionToMouse = (mousePosition - playerPosition).normalized;
@@ -156,10 +158,13 @@ public class PlayerMovement : MonoBehaviour
             autoAimEnabled = !autoAimEnabled;
             autoAttackEnabled = autoAimEnabled; 
         }
-        if (autoAimEnabled && autoAttackEnabled && attackCooldownTimer <= 0f)
+        if (autoAimEnabled && autoAttackEnabled)
         {
-            AimAtNearestEnemy();
-            AutoAttack();
+            bool hasEnemyInRange = AimAtNearestEnemy(mousePosition, playerPosition);
+            if (hasEnemyInRange && attackCooldownTimer <= 0f)
+            {
+                AutoAttack();
+            }
         }
         else
         {
@@ -201,14 +206,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void AimAtNearestEnemy()
+    bool AimAtNearestEnemy(Vector2 mousePosition, Vector2 playerPosition)
     {
         Enemy nearestEnemy = FindNearestEnemy();
         if (nearestEnemy != null)
         {
             Vector2 enemyPosition = nearestEnemy.transform.position;
-            Vector2 playerPosition = transform.position;
-
             Vector2 directionToEnemy = (enemyPosition - playerPosition).normalized;
 
             playerSpriteRenderer.flipX = enemyPosition.x < playerPosition.x;
@@ -218,6 +221,20 @@ public class PlayerMovement : MonoBehaviour
 
             StartAttackAnimation();
         }
+
+        else
+        {
+            if (mousePosition.x < playerPosition.x)
+            {
+                playerSpriteRenderer.flipX = true;
+            }
+            else if (mousePosition.x > playerPosition.x)
+            {
+                playerSpriteRenderer.flipX = false;
+            }
+        }
+
+        return nearestEnemy is not null;
     }
 
     Enemy FindNearestEnemy()

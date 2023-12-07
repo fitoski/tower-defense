@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        currency = 0;
         level = 1;
         experiencePoints = 0;
         InvokeRepeating("SpawnTrader", 5f, UnityEngine.Random.Range(20f, 40f));
@@ -191,10 +190,6 @@ public class GameManager : MonoBehaviour
     {
         GameObject trader = Instantiate(traderPrefab, new Vector2(UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10)), Quaternion.identity);
         Trader traderScript = trader.GetComponent<Trader>();
-        if (traderScript != null)
-        {
-            traderScript.traderUIManager = TraderUIManager.instance;
-        }
     }
 
     public void GoToMainMenu()

@@ -89,6 +89,7 @@ public class BuyMenu : MonoBehaviour
 
     public void BuyTurret(GameObject turretPrefab)
     {
+        Debug.Log("dsada");
         Node targetNode = GameManager.main.GetSelectedNode();
 
         if (GameManager.main.HasEnoughCurrency(turretPrefab.GetComponent<Turret>().Cost) && targetNode != null)
