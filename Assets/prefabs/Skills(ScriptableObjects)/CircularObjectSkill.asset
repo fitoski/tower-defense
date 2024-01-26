@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03ee49d8f189bed4b82459bceeec97d9, type: 3}
+  m_Name: CircularObjectSkill
+  m_EditorClassIdentifier: 
+  skillName: Circular Object
+  description: "Etraf\u0131nda d\xF6n"
+  icon: {fileID: -849832568, guid: 90bba4d767a78b944a40fd753cdbdbe8, type: 3}
+  maxLevel: 5
+  cooldown: 3
+  baseDamage: 10
+  damagePerLevel: 0
+  prefab: {fileID: 512545926742845820, guid: 60e9c53e87b26374781872e1788aa505, type: 3}
+  orbitDistance: 5
+  orbitDegreesPerSec: 180
+  maxAngle: 360

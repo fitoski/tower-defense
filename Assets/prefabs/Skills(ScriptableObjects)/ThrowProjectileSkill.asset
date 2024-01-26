@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45137f5504ba8de43a497b3f9887da07, type: 3}
+  m_Name: ThrowProjectileSkill
+  m_EditorClassIdentifier: 
+  skillName: Throw Projectile
+  description: "Sadece f\u0131rlat"
+  icon: {fileID: 1574692975, guid: d66833e611a1526499f2696d02c0932e, type: 3}
+  maxLevel: 0
+  cooldown: 2
+  baseDamage: 10
+  damagePerLevel: 0
+  distance: 50
+  speed: 50
+  prefab: {fileID: 1055528901483176653, guid: 6d9b428c45d2b6b4a8e1063722573382, type: 3}
