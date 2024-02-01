@@ -17,4 +17,4 @@ MonoBehaviour:
   icon: {fileID: -1525228480, guid: b05d974eca1bcbe4395221a459e18f0c, type: 3}
   maxLevel: 5
   cooldown: 15
-  prefab: {fileID: 1179035722000579781, guid: 725f6f19463d05749818e5d69fd793b2, type: 3}
+  prefab: {fileID: 4534142938075027970, guid: 5c687c2d234958b4fb22f2f26bfc1464, type: 3}

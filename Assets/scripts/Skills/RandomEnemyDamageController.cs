@@ -7,6 +7,8 @@ public class RandomEnemyDamageController : MonoBehaviour
     public int damage = 30;
     public float interval = 15f;
     private float lastAttackTime = -999f;
+    public GameObject lightningEffectPrefab;
+    public float effectDuration = 2f;
 
     void Update()
     {
@@ -19,17 +21,51 @@ public class RandomEnemyDamageController : MonoBehaviour
 
     void AttackRandomEnemies()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies.Length > 0)
+        List<GameObject> enemiesInView = GetEnemiesInView();
+        int enemiesCount = enemiesInView.Count;
+
+        if (enemiesCount > 0)
         {
-            for (int i = 0; i < 2; i++)
+            int attacks = Mathf.Min(2, enemiesCount);
+            for (int i = 0; i < attacks; i++)
             {
-                GameObject enemy = enemies[UnityEngine.Random.Range(0, enemies.Length)];
+                int randomIndex = UnityEngine.Random.Range(0, enemiesInView.Count);
+                GameObject enemy = enemiesInView[randomIndex];
                 if (enemy != null)
                 {
                     enemy.GetComponent<Enemy>().TakeDamage(damage);
+                    CreateLightningEffect(enemy.transform.position);
+                    enemiesInView.RemoveAt(randomIndex);
                 }
             }
         }
+    }
+
+    List<GameObject> GetEnemiesInView()
+    {
+        List<GameObject> enemiesInView = new List<GameObject>();
+        Camera cam = Camera.main;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            Vector3 viewPos = cam.WorldToViewportPoint(enemy.transform.position);
+            if (viewPos.x > 0 && viewPos.x < 1 && viewPos.y > 0 && viewPos.y < 1)
+            {
+                enemiesInView.Add(enemy);
+            }
+        }
+        return enemiesInView;
+    }
+
+    void CreateLightningEffect(Vector3 position)
+    {
+        GameObject effectInstance = Instantiate(lightningEffectPrefab, position, Quaternion.identity);
+        Destroy(effectInstance, effectDuration);
+    }
+
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
     }
 }
