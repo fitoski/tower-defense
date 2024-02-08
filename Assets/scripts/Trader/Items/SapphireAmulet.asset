@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6cb1b6a72b53004d84a732d80086f21, type: 3}
-  m_Name: TopazAmulet
+  m_Name: SapphireAmulet
   m_EditorClassIdentifier: 
-  itemName: Topaz Amulet
+  itemName: Sapphire Amulet
   price: 0
-  itemIcon: {fileID: -849832568, guid: 90bba4d767a78b944a40fd753cdbdbe8, type: 3}
+  itemIcon: {fileID: 1895015566, guid: 0cb09f81f46e47c4a9d016b5f8610148, type: 3}
   itemType: 7
   itemDamageBonus: 0
   itemRangeBonus: 0
   armorBonus: 0
-  material: Topaz
+  material: Sapphire
   attackCooldownReduction: 0
   healthRegenerationBonus: 0

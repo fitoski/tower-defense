@@ -278,7 +278,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.00039058924, y: 0.0054186583}
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bea1508b2cdca048b3e25ee3de7ab09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToStay: 100000
+  timeToStay: 30
   inventory:
   - Cloth Helmet
   - Leather Helmet
@@ -373,13 +373,21 @@ MonoBehaviour:
   - Cloth Boots
   - Leather Boots
   - Plate Boots
-  traderUIManager: {fileID: 0}
+  - Cloth Gloves
+  - Leather Gloves
+  - Plate Gloves
+  - Silver Ring
+  - Gold Ring
+  - Diamond Ring
+  - Topaz Amulet
+  - Ruby Amulet
+  - Sapphire Amulet
   notificationText: {fileID: 0}
   shopUIElements:
-  - {fileID: 8830386465397809650, guid: a6c83391cdd50db45bcea3983e0fe2f8, type: 3}
-  - {fileID: 8830386465397809650, guid: 34bc1e595b5643047abadcca8d322f34, type: 3}
-  - {fileID: 8830386465397809650, guid: 0532b581a030ef94b8736ecca10bb5d3, type: 3}
-  - {fileID: 8830386465397809650, guid: 048c2ac0e8876c6469b371ecf2ff89b0, type: 3}
+  - {fileID: 8830386465397809650, guid: 0c8a9f1d679d0b046af10cb67c9f6cd2, type: 3}
+  - {fileID: 8830386465397809650, guid: e1980cb7f9c7b3d439f477558a7caa48, type: 3}
+  - {fileID: 8830386465397809650, guid: 0899f9071c1c76948babc64e8d3932e8, type: 3}
+  - {fileID: 8830386465397809650, guid: e26eedd4d1c62174cab3169e60d84b28, type: 3}
   spawnPoints:
   - {fileID: 1343031816676537764}
   - {fileID: 4982982617513437598}
@@ -397,6 +405,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 07475c85ee3357a409a17f04f5f169f1, type: 2}
   - {fileID: 11400000, guid: e70819862a3d38345915de4d310ae58b, type: 2}
   - {fileID: 11400000, guid: d53fd6ef01e33e04b8223c4c5b2f5557, type: 2}
+  - {fileID: 11400000, guid: a79ad878e8dc26f4a8e9b3f446e5f6aa, type: 2}
+  - {fileID: 11400000, guid: 1354d6ba18c04a048ba50c3029264b4f, type: 2}
+  - {fileID: 11400000, guid: aab763d9a5258844681a2607c45f3178, type: 2}
+  - {fileID: 11400000, guid: ff4cc76ab0beb9b459f2bce01a9cb65d, type: 2}
+  - {fileID: 11400000, guid: 438d90a9d0f051e4ba26b4b031d8d4e5, type: 2}
+  - {fileID: 11400000, guid: a02e1db0dfab7cf4c929f72eab3874cf, type: 2}
+  - {fileID: 11400000, guid: 988e7d33854912644a348601c3c467f0, type: 2}
+  - {fileID: 11400000, guid: b0515aad5d77b504f959f43310c12d5e, type: 2}
+  - {fileID: 11400000, guid: 887dc703951dc5941a3523d614a3e880, type: 2}
 --- !u!95 &7377574819402123526
 Animator:
   serializedVersion: 5

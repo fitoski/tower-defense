@@ -8,39 +8,31 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Player attributes
-    public float moveSpeed = 5.0f; // Movement Speed
-    public float pickupRange = 3.0f; // Pickup Range
-    public float xpGain = 1.0f; // XP Gain Multiplier
-
-    // Defensive attributes
-    public int maxPlayerHealth = 500; // Max Health
-    public float healthRegenerationRate = 0.2f; // Health Regeneration per second
-    public float armorValue = 10; // Defense
-    public float blockStrength = 10; // Block Strength
-    public float defense = 10f; // Savunma değeri
-    public float defenseBonus = 1f; // Savunma bonusu
+    public float moveSpeed = 5.0f; 
+    public float pickupRange = 3.0f; 
+    public float xpGain = 1.0f; 
+    public int maxPlayerHealth = 500; 
+    public float healthRegenerationRate = 0.2f; 
+    public float armorValue = 10; 
+    public float blockStrength = 10; 
+    public float defense = 10f; 
+    public float defenseBonus = 1f; 
     public bool hasIncreasedDefense = false;
     public bool hasIncreasedDefenseBonus = false;
     public bool hasIncreasedBlockStrength = false;
-
-    // Offensive attributes
-    public int playerDamage = 100; // Damage
-    public float attackCooldown = 1.1f; // Attack Speed (attacks per second)
-    public float multistrike = 1.00f; // Multistrike Chance
-    public float criticalHitChance = 20f; // Crit Chance
-    public float criticalHitBonus = 65f; // Crit Bonus
-    public float range = 5.5f; // Attack Range
-    public float area = 2.0f; // Area of Effect
-
-    // Other attributes
+    public int playerDamage = 100; 
+    public float attackCooldown = 1.1f;
+    public float multistrike = 1.00f; 
+    public float criticalHitChance = 20f; 
+    public float criticalHitBonus = 65f; 
+    public float range = 5.5f; 
+    public float area = 2.0f; 
     private Rigidbody2D rb;
     public Transform sword;
     public float orbitRadius = 2f;
     public float orbitSpeed = 90f;
     public float attackRotationAmount = 15f;
     private float attackCooldownTimer = 0f;
-    //private bool isInvulnerable = false;
     public float invulnerabilityDuration = 1.5f;
     public Color flashColor = Color.red;
     private Color originalColor;
@@ -88,21 +80,16 @@ public class PlayerMovement : MonoBehaviour
     private bool autoAttackEnabled = false;
     private Transform nearestEnemy;
     private bool isDead = false;
-
-    // Level up bonuses
-    private const float perLevelDamageIncrease = 0.5f; // Damage increase per level
-    private const float perLevelHealthIncrease = 2.5f; // Health increase per level
-    private const float per10LevelDamageIncrease = 0.05f; // Additional Damage increase every 10 levels
-
-
-
+    private const float perLevelDamageIncrease = 0.5f; 
+    private const float perLevelHealthIncrease = 2.5f; 
+    private const float per10LevelDamageIncrease = 0.05f; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = playerSpriteRenderer.color;
-        playerHealth = maxPlayerHealth; 
+        playerHealth = maxPlayerHealth;
         UpdateHealthBars();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameManager = FindObjectOfType<GameManager>();
@@ -156,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             autoAimEnabled = !autoAimEnabled;
-            autoAttackEnabled = autoAimEnabled; 
+            autoAttackEnabled = autoAimEnabled;
         }
         if (autoAimEnabled && autoAttackEnabled)
         {
@@ -294,50 +281,15 @@ public class PlayerMovement : MonoBehaviour
 
     bool StartAttackAnimation()
     {
-        if (attackCooldownTimer <= 0f) 
+        if (attackCooldownTimer <= 0f)
         {
-            attackCooldownTimer = attackCooldown; 
+            attackCooldownTimer = attackCooldown;
             playerAnimator.SetTrigger("dkAttack");
             swordAnimator.SetTrigger("Attack");
-            return true; 
+            return true;
         }
         return false;
     }
-
-    //public void TakeDamage(int damage)
-    //{
-    //    if (!isInvulnerable)
-    //    {
-    //        float blockChance = CalculateBlockChance(damage);
-    //        if (UnityEngine.Random.Range(0f, 100f) <= blockChance)
-    //        {
-    //            return;
-    //        }
-
-    //        float damageReduction = CalculateDamageReduction(defense);
-    //        int actualDamage = Mathf.Max(1, damage - Mathf.FloorToInt(damage * damageReduction / 100f));
-    //        playerHealth -= actualDamage;
-
-    //        UpdateHealthBars();
-    //        StartCoroutine(FlashPlayer());
-    //        StartCoroutine(PausePlayer());
-
-    //        if (playerHealth <= 0)
-    //        {
-    //            Die();
-    //        }
-    //        else
-    //        {
-    //            isInvulnerable = true;
-    //            Invoke("ResetInvulnerability", 0.2f); 
-    //        }
-    //    }
-    //}
-
-    //void ResetInvulnerability()
-    //{
-    //    isInvulnerable = false;
-    //}
 
     public void TakeDamage(int damage)
     {
@@ -379,7 +331,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator PausePlayer()
     {
         isMoving = false;
-        yield return new WaitForSeconds(0.2f); 
+        yield return new WaitForSeconds(0.2f);
         isMoving = true;
     }
 
@@ -420,11 +372,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void IncreaseMaxHealthPerLevel()
     {
+        float healthRatioBeforeIncrease = (float)playerHealth / maxPlayerHealth;
         int healthIncreaseAmount = Mathf.FloorToInt(maxPlayerHealth * healthIncreasePercentage);
         maxPlayerHealth += healthIncreaseAmount;
-        playerHealth = maxPlayerHealth;
-        hasIncreasedHealth = true;
+        playerHealth = Mathf.FloorToInt(maxPlayerHealth * healthRatioBeforeIncrease);
         UpdateHealthBars();
+        hasIncreasedHealth = true;
     }
 
     public void IncreaseCriticalHitChance()
@@ -479,21 +432,21 @@ public class PlayerMovement : MonoBehaviour
 
     public void IncreaseBlockStrength()
     {
-        float blockStrengthIncrease = 0.1f; 
+        float blockStrengthIncrease = 0.1f;
         blockStrength += blockStrengthIncrease;
         hasIncreasedBlockStrength = true;
     }
 
     public void IncreaseDefense()
     {
-        float defenseIncrease = 0.2f; 
+        float defenseIncrease = 0.2f;
         defense += defenseIncrease;
         hasIncreasedDefense = true;
     }
 
     public void IncreaseDefenseBonus()
     {
-        float defenseBonusIncrease = 0.05f; 
+        float defenseBonusIncrease = 0.05f;
         defenseBonus += defenseBonusIncrease;
         hasIncreasedDefenseBonus = true;
     }
@@ -561,25 +514,25 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 MovementDirection
     {
-        get { return movementDirection; } 
+        get { return movementDirection; }
     }
 
     public void EquipHelmet(HelmetItem helmet)
     {
         if (helmet.material == "Cloth")
         {
-            moveSpeed *= 1.1f; 
-            attackCooldown *= 0.9f; 
+            moveSpeed *= 1.1f;
+            attackCooldown *= 0.9f;
         }
         else if (helmet.material == "Leather")
         {
-            defense *= 1.2f; 
-            playerDamage = (int)(playerDamage * 1.1f);  
+            defense *= 1.2f;
+            playerDamage = (int)(playerDamage * 1.1f);
         }
         else if (helmet.material == "Plate")
         {
-            defense *= 1.5f; 
-            blockStrength *= 1.5f; 
+            defense *= 1.5f;
+            blockStrength *= 1.5f;
         }
     }
 
@@ -591,15 +544,15 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (amulet.material == "Ruby")
         {
-            attackCooldown *= 0.9f; 
+            attackCooldown *= 0.9f;
             healthRegenerationRate += maxPlayerHealth * 0.01f;
         }
         else if (amulet.material == "Sapphire")
         {
-            attackCooldown *= 0.9f; 
-            healthRegenerationRate += maxPlayerHealth * 0.01f; 
-            maxPlayerHealth = (int)(maxPlayerHealth * 1.1f); 
-            playerHealth = maxPlayerHealth; 
+            attackCooldown *= 0.9f;
+            healthRegenerationRate += maxPlayerHealth * 0.01f;
+            maxPlayerHealth = (int)(maxPlayerHealth * 1.1f);
+            playerHealth = maxPlayerHealth;
             UpdateHealthBars();
         }
     }
@@ -689,8 +642,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isMoving = false;
         isDead = true;
-        this.enabled = false;
-
+        this.enabled = false; 
         if (playerAnimator != null)
         {
             playerAnimator.SetTrigger("dkDeath");
@@ -700,16 +652,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void DisablePlayerControls()
     {
-        this.enabled = false;
+        this.enabled = false; 
         if (swordAnimator != null)
         {
-            swordAnimator.enabled = false;
+            swordAnimator.enabled = false; 
         }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Enemy") && !isDead) 
+        if (collider.gameObject.CompareTag("Enemy") && !isDead)
         {
             Enemy enemy = collider.GetComponent<Enemy>();
             if (enemy != null)
@@ -721,7 +673,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Enemy") && !isDead) 
+        if (collider.gameObject.CompareTag("Enemy") && !isDead)
         {
             Enemy enemy = collider.GetComponent<Enemy>();
             if (enemy != null)
@@ -740,5 +692,14 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(deathAnimationLength);
         GameManager.main.ShowDeathScreen();
+    }
+
+    private void EnablePlayerControls()
+    {
+        this.enabled = true; 
+        if (swordAnimator != null)
+        {
+            swordAnimator.enabled = true; 
+        }
     }
 }

@@ -9,16 +9,21 @@ public class PlayerSkills : MonoBehaviour
 
     public void addSkillToPassiveSkills(PassiveSkill skill)
     {
-        passiveSkills.Add(skill);
-        skill.InitializeSkill();
+        if (skill != null) 
+        {
+            passiveSkills.Add(skill);
+            skill.InitializeSkill();
+        }
     }
 
     private void Update()
     {
-        
         foreach (var skill in passiveSkills)
         {
-            skill.ActivatePassiveSkill(this);
+            if (skill != null) 
+            {
+                skill.ActivatePassiveSkill(this);
+            }
         }
     }
 }

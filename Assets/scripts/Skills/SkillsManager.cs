@@ -7,7 +7,7 @@ using static Trader;
 public class SkillsManager : MonoBehaviour
 {
     public static SkillsManager Instance { get; private set; }
-    public GameObject skillRewardPanel; 
+    public GameObject skillRewardPanel;
 
     void Awake()
     {
@@ -27,7 +27,7 @@ public class SkillsManager : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     public void PrepareSkillRewardPanel()

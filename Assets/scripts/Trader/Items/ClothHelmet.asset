@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0deb145a4f70d46bf208d69a1c9ec7, type: 3}
   m_Name: ClothHelmet
   m_EditorClassIdentifier: 
-  itemName: ClothHelmet
+  itemName: Cloth Helmet
   price: 1
   itemIcon: {fileID: 2090595338, guid: 33648b139c3814a4fb28657821e787bb, type: 3}
-  itemType: 3
+  itemType: 2
   itemDamageBonus: 1
   itemRangeBonus: 1
   armorBonus: 1

@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6cb1b6a72b53004d84a732d80086f21, type: 3}
-  m_Name: TopazAmulet
+  m_Script: {fileID: 11500000, guid: 192eae7c2c3cabe4d8f4a5ff84f0e679, type: 3}
+  m_Name: GoldRing
   m_EditorClassIdentifier: 
-  itemName: Topaz Amulet
+  itemName: Gold Ring
   price: 0
-  itemIcon: {fileID: -849832568, guid: 90bba4d767a78b944a40fd753cdbdbe8, type: 3}
-  itemType: 7
+  itemIcon: {fileID: 1219643403, guid: 9cbd97a216121894992bc6a5a54dfcbb, type: 3}
+  itemType: 5
   itemDamageBonus: 0
   itemRangeBonus: 0
   armorBonus: 0
-  material: Topaz
-  attackCooldownReduction: 0
-  healthRegenerationBonus: 0
+  material: Gold

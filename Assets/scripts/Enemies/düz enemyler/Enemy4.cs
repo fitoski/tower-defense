@@ -7,8 +7,8 @@ public class Enemy4 : Enemy
     new void Start()
     {
         base.Start();
-        maxHealth = 55;
-        speed = 5f;
+        maxHealth = 70;
+        speed = 2f;
         baseDamage = 3;
         scoreValue = 15;
         damageMultiplierPerWave = 1.5f;

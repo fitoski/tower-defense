@@ -74,14 +74,34 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Player") && !isDead) 
+        if (collider.gameObject.CompareTag("Player") && !isDead)
         {
             PlayerMovement player = collider.GetComponent<PlayerMovement>();
             if (player != null)
             {
-                player.TakeDamage(baseDamage);
+                if (!isDead)
+                {
+                    player.TakeDamage(baseDamage);
+                }
             }
         }
+        else if (collider.gameObject.CompareTag("Core") && !isDead)
+        {
+            CoreHit();
+            Die();
+        }
+
+    }
+
+    void CoreHit()
+    {
+        Core core = FindObjectOfType<Core>();
+        if (core != null)
+        {
+            core.TakeDamage(baseDamage);
+        }
+        isDead = true;
+        animator.SetTrigger("Die");
     }
 
     public void TakeDamage(int damage)
@@ -161,7 +181,6 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
-
 
     public int burnDamageAmount;
     private float burningInterval;

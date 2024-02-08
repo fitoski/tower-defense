@@ -11,11 +11,8 @@ public class StashManager : MonoBehaviour
         StashItems.Add(item);
     }
 
-    // Call this method when a player dies to clear equipped stash items
     public void ClearEquippedStashItems()
     {
-        // Implement logic to remove equipped stash items
     }
 
-    // Implement additional methods as needed
 }

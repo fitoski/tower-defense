@@ -65,6 +65,12 @@ public class TraderUIManager : MonoBehaviour
 
     public void SetCurrentShopItems(List<ShopItem> items)
     {
+        if (items == null)
+        {
+            Debug.LogError("SetCurrentShopItems called with null items list.");
+            return; 
+        }
+
         currentShopItems = items;
 
         foreach (Transform button in buttonsParent.transform)
@@ -77,8 +83,15 @@ public class TraderUIManager : MonoBehaviour
             Debug.Log(i);
             ShopItem item = currentShopItems[i];
             TraderUIElement traderButton = Instantiate(buttonPrefab, buttonsParent).GetComponent<TraderUIElement>();
-            traderButton.GetComponent<Button>().onClick.AddListener(() => BuyItem(item));
-            traderButton.UpdateUI(item);
+            if (traderButton != null && traderButton.GetComponent<Button>() != null)
+            {
+                traderButton.GetComponent<Button>().onClick.AddListener(() => BuyItem(item));
+                traderButton.UpdateUI(item);
+            }
+            else
+            {
+                Debug.LogError("TraderUIElement or Button component not found on instantiated prefab.");
+            }
         }
     }
 
@@ -196,7 +209,7 @@ public class TraderUIManager : MonoBehaviour
 
             default:
                 Debug.LogError($"Unrecognized ItemType: {itemType}");
-                return null; 
+                return null;
         }
     }
 
@@ -248,4 +261,16 @@ public class TraderUIManager : MonoBehaviour
             notificationText.gameObject.SetActive(false);
         }
     }
+
+    //public void UpdateUI()
+    //{
+    //    if (stashBuyButton != null)
+    //    {
+    //        stashBuyButton.gameObject.SetActive(trader.ShouldShowStashButton());
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Stash buy button not assigned in TraderUIManager.");
+    //    }
+    //}
 }

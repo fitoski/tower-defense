@@ -11,24 +11,38 @@ public class SkillButton : MonoBehaviour
     [SerializeField] private TMP_Text skillName;
     [SerializeField] private TMP_Text skillDescription;
     [SerializeField] private Image skillIcon;
-    [SerializeField] private Button button; 
+    [SerializeField] private Button button;
 
     public void UpdateUI(PassiveSkill skill)
     {
-        this.skill = skill;
-        skillName.text = skill.name;
-        skillDescription.text = skill.description;
-        skillIcon.sprite = skill.icon;
+        if (skill != null) 
+        {
+            this.skill = skill;
+            skillName.text = skill.skillName; 
+            skillDescription.text = skill.description;
+            skillIcon.sprite = skill.icon;
+        }
+        else
+        {
+            skillName.text = "";
+            skillDescription.text = "";
+            skillIcon.sprite = null;
+        }
     }
 
     public void SelectSkill()
     {
-        Debug.Log("SelectSkill called.");
-        PlayerSkills playerSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkills>();
-        playerSkills.addSkillToPassiveSkills(skill);
+        if (skill != null) 
+        {
+            Debug.Log("SelectSkill called.");
+            PlayerSkills playerSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkills>();
+            if (playerSkills != null) 
+            {
+                playerSkills.addSkillToPassiveSkills(skill);
+            }
 
-        //transform.parent.parent.gameObject.SetActive(false);
-        SkillsManager.Instance.CloseSkillRewardPanel();
-        Time.timeScale = 1;
+            SkillsManager.Instance.CloseSkillRewardPanel();
+            Time.timeScale = 1;
+        }
     }
 }

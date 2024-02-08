@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 946503264104083784}
   - component: {fileID: 2539599766684847071}
   - component: {fileID: 6119647460750049429}
-  - component: {fileID: 8316285283714994773}
   - component: {fileID: 2882033880101117232}
+  - component: {fileID: 8316285283714994773}
   - component: {fileID: 1417263819240883765}
   m_Layer: 6
   m_Name: EnemyPrefab
@@ -137,23 +137,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8316285283714994773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3838339183629443256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d67a34c9434a22445958416d434ca60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  baseDamage: 1
-  damageMultiplierPerWave: 1.5
-  currentWave: 1
-  canInteractWithCore: 1
 --- !u!70 &2882033880101117232
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -189,6 +172,23 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0016530305, y: 0.0062924474}
   m_Size: {x: 0.18330607, y: 0.2671713}
   m_Direction: 0
+--- !u!114 &8316285283714994773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3838339183629443256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67a34c9434a22445958416d434ca60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  baseDamage: 1
+  damageMultiplierPerWave: 1.5
+  currentWave: 1
+  canInteractWithCore: 1
 --- !u!114 &1417263819240883765
 MonoBehaviour:
   m_ObjectHideFlags: 0

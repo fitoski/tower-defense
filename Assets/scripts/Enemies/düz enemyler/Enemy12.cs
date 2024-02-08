@@ -7,7 +7,7 @@ public class Enemy12 : Enemy
     new void Start()
     {
         base.Start();
-        maxHealth = 155;
+        maxHealth = 110;
         speed = 5f;
         baseDamage = 6;
         scoreValue = 15;
