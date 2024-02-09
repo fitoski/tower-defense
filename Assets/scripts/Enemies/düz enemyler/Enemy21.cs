@@ -14,14 +14,4 @@ public class Enemy21 : Enemy
         damageMultiplierPerWave = 1.5f;
         currentHealth = maxHealth;
     }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
-    protected override void Die()
-    {
-        base.Die();
-    }
 }

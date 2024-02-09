@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6119647460750049429}
   - component: {fileID: 2882033880101117232}
   - component: {fileID: 8316285283714994773}
-  - component: {fileID: 1417263819240883765}
+  - component: {fileID: 8236798536156896967}
   m_Layer: 6
-  m_Name: EnemyPrefab
+  m_Name: EnemyDefault
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 3838339183629443256}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.012, y: 0.01, z: 0}
-  m_LocalScale: {x: 4, y: 3.9352, z: 1}
+  m_LocalPosition: {x: -0.1573, y: 0.6664, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -189,7 +189,7 @@ MonoBehaviour:
   damageMultiplierPerWave: 1.5
   currentWave: 1
   canInteractWithCore: 1
---- !u!114 &1417263819240883765
+--- !u!114 &8236798536156896967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,16 +198,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3838339183629443256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00168cb0cf1c7f149adc425158635f30, type: 3}
+  m_Script: {fileID: 11500000, guid: 3feb6a8a531c3c043b9e0d7f2c682b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 60
   baseDamage: 1
   baseMaxHealth: 60
   healthMultiplierPerWave: 1.3
   damageMultiplierPerWave: 1.5
-  speed: 0
-  scoreValue: 10
+  speed: 2
+  scoreValue: 15
   experiencePointsValue: 5
   floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
   canvasTransform: {fileID: 0}

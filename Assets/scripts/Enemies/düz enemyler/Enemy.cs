@@ -22,9 +22,8 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     public GameObject floatingTextPrefab;
     public Transform canvasTransform;
-    public GameObject experiencePrefab; 
-    public int goldValue = 1; 
-
+    public GameObject experiencePrefab;
+    public int goldValue = 1;
 
     protected void Start()
     {
@@ -72,37 +71,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.CompareTag("Player") && !isDead)
-        {
-            PlayerMovement player = collider.GetComponent<PlayerMovement>();
-            if (player != null)
-            {
-                if (!isDead)
-                {
-                    player.TakeDamage(baseDamage);
-                }
-            }
-        }
-        else if (collider.gameObject.CompareTag("Core") && !isDead)
-        {
-            CoreHit();
-            Die();
-        }
-
-    }
-
-    void CoreHit()
-    {
-        Core core = FindObjectOfType<Core>();
-        if (core != null)
-        {
-            core.TakeDamage(baseDamage);
-        }
-        isDead = true;
-        animator.SetTrigger("Die");
-    }
+    //void OnTriggerEnter2D(Collider2D collider)
+    //{
+    //    if (collider.gameObject.CompareTag("Core") && !isDead)
+    //    {
+    //        Die();
+    //    }
+    //}
 
     public void TakeDamage(int damage)
     {
@@ -119,7 +94,7 @@ public class Enemy : MonoBehaviour
         if (floatingTextPrefab != null && canvasTransform != null)
         {
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 offset = new Vector3(0, 50, 0); 
+            Vector3 offset = new Vector3(0, 50, 0);
             GameObject floatingText = Instantiate(floatingTextPrefab, screenPosition + offset, Quaternion.identity, canvasTransform);
             floatingText.GetComponent<FloatingText>().SetText(damage.ToString());
         }
@@ -157,6 +132,8 @@ public class Enemy : MonoBehaviour
         isDead = true;
         animator.SetTrigger("Die");
         animator.SetBool("isDead", true);
+
+        GetComponent<Collider2D>().enabled = false;
 
         if (enemyMovement != null)
         {

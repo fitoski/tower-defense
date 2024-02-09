@@ -6,7 +6,6 @@ using TMPro;
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance;
-    public GameObject enemyPrefab;
     public Transform protectionObject;
     public float initialSpawnInterval = 5f;
     public int initialEnemiesPerWave = 5;
@@ -26,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
     public bool allowSpawn = true;
     private float nextWaveTime;
 
+    public GameObject enemyDefaultPrefab;
     public GameObject EnemyFastPrefab;
     public GameObject enemy4Prefab;
     public GameObject enemy5Prefab;
@@ -88,30 +88,30 @@ public class EnemySpawner : MonoBehaviour
     {
         waveEnemyTypes = new Dictionary<int, List<GameObject>>();
 
-        waveEnemyTypes.Add(1, new List<GameObject> { enemyPrefab });
-        waveEnemyTypes.Add(2, new List<GameObject> { enemyPrefab, EnemyFastPrefab });
-        waveEnemyTypes.Add(3, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab });
-        waveEnemyTypes.Add(4, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab });
-        waveEnemyTypes.Add(5, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab });
-        waveEnemyTypes.Add(6, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab });
-        waveEnemyTypes.Add(7, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab });
-        waveEnemyTypes.Add(8, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab });
-        waveEnemyTypes.Add(9, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab });
-        waveEnemyTypes.Add(10, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab });
-        waveEnemyTypes.Add(11, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab });
-        waveEnemyTypes.Add(12, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab });
-        waveEnemyTypes.Add(13, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab });
-        waveEnemyTypes.Add(14, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab });
-        waveEnemyTypes.Add(15, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab });
-        waveEnemyTypes.Add(16, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab });
-        waveEnemyTypes.Add(17, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab });
-        waveEnemyTypes.Add(18, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab });
-        waveEnemyTypes.Add(19, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab });
-        waveEnemyTypes.Add(20, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab });
-        waveEnemyTypes.Add(21, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab, enemy22Prefab });
-        waveEnemyTypes.Add(22, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab, enemy22Prefab, enemy23Prefab });
-        waveEnemyTypes.Add(23, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab, enemy22Prefab, enemy23Prefab, enemy24Prefab });
-        waveEnemyTypes.Add(24, new List<GameObject> { enemyPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab, enemy22Prefab, enemy23Prefab, enemy24Prefab, enemy25Prefab });
+        waveEnemyTypes.Add(1, new List<GameObject> { enemyDefaultPrefab });
+        waveEnemyTypes.Add(2, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab });
+        waveEnemyTypes.Add(3, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab });
+        waveEnemyTypes.Add(4, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab });
+        waveEnemyTypes.Add(5, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab });
+        waveEnemyTypes.Add(6, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab });
+        waveEnemyTypes.Add(7, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab });
+        waveEnemyTypes.Add(8, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab });
+        waveEnemyTypes.Add(9, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab });
+        waveEnemyTypes.Add(10, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab });
+        waveEnemyTypes.Add(11, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab });
+        waveEnemyTypes.Add(12, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab });
+        waveEnemyTypes.Add(13, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab });
+        waveEnemyTypes.Add(14, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab });
+        waveEnemyTypes.Add(15, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab });
+        waveEnemyTypes.Add(16, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab });
+        waveEnemyTypes.Add(17, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab });
+        waveEnemyTypes.Add(18, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab });
+        waveEnemyTypes.Add(19, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab });
+        waveEnemyTypes.Add(20, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab });
+        waveEnemyTypes.Add(21, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab, enemy22Prefab });
+        waveEnemyTypes.Add(22, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab, enemy22Prefab, enemy23Prefab });
+        waveEnemyTypes.Add(23, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab, enemy22Prefab, enemy23Prefab, enemy24Prefab });
+        waveEnemyTypes.Add(24, new List<GameObject> { enemyDefaultPrefab, EnemyFastPrefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab, enemy10Prefab, enemy11Prefab, enemy12Prefab, enemy13Prefab, enemy14Prefab, enemy15Prefab, enemy16Prefab, enemy17Prefab, enemy18Prefab, enemy19Prefab, enemy20Prefab, enemy21Prefab, enemy22Prefab, enemy23Prefab, enemy24Prefab, enemy25Prefab });
     }
 
     void Update()
@@ -549,7 +549,7 @@ public class EnemySpawner : MonoBehaviour
     {
         List<GameObject> waveEnemies = new List<GameObject>();
 
-        if (waveNumber >= 1) waveEnemies.Add(enemyPrefab);
+        if (waveNumber >= 1) waveEnemies.Add(enemyDefaultPrefab);
         if (waveNumber >= 2) waveEnemies.Add(EnemyFastPrefab);
         if (waveNumber >= 3) waveEnemies.Add(enemy4Prefab);
         if (waveNumber >= 4) waveEnemies.Add(enemy5Prefab);

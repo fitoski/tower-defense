@@ -143,7 +143,7 @@ public class Boss : Enemy
         isAttacking = false;
     }
 
-    protected override void Die()
+    public new void Die()
     {
         base.Die();
         SpawnChest();

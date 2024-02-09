@@ -13,6 +13,7 @@ public class Boss2 : Enemy
     private Transform playerTransform;
     private Animator bossAnimator;
     private bool isAttacking = false;
+    public GameObject chestPrefab;
 
     private float attackForwardDistance = 5f;
 
@@ -216,26 +217,20 @@ public class Boss2 : Enemy
         transform.position = desiredPosition;
     }
 
-    protected override void Die()
+    public new void Die()
     {
         base.Die();
-        DropItemOnDeath();
+        SpawnChest();
     }
 
-    void DropItemOnDeath()
+    void SpawnChest()
     {
-        Debug.Log("item düştü");
-        foreach (DropItem item in droppableItems)
-        {
-            int randomChance = UnityEngine.Random.Range(0, 100);
-            Debug.Log("random chance: " + randomChance + "item drop chance: " + item.dropChance);
+        Instantiate(chestPrefab, transform.position, Quaternion.identity);
+    }
 
-            if (randomChance < item.dropChance)
-            {
-                Debug.Log("dropped item: " + item.itemName);
-                Instantiate(item.itemPrefab, transform.position, Quaternion.identity);
-                break;
-            }
-        }
+    void DropSkillOnDeath()
+    {
+        Debug.Log("skill item düştü");
+        SkillsManager.Instance.PrepareSkillRewardPanel();
     }
 }

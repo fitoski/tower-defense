@@ -14927,7 +14927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f46dc1395e2c94e805764a014633cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 3838339183629443256, guid: a7b3986cc6f652547b77a6b812564b89, type: 3}
   protectionObject: {fileID: 1691617061}
   initialSpawnInterval: 5
   initialEnemiesPerWave: 5
@@ -14935,6 +14934,7 @@ MonoBehaviour:
   enemiesIncreasePerWave: 1
   enemyCountText: {fileID: 38919669}
   allowSpawn: 1
+  enemyDefaultPrefab: {fileID: 3838339183629443256, guid: 04fcaf9f3659ba849b3d19891ccd2246, type: 3}
   EnemyFastPrefab: {fileID: 3838339183629443256, guid: 76a1a024312653848957a2448aa92329, type: 3}
   enemy4Prefab: {fileID: 3046388492417412966, guid: 0923f9cf9fb226a4fac9b2ffb3a52efe, type: 3}
   enemy5Prefab: {fileID: 1450199049026034457, guid: 39baea003f1dd7543b9200814f9aa44b, type: 3}

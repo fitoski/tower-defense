@@ -8,20 +8,10 @@ public class EnemyFast : Enemy
     {
         base.Start();
         maxHealth = 65;
-        speed = 2.5f;
+        speed = 3f;
         baseDamage = 2;
         scoreValue = 15;
         damageMultiplierPerWave = 1.5f;
         currentHealth = maxHealth;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
-    protected override void Die()
-    {
-        base.Die();
     }
 }

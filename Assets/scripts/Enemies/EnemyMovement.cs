@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,13 +33,13 @@ public class EnemyMovement : MonoBehaviour
         {
             Vector2 direction = (target.position - transform.position).normalized;
 
-            if (direction.x > 0)  
+            if (direction.x > 0)
             {
-                spriteRenderer.flipX = true;  
+                spriteRenderer.flipX = true;
             }
-            else if (direction.x < 0)  
+            else if (direction.x < 0)
             {
-                spriteRenderer.flipX = false;  
+                spriteRenderer.flipX = false;
             }
 
             transform.Translate(direction * enemy.speed * Time.deltaTime);
