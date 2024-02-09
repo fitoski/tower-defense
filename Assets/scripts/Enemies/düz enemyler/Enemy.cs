@@ -132,7 +132,6 @@ public class Enemy : MonoBehaviour
         isDead = true;
         animator.SetTrigger("Die");
         animator.SetBool("isDead", true);
-
         GetComponent<Collider2D>().enabled = false;
 
         if (enemyMovement != null)
