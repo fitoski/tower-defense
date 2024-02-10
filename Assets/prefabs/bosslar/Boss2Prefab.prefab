@@ -188,7 +188,7 @@ MonoBehaviour:
   baseDamage: 1
   damageMultiplierPerWave: 1.5
   currentWave: 1
-  canInteractWithCore: 1
+  canInteractWithCore: 0
 --- !u!114 &8706514690153619327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   baseDamage: 1
+  baseMaxHealth: 60
+  healthMultiplierPerWave: 1.3
   damageMultiplierPerWave: 1.5
   speed: 0
   scoreValue: 10
@@ -215,4 +217,5 @@ MonoBehaviour:
   attackRange: 5
   attackDamage: 10
   attackCooldown: 5
+  chestPrefab: {fileID: 0}
   droppableItems: []

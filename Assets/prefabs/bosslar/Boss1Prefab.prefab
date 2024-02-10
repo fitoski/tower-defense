@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7047081285439649330}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.209608, y: 1.9237256, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -186,6 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   baseDamage: 10
+  baseMaxHealth: 60
+  healthMultiplierPerWave: 1.3
   damageMultiplierPerWave: 1.5
   speed: 0
   scoreValue: 10
@@ -199,6 +201,12 @@ MonoBehaviour:
   attackDamage: 10
   attackCooldown: 2
   chestPrefab: {fileID: 6854125686869889687, guid: aa0684ac749450a44b65e156feb2326c, type: 3}
+  secondAttackCooldown: 10
+  attackEffectCollider1: {fileID: 1371085262629090415, guid: 186d609606a277a4c91ead6ac89cc1e9, type: 3}
+  attackEffectCollider2: {fileID: 3259036614022572638, guid: 5690a187fde00ed4c889004498a4eba0, type: 3}
+  groundSmashEffectPrefab: {fileID: 6251619196035011713, guid: 186d609606a277a4c91ead6ac89cc1e9, type: 3}
+  landingEffectPrefab: {fileID: 3327379365603895184, guid: 5690a187fde00ed4c889004498a4eba0, type: 3}
+  effectSpawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &5980781206054759278
 MonoBehaviour:
   m_ObjectHideFlags: 0

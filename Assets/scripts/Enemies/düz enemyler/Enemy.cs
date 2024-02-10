@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     public GameObject experiencePrefab;
     public int goldValue = 1;
 
-    protected void Start()
+    protected virtual void Start()
     {
         int currentWave = EnemySpawner.Instance.GetCurrentWaveNumber();
         maxHealth = Mathf.RoundToInt(baseMaxHealth * Mathf.Pow(healthMultiplierPerWave, currentWave - 1));
@@ -70,14 +70,6 @@ public class Enemy : MonoBehaviour
             burnStopTime = 0;
         }
     }
-
-    //void OnTriggerEnter2D(Collider2D collider)
-    //{
-    //    if (collider.gameObject.CompareTag("Core") && !isDead)
-    //    {
-    //        Die();
-    //    }
-    //}
 
     public void TakeDamage(int damage)
     {

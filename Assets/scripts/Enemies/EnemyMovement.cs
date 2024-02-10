@@ -29,10 +29,10 @@ public class EnemyMovement : MonoBehaviour
 
     public void Update()
     {
-        if (isMoving && target != null && enemy != null)
+        if (isMoving && target != null && enemy != null && !(enemy is Boss))
         {
-            Vector2 direction = (target.position - transform.position).normalized;
-
+            Vector3 targetPositionWithOffset = target.position;
+            Vector2 direction = (targetPositionWithOffset - transform.position).normalized;
             if (direction.x > 0)
             {
                 spriteRenderer.flipX = true;
@@ -51,23 +51,26 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void SetRandomTarget()
+    public virtual void SetRandomTarget()
     {
-        float chance = Random.Range(0f, 1f);
-        if (chance <= 0.7f) 
+        if (target == null)
         {
-            SetTarget(EnemySpawner.Instance.protectionObject);
-        }
-        else 
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
+            float chance = Random.Range(0f, 1f);
+            if (chance <= 0.7f)
             {
-                SetTarget(player.transform);
+                SetTarget(EnemySpawner.Instance.protectionObject);
             }
             else
             {
-                SetTarget(EnemySpawner.Instance.protectionObject);
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null)
+                {
+                    SetTarget(player.transform);
+                }
+                else
+                {
+                    SetTarget(EnemySpawner.Instance.protectionObject);
+                }
             }
         }
     }

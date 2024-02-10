@@ -15,11 +15,16 @@ public class Boss : Enemy
     public GameObject chestPrefab;
     public float secondAttackCooldown = 10f; 
     private float secondAttackTimer;
+    public Collider2D attackEffectCollider1;
+    public Collider2D attackEffectCollider2;
+    public GameObject groundSmashEffectPrefab;
+    public GameObject landingEffectPrefab;
+    public Vector3 effectSpawnOffset;
 
-    private new void Start()
+    protected override void Start()
     {
         base.Start();
-        maxHealth = 10;
+        maxHealth = 5000;
         speed = 2f;
         baseDamage = 1;
         scoreValue = 15;
@@ -30,14 +35,15 @@ public class Boss : Enemy
         bossAnimator = GetComponent<Animator>();
         attackTimer = 0;
         secondAttackTimer = secondAttackCooldown;
+        effectSpawnOffset = new Vector3(5f, -1.5f, 0f);
     }
-       
+
     private new void Update()
     {
         if (currentHealth <= 0)
         {
             bossAnimator.SetTrigger("Die");
-            return; 
+            return;
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
@@ -76,6 +82,18 @@ public class Boss : Enemy
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+            if (player != null)
+            {
+                player.TakeDamage(attackDamage);
+            }
+        }
+    }
+
     void AttackPlayer()
     {
         UpdateOrientationTowardsPlayer();
@@ -83,6 +101,27 @@ public class Boss : Enemy
         bossAnimator.SetBool("isAttacking", true);
         isAttacking = true;
         attackTimer = attackCooldown;
+    }
+
+    public void TriggerGroundSmashEffect()
+    {
+        Vector3 adjustedEffectSpawnOffset = effectSpawnOffset;
+        if (playerTransform.position.x < transform.position.x)
+        {
+            adjustedEffectSpawnOffset.x = -effectSpawnOffset.x;
+        }
+
+        Vector3 effectSpawnPosition = transform.position + adjustedEffectSpawnOffset;
+        GameObject effectInstance = Instantiate(groundSmashEffectPrefab, effectSpawnPosition, Quaternion.identity);
+
+        if (playerTransform.position.x < transform.position.x)
+        {
+            effectInstance.transform.localScale = new Vector3(1, 1, 1); 
+        }
+        else
+        {
+            effectInstance.transform.localScale = new Vector3(-1, 1, 1); 
+        }
     }
 
     void PerformSecondAttack()
@@ -103,7 +142,7 @@ public class Boss : Enemy
         float jumpDuration = 1.5f;
         float elapsedTime = 0;
         Vector2 startPosition = transform.position;
-        Vector2 peakPosition = new Vector2(startPosition.x, startPosition.y + 10f); 
+        Vector2 peakPosition = new Vector2(startPosition.x, startPosition.y + 10f);
         while (elapsedTime < jumpDuration)
         {
             transform.position = Vector2.Lerp(startPosition, peakPosition, elapsedTime / jumpDuration);
@@ -120,8 +159,20 @@ public class Boss : Enemy
             yield return null;
         }
         bossAnimator.SetTrigger("Land");
+
+        TriggerLandingEffect();
+
         yield return new WaitForSeconds(0.8f);
         isAttacking = false;
+    }
+
+    public void TriggerLandingEffect()
+    {
+        Vector3 effectOffset = new Vector3(0f, -3f, 0f);
+
+        Vector3 effectSpawnPosition = transform.position + effectOffset;
+
+        Instantiate(landingEffectPrefab, effectSpawnPosition, Quaternion.identity);
     }
 
     public void JumpUp()
