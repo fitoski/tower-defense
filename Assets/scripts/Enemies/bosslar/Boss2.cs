@@ -117,20 +117,34 @@ public class Boss2 : Enemy, IBoss
 
     void AttackType1()
     {
+        //Debug.Log("Performing Attack Type 1");
+        //UpdateOrientationTowardsPlayer();
+        //bossAnimator.SetTrigger("Attack1Leap");
+        //isAttacking = true;
+        //bossAnimator.SetBool("isAttacking", true);
+        //strikeTargetPosition = playerTransform.position;
+        //StartCoroutine(WaitForLeapAnimation());
+
         Debug.Log("Performing Attack Type 1");
         UpdateOrientationTowardsPlayer();
         bossAnimator.SetTrigger("Attack1Leap");
         isAttacking = true;
         bossAnimator.SetBool("isAttacking", true);
-        strikeTargetPosition = playerTransform.position;
         StartCoroutine(WaitForLeapAnimation());
     }
 
     IEnumerator WaitForLeapAnimation()
     {
+        //yield return new WaitForSeconds(0.6f);
+        //PerformLeap();
+        //yield return new WaitForSeconds(0.5f);
+        //PerformStrike();
+
         yield return new WaitForSeconds(0.6f);
         PerformLeap();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
+        strikeTargetPosition = playerTransform.position;
+        yield return new WaitForSeconds(0.25f);
         PerformStrike();
     }
 
@@ -172,10 +186,21 @@ public class Boss2 : Enemy, IBoss
 
     IEnumerator StrikeMoveTowardsTarget(Vector2 target)
     {
-        float duration = 0.5f;
+        //float duration = 0.5f;
+        //float elapsedTime = 0;
+        //Vector2 startPosition = transform.position;
+        //while (elapsedTime < duration)
+        //{
+        //    transform.position = Vector2.Lerp(startPosition, target, elapsedTime / duration);
+        //    elapsedTime += Time.deltaTime;
+        //    yield return null;
+        //}
+        //ApplyStrikeDamage();
+        //OnAttackEnd();
+
+        float duration = 0.25f;
         float elapsedTime = 0;
         Vector2 startPosition = transform.position;
-
         while (elapsedTime < duration)
         {
             transform.position = Vector2.Lerp(startPosition, target, elapsedTime / duration);
@@ -183,7 +208,7 @@ public class Boss2 : Enemy, IBoss
             yield return null;
         }
         ApplyStrikeDamage();
-        OnAttackEnd(); 
+        OnAttackEnd();
     }
 
     //IEnumerator MoveTowardsPlayerDuringStrike()
@@ -227,26 +252,22 @@ public class Boss2 : Enemy, IBoss
 
     IEnumerator HandleAttackEffect()
     {
-        Vector3 firstSpawnPosition = transform.position + (spriteRenderer.flipX ? attackEffectOffset : new Vector3(-attackEffectOffset.x, attackEffectOffset.y, attackEffectOffset.z));
-        GameObject firstEffectInstance = Instantiate(attackEffectPrefab, firstSpawnPosition, Quaternion.identity);
-        firstEffectInstance.GetComponent<Attack2Effect>().InitializeDamage(attackDamage, 0.56f);
-        yield return new WaitForSeconds(0.56f);
-        Destroy(firstEffectInstance);
+        bool isPlayerRightSide = playerTransform.position.x > transform.position.x;
+        Vector3 spawnOffset = isPlayerRightSide ? attackEffectOffset : new Vector3(-attackEffectOffset.x, attackEffectOffset.y, attackEffectOffset.z);
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 spawnPosition = transform.position + spawnOffset;
+            GameObject effectInstance = Instantiate(attackEffectPrefab, spawnPosition, Quaternion.identity);
+            effectInstance.GetComponent<Attack2Effect>().InitializeDamage(attackDamage, 0.56f);
+            if (!isPlayerRightSide)
+            {
+                effectInstance.transform.localScale = new Vector3(-1 * effectInstance.transform.localScale.x, effectInstance.transform.localScale.y, effectInstance.transform.localScale.z);
+            }
 
-        Vector3 secondSpawnPosition = transform.position + (spriteRenderer.flipX ? attackEffectOffset : new Vector3(-attackEffectOffset.x, attackEffectOffset.y, attackEffectOffset.z));
-        GameObject secondEffectInstance = Instantiate(attackEffectPrefab, secondSpawnPosition, Quaternion.identity);
-        secondEffectInstance.GetComponent<Attack2Effect>().InitializeDamage(attackDamage, 0.56f);
-        yield return new WaitForSeconds(0.56f);
-        Destroy(secondEffectInstance);
-
-        Vector3 thirdSpawnPosition = transform.position + (spriteRenderer.flipX ? attackEffectOffset : new Vector3(-attackEffectOffset.x, attackEffectOffset.y, attackEffectOffset.z));
-        GameObject thirdEffectInstance = Instantiate(attackEffectPrefab, thirdSpawnPosition, Quaternion.identity);
-        thirdEffectInstance.GetComponent<Attack2Effect>().InitializeDamage(attackDamage, 0.56f);
-        yield return new WaitForSeconds(0.56f);
-        Destroy(thirdEffectInstance);
-
+            yield return new WaitForSeconds(0.56f);
+            Destroy(effectInstance);
+        }
         OnAttackEnd();
-
     }
 
     IEnumerator PerformShortStep()
