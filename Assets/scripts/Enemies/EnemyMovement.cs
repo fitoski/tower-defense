@@ -29,7 +29,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Update()
     {
-        if (isMoving && target != null && enemy != null && !(enemy is Boss))
+        if (isMoving && target != null && enemy != null && !(enemy is IBoss))
         {
             Vector3 targetPositionWithOffset = target.position;
             Vector2 direction = (targetPositionWithOffset - transform.position).normalized;
@@ -79,7 +79,7 @@ public class EnemyMovement : MonoBehaviour
     {
         target = newTarget;
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

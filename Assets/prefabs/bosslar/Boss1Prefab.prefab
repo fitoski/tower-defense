@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 4373678261000053710}
   - component: {fileID: -3616749556187024895}
   - component: {fileID: 5980781206054759278}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Boss1Prefab
-  m_TagString: Boss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

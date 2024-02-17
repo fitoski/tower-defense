@@ -5,7 +5,7 @@ using TMPro;
 
 public class Enemy : MonoBehaviour
 {
-    private bool isDead = false;
+    protected bool isDead = false;
     [Header("Attributes")]
     public int maxHealth;
     public int baseDamage = 1;
@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour
     private float nextBurnDamageTime = 0;
     private float burnStopTime;
 
-    public void StartBurning(int damageAmount,float burningInterval, float burnTime)
+    public void StartBurning(int damageAmount, float burningInterval, float burnTime)
     {
         if (burnDamageAmount < damageAmount)
         {

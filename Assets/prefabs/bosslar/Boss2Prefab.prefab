@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8706514690153619327}
   m_Layer: 6
   m_Name: Boss2Prefab
-  m_TagString: Boss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 640640077, guid: 73ac179fcf5012a4b911315cb4116f58, type: 3}
+  m_Sprite: {fileID: -1412450777, guid: 38585bc63636a1c468596c17354ad207, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,9 +148,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.15, y: -0.07}
-  m_Size: {x: 0.638279, y: 0.63827497}
-  m_Direction: 1
+  m_Offset: {x: 0.1896571, y: -0.016742803}
+  m_Size: {x: 0.2700001, y: 0.7434865}
+  m_Direction: 0
 --- !u!95 &5440685154819086373
 Animator:
   serializedVersion: 5
@@ -211,11 +211,12 @@ MonoBehaviour:
   experiencePointsValue: 5
   floatingTextPrefab: {fileID: 97509583214055842, guid: 373a9155f7acc9240ac8032289873413, type: 3}
   canvasTransform: {fileID: 0}
-  experiencePrefab: {fileID: 0}
+  experiencePrefab: {fileID: 5343862706134409668, guid: 914004ba27078254686d67c8b4a43f52, type: 3}
   goldValue: 1
   burnDamageAmount: 0
   attackRange: 5
   attackDamage: 10
   attackCooldown: 5
-  chestPrefab: {fileID: 0}
-  droppableItems: []
+  chestPrefab: {fileID: 6854125686869889687, guid: aa0684ac749450a44b65e156feb2326c, type: 3}
+  attackEffectPrefab: {fileID: 5947891208322678533, guid: d47d6b9f257f27b41a8b72964e7bb0e2, type: 3}
+  attackEffectOffset: {x: 0, y: 0, z: 0}

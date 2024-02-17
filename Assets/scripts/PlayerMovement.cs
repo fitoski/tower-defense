@@ -8,25 +8,25 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5.0f; 
-    public float pickupRange = 3.0f; 
-    public float xpGain = 1.0f; 
-    public int maxPlayerHealth = 500; 
-    public float healthRegenerationRate = 0.2f; 
-    public float armorValue = 10; 
-    public float blockStrength = 10; 
-    public float defense = 10f; 
-    public float defenseBonus = 1f; 
+    public float moveSpeed = 5.0f;
+    public float pickupRange = 3.0f;
+    public float xpGain = 1.0f;
+    public int maxPlayerHealth = 500;
+    public float healthRegenerationRate = 0.2f;
+    public float armorValue = 10;
+    public float blockStrength = 10;
+    public float defense = 10f;
+    public float defenseBonus = 1f;
     public bool hasIncreasedDefense = false;
     public bool hasIncreasedDefenseBonus = false;
     public bool hasIncreasedBlockStrength = false;
-    public int playerDamage = 100; 
+    public int playerDamage = 100;
     public float attackCooldown = 1.1f;
-    public float multistrike = 1.00f; 
-    public float criticalHitChance = 20f; 
-    public float criticalHitBonus = 65f; 
-    public float range = 5.5f; 
-    public float area = 2.0f; 
+    public float multistrike = 1.00f;
+    public float criticalHitChance = 20f;
+    public float criticalHitBonus = 65f;
+    public float range = 5.5f;
+    public float area = 2.0f;
     private Rigidbody2D rb;
     public Transform sword;
     public float orbitRadius = 2f;
@@ -80,9 +80,9 @@ public class PlayerMovement : MonoBehaviour
     private bool autoAttackEnabled = false;
     private Transform nearestEnemy;
     private bool isDead = false;
-    private const float perLevelDamageIncrease = 0.5f; 
-    private const float perLevelHealthIncrease = 2.5f; 
-    private const float per10LevelDamageIncrease = 0.05f; 
+    private const float perLevelDamageIncrease = 0.5f;
+    private const float perLevelHealthIncrease = 2.5f;
+    private const float per10LevelDamageIncrease = 0.05f;
 
     void Start()
     {
@@ -331,13 +331,15 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator PausePlayer()
     {
         isMoving = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         isMoving = true;
     }
 
     private float CalculateBlockChance(int incomingDamage)
     {
         return Mathf.Min(0.5f, blockStrength / (float)incomingDamage) * 100f;
+
+        //return Mathf.Clamp(blockStrength / incomingDamage, 0f, 1f) * 100;
     }
 
     private float CalculateDamageReduction(float defense)
@@ -345,6 +347,8 @@ public class PlayerMovement : MonoBehaviour
         float inverseHyperbolicEffect = Mathf.Sign(defense) * (0.6f - 24f / (Mathf.Abs(defense) + 40f));
         float clippedLinearEffect = Mathf.Min(0.4f, 0.004f * defense);
         return (inverseHyperbolicEffect + clippedLinearEffect) * 100f;
+
+        //return Mathf.Clamp(defense / (defense + 100), 0f, 0.75f);
     }
 
     void UpdateHealthBars()
@@ -642,7 +646,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isMoving = false;
         isDead = true;
-        this.enabled = false; 
+        this.enabled = false;
         if (playerAnimator != null)
         {
             playerAnimator.SetTrigger("dkDeath");
@@ -652,10 +656,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void DisablePlayerControls()
     {
-        this.enabled = false; 
+        this.enabled = false;
         if (swordAnimator != null)
         {
-            swordAnimator.enabled = false; 
+            swordAnimator.enabled = false;
         }
     }
 
@@ -696,10 +700,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void EnablePlayerControls()
     {
-        this.enabled = true; 
+        this.enabled = true;
         if (swordAnimator != null)
         {
-            swordAnimator.enabled = true; 
+            swordAnimator.enabled = true;
         }
     }
 }

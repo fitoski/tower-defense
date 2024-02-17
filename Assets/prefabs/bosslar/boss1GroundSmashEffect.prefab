@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3327985558200826369}
   - component: {fileID: 1371085262629090415}
   - component: {fileID: 4834231911590967011}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: boss1GroundSmashEffect
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51629970a09a8054b8d0654b9dda1c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 50

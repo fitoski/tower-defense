@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LandingEffect : MonoBehaviour
 {
-    public int damage = 25; 
+    public int damage = 25;
 
     void OnTriggerEnter2D(Collider2D collision)
     {

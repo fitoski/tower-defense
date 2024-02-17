@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : Enemy
+public class Boss : Enemy, IBoss
 {
     public float attackRange = 5f;
     public int attackDamage = 10;
     public float attackCooldown = 5f;
     private float attackTimer;
-
     private Transform playerTransform;
     private Animator bossAnimator;
     private bool isAttacking = false;
     public GameObject chestPrefab;
-    public float secondAttackCooldown = 10f; 
+    public float secondAttackCooldown = 10f;
     private float secondAttackTimer;
     public Collider2D attackEffectCollider1;
     public Collider2D attackEffectCollider2;
@@ -24,9 +23,9 @@ public class Boss : Enemy
     protected override void Start()
     {
         base.Start();
-        maxHealth = 5000;
+        maxHealth = 50;
         speed = 2f;
-        baseDamage = 1;
+        baseDamage = 10;
         scoreValue = 15;
         experiencePointsValue = 10;
         damageMultiplierPerWave = 1.5f;
@@ -94,7 +93,7 @@ public class Boss : Enemy
         }
     }
 
-    void AttackPlayer()
+    public void AttackPlayer()
     {
         UpdateOrientationTowardsPlayer();
         Debug.Log("Boss is attacking");
@@ -116,11 +115,11 @@ public class Boss : Enemy
 
         if (playerTransform.position.x < transform.position.x)
         {
-            effectInstance.transform.localScale = new Vector3(1, 1, 1); 
+            effectInstance.transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            effectInstance.transform.localScale = new Vector3(-1, 1, 1); 
+            effectInstance.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
@@ -130,39 +129,45 @@ public class Boss : Enemy
         {
             Debug.Log("Boss performs the second attack");
             Vector2 targetPosition = playerTransform.position;
-            isAttacking = true;  
+            isAttacking = true;
             StartCoroutine(JumpToPosition(targetPosition));
         }
     }
 
-    IEnumerator JumpToPosition(Vector2 targetPosition)
+    IEnumerator JumpToPosition(Vector2 initialTargetPosition)
     {
         bossAnimator.SetTrigger("Jump");
         yield return new WaitForSeconds(0.15f);
-        float jumpDuration = 1.5f;
+
+        float jumpUpDuration = 0.75f;
         float elapsedTime = 0;
         Vector2 startPosition = transform.position;
-        Vector2 peakPosition = new Vector2(startPosition.x, startPosition.y + 10f);
-        while (elapsedTime < jumpDuration)
+        Vector2 peakPosition = new Vector2(startPosition.x, startPosition.y + 15f);
+
+        while (elapsedTime < jumpUpDuration)
         {
-            transform.position = Vector2.Lerp(startPosition, peakPosition, elapsedTime / jumpDuration);
+            transform.position = Vector2.Lerp(startPosition, peakPosition, elapsedTime / jumpUpDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(1f);
+
+        Vector2 finalTargetPosition = playerTransform.position;
         elapsedTime = 0;
         startPosition = transform.position;
-        while (elapsedTime < jumpDuration)
+        float jumpDownDuration = 0.75f;
+
+        while (elapsedTime < jumpDownDuration)
         {
-            transform.position = Vector2.Lerp(startPosition, targetPosition, elapsedTime / jumpDuration);
+            transform.position = Vector2.Lerp(startPosition, finalTargetPosition, elapsedTime / jumpDownDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
         bossAnimator.SetTrigger("Land");
-
         TriggerLandingEffect();
-
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.4f);
         isAttacking = false;
     }
 
@@ -177,7 +182,7 @@ public class Boss : Enemy
 
     public void JumpUp()
     {
-        float jumpHeight = 10f; 
+        float jumpHeight = 10f;
         transform.position = new Vector2(transform.position.x, transform.position.y + jumpHeight);
     }
 
@@ -194,10 +199,18 @@ public class Boss : Enemy
         isAttacking = false;
     }
 
-    public new void Die()
+    protected override void Die()
     {
-        base.Die();
+        if (isDead) return;
+        isDead = true;
+        bossAnimator.SetTrigger("Die");
+    }
+
+    private new void OnDeathAnimationComplete()
+    {
         SpawnChest();
+        DropExperience();
+        Destroy(gameObject);
     }
 
     void SpawnChest()
@@ -209,5 +222,17 @@ public class Boss : Enemy
     {
         Debug.Log("skill item düştü");
         SkillsManager.Instance.PrepareSkillRewardPanel();
+    }
+
+    void DropExperience()
+    {
+        if (experiencePrefab != null)
+        {
+            Instantiate(experiencePrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Experience prefab is not set!");
+        }
     }
 }
