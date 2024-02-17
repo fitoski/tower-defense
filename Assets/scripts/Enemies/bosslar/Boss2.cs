@@ -117,14 +117,6 @@ public class Boss2 : Enemy, IBoss
 
     void AttackType1()
     {
-        //Debug.Log("Performing Attack Type 1");
-        //UpdateOrientationTowardsPlayer();
-        //bossAnimator.SetTrigger("Attack1Leap");
-        //isAttacking = true;
-        //bossAnimator.SetBool("isAttacking", true);
-        //strikeTargetPosition = playerTransform.position;
-        //StartCoroutine(WaitForLeapAnimation());
-
         Debug.Log("Performing Attack Type 1");
         UpdateOrientationTowardsPlayer();
         bossAnimator.SetTrigger("Attack1Leap");
@@ -135,11 +127,6 @@ public class Boss2 : Enemy, IBoss
 
     IEnumerator WaitForLeapAnimation()
     {
-        //yield return new WaitForSeconds(0.6f);
-        //PerformLeap();
-        //yield return new WaitForSeconds(0.5f);
-        //PerformStrike();
-
         yield return new WaitForSeconds(0.6f);
         PerformLeap();
         yield return new WaitForSeconds(0.25f);
@@ -186,18 +173,6 @@ public class Boss2 : Enemy, IBoss
 
     IEnumerator StrikeMoveTowardsTarget(Vector2 target)
     {
-        //float duration = 0.5f;
-        //float elapsedTime = 0;
-        //Vector2 startPosition = transform.position;
-        //while (elapsedTime < duration)
-        //{
-        //    transform.position = Vector2.Lerp(startPosition, target, elapsedTime / duration);
-        //    elapsedTime += Time.deltaTime;
-        //    yield return null;
-        //}
-        //ApplyStrikeDamage();
-        //OnAttackEnd();
-
         float duration = 0.25f;
         float elapsedTime = 0;
         Vector2 startPosition = transform.position;
@@ -210,21 +185,6 @@ public class Boss2 : Enemy, IBoss
         ApplyStrikeDamage();
         OnAttackEnd();
     }
-
-    //IEnumerator MoveTowardsPlayerDuringStrike()
-    //{
-    //    Vector2 targetPosition = playerTransform.position;
-    //    float strikeMoveDuration = 0.5f;
-    //    float elapsedTime = 0;
-
-    //    while (elapsedTime < strikeMoveDuration)
-    //    {
-    //        transform.position = Vector2.Lerp(transform.position, targetPosition, elapsedTime / strikeMoveDuration);
-    //        elapsedTime += Time.deltaTime;
-    //        yield return null;
-    //    }
-    //    ApplyStrikeDamage();
-    //}
 
     void ApplyStrikeDamage()
     {

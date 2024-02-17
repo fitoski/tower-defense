@@ -119,16 +119,8 @@ public class Trader : MonoBehaviour
             Debug.LogError("TraderUIManager is not set.");
             return;
         }
-
         currentShopItems = GetRandomItems(4);
-
         traderUIManager.SetCurrentShopItems(currentShopItems);
         traderUIManager.OpenShopUI();
     }
-
-    //public bool ShouldShowStashButton()
-    //{
-    //    return Random.value < 0.1f; 
-    //}
-
 }

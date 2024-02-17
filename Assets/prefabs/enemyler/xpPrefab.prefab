@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6524173848619358424}
   - component: {fileID: 7579527458779788560}
   - component: {fileID: 257768130306979361}
+  - component: {fileID: 3203291225855697017}
   m_Layer: 0
   m_Name: xpPrefab
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9db1798276b16584db5739ed37ba6a6f, type: 3}
+  m_Sprite: {fileID: -1301420373, guid: 843b3b261edce99469619c298bb19917, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,8 +147,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00085430144, y: -0.005298853}
-  m_Size: {x: 0.44322473, y: 0.64357036}
+  m_Offset: {x: -0.0016291619, y: 0.0004957199}
+  m_Size: {x: 0.12700482, y: 0.31408808}
   m_Direction: 0
 --- !u!114 &257768130306979361
 MonoBehaviour:
@@ -162,3 +163,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceAmount: 1
+--- !u!95 &3203291225855697017
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343862706134409668}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 54348729d7eb50c49b25b3dc8fde19eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

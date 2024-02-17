@@ -637,6 +637,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void EquipWeapon(WeaponItem weapon)
+    {
+        playerDamage = (int)weapon.itemDamageBonus;
+        range = weapon.itemRangeBonus;
+        swordSpriteRenderer.sprite = weapon.itemIcon;
+        swordAnimator.runtimeAnimatorController = weapon.weaponAnimator;
+    }
+
     private void ApplyDamageBonusToAllSkills(float damageBonus)
     {
         //

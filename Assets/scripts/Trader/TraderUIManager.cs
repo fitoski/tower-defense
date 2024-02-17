@@ -10,7 +10,6 @@ public class TraderUIManager : MonoBehaviour
 {
     [SerializeField] private Transform buttonsParent;
     [SerializeField] private GameObject buttonPrefab;
-    //[SerializeField] private Button stashBuyButton;
     [SerializeField] private GameObject purchasedItemPanel;
     public GameObject shopPanel;
     public static TraderUIManager instance;
@@ -165,6 +164,14 @@ public class TraderUIManager : MonoBehaviour
                 }
                 break;
 
+            case ItemType.Weapon:
+                WeaponItem weapon = item as WeaponItem;
+                if (weapon != null)
+                {
+                    playerMovement.EquipWeapon(weapon);
+                }
+                break;
+
             default:
                 Debug.LogError("Unrecognized item type: " + item.itemType);
                 break;
@@ -261,16 +268,4 @@ public class TraderUIManager : MonoBehaviour
             notificationText.gameObject.SetActive(false);
         }
     }
-
-    //public void UpdateUI()
-    //{
-    //    if (stashBuyButton != null)
-    //    {
-    //        stashBuyButton.gameObject.SetActive(trader.ShouldShowStashButton());
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("Stash buy button not assigned in TraderUIManager.");
-    //    }
-    //}
 }
