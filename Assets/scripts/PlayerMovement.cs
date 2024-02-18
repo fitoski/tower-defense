@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private Color originalColor;
     private SpriteRenderer playerSpriteRenderer;
     public SpriteRenderer swordSpriteRenderer;
+    private Sprite currentWeaponSprite;
     public List<Sprite> weaponSprites;
     private Animator playerAnimator;
     private bool isMoving = true;
@@ -83,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
     private const float perLevelDamageIncrease = 0.5f;
     private const float perLevelHealthIncrease = 2.5f;
     private const float per10LevelDamageIncrease = 0.05f;
+    private bool isAttacking = false;
 
     void Start()
     {
@@ -94,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameManager = FindObjectOfType<GameManager>();
         swordSpriteRenderer = sword.GetComponent<SpriteRenderer>();
+        currentWeaponSprite = swordSpriteRenderer.sprite;
         swordAnimator = sword.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
     }
@@ -156,6 +159,25 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             UpdateSwordRotation();
+        }
+
+
+
+
+
+        if (Input.GetMouseButton(0) && attackCooldownTimer <= 0f)
+        {
+            isAttacking = true; 
+            StartAttackAnimation();
+        }
+        else if (!Input.GetMouseButton(0))
+        {
+            isAttacking = false; 
+        }
+
+        if (!isAttacking)
+        {
+            swordSpriteRenderer.sprite = currentWeaponSprite;
         }
     }
 
@@ -641,7 +663,8 @@ public class PlayerMovement : MonoBehaviour
     {
         playerDamage = (int)weapon.itemDamageBonus;
         range = weapon.itemRangeBonus;
-        swordSpriteRenderer.sprite = weapon.itemIcon;
+        currentWeaponSprite = weapon.itemIcon;
+        swordSpriteRenderer.sprite = currentWeaponSprite;
         swordAnimator.runtimeAnimatorController = weapon.weaponAnimator;
     }
 

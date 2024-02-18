@@ -167,8 +167,8 @@ GameObject:
   - component: {fileID: 2938860285528450030}
   - component: {fileID: 5439758135665474568}
   - component: {fileID: 7145011843399947186}
-  - component: {fileID: -9001889919175403451}
   - component: {fileID: 7377574819402123526}
+  - component: {fileID: -9001889919175403451}
   m_Layer: 11
   m_Name: WanderingTrader
   m_TagString: WanderingTrader
@@ -350,6 +350,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &7377574819402123526
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4733289352250457369}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 94b8f579338fb434685355652ef9fa6e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-9001889919175403451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,6 +403,16 @@ MonoBehaviour:
   - Topaz Amulet
   - Ruby Amulet
   - Sapphire Amulet
+  - Weapon1
+  - Weapon2
+  - Weapon3
+  - Weapon4
+  - Weapon5
+  - Weapon6
+  - Weapon7
+  - Weapon8
+  - Weapon9
+  - Weapon10
   notificationText: {fileID: 0}
   shopUIElements:
   - {fileID: 8830386465397809650, guid: 0c8a9f1d679d0b046af10cb67c9f6cd2, type: 3}
@@ -424,27 +455,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96d777b83c814934e9a6ed760cbc791f, type: 2}
   - {fileID: 11400000, guid: ab2feb3efa7129b41bf64cde908f6640, type: 2}
   - {fileID: 11400000, guid: 6c8cb0f469d98e8419e9c761d117d749, type: 2}
---- !u!95 &7377574819402123526
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4733289352250457369}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 94b8f579338fb434685355652ef9fa6e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6758958073649753015
 GameObject:
   m_ObjectHideFlags: 0
