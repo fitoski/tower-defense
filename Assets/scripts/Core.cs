@@ -58,7 +58,16 @@ public class Core : MonoBehaviour
 
     void UpdateDomeAppearance()
     {
-        int spriteIndex = (int)(((float)currentHealth / maxHealth) * (crackSprites.Count - 1));
+        int spriteIndex = -1;
+        if (currentHealth > 75)
+            spriteIndex = 0; 
+        else if (currentHealth > 50)
+            spriteIndex = 1; 
+        else if (currentHealth > 25)
+            spriteIndex = 2; 
+        else
+            spriteIndex = 3; 
+
         domeRenderer.sprite = crackSprites[spriteIndex];
     }
 }

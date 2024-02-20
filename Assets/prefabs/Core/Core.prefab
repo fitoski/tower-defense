@@ -141,10 +141,9 @@ MonoBehaviour:
   coreHealthBar: {fileID: 0}
   bzztPrefab: {fileID: 784358880956270462, guid: 33157b7f242bb0541ae9fe398b668b4a, type: 3}
   crackSprites:
-  - {fileID: 587395991, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
-  - {fileID: -936665945, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
-  - {fileID: -1158986, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
   - {fileID: -1867525993, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
+  - {fileID: -1158986, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
+  - {fileID: -936665945, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
   domeRenderer: {fileID: 6566130431443324114}
 --- !u!95 &4534750703833046711
 Animator:
