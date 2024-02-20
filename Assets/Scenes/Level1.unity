@@ -15058,9 +15058,9 @@ PrefabInstance:
       propertyPath: coreHealthBar
       value: 
       objectReference: {fileID: 1734234566}
-    - target: {fileID: 3870481846892744746, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
+    - target: {fileID: 4242273079908541001, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
+      propertyPath: m_Name
+      value: coreFanus
       objectReference: {fileID: 0}
     - target: {fileID: 5208686639483664804, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15068,7 +15068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5208686639483664804, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5208686639483664804, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
       propertyPath: m_LocalPosition.z

@@ -120,8 +120,13 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Core") && canInteractWithCore)
         {
-            StopMovement();
-            SetAppropriateTrigger("SpecialAnimation", "Die");
+            Core core = collider.gameObject.GetComponent<Core>();
+            if (core != null)
+            {
+                core.TakeDamage(baseDamage);
+                StopMovement();
+                SetAppropriateTrigger("SpecialAnimation", "Die");
+            }
         }
     }
 
