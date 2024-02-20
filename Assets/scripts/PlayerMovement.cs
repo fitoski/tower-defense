@@ -218,14 +218,22 @@ public class PlayerMovement : MonoBehaviour
             Vector2 enemyPosition = nearestEnemy.transform.position;
             Vector2 directionToEnemy = (enemyPosition - playerPosition).normalized;
 
-            playerSpriteRenderer.flipX = enemyPosition.x < playerPosition.x;
+            bool shouldFlipSword = enemyPosition.x < playerPosition.x;
+            swordSpriteRenderer.flipX = shouldFlipSword;
+            if (shouldFlipSword)
+            {
+                playerSpriteRenderer.flipX = true;
+            }
+            else
+            {
+                playerSpriteRenderer.flipX = false;
+            }
 
             sword.up = directionToEnemy;
             sword.position = playerPosition + directionToEnemy * orbitRadius;
 
             StartAttackAnimation();
         }
-
         else
         {
             if (mousePosition.x < playerPosition.x)
@@ -238,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        return nearestEnemy is not null;
+        return nearestEnemy != null;
     }
 
     Enemy FindNearestEnemy()

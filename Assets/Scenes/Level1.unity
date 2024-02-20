@@ -15058,17 +15058,33 @@ PrefabInstance:
       propertyPath: coreHealthBar
       value: 
       objectReference: {fileID: 1734234566}
-    - target: {fileID: 3870481846892744746, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
+    - target: {fileID: 249810082100032054, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
+      propertyPath: crackSprites.Array.size
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 249810082100032054, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
+      propertyPath: crackSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 587395991, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
+    - target: {fileID: 249810082100032054, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
+      propertyPath: crackSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: -936665945, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
+    - target: {fileID: 249810082100032054, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
+      propertyPath: crackSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: -1158986, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
+    - target: {fileID: 249810082100032054, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
+      propertyPath: crackSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: -1867525993, guid: 9c8577dfe3bd1234ebcbea76a8c2b686, type: 3}
     - target: {fileID: 5208686639483664804, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5208686639483664804, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5208686639483664804, guid: 5564053d124b69f4fa1b7364838aeee8, type: 3}
       propertyPath: m_LocalPosition.z
