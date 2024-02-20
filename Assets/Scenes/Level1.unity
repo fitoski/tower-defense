@@ -2248,6 +2248,11 @@ MonoBehaviour:
   - {fileID: -1293388196, guid: 1945e723ee9eedf47a1d352a0a72603e, type: 3}
   - {fileID: 1606909695, guid: 1e8f5f97ce638f54ebb29ee68711ca84, type: 3}
   - {fileID: -2096765315, guid: c873e368a6d5d7743bc7c77330da51be, type: 3}
+  - {fileID: -1702010697, guid: 5760a531233b6c74380cf7c1f26cad57, type: 3}
+  - {fileID: -1896906183, guid: 056856d519ca46b4eb80f9cb7e35ecff, type: 3}
+  - {fileID: -2009406668, guid: 308d7112ccaf92a4abbe26cc490c4cbb, type: 3}
+  - {fileID: -2041414616, guid: f42e1a06d339315448beedfc920526e4, type: 3}
+  - {fileID: -98272142, guid: a9663c6538c80004aa804cd544e46ef9, type: 3}
   playerHealth: 100
   playerHealthBar: {fileID: 1812741630}
   waveDisplayText: {fileID: 1112839542}
@@ -2260,6 +2265,7 @@ MonoBehaviour:
   hasIncreasedHealthRegen: 0
   hasIncreasedOrbitRadius: 0
   hasDecreasedAttackCooldown: 0
+  attackPoint: {fileID: 1212233371}
 --- !u!50 &345292731
 Rigidbody2D:
   serializedVersion: 4
@@ -9343,6 +9349,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211863441}
   m_CullTransparentMesh: 1
+--- !u!4 &1212233371 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4452740349870456285, guid: ed6d3f58e675334458b0edfadee92fa4, type: 3}
+  m_PrefabInstance: {fileID: 3752643390316817710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1218725252
 GameObject:
   m_ObjectHideFlags: 0
@@ -14988,11 +14999,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6427646968184841353, guid: ed6d3f58e675334458b0edfadee92fa4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.309
+      value: 1.53
       objectReference: {fileID: 0}
     - target: {fileID: 6427646968184841353, guid: ed6d3f58e675334458b0edfadee92fa4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.363
+      value: 0.222
       objectReference: {fileID: 0}
     - target: {fileID: 6427646968184841353, guid: ed6d3f58e675334458b0edfadee92fa4, type: 3}
       propertyPath: m_LocalPosition.z

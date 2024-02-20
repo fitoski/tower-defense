@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
     private const float perLevelHealthIncrease = 2.5f;
     private const float per10LevelDamageIncrease = 0.05f;
     private bool isAttacking = false;
+    public Transform attackPoint;
 
     void Start()
     {
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         currentWeaponSprite = swordSpriteRenderer.sprite;
         swordAnimator = sword.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
+        orbitRadius = 3f;
     }
 
     void Update()
@@ -112,24 +114,22 @@ public class PlayerMovement : MonoBehaviour
             RegenerateHealth();
             healthRegenTimer = 0f;
         }
+
         if (isMoving)
         {
-            if (!autoAimEnabled)
+            Vector2 direction = (mousePosition - playerPosition).normalized;
+            sword.position = playerPosition + direction * orbitRadius;
+            bool shouldFlipSword = mousePosition.x < playerPosition.x;
+            swordSpriteRenderer.flipX = shouldFlipSword;
+            if (shouldFlipSword)
             {
-                Vector2 direction = (mousePosition - playerPosition).normalized;
-                sword.position = playerPosition + direction * orbitRadius;
-                sword.up = direction;
-                sword.RotateAround(playerPosition, Vector3.forward, orbitSpeed * Time.deltaTime);
-
-                if (mousePosition.x < playerPosition.x)
-                {
-                    playerSpriteRenderer.flipX = true;
-                }
-                else if (mousePosition.x > playerPosition.x)
-                {
-                    playerSpriteRenderer.flipX = false;
-                }
+                playerSpriteRenderer.flipX = true;
             }
+            else
+            {
+                playerSpriteRenderer.flipX = false;
+            }
+            sword.RotateAround(playerPosition, Vector3.forward, orbitSpeed * Time.deltaTime);
             bool isAttacking = Input.GetMouseButton(0);
             directionToMouse = (mousePosition - playerPosition).normalized;
             movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
@@ -161,20 +161,15 @@ public class PlayerMovement : MonoBehaviour
             UpdateSwordRotation();
         }
 
-
-
-
-
         if (Input.GetMouseButton(0) && attackCooldownTimer <= 0f)
         {
-            isAttacking = true; 
+            isAttacking = true;
             StartAttackAnimation();
         }
         else if (!Input.GetMouseButton(0))
         {
-            isAttacking = false; 
+            isAttacking = false;
         }
-
         if (!isAttacking)
         {
             swordSpriteRenderer.sprite = currentWeaponSprite;
@@ -195,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(sword.position, area);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, area);
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -538,6 +533,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void UpdateOrbitRadius(float newRadius)
+    {
+        orbitRadius = newRadius;
+    }
+
     public Vector2 MovementDirection
     {
         get { return movementDirection; }
@@ -665,7 +665,63 @@ public class PlayerMovement : MonoBehaviour
         range = weapon.itemRangeBonus;
         currentWeaponSprite = weapon.itemIcon;
         swordSpriteRenderer.sprite = currentWeaponSprite;
-        swordAnimator.runtimeAnimatorController = weapon.weaponAnimator;
+
+        if (swordAnimator != null)
+        {
+            swordAnimator.runtimeAnimatorController = weapon.weaponAnimator;
+        }
+        else
+        {
+            Debug.LogError("swordAnimator component not found on the sword object!");
+        }
+
+        orbitRadius = weapon.customOrbitRadius;
+
+        if (weapon.weaponMaterial == "weapon1")
+        {
+            orbitRadius = 3f;
+        }
+        if (weapon.weaponMaterial == "weapon2")
+        {
+            orbitRadius = 3f;
+        }
+        if (weapon.weaponMaterial == "weapon3")
+        {
+            orbitRadius = 3f;
+        }
+        if (weapon.weaponMaterial == "weapon4")
+        {
+            orbitRadius = 3.5f;
+        }
+        if (weapon.weaponMaterial == "weapon5")
+        {
+            orbitRadius = 5f;
+            attackPoint.localPosition = new Vector2(0f, 1f); // bi tık geri alınabilir.
+        }
+        if (weapon.weaponMaterial == "weapon6")
+        {
+            orbitRadius = 3f;
+        }
+        if (weapon.weaponMaterial == "weapon7")
+        {
+            orbitRadius = -1.5f;
+            attackPoint.localPosition = new Vector2(0f, 2f);
+        }
+        if (weapon.weaponMaterial == "weapon8")
+        {
+            orbitRadius = -0.5f;
+            attackPoint.localPosition = new Vector2(0f, 2f);
+        }
+        if (weapon.weaponMaterial == "weapon9")
+        {
+            orbitRadius = 3f;
+        }
+        if (weapon.weaponMaterial == "weapon10")
+        {
+            orbitRadius = 3f;
+            attackPoint.localPosition = new Vector2(0f, -0.5f);
+        }
+
     }
 
     private void ApplyDamageBonusToAllSkills(float damageBonus)

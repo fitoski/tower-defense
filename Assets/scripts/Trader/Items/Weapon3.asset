@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9425788237e741048be24d5ee3aaa4ad, type: 3}
   m_Name: Weapon3
   m_EditorClassIdentifier: 
-  itemName: Weapon1
+  itemName: Weapon3
   price: 0
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: -1293388196, guid: 1945e723ee9eedf47a1d352a0a72603e, type: 3}
   itemType: 0
-  itemDamageBonus: 0
+  itemDamageBonus: 100
   itemRangeBonus: 0
   armorBonus: 0
-  material: 
-  moveSpeedMultiplier: 0
-  defenseBonusMultiplier: 0
+  weaponMaterial: weapon3
+  weaponAnimator: {fileID: 9100000, guid: e8389b9280d7a8b43acf4fd5afdd4819, type: 2}
+  customOrbitRadius: 2

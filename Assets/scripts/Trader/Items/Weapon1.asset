@@ -16,10 +16,9 @@ MonoBehaviour:
   price: 0
   itemIcon: {fileID: -1530178956, guid: 2de0eab5657fc644586a6204a6b77149, type: 3}
   itemType: 0
-  itemDamageBonus: 0
+  itemDamageBonus: 100
   itemRangeBonus: 0
   armorBonus: 0
-  material: Steel
-  moveSpeedMultiplier: 1.05
-  defenseBonusMultiplier: 1.1
+  weaponMaterial: weapon1
   weaponAnimator: {fileID: 9100000, guid: 5d8dfe037268ef140aba41604cb620fb, type: 2}
+  customOrbitRadius: 2
