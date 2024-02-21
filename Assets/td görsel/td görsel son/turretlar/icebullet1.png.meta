@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 81f1bcad9896fc54292058a44d5e17bb
+guid: 3925575122062404c897616652c405db
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icebullet_0
+      name: icebullet1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 234a058e6b51a9a468711aba87d6cb10
-      internalID: -177792646
+      spriteID: a920ad325fabb7c429c795a3618c5995
+      internalID: -279276733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_1
+      name: icebullet1_1
       rect:
         serializedVersion: 2
         x: 39
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9878249c8ef0b4b43aef294ce0432929
-      internalID: 688877340
+      spriteID: 1c7c2d342fec77944a518ea9cfa4829a
+      internalID: -176135721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_2
+      name: icebullet1_2
       rect:
         serializedVersion: 2
         x: 78
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e184b84d4407f1e4e9c31a49437da86f
-      internalID: -1652752320
+      spriteID: 9b525e5a9be88d74780fdfe1c5163407
+      internalID: -280944397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_3
+      name: icebullet1_3
       rect:
         serializedVersion: 2
         x: 117
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f59c125fcf7cb64b9c5155db8f2b4f6
-      internalID: -968657883
+      spriteID: 2467a2757cc80f64685cfd47d6ff632d
+      internalID: -1052242402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_4
+      name: icebullet1_4
       rect:
         serializedVersion: 2
         x: 156
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cedb4c62e464b054ca7dc44a2932e1d3
-      internalID: 315263996
+      spriteID: 0ee914f8e5afeae43a35087fb07bc122
+      internalID: 2131721546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_5
+      name: icebullet1_5
       rect:
         serializedVersion: 2
         x: 195
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be1f88958f9e0a245808cdec7eb0b6dc
-      internalID: 191112241
+      spriteID: 6045c942b2140554f93056cb727cbdba
+      internalID: -1512302591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_6
+      name: icebullet1_6
       rect:
         serializedVersion: 2
         x: 234
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35a75ecbc1b87b64f961a1702b419270
-      internalID: -2089403326
+      spriteID: 9dea73fac2163d344ae858c4380130d6
+      internalID: -1266784770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_7
+      name: icebullet1_7
       rect:
         serializedVersion: 2
         x: 273
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ada0ec70896698b47a5a6393c14e7a9b
-      internalID: 192865533
+      spriteID: ed01ad22adb1fb64cb096ccf30bca6a5
+      internalID: 9699091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_8
+      name: icebullet1_8
       rect:
         serializedVersion: 2
         x: 312
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51efb80311d52a14ea39bfb48c5d8d9a
-      internalID: -1348824930
+      spriteID: 04b01d5259d133f42a19501fa1f54c8e
+      internalID: 210443213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icebullet_9
+      name: icebullet1_9
       rect:
         serializedVersion: 2
         x: 351
@@ -313,8 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be35541dc02d6ef448c4cd4e18dd803e
-      internalID: 285182758
+      spriteID: d4dab79f66e484e43be0ae50bc4838ad
+      internalID: -2109874181
       vertices: []
       indices: 
       edges: []
@@ -330,16 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      icebullet_0: -177792646
-      icebullet_1: 688877340
-      icebullet_2: -1652752320
-      icebullet_3: -968657883
-      icebullet_4: 315263996
-      icebullet_5: 191112241
-      icebullet_6: -2089403326
-      icebullet_7: 192865533
-      icebullet_8: -1348824930
-      icebullet_9: 285182758
+      icebullet1_0: -279276733
+      icebullet1_1: -176135721
+      icebullet1_2: -280944397
+      icebullet1_3: -1052242402
+      icebullet1_4: 2131721546
+      icebullet1_5: -1512302591
+      icebullet1_6: -1266784770
+      icebullet1_7: 9699091
+      icebullet1_8: 210443213
+      icebullet1_9: -2109874181
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
