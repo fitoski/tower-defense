@@ -150,20 +150,62 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // FIRE TURRET EFFECTS
     public int burnDamageAmount;
     private float burningInterval;
     private float nextBurnDamageTime = 0;
     private float burnStopTime;
-
-    public void StartBurning(int damageAmount, float burningInterval, float burnTime)
+    public void StartBurning(int damageAmount, float interval, float duration)
     {
-        if (burnDamageAmount < damageAmount)
-        {
-            burnDamageAmount = damageAmount;
-            this.burningInterval = burningInterval;
-        }
+        Debug.Log($"Enemy {gameObject.name}: Starting to burn with {damageAmount} damage every {interval} seconds for {duration} seconds.");
 
-        burnStopTime = Time.time + burningInterval;
+        StopCoroutine("ApplyBurningDamage");
+        StartCoroutine(ApplyBurningDamage(damageAmount, interval, duration));
+    }
+    private IEnumerator ApplyBurningDamage(int damageAmount, float interval, float duration)
+    {
+        float endTime = Time.time + duration;
+
+        while (Time.time < endTime)
+        {
+            Debug.Log($"Enemy {gameObject.name}: Burn damage applied: {damageAmount}");
+
+            TakeDamage(damageAmount);
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
+    // ICE TURRET EFFECTS
+    public void SlowDown(float slowFactor, float duration)
+    {
+        StartCoroutine(SlowCoroutine(slowFactor, duration));
+    }
+    private IEnumerator SlowCoroutine(float slowFactor, float duration)
+    {
+        float originalSpeed = speed;
+        speed *= slowFactor;
+
+        yield return new WaitForSeconds(duration);
+
+        speed = originalSpeed;
+    }
+
+    // WIND TURRET EFFECTS
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        StartCoroutine(KnockbackCoroutine(direction, force));
+    }
+    private IEnumerator KnockbackCoroutine(Vector2 direction, float force)
+    {
+        float duration = 0.2f;
+        float timer = 0;
+
+        while (timer < duration)
+        {
+            transform.position += (Vector3)(direction * force * Time.deltaTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
 
     public void OnDeathAnimationComplete()
