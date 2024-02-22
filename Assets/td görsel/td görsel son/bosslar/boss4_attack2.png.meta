@@ -46,8 +46,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.3}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -106,6 +106,45 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -117,8 +156,8 @@ TextureImporter:
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -138,8 +177,8 @@ TextureImporter:
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,15 +191,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_2
+      name: boss4_attack2_10
       rect:
         serializedVersion: 2
-        x: 306
+        x: 1530
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,15 +212,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_3
+      name: boss4_attack2_2
       rect:
         serializedVersion: 2
-        x: 459
+        x: 306
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,15 +233,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_4
+      name: boss4_attack2_3
       rect:
         serializedVersion: 2
-        x: 612
+        x: 459
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,15 +254,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_5
+      name: boss4_attack2_4
       rect:
         serializedVersion: 2
-        x: 765
+        x: 612
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,15 +275,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_6
+      name: boss4_attack2_5
       rect:
         serializedVersion: 2
-        x: 918
+        x: 765
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,15 +296,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_7
+      name: boss4_attack2_6
       rect:
         serializedVersion: 2
-        x: 1071
+        x: 918
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,15 +317,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_8
+      name: boss4_attack2_7
       rect:
         serializedVersion: 2
-        x: 1224
+        x: 1071
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,15 +338,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_9
+      name: boss4_attack2_8
       rect:
         serializedVersion: 2
-        x: 1377
+        x: 1224
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -320,15 +359,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss4_attack2_10
+      name: boss4_attack2_9
       rect:
         serializedVersion: 2
-        x: 1530
+        x: 1377
         y: 0
         width: 153
         height: 129
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -353,15 +392,15 @@ TextureImporter:
     nameFileIdTable:
       boss4_attack2_0: 480621749
       boss4_attack2_1: -1936288132
-      boss4_attack2_10: 1587335537
-      boss4_attack2_2: 1143315958
-      boss4_attack2_3: 70276644
-      boss4_attack2_4: 2007982242
-      boss4_attack2_5: 1935727996
-      boss4_attack2_6: 1548886478
-      boss4_attack2_7: -48070659
-      boss4_attack2_8: 2010879691
-      boss4_attack2_9: -1715586755
+      boss4_attack2_10: 1143315958
+      boss4_attack2_2: 70276644
+      boss4_attack2_3: 2007982242
+      boss4_attack2_4: 1935727996
+      boss4_attack2_5: 1548886478
+      boss4_attack2_6: -48070659
+      boss4_attack2_7: 2010879691
+      boss4_attack2_8: -1715586755
+      boss4_attack2_9: 1587335537
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
