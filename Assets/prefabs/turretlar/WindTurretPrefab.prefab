@@ -105,7 +105,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8915250865084867541, guid: 46fb71f0896398f4e87098438a4489ce, type: 3}
   firingPoint: {fileID: 514950347399163526}
   animator: {fileID: 3938969793502915524}
-  targetingRange: 6
+  targetingRange: 10
   bps: 1
   turretName: Turret
   turretIcon: {fileID: -201153775, guid: db776bbae3eb0694eb02cc2ae9ac534d, type: 3}

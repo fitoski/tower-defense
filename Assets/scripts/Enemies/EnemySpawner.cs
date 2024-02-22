@@ -176,6 +176,12 @@ public class EnemySpawner : MonoBehaviour
             case 12: 
                 bossPrefab = Boss2Prefab;
                 break;
+            case 18:
+                bossPrefab = Boss3Prefab;
+                break;
+            case 24:
+                bossPrefab = Boss4Prefab;
+                break;
             case 30: 
                 bossPrefab = Boss5Prefab;
                 break;

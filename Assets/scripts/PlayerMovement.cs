@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     private const float per10LevelDamageIncrease = 0.05f;
     private bool isAttacking = false;
     public Transform attackPoint;
+    public float healthRegenTickInterval = 10f;
 
     void Start()
     {
@@ -109,10 +110,10 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerPosition = transform.position;
 
         healthRegenTimer += Time.deltaTime;
-        if (healthRegenTimer >= healthRegenInterval)
+        if (healthRegenTimer >= healthRegenTickInterval)
         {
             RegenerateHealth();
-            healthRegenTimer = 0f;
+            healthRegenTimer -= healthRegenTickInterval;
         }
 
         if (isMoving)
@@ -427,25 +428,16 @@ public class PlayerMovement : MonoBehaviour
 
     void RegenerateHealth()
     {
-        if (healthRegenerationRate > 0f)
+        if (playerHealth < maxPlayerHealth)
         {
-            playerHealth = Mathf.Min(playerHealth + (int)healthRegenerationRate, maxPlayerHealth);
+            playerHealth = Mathf.Min(playerHealth + 1, maxPlayerHealth);
             UpdateHealthBars();
         }
     }
 
     public void IncreaseHealthRegeneration()
     {
-        if (healthRegenerationRate <= 0f)
-        {
-            healthRegenerationRate = Mathf.Max(healthRegenFirstTimeValue, maxHealthRegenRate * healthRegenBaseMultiplier);
-        }
-        else if (healthRegenerationRate < maxHealthRegenRate)
-        {
-            float healthRegenIncreaseAmount = healthRegenerationRate * healthRegenIncreasePercentage;
-            healthRegenerationRate = Mathf.Min(healthRegenerationRate + healthRegenIncreaseAmount, PlayerMovement.maxHealthRegenRate);
-        }
-
+        healthRegenTickInterval = Mathf.Max(1f, healthRegenTickInterval - 0.5f);
         hasIncreasedHealthRegen = true;
     }
 

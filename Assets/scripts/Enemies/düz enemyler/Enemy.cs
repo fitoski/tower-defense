@@ -14,7 +14,8 @@ public class Enemy : MonoBehaviour
     public float damageMultiplierPerWave = 1.5f;
     protected int currentHealth;
     protected EnemyMovement enemyMovement;
-    public float speed;
+    public float speed = 2f;
+    private float originalSpeed;
     public int scoreValue = 10;
     public int experiencePointsValue = 5;
     private Vector2 previousPosition;
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour
         int currentWave = EnemySpawner.Instance.GetCurrentWaveNumber();
         maxHealth = Mathf.RoundToInt(baseMaxHealth * Mathf.Pow(healthMultiplierPerWave, currentWave - 1));
         currentHealth = maxHealth;
-        speed = 2f;
+        originalSpeed = speed; 
         animator = GetComponent<Animator>();
         enemyMovement = GetComponent<EnemyMovement>();
         previousPosition = transform.position;
@@ -178,6 +179,11 @@ public class Enemy : MonoBehaviour
     // ICE TURRET EFFECTS
     public void SlowDown(float slowFactor, float duration)
     {
+        float newSpeed = speed * slowFactor;
+        if (newSpeed < originalSpeed * 0.1f)
+        {
+            slowFactor = originalSpeed * 0.1f / speed;
+        }
         StartCoroutine(SlowCoroutine(slowFactor, duration));
     }
     private IEnumerator SlowCoroutine(float slowFactor, float duration)
