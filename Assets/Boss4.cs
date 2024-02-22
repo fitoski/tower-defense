@@ -9,15 +9,17 @@ public class Boss4 : Enemy, IBoss
     public int meleeAttackDamage = 20;
     public float meleeAttackCooldown = 2f;
     private float meleeAttackTimer;
-
+    public GameObject meleeAttackPrefab;
     public GameObject projectilePrefab;
     public Transform projectileSpawnPoint;
     public float projectileCooldown = 5f;
     private float projectileTimer;
-
+    public GameObject currentMeleeAttackZone;
     private Animator bossAnimator;
     private Transform playerTransform;
     private bool isAttacking = false;
+    private float attackDelay = 2f; 
+    private float lastAttackTime = -2f; 
 
     protected override void Start()
     {
@@ -39,11 +41,6 @@ public class Boss4 : Enemy, IBoss
         HandleMovementAndAttacks(distanceToPlayer);
     }
 
-    public void AttackPlayer()
-    {
-        PerformMeleeAttack();
-    }
-
     private void HandleTimers()
     {
         meleeAttackTimer -= Time.deltaTime;
@@ -52,15 +49,19 @@ public class Boss4 : Enemy, IBoss
 
     private void HandleMovementAndAttacks(float distanceToPlayer)
     {
-        if (!isAttacking && distanceToPlayer <= meleeAttackRange && meleeAttackTimer <= 0)
+        if (!isAttacking && Time.time >= lastAttackTime + attackDelay)
         {
-            PerformMeleeAttack();
+            if (distanceToPlayer <= meleeAttackRange && meleeAttackTimer <= 0)
+            {
+                PerformMeleeAttack();
+            }
+            else if (distanceToPlayer > meleeAttackRange * 2 && projectileTimer <= 0)
+            {
+                PerformProjectileAttack();
+            }
         }
-        else if (!isAttacking && distanceToPlayer > meleeAttackRange && projectileTimer <= 0)
-        {
-            PerformProjectileAttack();
-        }
-        else if (!isAttacking)
+
+        if (!isAttacking)
         {
             FollowPlayer();
         }
@@ -68,26 +69,35 @@ public class Boss4 : Enemy, IBoss
 
     private void PerformMeleeAttack()
     {
-        if (!isAttacking && meleeAttackTimer <= 0)
-        {
-            Debug.Log("Performing melee attack");
-            isAttacking = true;
-            bossAnimator.SetBool("isAttacking", true);
-            bossAnimator.SetTrigger("MeleeAttack");
-            meleeAttackTimer = meleeAttackCooldown;
-        }
+        Debug.Log("Performing melee attack");
+        isAttacking = true;
+        bossAnimator.SetBool("isAttacking", true);
+        bossAnimator.SetTrigger("MeleeAttack");
+        meleeAttackTimer = meleeAttackCooldown;
+        lastAttackTime = Time.time;
     }
 
     private void PerformProjectileAttack()
     {
-        isAttacking = true;
-        bossAnimator.SetBool("isAttacking", true);
-        bossAnimator.SetTrigger("ProjectileAttack");
-        projectileTimer = projectileCooldown;
+        Debug.Log("Performing projectile attack");
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            bossAnimator.SetBool("isAttacking", true);
+            bossAnimator.SetTrigger("ProjectileAttack");
+            lastAttackTime = Time.time;
 
-        var projectileObject = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        var projectileScript = projectileObject.GetComponent<FollowProjectile>();
-        projectileScript.Initialize(playerTransform, 5f);
+            GameObject projectileObject = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+            FollowProjectile projectileScript = projectileObject.GetComponent<FollowProjectile>();
+            if (projectileScript != null)
+            {
+                projectileScript.Initialize(playerTransform, 5f);
+            }
+            else
+            {
+                Debug.LogError("Projectile prefab does not have a FollowProjectile component.");
+            }
+        }
     }
 
     public void OnMeleeAttackEnd()
@@ -104,31 +114,19 @@ public class Boss4 : Enemy, IBoss
 
     private void FollowPlayer()
     {
-        UpdateOrientationTowardsPlayer();
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
-    }
-
-    private void AdjustColliderOffset(bool shouldFaceRight)
-    {
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
+        if (!isAttacking)
         {
-            if ((shouldFaceRight && collider.offset.x < 0) || (!shouldFaceRight && collider.offset.x > 0))
-            {
-                collider.offset = new Vector2(-collider.offset.x, collider.offset.y);
-            }
-        }
-        else
-        {
-            Debug.LogError("Collider2D component not found on " + gameObject.name);
+            UpdateOrientationTowardsPlayer();
+            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
         }
     }
 
     private void UpdateOrientationTowardsPlayer()
     {
         bool shouldFaceRight = playerTransform.position.x > transform.position.x;
-
         GetComponent<SpriteRenderer>().flipX = !shouldFaceRight;
+
+        AdjustColliderOffset(shouldFaceRight);
 
         if (projectileSpawnPoint != null)
         {
@@ -138,7 +136,31 @@ public class Boss4 : Enemy, IBoss
                 projectileSpawnPoint.localPosition.z
             );
 
-            projectileSpawnPoint.localRotation = Quaternion.Euler(0, 0, 0); 
+            projectileSpawnPoint.localRotation = Quaternion.Euler(0, shouldFaceRight ? 0 : 180, 0);
         }
+    }
+
+    private void AdjustColliderOffset(bool shouldFaceRight)
+    {
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            var offset = collider.offset;
+            collider.offset = new Vector2(Mathf.Abs(offset.x) * (shouldFaceRight ? 1 : -1), offset.y);
+        }
+    }
+
+    public void CreateMeleeAttackZone()
+    {
+        if (meleeAttackPrefab != null)
+        {
+            Vector3 attackZonePosition = transform.position + (GetComponent<SpriteRenderer>().flipX ? Vector3.left : Vector3.right) * 0.5f;
+            Instantiate(meleeAttackPrefab, attackZonePosition, Quaternion.identity, transform);
+        }
+    }
+
+    public void AttackPlayer()
+    {
+
     }
 }

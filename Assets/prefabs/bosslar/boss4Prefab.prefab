@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 7769506986445208153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.09, y: 4.29, z: -13.083365}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -228,9 +228,11 @@ MonoBehaviour:
   meleeAttackRange: 3
   meleeAttackDamage: 20
   meleeAttackCooldown: 2
+  meleeAttackPrefab: {fileID: 6975437382009710776, guid: 455f4291144b6eb44acca4e179ddf2d6, type: 3}
   projectilePrefab: {fileID: 5009625327392601254, guid: 1a85c24d84267c847b889d00e734f1e1, type: 3}
   projectileSpawnPoint: {fileID: 786591550762600416}
   projectileCooldown: 5
+  currentMeleeAttackZone: {fileID: 6975437382009710776, guid: 455f4291144b6eb44acca4e179ddf2d6, type: 3}
 --- !u!95 &744481587636866788
 Animator:
   serializedVersion: 5
