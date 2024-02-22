@@ -72,15 +72,18 @@ public class Boss3 : Enemy, IBoss
         }
     }
 
-    void PerformProjectileAttack()
+    public void PerformProjectileAttack()
     {
         Debug.Log("Performing projectile attack");
-        isAttacking = true;
-        bossAnimator.SetBool("isAttacking", true);
-        bossAnimator.SetTrigger("ProjectileAttack");
-        GameObject projectileObject = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        Projectile projectileScript = projectileObject.GetComponent<Projectile>();
-        projectileScript.Initialize(playerTransform.position);
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            bossAnimator.SetBool("isAttacking", true);
+            bossAnimator.SetTrigger("ProjectileAttack");
+            GameObject projectileObject = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+            Projectile projectileScript = projectileObject.GetComponent<Projectile>();
+            projectileScript.Initialize(playerTransform.position);
+        }
     }
 
     IEnumerator InitiateMeleeAttack()
