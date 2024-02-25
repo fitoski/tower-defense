@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
     private Vector2 lastKnownDirection;
 
     [Header("Attributes")]
-    [SerializeField] private float bulletSpeed = 5f;
-    [SerializeField] public int bulletDamage = 10;
+    [SerializeField] protected float bulletSpeed = 5f;
+    [SerializeField] protected int bulletDamage = 10;
 
     private Transform target;
     private bool targetHit = false;
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         Invoke("DestroyBullet", 5f);
     }
 
-    public void SetTarget(Transform _target, Vector2 direction)
+    public virtual void SetTarget(Transform _target, Vector2 direction)
     {
         target = _target;
         rb.velocity = direction * bulletSpeed;

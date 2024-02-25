@@ -214,6 +214,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // ELECTRIC TURRET EFFECTS
+    public void Stun(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        enemyMovement.enabled = false;
+        yield return new WaitForSeconds(duration);
+        enemyMovement.enabled = true;
+    }
+
     public void OnDeathAnimationComplete()
     {
         Destroy(gameObject);
