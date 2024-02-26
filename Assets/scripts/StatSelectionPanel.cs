@@ -47,95 +47,9 @@ public class StatSelectionPanel : MonoBehaviour
         RandomizeStats();
     }
 
-    //private void RandomizeStats()
-    //{
-    //    Dictionary<string, StatProperty> statsDict = stats.ToDictionary(sp => sp.name);
-
-    //    if (player.moveSpeed >= PlayerMovement.maxMoveSpeed)
-    //    {
-    //        statsDict.Remove("Increase Speed");
-    //    }
-    //    if (player.orbitRadius >= PlayerMovement.maxOrbitRadius)
-    //    {
-
-    //    }
-    //    if (player.healthRegenerationRate >= PlayerMovement.maxHealthRegenRate)
-    //    {
-
-    //    }
-    //    if (player.attackCooldown <= PlayerMovement.minimumAttackCooldown)
-    //    {
-
-    //    }
-    //    if (player.criticalHitChance < 1f)
-    //    {
-
-    //    }
-    //    if (player.defense >= 100) // Burada 'someMaxDefenseValue' maksimum savunma değerinizi temsil eder
-    //    {
-    //        statsDict.Remove("Increase Defense");
-    //    }
-    //    if (player.defenseBonus >= 100) // 'someMaxDefenseBonusValue' maksimum savunma bonusunuzu temsil eder
-    //    {
-    //        statsDict.Remove("Increase Defense Bonus");
-    //    }
-    //    if (player.blockStrength >= 100) // 'someMaxBlockStrengthValue' maksimum blok gücünüzü temsil eder
-    //    {
-    //        statsDict.Remove("Increase Block Strength");
-    //    }
-    //    foreach (var button in statButtons)
-    //    {
-    //        button.gameObject.SetActive(false);
-    //    }
-    //    List<StatProperty> selectedStats = new List<StatProperty>();
-    //    while (selectedStats.Count < 4 && statsDict.Count > 0)
-    //    {
-    //        int randomIndex = UnityEngine.Random.Range(0, statsDict.Count);
-    //        StatProperty selectedStat = statsDict.ElementAt(randomIndex).Value;
-    //        selectedStats.Add(selectedStat);
-    //        statsDict.Remove(selectedStat.name);
-    //    }
-    //    //for (int i = 0; i < Mathf.Min(selectedStats.Count, statButtons.Length); i++)
-    //    //{
-    //    //    Button button = statButtons[i];
-    //    //    UnityEvent actionToAssign = selectedStats[i].action;
-    //    //    StatProperty stat = selectedStats[i];
-    //    //    TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-    //    //    Image image = button.GetComponentsInChildren<Image>()[1];
-    //    //    image.sprite = stat.icon;
-    //    //    if (buttonText == null)
-    //    //    {
-    //    //        Debug.LogError("TextMeshProUGUI component on stat button is not found.");
-    //    //        continue;
-    //    //    }
-    //    //    buttonText.text = stat.name;
-
-    //    //    button.onClick.RemoveAllListeners();
-    //    //    button.onClick.AddListener(() => actionToAssign.Invoke());
-    //    //    button.onClick.AddListener(() => UpdateDescription(stat.description));
-
-    //    //    button.gameObject.SetActive(true);
-    //    //}
-    //    for (int i = 0; i < Mathf.Min(selectedStats.Count, statButtons.Length); i++)
-    //    {
-    //        var statButton = statButtons[i];
-    //        var stat = selectedStats[i];
-    //        statButton.button.gameObject.SetActive(true);
-    //        statButton.button.onClick.RemoveAllListeners();
-    //        statButton.button.onClick.AddListener(() => stat.action.Invoke());
-    //        statButton.nameText.text = stat.name;
-    //        statButton.descriptionText.text = stat.description;
-    //        Image image = statButton.button.GetComponentInChildren<Image>(true);
-    //        if (image != null)
-    //        {
-    //            image.sprite = stat.icon;
-    //        }
-    //    }
-    //}
     private void RandomizeStats()
     {
         Dictionary<string, StatProperty> statsDict = stats.ToDictionary(sp => sp.name);
-
         if (player.moveSpeed >= PlayerMovement.maxMoveSpeed)
         {
             statsDict.Remove("Increase Speed");
@@ -160,20 +74,22 @@ public class StatSelectionPanel : MonoBehaviour
         {
             statsDict.Remove("Increase Defense");
         }
-        if (player.defenseBonus >= 100)
+        if (player.blockChance >= 100)
         {
-            statsDict.Remove("Increase Defense Bonus");
+            statsDict.Remove("Increase Block Chance");
         }
-        if (player.blockStrength >= 100)
+        if (player.pickupRangeLevel >= PlayerMovement.maxPickupRangeLevel)
         {
-            statsDict.Remove("Increase Block Strength");
+            statsDict.Remove("Increase Pickup Range");
         }
+
         foreach (var statButton in statButtons)
         {
             statButton.button.gameObject.SetActive(false);
         }
 
         List<StatProperty> selectedStats = new List<StatProperty>();
+
         while (selectedStats.Count < 4 && statsDict.Count > 0)
         {
             int randomIndex = UnityEngine.Random.Range(0, statsDict.Count);
@@ -186,14 +102,13 @@ public class StatSelectionPanel : MonoBehaviour
         {
             var statButton = statButtons[i];
             var stat = selectedStats[i];
-
             statButton.button.gameObject.SetActive(true);
             statButton.button.onClick.RemoveAllListeners();
             statButton.button.onClick.AddListener(() => stat.action.Invoke());
             statButton.nameText.text = stat.name;
             statButton.descriptionText.text = stat.description;
-
             Image image = statButton.button.GetComponentInChildren<Image>(true);
+
             if (image != null)
             {
                 image.sprite = stat.icon;
@@ -261,15 +176,15 @@ public class StatSelectionPanel : MonoBehaviour
         ClosePanel();
     }
 
-    public void IncreaseDefenseBonus()
+    public void IncreaseBlockChance()
     {
-        player.IncreaseDefenseBonus();
+        player.IncreaseBlockChance();
         ClosePanel();
     }
 
-    public void IncreaseBlockStrength()
+    public void IncreasePickupRange()
     {
-        player.IncreaseBlockStrength();
+        player.IncreasePickupRangeLevel();
         ClosePanel();
     }
 

@@ -53,10 +53,6 @@ public class PauseMenu : MonoBehaviour
             {
                 upgradesDisplayText += "Speed: " + player.moveSpeed.ToString("F1") + "\n";
             }
-            if (player.hasIncreasedArmor)
-            {
-                upgradesDisplayText += "Armor: " + player.armorValue.ToString("F1") + "%\n";
-            }
             if (player.hasIncreasedCritChance)
             {
                 upgradesDisplayText += "Crit Chance: " + (player.criticalHitChance * 100).ToString("F1") + "%\n";
@@ -73,17 +69,13 @@ public class PauseMenu : MonoBehaviour
             {
                 upgradesDisplayText += "Attack Speed: " + (1f / player.attackCooldown).ToString("F1") + " attacks/sec\n";
             }
-            if (player.hasIncreasedBlockStrength)
+            if (player.hasIncreasedBlockChance)
             {
-                upgradesDisplayText += "Block Strength: " + player.blockStrength.ToString() + "\n";
+                upgradesDisplayText += "Block Chance: " + player.blockChance.ToString() + "\n";
             }
             if (player.hasIncreasedDefense)
             {
                 upgradesDisplayText += "Defense: " + player.defense.ToString("F1") + "\n";
-            }
-            if (player.hasIncreasedDefenseBonus)
-            {
-                upgradesDisplayText += "Defense Bonus: " + player.defenseBonus.ToString("F1") + "\n";
             }
             upgradesText.text = upgradesDisplayText;
         }

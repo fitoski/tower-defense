@@ -16,6 +16,7 @@ TagManager:
   - Core
   - FloatingTextCanvas
   - Chest
+  - Experience
   layers:
   - Default
   - TransparentFX

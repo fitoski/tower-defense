@@ -13,13 +13,10 @@ public class PlayerMovement : MonoBehaviour
     public float xpGain = 1.0f;
     public int maxPlayerHealth = 500;
     public float healthRegenerationRate = 0.2f;
-    public float armorValue = 10;
-    public float blockStrength = 10;
+    public float blockChance = 10;
     public float defense = 10f;
-    public float defenseBonus = 1f;
     public bool hasIncreasedDefense = false;
-    public bool hasIncreasedDefenseBonus = false;
-    public bool hasIncreasedBlockStrength = false;
+    public bool hasIncreasedBlockChance = false;
     public int playerDamage = 100;
     public float attackCooldown = 1.1f;
     public float multistrike = 1.00f;
@@ -87,6 +84,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isAttacking = false;
     public Transform attackPoint;
     public float healthRegenTickInterval = 10f;
+    public int pickupRangeLevel = 0;
+    public const float maxPickupColliderRadius = 0.5f;
+    public const int maxPickupRangeLevel = 5;
 
     void Start()
     {
@@ -175,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
         {
             swordSpriteRenderer.sprite = currentWeaponSprite;
         }
+        UpdatePickupColliderSize();
     }
 
     private void FixedUpdate()
@@ -319,24 +320,29 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        bool isBlocked = UnityEngine.Random.Range(0f, 100f) <= CalculateBlockChance(damage);
+        bool isBlocked = UnityEngine.Random.Range(0f, 100f) <= blockChance;
+        string debugMessage = "Gelen hasar = " + damage;
+
         if (isBlocked)
         {
-            damage -= Mathf.FloorToInt(blockStrength);
+            debugMessage += " | Hasar bloklandı!";
+            damage = 0;
         }
-
-        float damageReduction = CalculateDamageReduction(defense + defenseBonus);
-        int actualDamage = Mathf.Max(1, damage - Mathf.FloorToInt(damage * damageReduction / 100f));
-
-        playerHealth -= actualDamage;
-        StartCoroutine(FlashPlayer());
-        StartCoroutine(PausePlayer());
-        UpdateHealthBars();
-
-        if (playerHealth <= 0)
+        else
         {
-            Die();
+            float damageReduction = CalculateDamageReduction(defense);
+            int actualDamage = Mathf.Max(1, damage - Mathf.FloorToInt(damage * damageReduction / 100f));
+            playerHealth -= actualDamage;
+            debugMessage += " | Defans sayesinde alınan asıl hasar = " + actualDamage;
+            StartCoroutine(FlashPlayer());
+            UpdateHealthBars();
+            if (playerHealth <= 0)
+            {
+                Die();
+            }
         }
+
+        Debug.Log(debugMessage);
     }
 
     IEnumerator FlashPlayer()
@@ -363,9 +369,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float CalculateBlockChance(int incomingDamage)
     {
-        return Mathf.Min(0.5f, blockStrength / (float)incomingDamage) * 100f;
-
-        //return Mathf.Clamp(blockStrength / incomingDamage, 0f, 1f) * 100;
+        return Mathf.Min(0.5f, blockChance / (float)incomingDamage) * 100f;
     }
 
     private float CalculateDamageReduction(float defense)
@@ -373,8 +377,6 @@ public class PlayerMovement : MonoBehaviour
         float inverseHyperbolicEffect = Mathf.Sign(defense) * (0.6f - 24f / (Mathf.Abs(defense) + 40f));
         float clippedLinearEffect = Mathf.Min(0.4f, 0.004f * defense);
         return (inverseHyperbolicEffect + clippedLinearEffect) * 100f;
-
-        //return Mathf.Clamp(defense / (defense + 100), 0f, 0.75f);
     }
 
     void UpdateHealthBars()
@@ -451,11 +453,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void IncreaseBlockStrength()
+    public void IncreaseBlockChance()
     {
-        float blockStrengthIncrease = 0.1f;
-        blockStrength += blockStrengthIncrease;
-        hasIncreasedBlockStrength = true;
+        float blockChanceIncrease = 0.1f;
+        blockChance += blockChanceIncrease;
+        hasIncreasedBlockChance = true;
     }
 
     public void IncreaseDefense()
@@ -465,23 +467,9 @@ public class PlayerMovement : MonoBehaviour
         hasIncreasedDefense = true;
     }
 
-    public void IncreaseDefenseBonus()
-    {
-        float defenseBonusIncrease = 0.05f;
-        defenseBonus += defenseBonusIncrease;
-        hasIncreasedDefenseBonus = true;
-    }
-
-    public void ChangeArmor(float newArmorValue)
-    {
-        armorValue = newArmorValue;
-        hasIncreasedArmor = true;
-    }
-
     public void AdjustAttackSpeedAndAnimation(float newAttackCooldown)
     {
         AnimationClip[] clips = swordAnimator.runtimeAnimatorController.animationClips;
-
         bool isFound = false;
         foreach (AnimationClip clip in clips)
         {
@@ -496,14 +484,12 @@ public class PlayerMovement : MonoBehaviour
                     isFound = true;
                     break;
             }
-
             if (isFound)
             {
                 break;
             }
         }
-
-        attackCooldown = newAttackCooldown;
+        attackCooldown = Mathf.Max(newAttackCooldown, minimumAttackCooldown);
         if (swordAnimator != null)
         {
             swordAnimator.speed = attackAnimationLength / attackCooldown;
@@ -543,6 +529,38 @@ public class PlayerMovement : MonoBehaviour
         get { return movementDirection; }
     }
 
+    public void IncreasePickupRangeLevel()
+    {
+        if (pickupRangeLevel < maxPickupRangeLevel)
+        {
+            pickupRangeLevel++;
+            UpdatePickupColliderSize();
+        }
+    }
+
+    void UpdatePickupColliderSize()
+    {
+        Transform pickupColliderTransform = transform.Find("PickupCollider");
+        if (pickupColliderTransform != null)
+        {
+            CircleCollider2D pickupCollider = pickupColliderTransform.GetComponent<CircleCollider2D>();
+            if (pickupCollider != null)
+            {
+                float newRadius = 0.13f + (pickupRangeLevel * (maxPickupColliderRadius - 0.13f) / maxPickupRangeLevel);
+                newRadius = Mathf.Clamp(newRadius, 0.13f, maxPickupColliderRadius);
+                pickupCollider.radius = newRadius;
+            }
+            else
+            {
+                Debug.LogError("CircleCollider2D component not found on the PickupCollider GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PickupCollider child GameObject not found.");
+        }
+    }
+
     public void EquipHelmet(HelmetItem helmet)
     {
         if (helmet.material == "Cloth")
@@ -558,7 +576,7 @@ public class PlayerMovement : MonoBehaviour
         else if (helmet.material == "Plate")
         {
             defense *= 1.5f;
-            blockStrength *= 1.5f;
+            blockChance *= 1.5f;
         }
     }
 
@@ -617,7 +635,7 @@ public class PlayerMovement : MonoBehaviour
         else if (gloves.material == "Plate")
         {
             defense *= 1.4f;
-            blockStrength *= 1.4f;
+            blockChance *= 1.4f;
         }
     }
 
@@ -636,7 +654,7 @@ public class PlayerMovement : MonoBehaviour
         else if (chestplate.material == "Plate")
         {
             defense *= 3f;
-            blockStrength *= 3f;
+            blockChance *= 3f;
         }
     }
 
@@ -655,7 +673,7 @@ public class PlayerMovement : MonoBehaviour
         else if (boots.material == "Plate")
         {
             defense *= 3.4f;
-            blockStrength *= 3.4f;
+            blockChance *= 3.4f;
         }
     }
 
@@ -752,13 +770,10 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Enemy") && !isDead)
+        if (collider.CompareTag("Experience"))
         {
-            Enemy enemy = collider.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                TakeDamage(enemy.baseDamage);
-            }
+            GameManager.main.IncreaseExperiencePoints(collider.GetComponent<ExperiencePickup>().experienceAmount);
+            Destroy(collider.gameObject);
         }
     }
 
