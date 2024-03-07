@@ -19,7 +19,8 @@ public class Boss4 : Enemy, IBoss
     private Transform playerTransform;
     private bool isAttacking = false;
     private float attackDelay = 2f; 
-    private float lastAttackTime = -2f; 
+    private float lastAttackTime = -2f;
+    public GameObject chestPrefab;
 
     protected override void Start()
     {
@@ -162,5 +163,37 @@ public class Boss4 : Enemy, IBoss
     public void AttackPlayer()
     {
 
+    }
+
+    void DropExperience()
+    {
+        if (experiencePrefab != null)
+        {
+            Instantiate(experiencePrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Experience prefab is not set!");
+        }
+    }
+
+    void SpawnChest()
+    {
+        Instantiate(chestPrefab, transform.position, Quaternion.identity);
+    }
+
+    protected override void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+        bossAnimator.SetTrigger("Die");
+        ScoreManager.Instance.IncreaseBossKills();
+    }
+
+    private void OnDeathAnimationComplete()
+    {
+        SpawnChest();
+        DropExperience();
+        Destroy(gameObject);
     }
 }

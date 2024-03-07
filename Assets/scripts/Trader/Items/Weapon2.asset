@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Weapon2
   price: 0
-  itemIcon: {fileID: 1140356547, guid: dcced99d58c808c4bb958ae86f803ea6, type: 3}
+  itemIcon: {fileID: 1035541977, guid: f23d011c2e998384292e50ddc40460eb, type: 3}
   itemType: 0
   itemDamageBonus: 100
   itemRangeBonus: 0
   armorBonus: 0
+  description: 
   weaponMaterial: weapon2
   weaponAnimator: {fileID: 9100000, guid: 8d7a1fddd17a5844fa7f03b42d47fb71, type: 2}
   customOrbitRadius: 2

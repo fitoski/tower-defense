@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     public Transform canvasTransform;
     public GameObject experiencePrefab;
     public int goldValue = 1;
+    public static int bossesKilled = 0;
 
     protected virtual void Start()
     {
@@ -72,29 +73,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isCriticalHit = false)
     {
         if (isDead)
         {
-            Debug.Log(gameObject.name + " zaten ölü.");
-
+            Debug.Log(gameObject.name + " is already dead.");
             return;
         }
 
         currentHealth -= damage;
-        Debug.Log(gameObject.name + " hasar aldı, yeni canı: " + currentHealth);
+        Debug.Log(gameObject.name + " took damage, new health: " + currentHealth);
 
         if (floatingTextPrefab != null && canvasTransform != null)
         {
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 offset = new Vector3(0, 50, 0);
             GameObject floatingText = Instantiate(floatingTextPrefab, screenPosition + offset, Quaternion.identity, canvasTransform);
-            floatingText.GetComponent<FloatingText>().SetText(damage.ToString());
-        }
-
-        else
-        {
-            Debug.LogError("FloatingTextPrefab or CanvasTransform is null.");
+            floatingText.GetComponent<FloatingText>().SetText(damage.ToString(), isCriticalHit ? Color.yellow : Color.red);
         }
 
         if (currentHealth <= 0)
@@ -126,6 +121,11 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Die");
         animator.SetBool("isDead", true);
         GetComponent<Collider2D>().enabled = false;
+
+        if (this is Boss)
+        {
+            bossesKilled++;
+        }
 
         if (enemyMovement != null)
         {

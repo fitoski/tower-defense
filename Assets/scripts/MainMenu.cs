@@ -11,7 +11,13 @@ public class MainMenu : MonoBehaviour
 
     public void PlayButtonClicked()
     {
-        SceneManager.LoadScene("Level1"); 
+        var gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            gameManager.ResetGame();
+        }
+
+        SceneManager.LoadScene("Level1");
     }
 
     public void OptionsButtonClicked()
@@ -26,6 +32,6 @@ public class MainMenu : MonoBehaviour
 
     public void QuitButtonClicked()
     {
-        Application.Quit(); 
+        Application.Quit();
     }
 }

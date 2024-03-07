@@ -232,6 +232,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6222467779918580170, guid: a68827ffff2b4ed48b7ce6cd159cc118, type: 3}
   projectileSpawnPoint: {fileID: 2538323161392101845}
   projectileCooldown: 5
+  chestPrefab: {fileID: 6854125686869889687, guid: aa0684ac749450a44b65e156feb2326c, type: 3}
 --- !u!95 &4921366953682852754
 Animator:
   serializedVersion: 5

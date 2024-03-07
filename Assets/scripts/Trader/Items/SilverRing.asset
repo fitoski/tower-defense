@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Silver Ring
   price: 0
-  itemIcon: {fileID: -2125138087, guid: 3f2d34a7ffd77134cad6ea4816362010, type: 3}
+  itemIcon: {fileID: 21300000, guid: 8c75cb6779377594ebbaf7d7c4e13e19, type: 3}
   itemType: 5
   itemDamageBonus: 0
   itemRangeBonus: 0
   armorBonus: 0
+  description: 
   material: Silver
+  rangeMultiplier: 1.05
+  damageMultiplier: 1

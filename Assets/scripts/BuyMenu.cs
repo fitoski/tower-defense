@@ -25,7 +25,7 @@ public class BuyMenu : MonoBehaviour
         {
             instance = this;
         }
-        
+
         else
         {
             Destroy(this);
@@ -99,7 +99,7 @@ public class BuyMenu : MonoBehaviour
             {
                 targetNode.BuyTurretToThisNode(turret);
             }
-            
+
             GameManager.main.ClearSelectedNodePosition();
         }
         else

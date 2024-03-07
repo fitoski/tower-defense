@@ -49,56 +49,23 @@ public class StatSelectionPanel : MonoBehaviour
 
     private void RandomizeStats()
     {
-        Dictionary<string, StatProperty> statsDict = stats.ToDictionary(sp => sp.name);
-        if (player.moveSpeed >= PlayerMovement.maxMoveSpeed)
-        {
-            statsDict.Remove("Increase Speed");
-        }
-        if (player.orbitRadius >= PlayerMovement.maxOrbitRadius)
-        {
-
-        }
-        if (player.healthRegenerationRate >= PlayerMovement.maxHealthRegenRate)
-        {
-
-        }
-        if (player.attackCooldown <= PlayerMovement.minimumAttackCooldown)
-        {
-
-        }
-        if (player.criticalHitChance < 1f)
-        {
-
-        }
-        if (player.defense >= 100)
-        {
-            statsDict.Remove("Increase Defense");
-        }
-        if (player.blockChance >= 100)
-        {
-            statsDict.Remove("Increase Block Chance");
-        }
-        if (player.pickupRangeLevel >= PlayerMovement.maxPickupRangeLevel)
-        {
-            statsDict.Remove("Increase Pickup Range");
-        }
-
         foreach (var statButton in statButtons)
         {
             statButton.button.gameObject.SetActive(false);
         }
 
-        List<StatProperty> selectedStats = new List<StatProperty>();
+        List<StatProperty> selectedStats = new List<StatProperty>(stats);
 
-        while (selectedStats.Count < 4 && statsDict.Count > 0)
+        for (int i = 0; i < selectedStats.Count; i++)
         {
-            int randomIndex = UnityEngine.Random.Range(0, statsDict.Count);
-            StatProperty selectedStat = statsDict.ElementAt(randomIndex).Value;
-            selectedStats.Add(selectedStat);
-            statsDict.Remove(selectedStat.name);
+            StatProperty temp = selectedStats[i];
+            int randomIndex = UnityEngine.Random.Range(i, selectedStats.Count);
+            selectedStats[i] = selectedStats[randomIndex];
+            selectedStats[randomIndex] = temp;
         }
 
-        for (int i = 0; i < Mathf.Min(selectedStats.Count, statButtons.Length); i++)
+        int statCount = Mathf.Min(statButtons.Length, selectedStats.Count);
+        for (int i = 0; i < statCount; i++)
         {
             var statButton = statButtons[i];
             var stat = selectedStats[i];
@@ -107,12 +74,7 @@ public class StatSelectionPanel : MonoBehaviour
             statButton.button.onClick.AddListener(() => stat.action.Invoke());
             statButton.nameText.text = stat.name;
             statButton.descriptionText.text = stat.description;
-            Image image = statButton.button.GetComponentInChildren<Image>(true);
-
-            if (image != null)
-            {
-                image.sprite = stat.icon;
-            }
+            statButton.icon.sprite = stat.icon;
         }
     }
 
@@ -170,12 +132,6 @@ public class StatSelectionPanel : MonoBehaviour
         ClosePanel();
     }
 
-    public void IncreaseDefense()
-    {
-        player.IncreaseDefense();
-        ClosePanel();
-    }
-
     public void IncreaseBlockChance()
     {
         player.IncreaseBlockChance();
@@ -208,6 +164,7 @@ public class StatProperty
 public class StatButton
 {
     public Button button;
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI descriptionText;
+    public TMP_Text nameText;
+    public TMP_Text descriptionText;
+    public Image icon;
 }

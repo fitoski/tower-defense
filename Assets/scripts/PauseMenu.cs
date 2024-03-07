@@ -73,10 +73,6 @@ public class PauseMenu : MonoBehaviour
             {
                 upgradesDisplayText += "Block Chance: " + player.blockChance.ToString() + "\n";
             }
-            if (player.hasIncreasedDefense)
-            {
-                upgradesDisplayText += "Defense: " + player.defense.ToString("F1") + "\n";
-            }
             upgradesText.text = upgradesDisplayText;
         }
         else

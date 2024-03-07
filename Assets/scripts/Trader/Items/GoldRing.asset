@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Gold Ring
   price: 0
-  itemIcon: {fileID: 1219643403, guid: 9cbd97a216121894992bc6a5a54dfcbb, type: 3}
+  itemIcon: {fileID: 21300000, guid: df47c69ff8c1afa4bb355b5903263bd5, type: 3}
   itemType: 5
   itemDamageBonus: 0
   itemRangeBonus: 0
   armorBonus: 0
+  description: 
   material: Gold
+  rangeMultiplier: 1.05
+  damageMultiplier: 1.1

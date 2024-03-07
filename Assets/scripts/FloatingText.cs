@@ -39,9 +39,11 @@ public class FloatingText : MonoBehaviour
         }
     }
 
-    public void SetText(string text)
+    public void SetText(string text, Color color)
     {
-        GetComponent<TextMeshProUGUI>().text = text;
+        TextMeshProUGUI textMesh = GetComponent<TextMeshProUGUI>();
+        textMesh.text = text;
+        textMesh.color = color;
     }
 }
 

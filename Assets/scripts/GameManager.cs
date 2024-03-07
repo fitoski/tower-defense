@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI totalGoldText;
     public int totalEnemiesKilled;
     private int gold = 0;
-
+    public float xpGainMultiplier = 1.0f;
+    public int xpUpgradeLevel = 0;
 
     private void Awake()
     {
@@ -52,7 +53,15 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnTrader", 5f, UnityEngine.Random.Range(20f, 40f));
         traderUIManager.Awake();
         traderUIManager = TraderUIManager.instance;
-        playTime = 0f; 
+        playTime = 0f;
+
+        LoadUpgrades();
+    }
+
+    private void LoadUpgrades()
+    {
+        xpUpgradeLevel = PlayerPrefs.GetInt("XPUpgradeLevel", 0);
+        ExperiencePickup.baseExperienceAmount = 1 + xpUpgradeLevel;
     }
 
     private void Update()
@@ -107,7 +116,7 @@ public class GameManager : MonoBehaviour
         if (amount <= gold)
         {
             gold -= amount;
-            OnGoldChanged?.Invoke(); 
+            OnGoldChanged?.Invoke();
             return true;
         }
         else
@@ -152,10 +161,9 @@ public class GameManager : MonoBehaviour
         return wallCost;
     }
 
-    public void IncreaseExperiencePoints(int amount)
+    public void IncreaseExperienceGain()
     {
-        experiencePoints += amount;
-        CheckLevelUp();
+        xpGainMultiplier += 0.1f;
     }
 
     void LevelUp()
@@ -164,7 +172,7 @@ public class GameManager : MonoBehaviour
         StatSelectionPanel statSelectionPanel = FindObjectOfType<StatSelectionPanel>();
         if (statSelectionPanel != null)
         {
-            statSelectionPanel.OpenStatSelection(); 
+            statSelectionPanel.OpenStatSelection();
         }
         else
         {
@@ -191,6 +199,21 @@ public class GameManager : MonoBehaviour
     public int GetCurrentExperiencePoints()
     {
         return experiencePoints;
+    }
+
+    public void IncreaseExperiencePoints(int amount)
+    {
+        int extraXp = xpUpgradeLevel * 25;
+        experiencePoints += amount + extraXp;
+        CheckLevelUp();
+    }
+
+    public void BuyXpUpgrade()
+    {
+        xpUpgradeLevel++;
+        PlayerPrefs.SetInt("XPUpgradeLevel", xpUpgradeLevel);
+        PlayerPrefs.Save();
+        ExperiencePickup.IncreaseBaseExperienceAmount();
     }
 
     public void SpawnTrader()
@@ -230,6 +253,16 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ResetGame()
+    {
+        Time.timeScale = 1;
+        level = 1;
+        experiencePoints = 0;
+        gold = 0;
+        UpdatePlayTimeUI();
+        PlayerPrefs.Save();
     }
 
 }

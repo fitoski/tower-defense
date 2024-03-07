@@ -161,4 +161,13 @@ public class EnemyMovement : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void ResetEnemies()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            Destroy(enemy.gameObject);
+        }
+    }
 }

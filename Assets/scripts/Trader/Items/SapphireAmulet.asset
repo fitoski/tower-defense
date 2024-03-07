@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Sapphire Amulet
   price: 0
-  itemIcon: {fileID: 1895015566, guid: 0cb09f81f46e47c4a9d016b5f8610148, type: 3}
+  itemIcon: {fileID: 21300000, guid: 61e84dd3f9674444889c6c7d92091046, type: 3}
   itemType: 7
   itemDamageBonus: 0
   itemRangeBonus: 0
   armorBonus: 0
+  description: 
   material: Sapphire
-  attackCooldownReduction: 0
-  healthRegenerationBonus: 0
+  attackCooldownReductionFactor: 0.9
+  healthRegenerationBonus: 0.01
+  maxHealthMultiplier: 1.1

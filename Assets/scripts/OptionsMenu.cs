@@ -25,7 +25,7 @@ public class OptionsMenu : MonoBehaviour
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
-            if (resolutions[i].width == Screen.currentResolution.width && 
+            if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
@@ -55,12 +55,12 @@ public class OptionsMenu : MonoBehaviour
         }
     }
 
-    public void SetQuality (int qualityIndex)
+    public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
-    public void SetFullscreen (bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }

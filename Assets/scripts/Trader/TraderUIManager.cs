@@ -67,7 +67,7 @@ public class TraderUIManager : MonoBehaviour
         if (items == null)
         {
             Debug.LogError("SetCurrentShopItems called with null items list.");
-            return; 
+            return;
         }
 
         currentShopItems = items;

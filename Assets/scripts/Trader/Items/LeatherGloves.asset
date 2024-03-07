@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Leather Gloves
   price: 0
-  itemIcon: {fileID: -1167689929, guid: 39aa4ad05a0c2704f9df290a5917ddfe, type: 3}
+  itemIcon: {fileID: 21300000, guid: 533e754383250b04ca38762315710322, type: 3}
   itemType: 6
   itemDamageBonus: 0
   itemRangeBonus: 0
   armorBonus: 0
+  description: 
   material: Leather
+  attackSpeedMultiplier: 1
+  defenseBonusMultiplier: 1.1

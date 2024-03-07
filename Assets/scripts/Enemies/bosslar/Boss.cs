@@ -204,6 +204,7 @@ public class Boss : Enemy, IBoss
         if (isDead) return;
         isDead = true;
         bossAnimator.SetTrigger("Die");
+        ScoreManager.Instance.IncreaseBossKills();
     }
 
     private new void OnDeathAnimationComplete()

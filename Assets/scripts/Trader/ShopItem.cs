@@ -13,4 +13,5 @@ public class ShopItem : ScriptableObject
     public float itemDamageBonus;
     public float itemRangeBonus;
     public float armorBonus;
+    public string description;
 }

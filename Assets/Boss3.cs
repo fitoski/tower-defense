@@ -16,6 +16,7 @@ public class Boss3 : Enemy, IBoss
     public Transform projectileSpawnPoint;
     public float projectileCooldown = 5f;
     private float projectileTimer;
+    public GameObject chestPrefab;
 
     protected override void Start()
     {
@@ -166,5 +167,37 @@ public class Boss3 : Enemy, IBoss
             projectileSpawnPoint.localPosition = new Vector3(
             Mathf.Abs(projectileSpawnPoint.localPosition.x) * (shouldFaceRight ? 1 : -1), projectileSpawnPoint.localPosition.y, projectileSpawnPoint.localPosition.z);
         }
+    }
+
+    void DropExperience()
+    {
+        if (experiencePrefab != null)
+        {
+            Instantiate(experiencePrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Experience prefab is not set!");
+        }
+    }
+
+    void SpawnChest()
+    {
+        Instantiate(chestPrefab, transform.position, Quaternion.identity);
+    }
+
+    protected override void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+        bossAnimator.SetTrigger("Die");
+        ScoreManager.Instance.IncreaseBossKills();
+    }
+
+    private void OnDeathAnimationComplete()
+    {
+        SpawnChest();
+        DropExperience();
+        Destroy(gameObject);
     }
 }

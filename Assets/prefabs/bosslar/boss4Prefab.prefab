@@ -233,6 +233,7 @@ MonoBehaviour:
   projectileSpawnPoint: {fileID: 786591550762600416}
   projectileCooldown: 5
   currentMeleeAttackZone: {fileID: 6975437382009710776, guid: 455f4291144b6eb44acca4e179ddf2d6, type: 3}
+  chestPrefab: {fileID: 6854125686869889687, guid: aa0684ac749450a44b65e156feb2326c, type: 3}
 --- !u!95 &744481587636866788
 Animator:
   serializedVersion: 5

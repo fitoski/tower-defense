@@ -415,10 +415,10 @@ MonoBehaviour:
   - Weapon10
   notificationText: {fileID: 0}
   shopUIElements:
-  - {fileID: 8830386465397809650, guid: 0c8a9f1d679d0b046af10cb67c9f6cd2, type: 3}
-  - {fileID: 8830386465397809650, guid: e1980cb7f9c7b3d439f477558a7caa48, type: 3}
-  - {fileID: 8830386465397809650, guid: 0899f9071c1c76948babc64e8d3932e8, type: 3}
-  - {fileID: 8830386465397809650, guid: e26eedd4d1c62174cab3169e60d84b28, type: 3}
+  - {fileID: 1648765688125960895, guid: 3bdec75b86a435f43b632ed81c409ce0, type: 3}
+  - {fileID: 1648765688125960895, guid: 3bdec75b86a435f43b632ed81c409ce0, type: 3}
+  - {fileID: 1648765688125960895, guid: 3bdec75b86a435f43b632ed81c409ce0, type: 3}
+  - {fileID: 1648765688125960895, guid: 3bdec75b86a435f43b632ed81c409ce0, type: 3}
   spawnPoints:
   - {fileID: 1343031816676537764}
   - {fileID: 4982982617513437598}

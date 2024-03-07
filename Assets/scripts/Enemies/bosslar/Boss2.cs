@@ -305,10 +305,11 @@ public class Boss2 : Enemy, IBoss
         bossAnimator.SetTrigger("Die");
     }
 
-    private new void OnDeathAnimationComplete()
+    private void OnDeathAnimationComplete()
     {
         SpawnChest();
         DropExperience();
+        ScoreManager.Instance.IncreaseBossKills();
         Destroy(gameObject);
     }
 

@@ -8,22 +8,22 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float multistrike = 1.00f;
+    public float criticalHitBonus = 65f;
+    public float area = 2.0f;
+    public float doubleAttackChance = 0f;
+
     public float moveSpeed = 5.0f;
     public float pickupRange = 3.0f;
-    public float xpGain = 1.0f;
+    //public float xpGain = 1.0f;
     public int maxPlayerHealth = 500;
     public float healthRegenerationRate = 0.2f;
     public float blockChance = 10;
-    public float defense = 10f;
-    public bool hasIncreasedDefense = false;
     public bool hasIncreasedBlockChance = false;
     public int playerDamage = 100;
     public float attackCooldown = 1.1f;
-    public float multistrike = 1.00f;
     public float criticalHitChance = 20f;
-    public float criticalHitBonus = 65f;
     public float range = 5.5f;
-    public float area = 2.0f;
     private Rigidbody2D rb;
     public Transform sword;
     public float orbitRadius = 2f;
@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        //PlayerPrefs.DeleteAll(); // SİL
         rb = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = playerSpriteRenderer.color;
@@ -102,6 +103,15 @@ public class PlayerMovement : MonoBehaviour
         swordAnimator = sword.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
         orbitRadius = 3f;
+        blockChance = 0;
+        LoadUpgrades();
+
+    }
+
+    void LoadUpgrades()
+    {
+        criticalHitBonus += PlayerPrefs.GetInt("CriticalHitDamage_Level", 0) * 5f;
+        doubleAttackChance += PlayerPrefs.GetInt("DoubleAttackChance_Level", 0) * 0.05f;
     }
 
     void Update()
@@ -201,12 +211,18 @@ public class PlayerMovement : MonoBehaviour
                 Enemy enemyComponent = enemy.GetComponent<Enemy>();
                 if (enemyComponent != null)
                 {
-                    enemyComponent.TakeDamage(playerDamage);
-
-                    if (enemyComponent.IsDead)
+                    bool isCriticalHit = UnityEngine.Random.Range(0f, 100f) <= criticalHitChance;
+                    int finalDamage = playerDamage;
+                    if (isCriticalHit)
                     {
-                        GameManager.main.EnemyKilled();
+                        finalDamage = Mathf.RoundToInt(playerDamage * (1 + criticalHitBonus / 100f));
                     }
+                    if (UnityEngine.Random.Range(0f, 1f) <= doubleAttackChance)
+                    {
+                        finalDamage *= 2;
+                        Debug.Log("Double Attack!");
+                    }
+                    enemyComponent.TakeDamage(finalDamage, isCriticalHit);
                 }
             }
         }
@@ -320,43 +336,30 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        bool isBlocked = UnityEngine.Random.Range(0f, 100f) <= blockChance;
-        string debugMessage = "Gelen hasar = " + damage;
-
+        bool isBlocked = UnityEngine.Random.Range(0f, 100f) < blockChance;
         if (isBlocked)
         {
-            debugMessage += " | Hasar bloklandı!";
-            damage = 0;
+            Debug.Log("Hasar bloklandı!");
         }
         else
         {
-            float damageReduction = CalculateDamageReduction(defense);
-            int actualDamage = Mathf.Max(1, damage - Mathf.FloorToInt(damage * damageReduction / 100f));
-            playerHealth -= actualDamage;
-            debugMessage += " | Defans sayesinde alınan asıl hasar = " + actualDamage;
-            StartCoroutine(FlashPlayer());
-            UpdateHealthBars();
+            playerHealth -= damage;
+            Debug.Log($"Alınan hasar: {damage}, Kalan sağlık: {playerHealth}");
             if (playerHealth <= 0)
             {
                 Die();
             }
+            else
+            {
+                StartCoroutine(FlashPlayer());
+            }
         }
-
-        Debug.Log(debugMessage);
     }
 
     IEnumerator FlashPlayer()
     {
-        float flashEndTime = Time.time + flashDuration;
-
-        while (Time.time < flashEndTime)
-        {
-            playerSpriteRenderer.color = flashColor;
-            yield return new WaitForSeconds(0.05f);
-            playerSpriteRenderer.color = originalColor;
-            yield return new WaitForSeconds(0.05f);
-        }
-
+        playerSpriteRenderer.color = flashColor;
+        yield return new WaitForSeconds(flashDuration);
         playerSpriteRenderer.color = originalColor;
     }
 
@@ -370,13 +373,6 @@ public class PlayerMovement : MonoBehaviour
     private float CalculateBlockChance(int incomingDamage)
     {
         return Mathf.Min(0.5f, blockChance / (float)incomingDamage) * 100f;
-    }
-
-    private float CalculateDamageReduction(float defense)
-    {
-        float inverseHyperbolicEffect = Mathf.Sign(defense) * (0.6f - 24f / (Mathf.Abs(defense) + 40f));
-        float clippedLinearEffect = Mathf.Min(0.4f, 0.004f * defense);
-        return (inverseHyperbolicEffect + clippedLinearEffect) * 100f;
     }
 
     void UpdateHealthBars()
@@ -460,13 +456,6 @@ public class PlayerMovement : MonoBehaviour
         hasIncreasedBlockChance = true;
     }
 
-    public void IncreaseDefense()
-    {
-        float defenseIncrease = 0.2f;
-        defense += defenseIncrease;
-        hasIncreasedDefense = true;
-    }
-
     public void AdjustAttackSpeedAndAnimation(float newAttackCooldown)
     {
         AnimationClip[] clips = swordAnimator.runtimeAnimatorController.animationClips;
@@ -498,9 +487,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void DecreaseAttackCooldownPerLevel()
     {
-        float decreaseAmount = attackCooldown * cooldownDecreasePercentage;
-        float newCooldown = Mathf.Max(attackCooldown - decreaseAmount, minimumAttackCooldown);
-        hasDecreasedAttackCooldown = true;
+        float attackSpeedIncreaseFactor = 0.99f;
+        attackCooldown *= attackSpeedIncreaseFactor;
+
+        attackCooldown = Mathf.Max(attackCooldown, minimumAttackCooldown);
+
+        Debug.Log($"Yeni saldırı bekleme süresi: {attackCooldown}");
     }
 
     public void ChangeWeapon(int newDamage, float newRange, int weaponIndex, RuntimeAnimatorController weaponAnimator)
@@ -529,13 +521,14 @@ public class PlayerMovement : MonoBehaviour
         get { return movementDirection; }
     }
 
+    public void IncreasePickupRange()
+    {
+        IncreasePickupRangeLevel();
+    }
+
     public void IncreasePickupRangeLevel()
     {
-        if (pickupRangeLevel < maxPickupRangeLevel)
-        {
-            pickupRangeLevel++;
-            UpdatePickupColliderSize();
-        }
+        pickupRangeLevel++;
     }
 
     void UpdatePickupColliderSize()
@@ -546,8 +539,7 @@ public class PlayerMovement : MonoBehaviour
             CircleCollider2D pickupCollider = pickupColliderTransform.GetComponent<CircleCollider2D>();
             if (pickupCollider != null)
             {
-                float newRadius = 0.13f + (pickupRangeLevel * (maxPickupColliderRadius - 0.13f) / maxPickupRangeLevel);
-                newRadius = Mathf.Clamp(newRadius, 0.13f, maxPickupColliderRadius);
+                float newRadius = 0.13f + (pickupRangeLevel * 0.02f);
                 pickupCollider.radius = newRadius;
             }
             else
@@ -570,12 +562,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (helmet.material == "Leather")
         {
-            defense *= 1.2f;
             playerDamage = (int)(playerDamage * 1.1f);
         }
         else if (helmet.material == "Plate")
         {
-            defense *= 1.5f;
             blockChance *= 1.5f;
         }
     }
@@ -616,7 +606,6 @@ public class PlayerMovement : MonoBehaviour
         {
             range += range * 0.05f;
             playerDamage = (int)(playerDamage * 1.1f);
-            ApplyDamageBonusToAllSkills(0.1f);
         }
     }
 
@@ -629,12 +618,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (gloves.material == "Leather")
         {
-            defense *= 1.1f;
             playerDamage = (int)(playerDamage * 1f);
         }
         else if (gloves.material == "Plate")
         {
-            defense *= 1.4f;
             blockChance *= 1.4f;
         }
     }
@@ -648,12 +635,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (chestplate.material == "Leather")
         {
-            defense *= 2.4f;
             playerDamage = (int)(playerDamage * 2.2f);
         }
         else if (chestplate.material == "Plate")
         {
-            defense *= 3f;
             blockChance *= 3f;
         }
     }
@@ -667,12 +652,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (boots.material == "Leather")
         {
-            defense *= 2.8f;
             playerDamage = (int)(playerDamage * 2.6f);
         }
         else if (boots.material == "Plate")
         {
-            defense *= 3.4f;
             blockChance *= 3.4f;
         }
     }
@@ -742,11 +725,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void ApplyDamageBonusToAllSkills(float damageBonus)
-    {
-        //
-    }
-
     public void Die()
     {
         isMoving = false;
@@ -772,7 +750,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collider.CompareTag("Experience"))
         {
-            GameManager.main.IncreaseExperiencePoints(collider.GetComponent<ExperiencePickup>().experienceAmount);
+            GameManager.main.IncreaseExperiencePoints(ExperiencePickup.baseExperienceAmount);
             Destroy(collider.gameObject);
         }
     }
@@ -807,5 +785,21 @@ public class PlayerMovement : MonoBehaviour
         {
             swordAnimator.enabled = true;
         }
+    }
+
+    public void IncreaseCriticalHitDamage(float increaseAmount)
+    {
+        int currentLevel = PlayerPrefs.GetInt("CriticalHitDamage_Level", 0);
+        currentLevel++;
+        PlayerPrefs.SetInt("CriticalHitDamage_Level", currentLevel);
+        criticalHitBonus = 65 + (currentLevel * increaseAmount);
+    }
+
+    public void IncreaseDoubleAttackChance()
+    {
+        int currentLevel = PlayerPrefs.GetInt("DoubleAttackChance_Level", 0);
+        currentLevel++;
+        PlayerPrefs.SetInt("DoubleAttackChance_Level", currentLevel);
+        doubleAttackChance = Mathf.Min(doubleAttackChance + (0.01f * currentLevel), 1f);
     }
 }

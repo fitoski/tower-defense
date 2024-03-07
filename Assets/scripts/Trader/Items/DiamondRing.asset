@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Diamond Ring
   price: 0
-  itemIcon: {fileID: 565177600, guid: ba4db4aff46a89247ac99f2022a6f601, type: 3}
+  itemIcon: {fileID: 21300000, guid: 48e7aa3e9a81f714786fe247ce7824f7, type: 3}
   itemType: 5
   itemDamageBonus: 0
   itemRangeBonus: 0
   armorBonus: 0
+  description: 
   material: Diamond
+  rangeMultiplier: 1.05
+  damageMultiplier: 1.1
