@@ -1616,6 +1616,10 @@ MonoBehaviour:
     nameText: {fileID: 2061143109}
     countText: {fileID: 1989540998}
   bossKillScoreText: {fileID: 623158154}
+  electricBulletLevelText: {fileID: 494406625}
+  fireBulletLevelText: {fileID: 1357628538}
+  iceBulletLevelText: {fileID: 182129872}
+  windBulletLevelText: {fileID: 1989540998}
   turretUpgrades: []
 --- !u!114 &269066765
 MonoBehaviour:
@@ -3322,8 +3326,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 269066764}
         m_TargetAssemblyTypeName: UpgradesManager, Assembly-CSharp
-        m_MethodName: BuyUpgrade
-        m_Mode: 3
+        m_MethodName: BuyWindBulletUpgrade
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4465,8 +4469,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 269066764}
         m_TargetAssemblyTypeName: UpgradesManager, Assembly-CSharp
-        m_MethodName: BuyUpgrade
-        m_Mode: 3
+        m_MethodName: BuyElectricBulletUpgrade
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5888,8 +5892,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 269066764}
         m_TargetAssemblyTypeName: UpgradesManager, Assembly-CSharp
-        m_MethodName: BuyUpgrade
-        m_Mode: 3
+        m_MethodName: BuyFireBulletUpgrade
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8721,8 +8725,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 269066764}
         m_TargetAssemblyTypeName: UpgradesManager, Assembly-CSharp
-        m_MethodName: BuyUpgrade
-        m_Mode: 3
+        m_MethodName: BuyIceBulletUpgrade
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
