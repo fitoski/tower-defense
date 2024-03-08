@@ -57,7 +57,7 @@ MonoBehaviour:
   bps: 1
   turretName: Fire Turret
   turretIcon: {fileID: -411911565, guid: cf97d1a9e3b2f354a8cfb8de8de56cdf, type: 3}
-  cost: 30
+  cost: 1
 --- !u!212 &539944500514011758
 SpriteRenderer:
   m_ObjectHideFlags: 0

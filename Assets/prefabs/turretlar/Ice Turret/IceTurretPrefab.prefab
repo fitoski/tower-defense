@@ -57,7 +57,7 @@ MonoBehaviour:
   bps: 1
   turretName: Ice Turret
   turretIcon: {fileID: 1635148349, guid: 1099e4790b76cf341a2b73922f0aefed, type: 3}
-  cost: 20
+  cost: 1
 --- !u!212 &1704793498548582772
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class PlayerSkills : MonoBehaviour
 
     public void addSkillToPassiveSkills(PassiveSkill skill)
     {
-        if (skill != null) 
+        if (skill != null)
         {
             passiveSkills.Add(skill);
             skill.InitializeSkill();
@@ -20,7 +20,7 @@ public class PlayerSkills : MonoBehaviour
     {
         foreach (var skill in passiveSkills)
         {
-            if (skill != null) 
+            if (skill != null)
             {
                 skill.ActivatePassiveSkill(this);
             }

@@ -10,6 +10,17 @@ public class Turret : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
     [SerializeField] private Animator animator;
+    public GameObject BulletPrefab => bulletPrefab;
+    public float TargetingRange
+    {
+        get => targetingRange;
+        set => targetingRange = value;
+    }
+    public float Bps
+    {
+        get => bps;
+        set => bps = value;
+    }
 
     [Header("Attributes")]
     [SerializeField] private float targetingRange = 6f;
@@ -23,6 +34,15 @@ public class Turret : MonoBehaviour
 
     private Transform target;
     private float timeUntilFire;
+
+    void Start()
+    {
+        int level = PlayerPrefs.GetInt(turretName + "_Level", 0);
+        if (level > 0)
+        {
+            ApplyTurretUpgrade(level);
+        }
+    }
 
     private void Update()
     {
@@ -44,10 +64,6 @@ public class Turret : MonoBehaviour
 
     private void Shoot()
     {
-        //GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        //Bullet bulletScript = bulletObj.GetComponent<Bullet>();
-        //bulletScript.SetTarget(target);
-
         animator.SetTrigger("Shoot");
     }
 
@@ -56,12 +72,16 @@ public class Turret : MonoBehaviour
         if (target != null)
         {
             Vector2 direction = (target.position - firingPoint.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg  + 180f;
-
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, rotation);
             Bullet bulletScript = bulletObj.GetComponent<Bullet>();
+
+            int turretLevel = PlayerPrefs.GetInt(turretName + "_Level", 0);
+            bulletScript.BulletDamage += turretLevel;
+            bulletScript.BulletSpeed += turretLevel * 0.5f;
+
             bulletScript.SetTarget(target, direction);
         }
     }
@@ -116,5 +136,11 @@ public class Turret : MonoBehaviour
     {
         Handles.color = Color.red;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
+    }
+
+    void ApplyTurretUpgrade(int level)
+    {
+        TargetingRange += level;
+        Bps += level;
     }
 }

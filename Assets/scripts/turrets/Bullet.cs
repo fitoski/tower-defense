@@ -11,6 +11,17 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected float bulletSpeed = 5f;
     [SerializeField] protected int bulletDamage = 10;
 
+    public int BulletDamage
+    {
+        get => bulletDamage;
+        set => bulletDamage = value;
+    }
+    public float BulletSpeed
+    {
+        get => bulletSpeed;
+        set => bulletSpeed = value;
+    }
+
     private Transform target;
     private bool targetHit = false;
 

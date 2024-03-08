@@ -161,4 +161,4 @@ MonoBehaviour:
   bps: 1
   turretName: Turret
   turretIcon: {fileID: -458946307, guid: 236307d899b346a4cab6735e500b3e7e, type: 3}
-  cost: 10
+  cost: 1

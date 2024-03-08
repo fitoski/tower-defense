@@ -8,6 +8,17 @@ public class FireBullet : Bullet
     [SerializeField] private int burnDamage = 2;
     [SerializeField] private float burningInterval = 2f;
     [SerializeField] private float burnTime = 5f;
+    public int burnTimeLevel = 0;
+    public int bulletDamageLevel = 0;
+
+    void Start()
+    {
+        burnTimeLevel = PlayerPrefs.GetInt("FireBullet_burnTimeLevel", 0);
+        bulletDamageLevel = PlayerPrefs.GetInt("FireBullet_BulletDamageLevel", 0);
+
+        burnTime += burnTimeLevel * 1f;
+        bulletDamage += bulletDamageLevel;
+    }
 
     protected override void HitToEnemy(Enemy enemy, int bulletDamage)
     {

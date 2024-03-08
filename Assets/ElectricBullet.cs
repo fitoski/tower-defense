@@ -9,6 +9,20 @@ public class ElectricBullet : Bullet
     public int chainAmount = 2;
     public float chainRange = 5f;
     public GameObject chainBulletPrefab;
+    public int stunDurationLevel = 0;
+    public int chainAmountLevel = 0;
+    public int bulletDamageLevel = 0;
+
+    void Start()
+    {
+        stunDurationLevel = PlayerPrefs.GetInt("ElectricBullet_stunDurationLevel", 0);
+        chainAmountLevel = PlayerPrefs.GetInt("ElectricBullet_chainAmountLevel", 0);
+        bulletDamageLevel = PlayerPrefs.GetInt("ElectricBullet_BulletDamageLevel", 0);
+
+        stunDuration += stunDurationLevel * 0.1f;
+        chainAmount += chainAmountLevel;
+        bulletDamage += bulletDamageLevel;
+    }
 
     protected override void HitToEnemy(Enemy enemy, int bulletDamage)
     {

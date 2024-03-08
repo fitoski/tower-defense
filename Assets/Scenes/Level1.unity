@@ -2498,10 +2498,8 @@ MonoBehaviour:
   criticalHitBonus: 65
   area: 2
   doubleAttackChance: 0
-  weaponSizeMultiplier: 1
   moveSpeed: 5
   pickupRange: 3
-  xpGain: 1
   maxPlayerHealth: 500
   healthRegenerationRate: 0.2
   blockChance: 10
@@ -2755,6 +2753,8 @@ MonoBehaviour:
   availableUpgradedTurrets:
   - {fileID: 1542800076757277249, guid: bfd991276df20c74b81ed986801bddfc, type: 3}
   - {fileID: 1542800076757277249, guid: 799358fc35ae92541bef94fb18e3124e, type: 3}
+  - {fileID: 3406405216905120461, guid: a6044ca8edd250b4b93f9742b641e08b, type: 3}
+  - {fileID: 5005311136962299181, guid: aeb8263e942f97e4cb60130e4a3f9acb, type: 3}
 --- !u!114 &358219926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14265,6 +14265,8 @@ MonoBehaviour:
   minutesSurvivedText: {fileID: 1612791312}
   totalGoldText: {fileID: 842006635}
   totalEnemiesKilled: 0
+  xpGainMultiplier: 1
+  xpUpgradeLevel: 0
 --- !u!4 &1732176448
 Transform:
   m_ObjectHideFlags: 0

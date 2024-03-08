@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
 
     public void EnemyKilled()
     {
-        //gold += 1;
         totalEnemiesKilled++;
     }
 
