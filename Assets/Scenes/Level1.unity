@@ -11551,7 +11551,7 @@ RectTransform:
   m_Father: {fileID: 2026363613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12052,8 +12052,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1171170786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14235,6 +14235,7 @@ GameObject:
   - component: {fileID: 1732176449}
   - component: {fileID: 1732176450}
   - component: {fileID: 1732176451}
+  - component: {fileID: 1732176452}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -14330,6 +14331,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsPanel: {fileID: 0}
+--- !u!114 &1732176452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732176446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961150f02e613b7458b056a0ee77e9fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resumeButtonText: {fileID: 2034622182}
+  optionsButtonText: {fileID: 1298809148}
+  quitToMainMenuButtonText: {fileID: 1251238004}
+  quitToDesktopButtonText: {fileID: 1323627518}
+  graphicsQualityDropdown: {fileID: 197417203}
 --- !u!1 &1734234564
 GameObject:
   m_ObjectHideFlags: 0

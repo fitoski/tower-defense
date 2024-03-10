@@ -8,12 +8,14 @@ using System.Collections;
 public class Upgrade
 {
     public string name;
+    public string displayName;
     public int cost;
     public int level;
 
-    public Upgrade(string name, int cost)
+    public Upgrade(string name, string displayName, int cost)
     {
         this.name = name;
+        this.displayName = displayName;
         this.cost = cost;
         this.level = 0;
     }
@@ -131,12 +133,12 @@ public class UpgradesManager : MonoBehaviour
         for (int i = 0; i < upgrades.Count; i++)
         {
             int index = i;
-            upgradeUIs[i].nameText.text = upgrades[i].name;
+            upgradeUIs[i].nameText.text = upgrades[i].displayName;
             upgradeUIs[i].countText.text = "Level: " + upgrades[i].level;
             upgradeUIs[i].upgradeButton.onClick.RemoveAllListeners();
             //upgradeUIs[i].upgradeButton.onClick.AddListener(() => BuyUpgrade(index));
         }
-        bossKillScoreText.text = "Boss Kills: " + ScoreManager.GetBossKills().ToString();
+        bossKillScoreText.text = "Bounties: " + ScoreManager.GetBossKills().ToString();
         UpdateBulletUpgradeUI();
     }
 

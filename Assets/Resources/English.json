@@ -1,0 +1,17 @@
+{
+  "play_button": "Play",
+  "options_button": "Options",
+  "exit_button": "Exit",
+  "quality_dropdown_low": "Low",
+  "quality_dropdown_medium": "Medium",
+  "quality_dropdown_high": "High",
+  "fullscreen_toggle": "Fullscreen",
+  "pause_menu_resume_button": "Resume",
+  "pause_menu_options_button": "Options",
+  "pause_menu_quittomainmenu_button": "Return to Main Menu",
+  "pause_menu_quittodesktop_button": "Quit to Desktop",
+  "pause_menu_quality_dropdown_low": "Low",
+  "pause_menu_quality_dropdown_medium": "Medium",
+  "pause_menu_quality_dropdown_high": "High",
+  "pause_menu_fullscreen_toggle": "Fullscreen"
+}

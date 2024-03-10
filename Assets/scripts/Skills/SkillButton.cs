@@ -15,10 +15,10 @@ public class SkillButton : MonoBehaviour
 
     public void UpdateUI(PassiveSkill skill)
     {
-        if (skill != null) 
+        if (skill != null)
         {
             this.skill = skill;
-            skillName.text = skill.skillName; 
+            skillName.text = skill.skillName;
             skillDescription.text = skill.description;
             skillIcon.sprite = skill.icon;
         }
@@ -32,11 +32,11 @@ public class SkillButton : MonoBehaviour
 
     public void SelectSkill()
     {
-        if (skill != null) 
+        if (skill != null)
         {
             Debug.Log("SelectSkill called.");
             PlayerSkills playerSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkills>();
-            if (playerSkills != null) 
+            if (playerSkills != null)
             {
                 playerSkills.addSkillToPassiveSkills(skill);
             }

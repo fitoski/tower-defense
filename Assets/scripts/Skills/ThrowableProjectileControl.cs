@@ -31,7 +31,7 @@ public class ThrowableProjectileControl : MonoBehaviour
         }
 
         firstPos = transform.position;
-        Vector2 dir = ((Vector2) target - rb.position).normalized;
+        Vector2 dir = ((Vector2)target - rb.position).normalized;
 
         rb.velocity = dir * speed;
     }

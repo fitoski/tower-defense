@@ -33,8 +33,8 @@ public class ThrowAndGetBackController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = player.position;
         firstPos = transform.position;
-        distance = Vector2.Distance((Vector2) target, transform.position);
-        dir = ((Vector2) target - (Vector2) transform.position).normalized;
+        distance = Vector2.Distance((Vector2)target, transform.position);
+        dir = ((Vector2)target - (Vector2)transform.position).normalized;
 
         float lookAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, lookAngle - 90);
@@ -58,7 +58,7 @@ public class ThrowAndGetBackController : MonoBehaviour
             }
         }
 
-        transform.position += speed * Time.deltaTime * (Vector3) dir;
+        transform.position += speed * Time.deltaTime * (Vector3)dir;
     }
 
     private Vector2? FindTargetPosition()

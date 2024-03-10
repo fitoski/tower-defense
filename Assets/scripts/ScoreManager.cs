@@ -8,13 +8,12 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
     public TextMeshProUGUI bossKillScoreText;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            UpdateBossKillScoreUI();
         }
         else
         {

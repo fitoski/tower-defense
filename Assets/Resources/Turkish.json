@@ -1,0 +1,17 @@
+{
+  "play_button": "Oyna",
+  "options_button": "Ayarlar",
+  "exit_button": "Çıkış",
+  "quality_dropdown_low": "Düşük",
+  "quality_dropdown_medium": "Orta",
+  "quality_dropdown_high": "Yüksek",
+  "fullscreen_toggle": "Tam Ekran",
+  "pause_menu_resume_button": "Devam",
+  "pause_menu_options_button": "Ayarlar",
+  "pause_menu_quittomainmenu_button": "Ana Menüye Dön",
+  "pause_menu_quittodesktop_button": "Masaüstüne Çık",
+  "pause_menu_quality_dropdown_low": "Düşük",
+  "pause_menu_quality_dropdown_medium": "Orta",
+  "pause_menu_quality_dropdown_high": "Yüksek",
+  "pause_menu_fullscreen_toggle": "Tam Ekran"
+}

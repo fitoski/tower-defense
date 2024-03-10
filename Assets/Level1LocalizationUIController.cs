@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
+public class Level1LocalizationUIController : MonoBehaviour
+{
+    public TextMeshProUGUI resumeButtonText;
+    public TextMeshProUGUI optionsButtonText;
+    public TextMeshProUGUI quitToMainMenuButtonText;
+    public TextMeshProUGUI quitToDesktopButtonText;
+    public TMP_Dropdown graphicsQualityDropdown;
+
+    public void UpdateTexts()
+    {
+        resumeButtonText.text = LocalizationManager.Instance.GetLocalizedValue("pause_menu_resume_button");
+        optionsButtonText.text = LocalizationManager.Instance.GetLocalizedValue("pause_menu_options_button");
+        quitToMainMenuButtonText.text = LocalizationManager.Instance.GetLocalizedValue("pause_menu_quittomainmenu_button");
+        quitToDesktopButtonText.text = LocalizationManager.Instance.GetLocalizedValue("pause_menu_quittodesktop_button");
+        List<string> qualityOptionsKeys = new List<string> { "quality_dropdown_low", "quality_dropdown_medium", "quality_dropdown_high" };
+        LocalizationManager.Instance.UpdateDropdownOptions(graphicsQualityDropdown, qualityOptionsKeys);
+    }
+
+    void OnEnable()
+    {
+        UpdateTexts();
+    }
+}

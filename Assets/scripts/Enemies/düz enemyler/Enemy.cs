@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         int currentWave = EnemySpawner.Instance.GetCurrentWaveNumber();
         maxHealth = Mathf.RoundToInt(baseMaxHealth * Mathf.Pow(healthMultiplierPerWave, currentWave - 1));
         currentHealth = maxHealth;
-        originalSpeed = speed; 
+        originalSpeed = speed;
         animator = GetComponent<Animator>();
         enemyMovement = GetComponent<EnemyMovement>();
         previousPosition = transform.position;

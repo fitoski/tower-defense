@@ -21,6 +21,6 @@ public class CircularObjectSkill : PassiveSkill
 
     public override void InitializeSkillInternal()
     {
-        
+
     }
 }
