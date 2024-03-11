@@ -13,5 +13,15 @@
   "pause_menu_quality_dropdown_low": "Low",
   "pause_menu_quality_dropdown_medium": "Medium",
   "pause_menu_quality_dropdown_high": "High",
-  "pause_menu_fullscreen_toggle": "Fullscreen"
+  "pause_menu_fullscreen_toggle": "Fullscreen",
+  "upgrades_critical_hit_damage": "Increase Critical Hit Damage",
+  "upgrades_multistrike_chance": "Increase Multistrike Chance",
+  "upgrades_experience_gain": "Increase Experince Gain",
+  "upgrades_basic_turret": "Basic Turret Powerup",
+  "upgrades_electric_turret": "Electric Turret Powerup",
+  "upgrades_fire_turret": "Fire Turret Powerup",
+  "upgrades_ice_turret": "Ice Turret Powerup",
+  "upgrades_wind_turret": "Wind Turret Powerup",
+  "upgrades_boss_kill_score": "Bounties",
+  "upgrades_button_text": "Upgrades"
 }

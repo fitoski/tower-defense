@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class LocalizationManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class LocalizationManager : MonoBehaviour
     public TMP_Dropdown qualityDropdown;
     public LocalizationUIController localizationUIController;
     public Level1LocalizationUIController level1LocalizationUIController;
+    public event Action OnLanguageChanged;
 
     private void Start()
     {
@@ -47,12 +49,25 @@ public class LocalizationManager : MonoBehaviour
                 localizationUIController.UpdateTexts();
             }
         }
+        ApplyLanguageToUI();
     }
 
     private void InitializeLanguageDropdown()
     {
         languageDropdown.ClearOptions();
-        List<string> options = new List<string> { "English", "T�rk�e" };
+        List<string> options = new List<string> {
+        "English",
+        "Türkçe",
+        "简体中文",
+        "Español",
+        "Français",
+        "Italiano",
+        "Deutsch",
+        "日本語",
+        "한국어",
+        "Polski",
+        "Português",
+        "Русский"};
         languageDropdown.AddOptions(options);
 
         languageDropdown.onValueChanged.AddListener(delegate {
@@ -62,16 +77,59 @@ public class LocalizationManager : MonoBehaviour
 
     public void DropdownValueChanged(TMPro.TMP_Dropdown change)
     {
-        if (change.value == 0)
+        switch (change.value)
         {
-            ChangeLanguage("English");
-        }
-        else if (change.value == 1)
-        {
-            ChangeLanguage("Turkish");
+            case 0:
+                ChangeLanguage("English");
+                break;
+            case 1:
+                ChangeLanguage("Turkish");
+                break;
+            case 2:
+                ChangeLanguage("SimplifiedChinese");
+                break;
+            case 3:
+                ChangeLanguage("Spanish");
+                break;
+            case 4:
+                ChangeLanguage("French");
+                break;
+            case 5:
+                ChangeLanguage("Italian");
+                break;
+            case 6:
+                ChangeLanguage("German");
+                break;
+            case 7:
+                ChangeLanguage("Japanese");
+                break;
+            case 8:
+                ChangeLanguage("Korean");
+                break;
+            case 9:
+                ChangeLanguage("Polish");
+                break;
+            case 10:
+                ChangeLanguage("Portuguese");
+                break;
+            case 11:
+                ChangeLanguage("Russian");
+                break;
+
+            default:
+                Debug.LogError("Unsupported language selected.");
+                break;
         }
 
-        localizationUIController.UpdateTexts();
+        if (localizationUIController != null)
+        {
+            localizationUIController.UpdateTexts();
+        }
+
+        if (level1LocalizationUIController != null)
+        {
+            level1LocalizationUIController.UpdateTexts();
+        }
     }
 
     private void Awake()
@@ -86,7 +144,21 @@ public class LocalizationManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        currentLanguage = PlayerPrefs.GetString("SelectedLanguage", "English");
         LoadLocalizedText(currentLanguage);
+        ApplyLanguageToUI();
+    }
+
+    public void ApplyLanguageToUI()
+    {
+        if (localizationUIController != null)
+        {
+            localizationUIController.UpdateTexts();
+        }
+        if (level1LocalizationUIController != null)
+        {
+            level1LocalizationUIController.UpdateTexts();
+        }
     }
 
     public void UpdateDropdownOptions(TMP_Dropdown dropdown, List<string> optionKeys)
@@ -100,6 +172,29 @@ public class LocalizationManager : MonoBehaviour
         }
 
         dropdown.AddOptions(options);
+    }
+
+    public void UpdateUpgradesPanelTexts()
+    {
+        TextMeshProUGUI criticalHitDamageText = GameObject.Find("CriticalHitDamageText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI mulstrikeText = GameObject.Find("MultistrikeText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI experiencegainText = GameObject.Find("ExperienceGainText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI basicturretupgradeText = GameObject.Find("BasicTurretUpgradeText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI electricturretupgradeText = GameObject.Find("ElectricTurretUpgradeText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI fireturretupgradeText = GameObject.Find("FireTurretUpgradeText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI iceturretupgradeText = GameObject.Find("IceTurretUpgradeText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI windturretupgradeText = GameObject.Find("WindTurretUpgradeText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI bountiesText = GameObject.Find("BountiesText").GetComponent<TextMeshProUGUI>();
+
+        criticalHitDamageText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_critical_hit_damage");
+        mulstrikeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_multistrike_chance");
+        experiencegainText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_experience_gain");
+        basicturretupgradeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_basic_turret");
+        electricturretupgradeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_electric_turret");
+        fireturretupgradeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_fire_turret");
+        iceturretupgradeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_ice_turret");
+        windturretupgradeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_wind_turret");
+        bountiesText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_boss_kill_score");
     }
 
     public void LoadLocalizedText(string language)
@@ -124,7 +219,16 @@ public class LocalizationManager : MonoBehaviour
             localizedText["pause_menu_quality_dropdown_medium"] = data.pause_menu_quality_dropdown_medium;
             localizedText["pause_menu_quality_dropdown_high"] = data.pause_menu_quality_dropdown_high;
             localizedText["pause_menu_fullscreen_toggle"] = data.pause_menu_fullscreen_toggle;
-
+            localizedText["upgrades_critical_hit_damage"] = data.upgrades_critical_hit_damage;
+            localizedText["upgrades_multistrike_chance"] = data.upgrades_multistrike_chance;
+            localizedText["upgrades_experience_gain"] = data.upgrades_experience_gain;
+            localizedText["upgrades_basic_turret"] = data.upgrades_basic_turret;
+            localizedText["upgrades_electric_turret"] = data.upgrades_electric_turret;
+            localizedText["upgrades_fire_turret"] = data.upgrades_fire_turret;
+            localizedText["upgrades_ice_turret"] = data.upgrades_ice_turret;
+            localizedText["upgrades_wind_turret"] = data.upgrades_wind_turret;
+            localizedText["upgrades_boss_kill_score"] = data.upgrades_boss_kill_score;
+            localizedText["upgrades_button_text"] = data.upgrades_button_text;
         }
         else
         {
@@ -150,6 +254,8 @@ public class LocalizationManager : MonoBehaviour
     {
         currentLanguage = language;
         LoadLocalizedText(language);
+        PlayerPrefs.SetString("SelectedLanguage", language);
+        PlayerPrefs.Save();
 
         List<string> qualityOptionsKeys = new List<string> { "quality_dropdown_low", "quality_dropdown_medium", "quality_dropdown_high" };
         UpdateDropdownOptions(qualityDropdown, qualityOptionsKeys);
@@ -163,6 +269,8 @@ public class LocalizationManager : MonoBehaviour
         {
             level1LocalizationUIController.UpdateTexts();
         }
+        OnLanguageChanged?.Invoke();
+        ApplyLanguageToUI();
     }
 
     [System.Serializable]
@@ -183,5 +291,15 @@ public class LocalizationManager : MonoBehaviour
         public string pause_menu_quality_dropdown_medium;
         public string pause_menu_quality_dropdown_high;
         public string pause_menu_fullscreen_toggle;
+        public string upgrades_critical_hit_damage;
+        public string upgrades_multistrike_chance;
+        public string upgrades_experience_gain;
+        public string upgrades_basic_turret;
+        public string upgrades_electric_turret;
+        public string upgrades_fire_turret;
+        public string upgrades_ice_turret;
+        public string upgrades_wind_turret;
+        public string upgrades_boss_kill_score;
+        public string upgrades_button_text;
     }
 }

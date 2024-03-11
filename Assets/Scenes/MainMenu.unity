@@ -1731,7 +1731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &269066760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2026,6 +2026,16 @@ MonoBehaviour:
   optionsButtonText: {fileID: 2115945477}
   exitButtonText: {fileID: 373926153}
   fullscreen_toggleText: {fileID: 316259304}
+  upgradesCriticalHitDamageText: {fileID: 1570429423}
+  upgradesMultistrikeChanceText: {fileID: 523109493}
+  upgradesExperienceGainText: {fileID: 60641914}
+  upgradesBasicTurretText: {fileID: 1937895080}
+  upgradesElectricTurretText: {fileID: 331271175}
+  upgradesFireTurretText: {fileID: 38068168}
+  upgradesIceTurretText: {fileID: 1408481485}
+  upgradesWindTurretText: {fileID: 2061143109}
+  upgradesBossKillScoreText: {fileID: 623158154}
+  upgradesButtonText: {fileID: 1854406604}
 --- !u!114 &311910667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2041,6 +2051,7 @@ MonoBehaviour:
   languageDropdown: {fileID: 582468571}
   qualityDropdown: {fileID: 1044845040}
   localizationUIController: {fileID: 311910666}
+  level1LocalizationUIController: {fileID: 0}
 --- !u!1 &316259302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,6 +3758,26 @@ MonoBehaviour:
     - m_Text: English
       m_Image: {fileID: 0}
     - m_Text: "T\xFCrk\xE7e"
+      m_Image: {fileID: 0}
+    - m_Text: "\u7B80\u4F53\u4E2D\u6587"
+      m_Image: {fileID: 0}
+    - m_Text: "Espa\xF1ol"
+      m_Image: {fileID: 0}
+    - m_Text: "Fran\xE7ais"
+      m_Image: {fileID: 0}
+    - m_Text: Italiano
+      m_Image: {fileID: 0}
+    - m_Text: Deutsch
+      m_Image: {fileID: 0}
+    - m_Text: "\u65E5\u672C\u8A9E"
+      m_Image: {fileID: 0}
+    - m_Text: "\uD55C\uAD6D\uC5B4"
+      m_Image: {fileID: 0}
+    - m_Text: Polski
+      m_Image: {fileID: 0}
+    - m_Text: "Portugu\xEAs"
+      m_Image: {fileID: 0}
+    - m_Text: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

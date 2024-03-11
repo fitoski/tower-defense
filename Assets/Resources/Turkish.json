@@ -13,5 +13,15 @@
   "pause_menu_quality_dropdown_low": "Düşük",
   "pause_menu_quality_dropdown_medium": "Orta",
   "pause_menu_quality_dropdown_high": "Yüksek",
-  "pause_menu_fullscreen_toggle": "Tam Ekran"
+  "pause_menu_fullscreen_toggle": "Tam Ekran",
+  "upgrades_critical_hit_damage": "Kritik Vuruş Hasarını Artır",
+  "upgrades_multistrike_chance": "Çoklu Vuruş Şansını Artır",
+  "upgrades_experience_gain": "Deneyim Kazancını Artır",
+  "upgrades_basic_turret": "Temel Taret Güçlendirmesi",
+  "upgrades_electric_turret": "Elektrik Tareti Güçlendirmesi",
+  "upgrades_fire_turret": "Ateş Tareti Güçlendirmesi",
+  "upgrades_ice_turret": "Buz Tareti Güçlendirmesi",
+  "upgrades_wind_turret": "Rüzgar Tareti Güçlendirmesi",
+  "upgrades_boss_kill_score": "Kelleler",
+  "upgrades_button_text": "Yükseltmeler"
 }

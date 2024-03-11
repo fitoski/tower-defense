@@ -14348,6 +14348,7 @@ MonoBehaviour:
   quitToMainMenuButtonText: {fileID: 1251238004}
   quitToDesktopButtonText: {fileID: 1323627518}
   graphicsQualityDropdown: {fileID: 197417203}
+  fullscreenToggleText: {fileID: 1454035523}
 --- !u!1 &1734234564
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,23 @@ public class Level1LocalizationUIController : MonoBehaviour
     public TextMeshProUGUI quitToMainMenuButtonText;
     public TextMeshProUGUI quitToDesktopButtonText;
     public TMP_Dropdown graphicsQualityDropdown;
+    public Text fullscreenToggleText; 
+
+    void Start()
+    {
+        LocalizationManager.Instance.OnLanguageChanged += UpdateTexts;
+        UpdateTexts();
+    }
+
+    void OnEnable()
+    {
+        UpdateTexts();
+    }
+
+    void OnDestroy()
+    {
+        LocalizationManager.Instance.OnLanguageChanged -= UpdateTexts;
+    }
 
     public void UpdateTexts()
     {
@@ -18,12 +35,9 @@ public class Level1LocalizationUIController : MonoBehaviour
         optionsButtonText.text = LocalizationManager.Instance.GetLocalizedValue("pause_menu_options_button");
         quitToMainMenuButtonText.text = LocalizationManager.Instance.GetLocalizedValue("pause_menu_quittomainmenu_button");
         quitToDesktopButtonText.text = LocalizationManager.Instance.GetLocalizedValue("pause_menu_quittodesktop_button");
+        fullscreenToggleText.text = LocalizationManager.Instance.GetLocalizedValue("pause_menu_fullscreen_toggle");
+
         List<string> qualityOptionsKeys = new List<string> { "quality_dropdown_low", "quality_dropdown_medium", "quality_dropdown_high" };
         LocalizationManager.Instance.UpdateDropdownOptions(graphicsQualityDropdown, qualityOptionsKeys);
-    }
-
-    void OnEnable()
-    {
-        UpdateTexts();
     }
 }
