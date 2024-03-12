@@ -8,6 +8,7 @@ using System;
 public class LocalizationManager : MonoBehaviour
 {
     public static LocalizationManager Instance;
+    public event Action OnLanguageChanged;
 
     private Dictionary<string, string> localizedText;
     private string currentLanguage = "English";
@@ -15,7 +16,6 @@ public class LocalizationManager : MonoBehaviour
     public TMP_Dropdown qualityDropdown;
     public LocalizationUIController localizationUIController;
     public Level1LocalizationUIController level1LocalizationUIController;
-    public event Action OnLanguageChanged;
 
     private void Start()
     {
@@ -37,19 +37,22 @@ public class LocalizationManager : MonoBehaviour
     {
         if (scene.name == "Level1")
         {
-            if (level1LocalizationUIController != null)
+            var controller = FindObjectOfType<Level1LocalizationUIController>();
+            if (controller != null)
             {
-                level1LocalizationUIController.UpdateTexts();
+                level1LocalizationUIController = controller;
+                controller.UpdateTexts();
             }
         }
-        else
+        if (scene.name == "MainMenu")
         {
-            if (localizationUIController != null)
+            var controller = FindObjectOfType<LocalizationUIController>();
+            if (controller != null)
             {
-                localizationUIController.UpdateTexts();
+                localizationUIController = controller;
+                controller.UpdateTexts();
             }
         }
-        ApplyLanguageToUI();
     }
 
     private void InitializeLanguageDropdown()
@@ -184,7 +187,7 @@ public class LocalizationManager : MonoBehaviour
         TextMeshProUGUI fireturretupgradeText = GameObject.Find("FireTurretUpgradeText").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI iceturretupgradeText = GameObject.Find("IceTurretUpgradeText").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI windturretupgradeText = GameObject.Find("WindTurretUpgradeText").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI bountiesText = GameObject.Find("BountiesText").GetComponent<TextMeshProUGUI>();
+        //TextMeshProUGUI bountiesText = GameObject.Find("BountiesText").GetComponent<TextMeshProUGUI>();
 
         criticalHitDamageText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_critical_hit_damage");
         mulstrikeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_multistrike_chance");
@@ -194,7 +197,7 @@ public class LocalizationManager : MonoBehaviour
         fireturretupgradeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_fire_turret");
         iceturretupgradeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_ice_turret");
         windturretupgradeText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_wind_turret");
-        bountiesText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_boss_kill_score");
+        //bountiesText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_boss_kill_score");
     }
 
     public void LoadLocalizedText(string language)
@@ -229,6 +232,13 @@ public class LocalizationManager : MonoBehaviour
             localizedText["upgrades_wind_turret"] = data.upgrades_wind_turret;
             localizedText["upgrades_boss_kill_score"] = data.upgrades_boss_kill_score;
             localizedText["upgrades_button_text"] = data.upgrades_button_text;
+            localizedText["death_panel_restart_button"] = data.death_panel_restart_button_text;
+            localizedText["death_panel_returntomainmenu_button"] = data.death_panel_returntomainmenu_button_text;
+            localizedText["death_panel_exittodesktop_button"] = data.death_panel_exittodesktop_button_text;
+            localizedText["death_panel_minutes_survived"] = data.death_panel_minutes_survived_text;
+            localizedText["death_panel_total_gold"] = data.death_panel_total_gold_text;
+            //localizedText["death_panel_bounties"] = data.death_panel_bounties_text;
+
         }
         else
         {
@@ -269,8 +279,8 @@ public class LocalizationManager : MonoBehaviour
         {
             level1LocalizationUIController.UpdateTexts();
         }
-        OnLanguageChanged?.Invoke();
         ApplyLanguageToUI();
+        OnLanguageChanged?.Invoke();
     }
 
     [System.Serializable]
@@ -301,5 +311,14 @@ public class LocalizationManager : MonoBehaviour
         public string upgrades_wind_turret;
         public string upgrades_boss_kill_score;
         public string upgrades_button_text;
+        public string death_panel_restart_button_text;
+        public string death_panel_returntomainmenu_button_text;
+        public string death_panel_exittodesktop_button_text;
+        public string death_panel_minutes_survived_text;
+        public string death_panel_total_gold_text;
+        //public string death_panel_bounties_text;
+        //public string
+        //public string
+        //public string
     }
 }

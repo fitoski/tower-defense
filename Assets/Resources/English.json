@@ -22,6 +22,12 @@
   "upgrades_fire_turret": "Fire Turret Powerup",
   "upgrades_ice_turret": "Ice Turret Powerup",
   "upgrades_wind_turret": "Wind Turret Powerup",
-  "upgrades_boss_kill_score": "Bounties",
-  "upgrades_button_text": "Upgrades"
+  "upgrades_boss_kill_score": "Bounties:",
+  "upgrades_button_text": "Upgrades",
+  "death_panel_restart_button": "Restart",
+  "death_panel_returntomainmenu_button": "Return to Main Menu",
+  "death_panel_exittodesktop_button": "Exit to Desktop",
+  "death_panel_minutes_survived": "Minutes Survived:",
+  "death_panel_total_gold": "Collected Golds",
+  "death_panel_bounties": "Collected Bounties"
 }

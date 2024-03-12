@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "Potencializar Torre de Gelo",
   "upgrades_wind_turret": "Potencializar Torre de Vento",
   "upgrades_boss_kill_score": "Recompensas",
-  "upgrades_button_text": "Melhorias"
+  "upgrades_button_text": "Melhorias",
+  "death_panel_restart_button": "Reiniciar",
+  "death_panel_returntomainmenu_button": "Voltar ao Menu Principal",
+  "death_panel_exittodesktop_button": "Sair para o Desktop",
+  "death_panel_minutes_survived": "Minutos Sobrevividos:",
+  "death_panel_total_gold": "Ouros Coletados",
+  "death_panel_bounties": "Recompensas Coletadas"
 }

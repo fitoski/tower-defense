@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "얼음 터렛 파워업",
   "upgrades_wind_turret": "바람 터렛 파워업",
   "upgrades_boss_kill_score": "현상금",
-  "upgrades_button_text": "업그레이드"
+  "upgrades_button_text": "업그레이드",
+  "death_panel_restart_button": "재시작",
+  "death_panel_returntomainmenu_button": "메인 메뉴로 돌아가기",
+  "death_panel_exittodesktop_button": "데스크톱으로 나가기",
+  "death_panel_minutes_survived": "생존한 분:",
+  "death_panel_total_gold": "수집된 금",
+  "death_panel_bounties": "수집된 현상금"
 }

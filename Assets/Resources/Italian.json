@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "Potenziamento Torretta di Ghiaccio",
   "upgrades_wind_turret": "Potenziamento Torretta di Vento",
   "upgrades_boss_kill_score": "Taglie",
-  "upgrades_button_text": "Miglioramenti"
+  "upgrades_button_text": "Miglioramenti",
+  "death_panel_restart_button": "Riavvia",
+  "death_panel_returntomainmenu_button": "Torna al Menu Principale",
+  "death_panel_exittodesktop_button": "Esci al Desktop",
+  "death_panel_minutes_survived": "Minuti Sopravvissuti:",
+  "death_panel_total_gold": "Oro Raccolto",
+  "death_panel_bounties": "Taglie Raccolte"
 }

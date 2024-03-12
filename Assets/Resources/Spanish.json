@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "Mejora de Torreta de Hielo",
   "upgrades_wind_turret": "Mejora de Torreta de Viento",
   "upgrades_boss_kill_score": "Recompensas por Matar al Jefe",
-  "upgrades_button_text": "Mejoras"
+  "upgrades_button_text": "Mejoras",
+  "death_panel_restart_button": "Reiniciar",
+  "death_panel_returntomainmenu_button": "Volver al Menú Principal",
+  "death_panel_exittodesktop_button": "Salir al Escritorio",
+  "death_panel_minutes_survived": "Minutos Sobrevividos:",
+  "death_panel_total_gold": "Oros Recogidos",
+  "death_panel_bounties": "Recompensas Recogidas"
 }

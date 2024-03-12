@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using static Enums;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,12 +31,45 @@ public class GameManager : MonoBehaviour
     public float xpGainMultiplier = 1.0f;
     public int xpUpgradeLevel = 0;
 
+
+    // death panel
+    public TextMeshProUGUI restartButtonText;
+    public TextMeshProUGUI returnToMainMenuButtonText;
+    public TextMeshProUGUI exitToDesktopButtonText;
+    public TextMeshProUGUI minutesSurvivedLabel;
+    public TextMeshProUGUI totalGoldLabel;
+    //public TextMeshProUGUI bountiesLabel;
+
     private void Awake()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         main = this;
         if (OnGoldChanged == null)
         {
             OnGoldChanged = () => { };
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ApplyLanguageSettings();
+    }
+
+    private void ApplyLanguageSettings()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            UpdateDeathScreenTexts();
         }
     }
 
@@ -47,6 +81,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        LocalizationManager.Instance.OnLanguageChanged += UpdateDeathScreenTexts;
         rb = GetComponent<Rigidbody2D>();
         level = 1;
         experiencePoints = 0;
@@ -54,8 +89,16 @@ public class GameManager : MonoBehaviour
         traderUIManager.Awake();
         traderUIManager = TraderUIManager.instance;
         playTime = 0f;
-
         LoadUpgrades();
+        UpdateDeathScreenTexts();
+    }
+
+    private void OnDestroy()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= UpdateDeathScreenTexts;
+        }
     }
 
     private void LoadUpgrades()
@@ -231,6 +274,16 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void UpdateDeathScreenTexts()
+    {
+        restartButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_restart_button");
+        returnToMainMenuButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_returntomainmenu_button");
+        exitToDesktopButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_exittodesktop_button");
+        minutesSurvivedLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_minutes_survived");
+        totalGoldLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_total_gold");
+        //bountiesLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_bounties");
     }
 
     public void ShowDeathScreen()

@@ -15,18 +15,29 @@ public class Level1LocalizationUIController : MonoBehaviour
 
     void Start()
     {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.level1LocalizationUIController = this;
+        }
+
         LocalizationManager.Instance.OnLanguageChanged += UpdateTexts;
+        LocalizationManager.Instance.OnLanguageChanged += GameManager.main.UpdateDeathScreenTexts;
         UpdateTexts();
     }
 
     void OnEnable()
     {
         UpdateTexts();
+        if (GameManager.main != null)
+        {
+            GameManager.main.UpdateDeathScreenTexts();
+        }
     }
 
     void OnDestroy()
     {
         LocalizationManager.Instance.OnLanguageChanged -= UpdateTexts;
+        LocalizationManager.Instance.OnLanguageChanged -= GameManager.main.UpdateDeathScreenTexts;
     }
 
     public void UpdateTexts()

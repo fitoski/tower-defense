@@ -22,6 +22,12 @@
   "upgrades_fire_turret": "Ateş Tareti Güçlendirmesi",
   "upgrades_ice_turret": "Buz Tareti Güçlendirmesi",
   "upgrades_wind_turret": "Rüzgar Tareti Güçlendirmesi",
-  "upgrades_boss_kill_score": "Kelleler",
-  "upgrades_button_text": "Yükseltmeler"
+  "upgrades_boss_kill_score": "Kelleler:",
+  "upgrades_button_text": "Yükseltmeler",
+  "death_panel_restart_button": "Yeniden Başlat",
+  "death_panel_returntomainmenu_button": "Ana Menüye Dön",
+  "death_panel_exittodesktop_button": "Masaüstüne Çık",
+  "death_panel_minutes_survived": "Hayatta Kalınan Süre:",
+  "death_panel_total_gold": "Toplanan Altınlar",
+  "death_panel_bounties": "Toplanan Kelleler"
 }

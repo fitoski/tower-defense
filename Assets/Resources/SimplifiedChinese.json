@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "冰冻炮塔升级",
   "upgrades_wind_turret": "风力炮塔升级",
   "upgrades_boss_kill_score": "首领击杀奖励",
-  "upgrades_button_text": "升级"
+  "upgrades_button_text": "升级",
+  "death_panel_restart_button": "重新开始",
+  "death_panel_returntomainmenu_button": "返回主菜单",
+  "death_panel_exittodesktop_button": "退出到桌面",
+  "death_panel_minutes_survived": "存活分钟数:",
+  "death_panel_total_gold": "收集的金币",
+  "death_panel_bounties": "收集的赏金"
 }

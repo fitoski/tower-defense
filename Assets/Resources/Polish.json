@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "Ulepszenie Lodowej Wieży",
   "upgrades_wind_turret": "Ulepszenie Wietrznej Wieży",
   "upgrades_boss_kill_score": "Nagrody za Szefa",
-  "upgrades_button_text": "Ulepszenia"
+  "upgrades_button_text": "Ulepszenia",
+  "death_panel_restart_button": "Zrestartuj",
+  "death_panel_returntomainmenu_button": "Wróć do Menu Głównego",
+  "death_panel_exittodesktop_button": "Wyjdź na Pulpit",
+  "death_panel_minutes_survived": "Przeżyte Minuty:",
+  "death_panel_total_gold": "Zebrane Złoto",
+  "death_panel_bounties": "Zebrane Łowy"
 }

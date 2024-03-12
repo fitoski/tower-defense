@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "Усиление Ледяной Турели",
   "upgrades_wind_turret": "Усиление Ветровой Турели",
   "upgrades_boss_kill_score": "Награды за Убийство Боссов",
-  "upgrades_button_text": "Улучшения"
+  "upgrades_button_text": "Улучшения",
+  "death_panel_restart_button": "Перезапустить",
+  "death_panel_returntomainmenu_button": "Вернуться в Главное Меню",
+  "death_panel_exittodesktop_button": "Выйти на Рабочий Стол",
+  "death_panel_minutes_survived": "Минут Выжил:",
+  "death_panel_total_gold": "Собранное Золото",
+  "death_panel_bounties": "Собранные Награды"
 }

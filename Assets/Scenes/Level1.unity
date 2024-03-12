@@ -14268,6 +14268,12 @@ MonoBehaviour:
   totalEnemiesKilled: 0
   xpGainMultiplier: 1
   xpUpgradeLevel: 0
+  restartButtonText: {fileID: 916342082}
+  returnToMainMenuButtonText: {fileID: 1865646418}
+  exitToDesktopButtonText: {fileID: 904535005}
+  minutesSurvivedLabel: {fileID: 1612791312}
+  totalGoldLabel: {fileID: 842006635}
+  bountiesLabel: {fileID: 0}
 --- !u!4 &1732176448
 Transform:
   m_ObjectHideFlags: 0

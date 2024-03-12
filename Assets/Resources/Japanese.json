@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "氷タレットのパワーアップ",
   "upgrades_wind_turret": "風タレットのパワーアップ",
   "upgrades_boss_kill_score": "賞金",
-  "upgrades_button_text": "アップグレード"
+  "upgrades_button_text": "アップグレード",
+  "death_panel_restart_button": "リスタート",
+  "death_panel_returntomainmenu_button": "メインメニューに戻る",
+  "death_panel_exittodesktop_button": "デスクトップに退出",
+  "death_panel_minutes_survived": "生存時間:",
+  "death_panel_total_gold": "獲得したゴールド",
+  "death_panel_bounties": "獲得した賞金"
 }

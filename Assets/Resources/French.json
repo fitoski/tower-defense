@@ -23,5 +23,11 @@
   "upgrades_ice_turret": "Amélioration de Tourelle de Glace",
   "upgrades_wind_turret": "Amélioration de Tourelle de Vent",
   "upgrades_boss_kill_score": "Primes pour les Boss Tués",
-  "upgrades_button_text": "Améliorations"
+  "upgrades_button_text": "Améliorations",
+  "death_panel_restart_button": "Redémarrer",
+  "death_panel_returntomainmenu_button": "Retour au menu principal",
+  "death_panel_exittodesktop_button": "Quitter vers le bureau",
+  "death_panel_minutes_survived": "Minutes survécues:",
+  "death_panel_total_gold": "Or Collecté",
+  "death_panel_bounties": "Primes Collectées"
 }

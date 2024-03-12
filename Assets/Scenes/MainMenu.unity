@@ -1950,6 +1950,11 @@ MonoBehaviour:
   totalEnemiesKilled: 0
   xpGainMultiplier: 1
   xpUpgradeLevel: 0
+  restartButtonText: {fileID: 0}
+  returnToMainMenuButtonText: {fileID: 0}
+  exitToDesktopButtonText: {fileID: 0}
+  minutesSurvivedLabel: {fileID: 0}
+  totalGoldLabel: {fileID: 0}
 --- !u!114 &269066766
 MonoBehaviour:
   m_ObjectHideFlags: 0
