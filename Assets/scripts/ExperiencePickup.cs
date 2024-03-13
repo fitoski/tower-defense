@@ -10,7 +10,7 @@ public class ExperiencePickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.main.IncreaseExperiencePoints(baseExperienceAmount);
+            GameManager.main.EnqueueExperience(baseExperienceAmount);
             Destroy(gameObject);
         }
     }

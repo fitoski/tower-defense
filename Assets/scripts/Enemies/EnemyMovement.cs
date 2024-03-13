@@ -53,25 +53,20 @@ public class EnemyMovement : MonoBehaviour
 
     public virtual void SetRandomTarget()
     {
+        float chance = Random.Range(0f, 1f);
+        if (chance <= 0.7f)
+        {
+            target = GameObject.FindGameObjectWithTag("Core")?.transform;
+        }
+        else
+        {
+            target = GameObject.FindGameObjectWithTag("Player")?.transform;
+        }
+
         if (target == null)
         {
-            float chance = Random.Range(0f, 1f);
-            if (chance <= 0.7f)
-            {
-                SetTarget(EnemySpawner.Instance.protectionObject);
-            }
-            else
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player != null)
-                {
-                    SetTarget(player.transform);
-                }
-                else
-                {
-                    SetTarget(EnemySpawner.Instance.protectionObject);
-                }
-            }
+            Debug.LogError("Target not found. Setting default target as Core.");
+            target = GameObject.FindGameObjectWithTag("Core")?.transform;
         }
     }
 
