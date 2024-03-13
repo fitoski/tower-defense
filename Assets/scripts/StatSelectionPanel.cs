@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using UnityEngine.Events;
 using System.Linq;
+using System.Collections;
 
 public class StatSelectionPanel : MonoBehaviour
 {
@@ -40,11 +41,34 @@ public class StatSelectionPanel : MonoBehaviour
         panel.SetActive(false);
     }
 
-    public void OpenStatSelection()
+    public void OpenStatSelection(int levelsGained)
     {
         panel.SetActive(true);
         Time.timeScale = 0;
         RandomizeStats();
+
+        GameManager.main.levelsGainedThisSession -= 1;
+        if (GameManager.main.levelsGainedThisSession > 0)
+        {
+            ClosePanel(true);
+        }
+    }
+
+    private void ClosePanel(bool reopenIfNeeded = false)
+    {
+        panel.SetActive(false);
+        Time.timeScale = 1;
+
+        if (reopenIfNeeded && GameManager.main.levelsGainedThisSession > 0)
+        {
+            StartCoroutine(ReopenPanelNextFrame());
+        }
+    }
+
+    private IEnumerator ReopenPanelNextFrame()
+    {
+        yield return null;
+        OpenStatSelection(GameManager.main.levelsGainedThisSession);
     }
 
     private void RandomizeStats()

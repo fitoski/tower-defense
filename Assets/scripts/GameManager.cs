@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     private int gold = 0;
     public float xpGainMultiplier = 1.0f;
     public int xpUpgradeLevel = 0;
+    public int levelsGainedThisSession = 0;
+    private Queue<int> experienceQueue = new Queue<int>();
 
 
     // death panel
@@ -39,6 +41,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI minutesSurvivedLabel;
     public TextMeshProUGUI totalGoldLabel;
     //public TextMeshProUGUI bountiesLabel;
+
+    public void EnqueueExperience(int amount)
+    {
+        experienceQueue.Enqueue(amount);
+    }
 
     private void Awake()
     {
@@ -111,6 +118,11 @@ public class GameManager : MonoBehaviour
     {
         playTime += Time.deltaTime;
         UpdatePlayTimeUI();
+        if (experienceQueue.Count > 0)
+        {
+            int experienceToProcess = experienceQueue.Dequeue();
+            IncreaseExperiencePoints(experienceToProcess);
+        }
     }
 
     public int CalculateXpForNextLevel(int currentLevel, string stage)
@@ -211,14 +223,34 @@ public class GameManager : MonoBehaviour
     void LevelUp()
     {
         level++;
-        StatSelectionPanel statSelectionPanel = FindObjectOfType<StatSelectionPanel>();
-        if (statSelectionPanel != null)
+        levelsGainedThisSession++;
+        CheckAndOpenStatSelectionPanel();
+
+        //StatSelectionPanel statSelectionPanel = FindObjectOfType<StatSelectionPanel>();
+        //if (statSelectionPanel != null)
+        //{
+        //    statSelectionPanel.OpenStatSelection();
+        //}
+        //else
+        //{
+        //    Debug.LogError("StatSelectionPanel not found in the scene!");
+        //}
+    }
+
+    void CheckAndOpenStatSelectionPanel()
+    {
+        if (levelsGainedThisSession > 0)
         {
-            statSelectionPanel.OpenStatSelection();
-        }
-        else
-        {
-            Debug.LogError("StatSelectionPanel not found in the scene!");
+            StatSelectionPanel statSelectionPanel = FindObjectOfType<StatSelectionPanel>();
+            if (statSelectionPanel != null)
+            {
+                statSelectionPanel.OpenStatSelection(levelsGainedThisSession);
+                levelsGainedThisSession = 0;
+            }
+            else
+            {
+                Debug.LogError("StatSelectionPanel not found in the scene!");
+            }
         }
     }
 
