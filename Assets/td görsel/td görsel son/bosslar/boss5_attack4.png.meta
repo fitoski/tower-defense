@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b43150f0b7c292246a5e5fcb93a00d52
+guid: 0667fc14235b1d446a90f0f5f49a8b7f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boss5_idle_0
+      name: boss5_attack4_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a7775b323975e44f9bf3b6ca290b8d3
-      internalID: -132756905
+      spriteID: 71b7ae7469cdce1498ec656495d60a40
+      internalID: -1955285111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss5_idle_1
+      name: boss5_attack4_1
       rect:
         serializedVersion: 2
         x: 326
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 614825a3d25fce64a96595a15b80ab6a
-      internalID: -1124232676
+      spriteID: b641386d225675c48918990193f613e0
+      internalID: 1325238276
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss5_idle_2
+      name: boss5_attack4_2
       rect:
         serializedVersion: 2
         x: 652
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7828ae207f50e8469879aa198536d55
-      internalID: 1009645720
+      spriteID: 2517666c1e685c94ab089519e45080f5
+      internalID: -96111553
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss5_idle_3
+      name: boss5_attack4_3
       rect:
         serializedVersion: 2
         x: 978
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76299822f3a4c5f4ebb5a316ad3e32c5
-      internalID: -1577700264
+      spriteID: fe36c3367ed944f4fb5cf7885fa2f38d
+      internalID: 733984826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss5_idle_4
+      name: boss5_attack4_4
       rect:
         serializedVersion: 2
         x: 1304
@@ -208,8 +208,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65601c85ccc2a3c4883c8133df01d06a
-      internalID: -1430983545
+      spriteID: c5b23a1ac920f9048aefcf71c7aed8ec
+      internalID: -323608700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss5_attack4_5
+      rect:
+        serializedVersion: 2
+        x: 1630
+        y: 0
+        width: 326
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f0e4ba8d941f6249bdc6dbc86748da7
+      internalID: -1796035607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss5_attack4_6
+      rect:
+        serializedVersion: 2
+        x: 1956
+        y: 0
+        width: 326
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e28b50df7d23269498154a225c7ab696
+      internalID: 2107026289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss5_attack4_7
+      rect:
+        serializedVersion: 2
+        x: 2282
+        y: 0
+        width: 326
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ad209ae4d9f1454c9daed5bfdc5c0eb
+      internalID: -173809734
       vertices: []
       indices: 
       edges: []
@@ -225,11 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boss5_idle_0: -132756905
-      boss5_idle_1: -1124232676
-      boss5_idle_2: 1009645720
-      boss5_idle_3: -1577700264
-      boss5_idle_4: -1430983545
+      boss5_attack4_0: -1955285111
+      boss5_attack4_1: 1325238276
+      boss5_attack4_2: -96111553
+      boss5_attack4_3: 733984826
+      boss5_attack4_4: -323608700
+      boss5_attack4_5: -1796035607
+      boss5_attack4_6: 2107026289
+      boss5_attack4_7: -173809734
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
