@@ -47,7 +47,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (bossKillScoreText != null)
         {
-            bossKillScoreText.text = "Boss Kills: " + GetBossKills().ToString();
+            bossKillScoreText.text = $"{LocalizationManager.Instance.GetLocalizedValue("upgrades_boss_kill_score")} " + GetBossKills().ToString();
         }
     }
 

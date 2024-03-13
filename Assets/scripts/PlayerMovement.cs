@@ -344,7 +344,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             playerHealth -= damage;
-            Debug.Log($"Alınan hasar: {damage}, Kalan sağlık: {playerHealth}");
+            //Debug.Log($"Alınan hasar: {damage}, Kalan sağlık: {playerHealth}");
             if (playerHealth <= 0)
             {
                 Die();

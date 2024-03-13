@@ -55,13 +55,13 @@ public class Boss5 : Enemy, IBoss
         float healthPercentageDamageTaken = (lastHealth - currentHealth) / maxHealth * 100;
         if (healthPercentageDamageTaken >= 10)
         {
-            Debug.Log("Teleport koşulu sağlandı, teleport işlemi başlatılıyor.");
+            //Debug.Log("Teleport koşulu sağlandı, teleport işlemi başlatılıyor.");
             Teleport();
             lastHealth = currentHealth;
         }
         else
         {
-            Debug.Log($"Teleport koşulu sağlanmadı: {healthPercentageDamageTaken} < 10");
+            //Debug.Log($"Teleport koşulu sağlanmadı: {healthPercentageDamageTaken} < 10");
         }
     }
 

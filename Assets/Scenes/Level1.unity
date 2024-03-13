@@ -10553,9 +10553,10 @@ GameObject:
   - component: {fileID: 1368707319}
   - component: {fileID: 1368707318}
   - component: {fileID: 1368707317}
+  - component: {fileID: 1368707321}
   m_Layer: 5
   m_Name: DeathScreenCanvas
-  m_TagString: Untagged
+  m_TagString: DeathScreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10643,6 +10644,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1368707321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368707316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a61dbcbe1bcdf49b867e21aa42b5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartButtonText: {fileID: 916342082}
+  returnToMainMenuButtonText: {fileID: 1865646418}
+  exitToDesktopButtonText: {fileID: 904535005}
+  minutesSurvivedLabel: {fileID: 1612791312}
+  totalGoldLabel: {fileID: 842006635}
 --- !u!1 &1394461604
 GameObject:
   m_ObjectHideFlags: 0
@@ -12989,11 +13007,6 @@ MonoBehaviour:
   xpGainMultiplier: 1
   xpUpgradeLevel: 0
   levelsGainedThisSession: 0
-  restartButtonText: {fileID: 916342082}
-  returnToMainMenuButtonText: {fileID: 1865646418}
-  exitToDesktopButtonText: {fileID: 904535005}
-  minutesSurvivedLabel: {fileID: 1612791312}
-  totalGoldLabel: {fileID: 842006635}
 --- !u!4 &1732176448
 Transform:
   m_ObjectHideFlags: 0

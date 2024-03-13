@@ -17,6 +17,9 @@ TagManager:
   - FloatingTextCanvas
   - Chest
   - Experience
+  - DeathScreen
+  - LanguageDropdown
+  - QualityDropdown
   layers:
   - Default
   - TransparentFX

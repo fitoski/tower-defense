@@ -140,14 +140,8 @@ public class UpgradesManager : MonoBehaviour
     {
         for (int i = 0; i < upgrades.Count; i++)
         {
-            upgradeUIs[i].nameText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_" + upgrades[i].name);
-            upgradeUIs[i].countText.text = LocalizationManager.Instance.GetLocalizedValue("level_text") + ": " + upgrades[i].level;
+            upgradeUIs[i].countText.text = upgrades[i].level.ToString();
         }
-        electricBulletLevelText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_electric_bullet_level") + ": " + PlayerPrefs.GetInt("ElectricBullet_Level", 0).ToString();
-        fireBulletLevelText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_fire_bullet_level") + ": " + PlayerPrefs.GetInt("FireBullet_Level", 0).ToString();
-        iceBulletLevelText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_ice_bullet_level") + ": " + PlayerPrefs.GetInt("IceBullet_Level", 0).ToString();
-        windBulletLevelText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_wind_bullet_level") + ": " + PlayerPrefs.GetInt("WindBullet_Level", 0).ToString();
-        bossKillScoreText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_boss_kill_score") + ": " + ScoreManager.GetBossKills().ToString();
     }
 
     public void OpenUpgradesPanel()

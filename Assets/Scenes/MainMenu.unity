@@ -1950,11 +1950,7 @@ MonoBehaviour:
   totalEnemiesKilled: 0
   xpGainMultiplier: 1
   xpUpgradeLevel: 0
-  restartButtonText: {fileID: 0}
-  returnToMainMenuButtonText: {fileID: 0}
-  exitToDesktopButtonText: {fileID: 0}
-  minutesSurvivedLabel: {fileID: 0}
-  totalGoldLabel: {fileID: 0}
+  levelsGainedThisSession: 0
 --- !u!114 &269066766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1978,7 +1974,6 @@ GameObject:
   m_Component:
   - component: {fileID: 311910665}
   - component: {fileID: 311910664}
-  - component: {fileID: 311910667}
   - component: {fileID: 311910666}
   m_Layer: 0
   m_Name: Main Menu Object
@@ -2041,22 +2036,8 @@ MonoBehaviour:
   upgradesWindTurretText: {fileID: 2061143109}
   upgradesBossKillScoreText: {fileID: 623158154}
   upgradesButtonText: {fileID: 1854406604}
---- !u!114 &311910667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311910663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a223f0961a457e14bb6ab6669496472c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   languageDropdown: {fileID: 582468571}
   qualityDropdown: {fileID: 1044845040}
-  localizationUIController: {fileID: 311910666}
-  level1LocalizationUIController: {fileID: 0}
 --- !u!1 &316259302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3674,7 +3655,7 @@ GameObject:
   - component: {fileID: 582468571}
   m_Layer: 5
   m_Name: Language Dropdown
-  m_TagString: Untagged
+  m_TagString: LanguageDropdown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5804,7 +5785,7 @@ GameObject:
   - component: {fileID: 1044845040}
   m_Layer: 5
   m_Name: Graphics Dropdown
-  m_TagString: Untagged
+  m_TagString: QualityDropdown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6242,6 +6223,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115810144}
   m_CullTransparentMesh: 1
+--- !u!1 &1158371031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158371033}
+  - component: {fileID: 1158371032}
+  m_Layer: 0
+  m_Name: LocalizationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1158371032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158371031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a223f0961a457e14bb6ab6669496472c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationUIController: {fileID: 311910666}
+  level1LocalizationUIController: {fileID: 0}
+--- !u!4 &1158371033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158371031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.0862671, y: -0.12779713, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1253512175
 GameObject:
   m_ObjectHideFlags: 0
@@ -10222,3 +10249,4 @@ SceneRoots:
   - {fileID: 27640333}
   - {fileID: 965811659}
   - {fileID: 311910665}
+  - {fileID: 1158371033}

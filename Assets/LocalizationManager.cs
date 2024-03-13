@@ -12,18 +12,17 @@ public class LocalizationManager : MonoBehaviour
 
     private Dictionary<string, string> localizedText;
     private string currentLanguage = "English";
-    public TMP_Dropdown languageDropdown;
-    public TMP_Dropdown qualityDropdown;
+
     public LocalizationUIController localizationUIController;
     public Level1LocalizationUIController level1LocalizationUIController;
 
+
     private void Start()
     {
-        InitializeLanguageDropdown();
-        ChangeLanguage(currentLanguage);
+  
     }
 
-    void OnEnable()
+    void OnEnable() 
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -35,29 +34,23 @@ public class LocalizationManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Level1")
-        {
-            var controller = FindObjectOfType<Level1LocalizationUIController>();
-            if (controller != null)
-            {
-                level1LocalizationUIController = controller;
-                controller.UpdateTexts();
-            }
-        }
         if (scene.name == "MainMenu")
         {
             var controller = FindObjectOfType<LocalizationUIController>();
             if (controller != null)
             {
                 localizationUIController = controller;
+                InitializeLanguageDropdown();
+                ChangeLanguage(currentLanguage);
                 controller.UpdateTexts();
             }
         }
     }
 
+
     private void InitializeLanguageDropdown()
     {
-        languageDropdown.ClearOptions();
+        localizationUIController.languageDropdown.ClearOptions();
         List<string> options = new List<string> {
         "English",
         "Türkçe",
@@ -71,10 +64,10 @@ public class LocalizationManager : MonoBehaviour
         "Polski",
         "Português",
         "Русский"};
-        languageDropdown.AddOptions(options);
+        localizationUIController.languageDropdown.AddOptions(options);
 
-        languageDropdown.onValueChanged.AddListener(delegate {
-            DropdownValueChanged(languageDropdown);
+        localizationUIController.languageDropdown.onValueChanged.AddListener(delegate {
+            DropdownValueChanged(localizationUIController.languageDropdown);
         });
     }
 
@@ -232,11 +225,11 @@ public class LocalizationManager : MonoBehaviour
             localizedText["upgrades_wind_turret"] = data.upgrades_wind_turret;
             localizedText["upgrades_boss_kill_score"] = data.upgrades_boss_kill_score;
             localizedText["upgrades_button_text"] = data.upgrades_button_text;
-            localizedText["death_panel_restart_button"] = data.death_panel_restart_button_text;
-            localizedText["death_panel_returntomainmenu_button"] = data.death_panel_returntomainmenu_button_text;
-            localizedText["death_panel_exittodesktop_button"] = data.death_panel_exittodesktop_button_text;
-            localizedText["death_panel_minutes_survived"] = data.death_panel_minutes_survived_text;
-            localizedText["death_panel_total_gold"] = data.death_panel_total_gold_text;
+            localizedText["death_panel_restart_button"] = data.death_panel_restart_button;
+            localizedText["death_panel_returntomainmenu_button"] = data.death_panel_returntomainmenu_button;
+            localizedText["death_panel_exittodesktop_button"] = data.death_panel_exittodesktop_button;
+            localizedText["death_panel_minutes_survived"] = data.death_panel_minutes_survived;
+            localizedText["death_panel_total_gold"] = data.death_panel_total_gold;
             //localizedText["death_panel_bounties"] = data.death_panel_bounties_text;
 
         }
@@ -257,6 +250,10 @@ public class LocalizationManager : MonoBehaviour
         {
             result = localizedText[key];
         }
+        if (key == "upgrades_critical_hit_damage")
+        {
+            print(result);
+        }
         return result;
     }
 
@@ -268,7 +265,7 @@ public class LocalizationManager : MonoBehaviour
         PlayerPrefs.Save();
 
         List<string> qualityOptionsKeys = new List<string> { "quality_dropdown_low", "quality_dropdown_medium", "quality_dropdown_high" };
-        UpdateDropdownOptions(qualityDropdown, qualityOptionsKeys);
+        UpdateDropdownOptions(localizationUIController.qualityDropdown, qualityOptionsKeys);
 
         if (localizationUIController != null)
         {
@@ -311,11 +308,11 @@ public class LocalizationManager : MonoBehaviour
         public string upgrades_wind_turret;
         public string upgrades_boss_kill_score;
         public string upgrades_button_text;
-        public string death_panel_restart_button_text;
-        public string death_panel_returntomainmenu_button_text;
-        public string death_panel_exittodesktop_button_text;
-        public string death_panel_minutes_survived_text;
-        public string death_panel_total_gold_text;
+        public string death_panel_restart_button;
+        public string death_panel_returntomainmenu_button;
+        public string death_panel_exittodesktop_button;
+        public string death_panel_minutes_survived;
+        public string death_panel_total_gold;
         //public string death_panel_bounties_text;
         //public string
         //public string

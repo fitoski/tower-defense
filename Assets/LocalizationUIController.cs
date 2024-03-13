@@ -23,6 +23,9 @@ public class LocalizationUIController : MonoBehaviour
     public TextMeshProUGUI upgradesButtonText;
 
 
+    public TMP_Dropdown languageDropdown;
+    public TMP_Dropdown qualityDropdown;
+
     private void Start()
     {
         UpdateTexts();
@@ -42,7 +45,6 @@ public class LocalizationUIController : MonoBehaviour
         upgradesFireTurretText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_fire_turret");
         upgradesIceTurretText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_ice_turret");
         upgradesWindTurretText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_wind_turret");
-        upgradesBossKillScoreText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_boss_kill_score");
         upgradesButtonText.text = LocalizationManager.Instance.GetLocalizedValue("upgrades_button_text");
     }
 }

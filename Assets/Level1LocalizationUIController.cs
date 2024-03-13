@@ -22,7 +22,6 @@ public class Level1LocalizationUIController : MonoBehaviour
 
         LocalizationManager.Instance.OnLanguageChanged += UpdateTexts;
         LocalizationManager.Instance.OnLanguageChanged += GameManager.main.UpdateDeathScreenTexts;
-        UpdateTexts();
     }
 
     void OnEnable()

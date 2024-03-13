@@ -7,6 +7,7 @@ using static Enums;
 using TMPro;
 using System;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,11 +36,7 @@ public class GameManager : MonoBehaviour
 
 
     // death panel
-    public TextMeshProUGUI restartButtonText;
-    public TextMeshProUGUI returnToMainMenuButtonText;
-    public TextMeshProUGUI exitToDesktopButtonText;
-    public TextMeshProUGUI minutesSurvivedLabel;
-    public TextMeshProUGUI totalGoldLabel;
+    private DeathScreenManager deathScreenManager; 
     //public TextMeshProUGUI bountiesLabel;
 
     public void EnqueueExperience(int amount)
@@ -55,6 +52,8 @@ public class GameManager : MonoBehaviour
         {
             OnGoldChanged = () => { };
         }
+
+        deathScreenManager = GameObject.FindGameObjectWithTag("DeathScreen")?.GetComponent<DeathScreenManager>();
     }
 
     private void OnEnable()
@@ -310,11 +309,14 @@ public class GameManager : MonoBehaviour
 
     public void UpdateDeathScreenTexts()
     {
-        restartButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_restart_button");
-        returnToMainMenuButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_returntomainmenu_button");
-        exitToDesktopButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_exittodesktop_button");
-        minutesSurvivedLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_minutes_survived");
-        totalGoldLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_total_gold");
+        if (deathScreenManager != null)
+        {
+            deathScreenManager.restartButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_restart_button");
+            deathScreenManager.returnToMainMenuButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_returntomainmenu_button");
+            deathScreenManager.exitToDesktopButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_exittodesktop_button");
+            deathScreenManager.minutesSurvivedLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_minutes_survived");
+            deathScreenManager.totalGoldLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_total_gold");
+        }
         //bountiesLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_bounties");
     }
 
@@ -328,8 +330,8 @@ public class GameManager : MonoBehaviour
 
         int minutes = (int)(playTime / 60);
         int seconds = (int)(playTime % 60);
-        minutesSurvivedText.text = "Minutes Survived: " + string.Format("{0:00}:{1:00}", minutes, seconds);
-        totalGoldText.text = "Total Gold: " + gold;
+        minutesSurvivedText.text = $"{LocalizationManager.Instance.GetLocalizedValue("death_panel_minutes_survived")} " + string.Format("{0:00}:{1:00}", minutes, seconds);
+        totalGoldText.text = $"{LocalizationManager.Instance.GetLocalizedValue("death_panel_total_gold")} " + gold;
     }
 
     public void ReturnToMainMenu()
