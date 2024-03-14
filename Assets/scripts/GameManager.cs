@@ -110,7 +110,6 @@ public class GameManager : MonoBehaviour
     private void LoadUpgrades()
     {
         xpUpgradeLevel = PlayerPrefs.GetInt("XPUpgradeLevel", 0);
-        ExperiencePickup.baseExperienceAmount = 1 + xpUpgradeLevel;
     }
 
     private void Update()
@@ -150,7 +149,7 @@ public class GameManager : MonoBehaviour
                 c = 4;
                 break;
         }
-        return Mathf.FloorToInt((10 * Mathf.Pow(1.04f, currentLevel) + a * Mathf.Pow(0.95f, currentLevel) + b) * currentLevel + c);
+        return Mathf.FloorToInt((10 * Mathf.Pow(1.04f, currentLevel) + a * Mathf.Pow(0.95f, currentLevel) + b) * currentLevel + c) * 100;
     }
 
     public void IncreaseGold(int amount)
@@ -256,6 +255,8 @@ public class GameManager : MonoBehaviour
     public void CheckLevelUp()
     {
         int requiredExperience = CalculateXpForNextLevel(level, "map1");
+        Debug.Log($"current exp: {experiencePoints}");
+        Debug.Log($"required exp: {requiredExperience}");
 
         if (experiencePoints >= requiredExperience)
         {
@@ -276,17 +277,8 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseExperiencePoints(int amount)
     {
-        int extraXp = xpUpgradeLevel * 25;
-        experiencePoints += amount + extraXp;
+        experiencePoints += amount;
         CheckLevelUp();
-    }
-
-    public void BuyXpUpgrade()
-    {
-        xpUpgradeLevel++;
-        PlayerPrefs.SetInt("XPUpgradeLevel", xpUpgradeLevel);
-        PlayerPrefs.Save();
-        ExperiencePickup.IncreaseBaseExperienceAmount();
     }
 
     public void SpawnTrader()

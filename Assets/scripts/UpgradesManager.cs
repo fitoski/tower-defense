@@ -95,7 +95,6 @@ public class UpgradesManager : MonoBehaviour
         upgrade.level++;
         PlayerPrefs.SetInt(upgrade.name + "_Level", upgrade.level);
         PlayerPrefs.Save();
-        ApplyUpgrade(index);
         UpdateUI();
     }
 
@@ -112,27 +111,6 @@ public class UpgradesManager : MonoBehaviour
         for (int i = 0; i < upgrades.Count; i++)
         {
             upgrades[i].level = PlayerPrefs.GetInt(upgrades[i].name + "_Level", 0);
-        }
-    }
-
-    void ApplyUpgrade(int index)
-    {
-        PlayerMovement player = FindObjectOfType<PlayerMovement>();
-        if (player != null)
-        {
-            switch (index)
-            {
-                case 0:
-                    player.IncreaseCriticalHitDamage(5f);
-                    break;
-                case 1:
-                    player.IncreaseDoubleAttackChance();
-                    break;
-                case 2:
-                    GameManager.main.BuyXpUpgrade();
-                    Debug.Log("Experience Gain Upgrade purchased. Current Level: " + GameManager.main.xpUpgradeLevel);
-                    break;
-            }
         }
     }
 

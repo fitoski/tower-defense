@@ -112,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
     {
         criticalHitBonus += PlayerPrefs.GetInt("CriticalHitDamage_Level", 0) * 5f;
         doubleAttackChance += PlayerPrefs.GetInt("DoubleAttackChance_Level", 0) * 0.05f;
+        ExperiencePickup.IncreaseBaseExperienceAmount(Mathf.Pow(1.2f, PlayerPrefs.GetInt("IncreaseBaseExperienceAmount_Level", 0)));
     }
 
     void Update()
@@ -743,15 +744,6 @@ public class PlayerMovement : MonoBehaviour
         if (swordAnimator != null)
         {
             swordAnimator.enabled = false;
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Experience"))
-        {
-            GameManager.main.IncreaseExperiencePoints(ExperiencePickup.baseExperienceAmount);
-            Destroy(collider.gameObject);
         }
     }
 
