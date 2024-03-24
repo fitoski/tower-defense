@@ -87,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     public int pickupRangeLevel = 0;
     public const float maxPickupColliderRadius = 0.5f;
     public const int maxPickupRangeLevel = 5;
+    private bool isStunned = false;
 
     void Start()
     {
@@ -117,6 +118,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (isStunned)
+        {
+            return;
+        }
+
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 playerPosition = transform.position;
 
@@ -187,6 +193,18 @@ public class PlayerMovement : MonoBehaviour
             swordSpriteRenderer.sprite = currentWeaponSprite;
         }
         UpdatePickupColliderSize();
+    }
+
+    public void Stun(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    IEnumerator StunCoroutine(float duration)
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
     }
 
     private void FixedUpdate()

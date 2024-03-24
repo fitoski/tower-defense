@@ -9,6 +9,8 @@ public class FollowProjectile : MonoBehaviour
     public float followDuration = 5f;
     private Transform target;
     private float timer;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform projectileSpawnPoint;
 
     public void Initialize(Transform target, float duration)
     {

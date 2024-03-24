@@ -14,6 +14,25 @@ public class Boss5 : Enemy, IBoss
     public float minTeleportDistance = 1f;
     public float maxTeleportDistance = 5f;
     private float lastHealth;
+    public float meleeAttackRange = 12.5f;
+    private float rangedAttackTimer = 2f;
+    private bool isAttacking = false;
+    [SerializeField] private GameObject tentaclePrefab;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private GameObject attack3Prefab;
+    [SerializeField] private GameObject attack4Prefab;
+    [SerializeField] private GameObject fireBreathPrefab;
+    private float meleeAttackCooldown = 2f;
+    private float lastMeleeAttackTime = 0;
+    private GameObject activeMeleeDamageArea;
+    [SerializeField] private GameObject minePrefab;
+    public float mineSpawnRadius = 5f;
+    private Vector3 startPosition;
+    public float frequency = 5f;
+    public float magnitude = 0.5f;
+    public bool isidleWorking = true;
+    private Coroutine infinityMovementCoroutine;
 
     protected override void Start()
     {
@@ -28,6 +47,22 @@ public class Boss5 : Enemy, IBoss
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         bossAnimator = GetComponent<Animator>();
         lastHealth = currentHealth;
+        startPosition = transform.position;
+        infinityMovementCoroutine = StartCoroutine(InfinityMovementRoutine());
+    }
+
+    IEnumerator InfinityMovementRoutine()
+    {
+        while (true)
+        {
+            if (isidleWorking)
+            {
+                float x = Mathf.Sin(Time.time * frequency) * magnitude;
+                float y = Mathf.Cos(Time.time * frequency * 2) * magnitude;
+                transform.position = startPosition + new Vector3(x, y, 0);
+            }
+            yield return null;
+        }
     }
 
     private new void Update()
@@ -42,6 +77,7 @@ public class Boss5 : Enemy, IBoss
         }
 
         UpdateOrientationTowardsPlayer();
+        AttackPlayer();
     }
 
     void UpdateOrientationTowardsPlayer()
@@ -55,18 +91,17 @@ public class Boss5 : Enemy, IBoss
         float healthPercentageDamageTaken = (lastHealth - currentHealth) / maxHealth * 100;
         if (healthPercentageDamageTaken >= 10)
         {
-            //Debug.Log("Teleport koşulu sağlandı, teleport işlemi başlatılıyor.");
             Teleport();
             lastHealth = currentHealth;
         }
         else
         {
-            //Debug.Log($"Teleport koşulu sağlanmadı: {healthPercentageDamageTaken} < 10");
         }
     }
 
     void Teleport()
     {
+        isidleWorking = false;
         bossAnimator.SetTrigger("Teleport1");
     }
 
@@ -85,8 +120,18 @@ public class Boss5 : Enemy, IBoss
             }
 
             transform.position = teleportPosition;
+            startPosition = transform.position;
 
             bossAnimator.SetBool("isTeleporting", false);
+
+            if (infinityMovementCoroutine != null)
+            {
+                StopCoroutine(infinityMovementCoroutine);
+            }
+
+            infinityMovementCoroutine = StartCoroutine(InfinityMovementRoutine());
+
+            isidleWorking = true;
         }
     }
 
@@ -136,12 +181,197 @@ public class Boss5 : Enemy, IBoss
 
     public void AttackPlayer()
     {
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
+        if (distanceToPlayer <= meleeAttackRange)
+        {
+            if (!isAttacking && Time.time - lastMeleeAttackTime >= meleeAttackCooldown)
+            {
+                MeleeAttack();
+                lastMeleeAttackTime = Time.time;
+            }
+        }
+        else
+        {
+            if (!isAttacking && rangedAttackTimer <= 0)
+            {
+                PerformRandomRangedAttack();
+                rangedAttackTimer = attackCooldown;
+            }
+            else
+            {
+                rangedAttackTimer -= Time.deltaTime;
+            }
+        }
+    }
+
+    void PerformRandomRangedAttack()
+    {
+        int attackNumber = Random.Range(1, 6);
+        switch (attackNumber)
+        {
+            case 1:
+                attack1();
+                break;
+            case 2:
+                attack2();
+                break;
+            case 3:
+                attack3();
+                break;
+            case 4:
+                attack4();
+                break;
+            case 5:
+                attack6();
+                break;
+        }
+    }
+
+    private void MeleeAttack()
+    {
+        if (!isAttacking && Time.time - lastMeleeAttackTime >= meleeAttackCooldown)
+        {
+            isAttacking = true;
+            bossAnimator.SetBool("isAttacking", true);
+            bossAnimator.SetTrigger("MeleeAttack");
+            lastMeleeAttackTime = Time.time;
+            StartCoroutine(ResetIsAttacking());
+        }
+    }
+
+    public void CreateMeleeDamageArea()
+    {
+        Vector3 spawnPosition = transform.position + (GetComponent<SpriteRenderer>().flipX ? Vector3.left : Vector3.right) * 1.5f;
+        activeMeleeDamageArea = Instantiate(fireBreathPrefab, spawnPosition, Quaternion.identity);
+    }
+
+    public void MeleeAttackEnd()
+    {
+        if (activeMeleeDamageArea != null)
+        {
+            Destroy(activeMeleeDamageArea);
+            activeMeleeDamageArea = null;
+        }
+    }
+
+    IEnumerator ResetIsAttacking()
+    {
+        yield return new WaitForSeconds(1.6f);
+        isAttacking = false;
+        bossAnimator.SetBool("isAttacking", false);
+    }
+
+    public void attack1()
+    {
+        isAttacking = true;
+        bossAnimator.SetBool("isAttacking", true);
+        bossAnimator.SetTrigger("Attack1");
+        //if (tentaclePrefab != null)
+        //    {
+        //        Instantiate(tentaclePrefab, playerTransform.position, Quaternion.identity);
+        //    }
+    }
+    
+    public void TriggerAttack1Effect()
+    {
+        Instantiate(tentaclePrefab, playerTransform.position, Quaternion.identity);
+    }
+
+    public void attack2()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            bossAnimator.SetBool("isAttacking", true);
+            bossAnimator.SetTrigger("Attack2");
+        }
+    }
+
+    public void FireProjectile()
+    {
+        GameObject projectileObject = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        FlippedFollowProjectile projectileScript = projectileObject.GetComponent<FlippedFollowProjectile>();
+        if (projectileScript != null)
+        {
+            projectileScript.Initialize(playerTransform, 5f);
+        }
+        else
+        {
+        }
+    }
+
+    public void OnProjectileAttackEnd()
+    {
+        isAttacking = false;
+        bossAnimator.SetBool("isAttacking", false);
+    }
+
+    public void attack3()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            bossAnimator.SetBool("isAttacking", true);
+            bossAnimator.SetTrigger("Attack3");
+            //Instantiate(attack3Prefab, playerTransform.position, Quaternion.identity);
+        }
+    }
+
+    public void TriggerAttack3Effect()
+    {
+        Instantiate(attack3Prefab, playerTransform.position, Quaternion.identity);
+    }
+
+    void attack4()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            bossAnimator.SetBool("isAttacking", true);
+            bossAnimator.SetTrigger("Attack4");
+        }
+    }
+
+    public void OnAttack4End()
+    {
+        isAttacking = false;
+        bossAnimator.SetBool("isAttacking", false);
+    }
+
+    public void LaunchAttack4Projectile()
+    {
+        GameObject projectileObject = Instantiate(attack4Prefab, projectileSpawnPoint.position, Quaternion.identity);
+        FollowProjectile projectileScript = projectileObject.GetComponent<FollowProjectile>();
+        if (projectileScript != null)
+        {
+            projectileScript.Initialize(playerTransform, 5f);
+        }
+        else
+        {
+        }
+    }
+
+    void attack6()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            bossAnimator.SetBool("isAttacking", true);
+            bossAnimator.SetTrigger("Attack6");
+            Vector2 spawnPoint = (Vector2)transform.position + Random.insideUnitCircle.normalized * mineSpawnRadius;
+            Instantiate(minePrefab, spawnPoint, Quaternion.identity);
+            StartCoroutine(ResetIsAttacking());
+        }
     }
 
     public void OnAttackEnd()
     {
-
+        bossAnimator.ResetTrigger("Attack1");
+        bossAnimator.ResetTrigger("Attack2");
+        bossAnimator.ResetTrigger("Attack6");
+        bossAnimator.SetBool("isAttacking", false);
+        isAttacking = false;
     }
 
     protected override void Die()
@@ -166,7 +396,6 @@ public class Boss5 : Enemy, IBoss
 
     void DropSkillOnDeath()
     {
-        Debug.Log("skill item düştü");
         SkillsManager.Instance.PrepareSkillRewardPanel();
     }
 
@@ -178,7 +407,6 @@ public class Boss5 : Enemy, IBoss
         }
         else
         {
-            Debug.LogError("Experience prefab is not set!");
         }
     }
 }
