@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100000
   baseDamage: 1
-  baseMaxHealth: 10000
+  baseMaxHealth: 100000
   healthMultiplierPerWave: 1.3
   damageMultiplierPerWave: 1.5
   speed: 2
