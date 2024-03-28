@@ -32,19 +32,19 @@ public class SkillsManager : MonoBehaviour
 
     public void PrepareSkillRewardPanel()
     {
+        Debug.Log("PrepareSkillRewardPanel called.");
+
         if (skillRewardButtons.Length == 0) return;
 
         foreach (var button in skillRewardButtons)
         {
             button.GetComponent<Button>().interactable = true;
         }
-
+        skillRewardPanel.SetActive(true);
+        GameManager.main.isSkillPanelOpen = true;
         Time.timeScale = 0;
-
         skillRewardButtons[0].transform.parent.parent.gameObject.SetActive(true);
-
         List<PassiveSkill> availableSkills = new List<PassiveSkill>(skills);
-
         for (int i = 0; i < skillRewardButtons.Length && availableSkills.Count > 0; i++)
         {
             int randomIndex = Random.Range(0, availableSkills.Count);
@@ -61,14 +61,10 @@ public class SkillsManager : MonoBehaviour
 
     public void CloseSkillRewardPanel()
     {
-        if (skillRewardPanel != null)
-        {
-            skillRewardPanel.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("skillRewardPanel is not set!");
-        }
+        Debug.Log("CloseSkillRewardPanel called.");
+        skillRewardPanel.SetActive(false);
+        GameManager.main.isSkillPanelOpen = false;
+        GameManager.main.CheckAndResumeGame();
     }
 
     public void OnBossDeath()

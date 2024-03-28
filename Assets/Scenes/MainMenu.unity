@@ -1951,6 +1951,8 @@ MonoBehaviour:
   xpGainMultiplier: 1
   xpUpgradeLevel: 0
   levelsGainedThisSession: 0
+  isStatPanelOpen: 0
+  isSkillPanelOpen: 0
 --- !u!114 &269066766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6233,6 +6235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1158371033}
   - component: {fileID: 1158371032}
+  - component: {fileID: 1158371034}
   m_Layer: 0
   m_Name: LocalizationManager
   m_TagString: Untagged
@@ -6269,6 +6272,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1158371034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158371031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10341e533199f7c44928a278d37de966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newFont: {fileID: 12800000, guid: 27a6efa786d8dba41bb25f3829cadaf0, type: 3}
+  newTMPFont: {fileID: 11400000, guid: 47614b4719f0cc54b89802ac8248e382, type: 2}
 --- !u!1 &1253512175
 GameObject:
   m_ObjectHideFlags: 0

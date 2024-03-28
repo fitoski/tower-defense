@@ -32,9 +32,9 @@ public class SkillButton : MonoBehaviour
 
     public void SelectSkill()
     {
+        Debug.Log($"SelectSkill called for skill: {skill?.skillName}");
         if (skill != null)
         {
-            Debug.Log("SelectSkill called.");
             PlayerSkills playerSkills = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkills>();
             if (playerSkills != null)
             {
@@ -42,7 +42,6 @@ public class SkillButton : MonoBehaviour
             }
 
             SkillsManager.Instance.CloseSkillRewardPanel();
-            Time.timeScale = 1;
         }
     }
 }

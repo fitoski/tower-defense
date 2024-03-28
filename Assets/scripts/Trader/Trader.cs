@@ -47,12 +47,24 @@ public class Trader : MonoBehaviour
         timer = timeToStay;
         animator.SetBool("IsIdle", true);
 
+        if (spawnPoints.Count == 0)
+        {
+            Debug.LogError("No spawn points available for the trader.");
+            return;
+        }
+
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
         transform.position = spawnPoint.position;
+
+        Debug.Log("Trader started at " + spawnPoint.position);
 
         if (traderUIManager != null)
         {
             traderUIManager.ShowNotification("Trader has arrived!", notificationDuration);
+        }
+        else
+        {
+            Debug.LogError("TraderUIManager is not set or could not be found.");
         }
     }
 
@@ -101,6 +113,7 @@ public class Trader : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
+            Debug.Log("Trader's time has expired. Trader will disappear.");
             animator.SetTrigger("Disappear");
             Destroy(gameObject, 1f);
         }

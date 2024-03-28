@@ -45,6 +45,7 @@ public class StatSelectionPanel : MonoBehaviour
     {
         panel.SetActive(true);
         Time.timeScale = 0;
+        GameManager.main.isStatPanelOpen = true;
         RandomizeStats();
 
         GameManager.main.levelsGainedThisSession -= 1;
@@ -57,9 +58,12 @@ public class StatSelectionPanel : MonoBehaviour
     private void ClosePanel(bool reopenIfNeeded = false)
     {
         panel.SetActive(false);
-        Time.timeScale = 1;
-
-        if (reopenIfNeeded && GameManager.main.levelsGainedThisSession > 0)
+        GameManager.main.isStatPanelOpen = false;
+        if (!reopenIfNeeded)
+        {
+            GameManager.main.CheckAndResumeGame();
+        }
+        else if (GameManager.main.levelsGainedThisSession > 0)
         {
             StartCoroutine(ReopenPanelNextFrame());
         }

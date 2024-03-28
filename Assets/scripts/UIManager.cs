@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -18,10 +19,14 @@ public class UIManager : MonoBehaviour
     {
         if (gameManager != null)
         {
-            levelText.text = "Lv: " + gameManager.GetCurrentLevel().ToString();
+            int currentLevel = gameManager.GetCurrentLevel();
+            string currentSceneName = SceneManager.GetActiveScene().name;
 
-            float experienceRatio = (float)gameManager.GetCurrentExperiencePoints() /
-                                   (10 * Mathf.Pow(1.7f, gameManager.GetCurrentLevel() - 1));
+            levelText.text = "Lv: " + currentLevel.ToString();
+
+            float currentXp = gameManager.GetCurrentExperiencePoints();
+            float nextLevelXp = gameManager.CalculateXpForNextLevel(currentLevel, currentSceneName);
+            float experienceRatio = currentXp / nextLevelXp;
             experienceBar.fillAmount = experienceRatio;
         }
     }

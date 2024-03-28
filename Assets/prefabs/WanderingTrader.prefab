@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bea1508b2cdca048b3e25ee3de7ab09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToStay: 30
+  timeToStay: 500
   inventory:
   - Cloth Helmet
   - Leather Helmet

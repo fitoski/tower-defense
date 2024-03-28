@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     public int xpUpgradeLevel = 0;
     public int levelsGainedThisSession = 0;
     private Queue<int> experienceQueue = new Queue<int>();
+    public bool isStatPanelOpen = false;
+    public bool isSkillPanelOpen = false;
 
 
     // death panel
@@ -87,7 +89,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        LocalizationManager.Instance.OnLanguageChanged += UpdateDeathScreenTexts;
+        //LocalizationManager.Instance.OnLanguageChanged += UpdateDeathScreenTexts;
         rb = GetComponent<Rigidbody2D>();
         level = 1;
         experiencePoints = 0;
@@ -125,31 +127,22 @@ public class GameManager : MonoBehaviour
 
     public int CalculateXpForNextLevel(int currentLevel, string stage)
     {
-        int a = 0, b = 0, c = 0;
-        switch (stage)
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        int baseXp = 500;
+        float xpMultiplier = 1.5f;
+
+        if (currentSceneName == "Level1")
         {
-            case "map1":
-                a = -5;
-                b = 4;
-                c = -3;
-                break;
-            case "map2":
-                a = 15;
-                b = 5;
-                c = 0;
-                break;
-            case "map3":
-                a = 35;
-                b = 6;
-                c = 3;
-                break;
-            case "map4":
-                a = 45;
-                b = 7;
-                c = 4;
-                break;
+            return Mathf.FloorToInt(baseXp * Mathf.Pow(xpMultiplier, currentLevel - 1));
         }
-        return Mathf.FloorToInt((10 * Mathf.Pow(1.04f, currentLevel) + a * Mathf.Pow(0.95f, currentLevel) + b) * currentLevel + c) * 100;
+        else if (currentSceneName == "Level2")
+        {
+            return Mathf.FloorToInt(baseXp * 1.5f * Mathf.Pow(xpMultiplier, currentLevel - 1));
+        }
+        else
+        {
+            return Mathf.FloorToInt(baseXp * Mathf.Pow(xpMultiplier, currentLevel - 1));
+        }
     }
 
     public void IncreaseGold(int amount)
@@ -252,6 +245,42 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CheckAndResumeGame()
+    {
+        Debug.Log($"CheckAndResumeGame called. isStatPanelOpen: {isStatPanelOpen}, isSkillPanelOpen: {isSkillPanelOpen}");
+        if (!isStatPanelOpen && !isSkillPanelOpen)
+        {
+            Debug.Log("Both panels are closed. Resuming game.");
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Debug.Log("One or both panels are open. Checking further...");
+
+            if (isStatPanelOpen && !FindObjectOfType<StatSelectionPanel>().panel.activeSelf)
+            {
+                Debug.LogError("Stat panel state was incorrectly marked as open. Correcting state...");
+                isStatPanelOpen = false;
+            }
+
+            if (isSkillPanelOpen && !SkillsManager.Instance.skillRewardPanel.activeSelf)
+            {
+                Debug.LogError("Skill panel state was incorrectly marked as open. Correcting state...");
+                isSkillPanelOpen = false;
+            }
+
+            if (!isStatPanelOpen && !isSkillPanelOpen)
+            {
+                Debug.Log("Corrected panel states. Resuming game.");
+                Time.timeScale = 1;
+            }
+            else
+            {
+                Debug.LogWarning("Game remains paused due to an open panel.");
+            }
+        }
+    }
+
     public void CheckLevelUp()
     {
         int requiredExperience = CalculateXpForNextLevel(level, "map1");
@@ -262,6 +291,14 @@ public class GameManager : MonoBehaviour
         {
             experiencePoints -= requiredExperience;
             LevelUp();
+        }
+    }
+
+    public void CheckPanelsAndResumeGame()
+    {
+        if (!isStatPanelOpen && !isSkillPanelOpen)
+        {
+            Time.timeScale = 1;
         }
     }
 
@@ -283,8 +320,17 @@ public class GameManager : MonoBehaviour
 
     public void SpawnTrader()
     {
+        Debug.Log("GameManager: Trying to spawn a trader...");
+
         GameObject trader = Instantiate(traderPrefab, new Vector2(UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10)), Quaternion.identity);
-        Trader traderScript = trader.GetComponent<Trader>();
+        if (trader == null)
+        {
+            Debug.LogError("GameManager: Failed to instantiate trader prefab.");
+        }
+        else
+        {
+            Debug.Log("GameManager: Trader spawned successfully.");
+        }
     }
 
     public void GoToMainMenu()
@@ -301,14 +347,14 @@ public class GameManager : MonoBehaviour
 
     public void UpdateDeathScreenTexts()
     {
-        if (deathScreenManager != null)
-        {
-            deathScreenManager.restartButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_restart_button");
-            deathScreenManager.returnToMainMenuButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_returntomainmenu_button");
-            deathScreenManager.exitToDesktopButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_exittodesktop_button");
-            deathScreenManager.minutesSurvivedLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_minutes_survived");
-            deathScreenManager.totalGoldLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_total_gold");
-        }
+        //if (deathScreenManager != null)
+        //{
+        //    //deathScreenManager.restartButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_restart_button");
+        //    //deathScreenManager.returnToMainMenuButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_returntomainmenu_button");
+        //    //deathScreenManager.exitToDesktopButtonText.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_exittodesktop_button");
+        //    //deathScreenManager.minutesSurvivedLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_minutes_survived");
+        //    //deathScreenManager.totalGoldLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_total_gold");
+        //}
         //bountiesLabel.text = LocalizationManager.Instance.GetLocalizedValue("death_panel_bounties");
     }
 
